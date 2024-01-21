@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import FeedList from "../components/homePage/feedList";
+import config from "../config";
 
 export default function Example() {
   return (
     <div className="bg-white">
       <div className="relative isolate px-6 lg:px-8">
         <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          className="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl -top-40"
           aria-hidden="true"
         >
           <div
@@ -17,41 +19,42 @@ export default function Example() {
             }}
           />
         </div>
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+        <div className="mx-auto max-w-2xl py-4 sm:py-16 lg:py-10">
+          {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{" "}
-              <a href="#" className="font-semibold text-indigo-600">
+              开发文档，请移步
+              <a href="/docs" className="font-semibold text-indigo-600 ml-1">
                 <span className="absolute inset-0" aria-hidden="true" />
-                Read more <span aria-hidden="true">&rarr;</span>
+                开发者中心 <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
-          </div>
+          </div> */}
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Data to enrich your online business
-            </h1>
+            <h4 className="stroke-2 font-mono	stroke-[black] text-black  sm:text-6xl flex flex-col">
+              <span
+                style={{
+                  textShadow:
+                    "0 1px white, 1px 0 white, -1px 0 white, 0 -1px white",
+                }}
+              >
+                {config.title} 终极智能枢纽
+              </span>
+            </h4>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
+              作为一个汇聚AI模型接口调用方式的终极智能枢纽，{config.title}
+              为用户带来了无限的便利和可能性。无论是开发者、研究人员还是普通用户，您都可以通过AGICTO快速接入和使用各种优秀的AI模型，提升工作效率和创造力。
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="#"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
-              </a>
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                Learn more <span aria-hidden="true">→</span>
+                开始使用
               </a>
             </div>
           </div>
         </div>
+        <FeedList />
       </div>
     </div>
   );
