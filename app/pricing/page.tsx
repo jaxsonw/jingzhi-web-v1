@@ -7,8 +7,6 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Mousewheel, Pagination } from 'swiper/modules'
 
-import PricingHero from '../../components/pricing/Hero.mdx'
-import ModelDetail from '../../components/pricing/ModelDetail'
 import modelList from './const.js'
 
 const transactions = [
@@ -26,12 +24,11 @@ const transactions = [
 
 export default function Pricing() {
   return (
-    <div className="h-[calc(100vh_-_82px)] p-20">
+    <div className="h-[calc(100vh_-_82px)] px-20 py-10">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-bold leading-6 text-gray-900">计费标准</h1>
-            <p className="mt-2 text-sm text-gray-700">A table of placeholder stock market data that does not make any sense.</p>
           </div>
         </div>
         <div className="mt-8 flow-root">
@@ -40,6 +37,9 @@ export default function Pricing() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr>
+                    <th scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                      品牌
+                    </th>
                     <th scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                       模型
                     </th>
@@ -54,6 +54,7 @@ export default function Pricing() {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {modelList.map((item: any) => (
                     <tr key={item.id}>
+                      <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.source}</td>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.name}</td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{item.inputPrice}</td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item.outputPrice}</td>

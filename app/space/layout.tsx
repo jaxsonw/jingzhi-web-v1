@@ -8,15 +8,8 @@ import { usePathname } from 'next/navigation'
 import logo from '/public/logo.png'
 import config from '../../config'
 import baseHooks from '../../components/hooks/base'
+import navigation from './const'
 
-const navigation = [
-  { name: 'API keys', href: '/space/apikey', icon: HomeIcon, title: 'API keys' }
-  // { name: "Team", href: "apiKeys", icon: UsersIcon, current: false },
-  // { name: "Projects", href: "apiKeys", icon: FolderIcon, current: false },
-  // { name: "Calendar", href: "apiKeys", icon: CalendarIcon, current: false },
-  // { name: "Documents", href: "apiKeys", icon: DocumentDuplicateIcon, current: false },
-  // { name: "Reports", href: "apiKeys", icon: ChartPieIcon, current: false },
-]
 const teams = [
   { id: 1, name: 'Heroicons', href: '?current=', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
@@ -133,10 +126,10 @@ export default function SpaceLayout({ children }) {
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-            <div className="flex h-16 shrink-0 items-center">
+            <a href="/" className="flex h-16 shrink-0 items-center">
               <Image className="w-auto h-[65px]" src={logo} alt="" />
               <span className="font-bold text-2xl ml-2">{config.title}</span>
-            </div>
+            </a>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
