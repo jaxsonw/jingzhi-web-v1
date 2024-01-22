@@ -34,8 +34,7 @@ const Header = () => {
     <header className="bg-white relative z-50">
       <nav className="flex items-center justify-between p-6 lg:px-8 bg-white 123123" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5 flex items-center">
-            <span className="sr-only">{config.title}</span>
+          <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
             <Image className="w-[35px]" src={Logo} alt="" />
             <span className="font-bold text-2xl ml-2">{config.title}</span>
             {/* <img
@@ -78,7 +77,7 @@ const Header = () => {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="/" className="-m-1.5 p-1.5">
+            <a href="/" className="flex items-center -m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image className="w-[35px]" src={Logo} alt="" />
               <span className="font-bold text-2xl ml-2">{config.title}</span>
