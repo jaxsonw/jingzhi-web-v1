@@ -2,6 +2,9 @@
 'use client'
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
+import AliPay from "../../../icons/aliPay"
+import WeChatPay from "../../../icons/weChatPay"
+
 
 const pricePlan = [
   { label: '50元', value: 50 },
@@ -13,11 +16,13 @@ const pricePlan = [
 const rechargeType = [
   {
     value: 1,
-    name: '微信'
+    name: '微信',
+    icon: <WeChatPay />
   },
   {
     value: 2,
-    name: '支付宝'
+    name: '支付宝',
+    icon: <AliPay />
   }
 ]
 
@@ -33,8 +38,29 @@ const stats = [
 
 export default function Example() {
   const [selectedPrice, setSelectedPrice] = useState(pricePlan[0]?.value)
+  const [inputPrice, setInputPrice] = useState(0)
 
-  const [selectedType, setSelectedType] = useState(rechargeType[0])
+  const [selectedType, setSelectedType] = useState(rechargeType[0]?.value)
+
+  const onAmountChange = (e) => {
+    // 移除非数字字符
+    const cleanedValue = e.target.value.replace(/\D/g, '');
+    const finalValue = cleanedValue.replace(/^0+/, '');
+
+
+    // 更新输入框的值
+    setInputPrice(finalValue);
+
+  }
+
+  const onCreateOrder = () => {
+    let price = selectedPrice
+    if (selectedPrice === 0) {
+      price = inputPrice
+    }
+
+  }
+
 
   return (
     <div>
@@ -49,7 +75,10 @@ export default function Example() {
       </div>
       <div>
         <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">充值</h3>
-        <RadioGroup className="mb-4" value={selectedPrice} onChange={e => setSelectedPrice(e?.value)}>
+        <RadioGroup className="mb-4" value={selectedPrice} onChange={e => {
+          setInputPrice(0)
+          setSelectedPrice(e?.value)
+        }}>
           <RadioGroup.Label>充值金额</RadioGroup.Label>
           <div className=" flex flex-wrap items-center">
             {pricePlan?.map(plan => {
@@ -69,6 +98,16 @@ export default function Example() {
                 </RadioGroup.Option>
               )
             })}
+            {
+              selectedPrice === 0 ? <input
+                type="number"
+                name="price"
+                value={inputPrice}
+                onChange={onAmountChange}
+                className="block w-[150px] text-xl font-semibold px-6 py-4 mr-4 mt-4   rounded-md border-0 py-1.5 pl-7   text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 "
+                placeholder="0.00"
+              /> : null
+            }
           </div>
         </RadioGroup>
         <RadioGroup value={selectedType} onChange={e => setSelectedType(e?.value)}>
@@ -97,6 +136,15 @@ export default function Example() {
             })}
           </div>
         </RadioGroup>
+      </div>
+      <div className="flex justify-end">
+        <button
+          onClick={onCreateOrder}
+          type="button"
+          className="inline-flex text-center items-center justify-center w-[150px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          立即支付
+        </button>
       </div>
     </div>
   )

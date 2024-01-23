@@ -9,19 +9,6 @@ import { Mousewheel, Pagination } from 'swiper/modules'
 
 import modelList from './const.js'
 
-const transactions = [
-  {
-    id: 'AAPS0L',
-    company: 'Chase & Co.',
-    share: 'CAC',
-    commission: '+$4.37',
-    price: '$3,509.00',
-    quantity: '12.00',
-    netAmount: '$4,397.00'
-  }
-  // More transactions...
-]
-
 export default function Pricing() {
   return (
     <div className="h-[calc(100vh_-_82px)] px-20 py-10">
@@ -53,7 +40,7 @@ export default function Pricing() {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {modelList.map((item: any) => (
-                    <tr key={item.id}>
+                    <tr key={item.name}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.source}</td>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.name}</td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{item.inputPrice}</td>
