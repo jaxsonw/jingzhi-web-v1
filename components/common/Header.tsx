@@ -12,9 +12,8 @@ const hiddenPath = ['/space']
 
 const navigation = [
   { name: '首页', href: '/' },
-  { name: '计费标准', href: '/pricing' }
-
-  //   { name: "开发文档", href: "/docs" },
+  // { name: '计费标准', href: '/pricing' },
+  { name: '开发文档', href: '/docs' }
   //   { name: "在线平台", href: "/playground" },
   //   { name: "商店", href: "/shop" },
 ]
@@ -31,17 +30,12 @@ const Header = () => {
   })
   if (!isShowHeader) return null
   return (
-    <header className="bg-white relative z-50">
+    <header className="bg-white relative z-50 shadow">
       <nav className="flex items-center justify-between p-6 lg:px-8 bg-white 123123" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
             <Image className="w-[35px]" src={Logo} alt="" />
             <span className="font-bold text-2xl ml-2">{config.title}</span>
-            {/* <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt=""
-            /> */}
           </a>
         </div>
         <div className="flex lg:hidden">

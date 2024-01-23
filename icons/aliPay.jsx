@@ -2,13 +2,13 @@ export default function AliPay() {
     return (
         <svg
             t="1705953587209"
-            class="icon"
+            className="icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="5188"
-            width="200"
-            height="200"
+            width="30"
+            height="30"
         >
             <path
                 d="M1023.795 853.64v6.348a163.807 163.807 0 0 1-163.807 163.807h-696.18A163.807 163.807 0 0 1 0 859.988v-696.18A163.807 163.807 0 0 1 163.807 0h696.181a163.807 163.807 0 0 1 163.807 163.807V853.64z"

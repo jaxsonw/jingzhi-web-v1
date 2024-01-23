@@ -5,6 +5,7 @@
     "[json]": {
       "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "jsc.transform.react.throwIfNamespace":false,
     "editor.formatOnSave": true,
     "tabnine.experimentalAutoImports": true,
     "[typescriptreact]": {

@@ -1,4 +1,4 @@
-const modelList = [
+export const modelList = [
   {
     inputPrice: '$0.01 / 1K tokens',
     outputPrice: '$0.03 / 1K tokens',
@@ -106,7 +106,18 @@ const modelList = [
     outputPrice: '$0.03 / 1K tokens',
     name: 'qwen-max-longcontext',
     source: '通义千问'
-  } 
+  }
+]
+
+export const navigation = [
+  {
+    title: '概览',
+    links: [{ title: '快速开始', href: '/docs/usage' }]
+  },
+  {
+    title: '计费规则',
+    links: [{ title: '计费标准', href: '/docs/pricing' }]
+  }
 ]
 
 export default modelList

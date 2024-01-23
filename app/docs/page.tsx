@@ -1,9 +1,13 @@
-"use client";
+'use client'
+import { Fragment, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { navigation } from './const'
 
-import React from "react";
+export default function Docs() {
+  const router = useRouter()
 
-const Docs = () => {
-  return <div>文档</div>;
-};
-
-export default Docs;
+  useEffect(() => {
+    router.push(navigation[0]?.links[0].href)
+  }, [])
+  return <>loading...</>
+}
