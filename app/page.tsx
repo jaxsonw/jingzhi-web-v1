@@ -1,61 +1,43 @@
-"use client";
-import React, { useState } from "react";
-import FeedList from "../components/homePage/feedList";
-import config from "../config";
+'use client'
+import React, { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Mousewheel, Pagination } from 'swiper/modules'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import Hero from '../components/homePage/Hero'
+import FeedList from '../components/homePage/feedList'
+
+import config from '../config'
 
 export default function Example() {
   return (
-    <div className="bg-white">
-      <div className="relative isolate px-6 lg:px-8">
-        <div
-          className="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl -top-40"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
-        </div>
-        <div className="mx-auto max-w-2xl py-4 sm:py-16 lg:py-10">
-          {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              开发文档，请移步
-              <a href="/docs" className="font-semibold text-indigo-600 ml-1">
-                <span className="absolute inset-0" aria-hidden="true" />
-                开发者中心 <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div> */}
-          <div className="text-center">
-            <h4 className="stroke-2 font-mono	stroke-[black] text-black  sm:text-6xl flex flex-col">
-              <span
-                style={{
-                  textShadow:
-                    "0 1px white, 1px 0 white, -1px 0 white, 0 -1px white",
-                }}
-              >
-                {config.title} 终极智能枢纽
-              </span>
-            </h4>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              作为一个汇聚AI模型接口调用方式的终极智能枢纽，{config.title}
-              为用户带来了无限的便利和可能性。无论是开发者、研究人员还是普通用户，您都可以通过AGICTO快速接入和使用各种优秀的AI模型，提升工作效率和创造力。
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                开始使用
-              </a>
-            </div>
-          </div>
-        </div>
-        <FeedList />
-      </div>
+    <div className="h-[calc(100vh_-_82px)] ">
+      <Swiper
+        direction={'vertical'}
+        slidesPerView={1}
+        spaceBetween={30}
+        mousewheel={true}
+        pagination={{
+          clickable: true
+        }}
+        modules={[Mousewheel, Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <Hero />
+        </SwiperSlide>
+        <SwiperSlide>
+          <FeedList />
+        </SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+      </Swiper>
     </div>
-  );
+  )
 }
