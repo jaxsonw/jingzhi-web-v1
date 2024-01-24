@@ -1,17 +1,11 @@
 "use client"
-import { useCallback, useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-
 import { navigation } from "./const"
-import { MobileNavigation } from '../../components/docs/MobileNavigation'
 import { Navigation } from '../../components/docs/Navigation'
-import { Prose } from '../../components/docs/Prose'
 
 
 
 
-export default function Layout({ children, pageProps }) {
+export default function Layout({ children }) {
     return (
         <>
 

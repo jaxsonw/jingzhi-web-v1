@@ -1,6 +1,6 @@
 import config from '../../config'
 import OpenAI from '../../icons/openai'
-import Icon from '../../icons/icon'
+import Icon from '../../icons/Icon'
 import ZhiNao from '../../icons/360.png'
 import XunFei from '../../icons/xunfei.png'
 

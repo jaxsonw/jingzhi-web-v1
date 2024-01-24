@@ -10,11 +10,6 @@ import config from '../../config'
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 
-const teams = [
-  { id: 1, name: 'Heroicons', href: '?current=', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
-]
 const userNavigation = [{ name: '退出登录', href: '/login' }]
 
 function classNames(...classes) {
