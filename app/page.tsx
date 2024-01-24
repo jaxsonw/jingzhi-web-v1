@@ -2,10 +2,6 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination } from 'swiper/modules'
-
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
 import Hero from '../components/homePage/Hero'
 import FeedList from '../components/homePage/feedList'
 

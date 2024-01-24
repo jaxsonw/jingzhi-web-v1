@@ -6,9 +6,11 @@ import Footer from '../components/common/Footer'
 import Head from 'next/head'
 
 import 'react-toastify/dist/ReactToastify.css'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import './globals.css'
 import '../styles/markdown.css'
-import 'swiper/css'
+
 import config from '../config'
 
 const inter = Inter({ subsets: ['latin'] })
