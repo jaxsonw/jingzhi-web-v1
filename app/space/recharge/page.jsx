@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import AliPay from "../../../icons/aliPay"
-import WeChatPay from "../../../icons/weChatPay"
+import WeChatPay from "../../../icons/wechatPay"
 
 
 const pricePlan = [
