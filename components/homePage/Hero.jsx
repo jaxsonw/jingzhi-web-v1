@@ -75,7 +75,7 @@ export default function Hero() {
                 为用户带来了无限的便利和可能性。无论是开发者、研究人员还是普通用户，您都可以通过{config.title}快速接入和使用各种优秀的AI模型，提升工作效率和创造力。
             </p>
             <div className="mt-10 flex justify-center gap-x-6">
-                <Button href="/register">立即开始</Button>
+                <Button href="/docs">立即开始</Button>
             </div>
         </Container>
     )
