@@ -6,10 +6,7 @@ const assetPrefix = {
   development: '',
   pre: '',
   test: 'https://a.ew6.cn/testagicto',
-  test2: 'https://a.ew6.cn/testagicto',
-  test3: 'https://a.ew6.cn/testagicto',
-  prod: 'https://a.ew6.cn/agicto',
-  prodpro: 'https://a.ew6.cn/agicto'
+  prod: 'https://a.ew6.cn/agicto'
 }
 
 module.exports = {
