@@ -1,7 +1,7 @@
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 })
-
+console.log('first', process.env.INIT_ENV)
 const assetPrefix = {
   development: '',
   pre: '',
