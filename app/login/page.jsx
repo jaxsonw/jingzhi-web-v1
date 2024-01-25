@@ -5,8 +5,6 @@ import { useSearchParams } from 'next/navigation'
 import { toast as Toast } from 'react-toastify'
 import { getEmailCode, login } from '../../services/index'
 import { vaildEmail, checkServer } from '../../utils/index'
-import Logo from '/public/logo.jpeg'
-import LoginBg from '/public/login_bg.png'
 
 export default function Login() {
   const searchParams = useSearchParams()
@@ -82,12 +80,8 @@ export default function Login() {
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div className="flex items-center">
-              {/* <img
-                className="h-10 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              /> */}
-              <Image className="w-[35px]" src={Logo} alt="" />
+
+              <Image className="w-[35px]" src="https://ew6.cn/agicto-logo.png" alt="" />
               <h2 className="ml-[10px] text-2xl font-bold leading-9 tracking-tight text-gray-900">登录&注册</h2>
             </div>
 
@@ -159,7 +153,7 @@ export default function Login() {
           </div>
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
-          <Image src={LoginBg} className="absolute inset-0 h-full w-full object-cover" />
+          <Image alt="login" src="https://ew6.cn/login_bg.png" className="absolute inset-0 h-full w-full object-cover" />
           {/* <img
             className="absolute inset-0 h-full w-full object-cover"
             src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"

@@ -1,7 +1,6 @@
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 })
-console.log('first', process.env.INIT_ENV)
 const assetPrefix = {
   development: '',
   pre: '',
@@ -10,6 +9,9 @@ const assetPrefix = {
 }
 
 module.exports = {
+  images: {
+    domains: ['ew6.cn']
+  },
   ...withMDX({
     assetPrefix: assetPrefix[process.env.INIT_ENV],
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']

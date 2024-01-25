@@ -5,7 +5,6 @@ import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, 
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import logo from '/public/logo.png'
 import config from '../../config'
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
@@ -69,7 +68,7 @@ export default function SpaceLayout({ children }) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
-                      <Image className="w-auto h-[65px]" src={logo} alt="" />
+                      <Image className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
                       <span className="font-bold text-2xl ml-2">{config.title}</span>
                     </div>
                     <nav className="flex flex-1 flex-col">
@@ -122,7 +121,7 @@ export default function SpaceLayout({ children }) {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
-              <Image className="w-auto h-[65px]" src={logo} alt="" />
+              <Image className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
               <span className="font-bold text-2xl ml-2">{config.title}</span>
             </a>
             <nav className="flex flex-1 flex-col">

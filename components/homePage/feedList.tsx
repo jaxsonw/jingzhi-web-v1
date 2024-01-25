@@ -17,19 +17,18 @@ export default function Example() {
           </div>
           <div className="mx-auto grid w-full max-w-xl grid-cols-2 items-center gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8 ">
             <OpenAI />
-            <Icon src={ZhiNao} className="w-[135px]" />
+            <img className="max-h-12  w-auto h-[38px] object-contain object-left" src="https://ew6.cn/360.png" alt="Reform" />
             <img
               className="max-h-12  w-auto h-[38px] object-contain object-left"
               src="https://ebui-cdn.bj.bcebos.com/yiyan-logo.png"
               alt="Reform"
             />
-            <Icon src={XunFei} className="w-[145px]" />
-
             <img
-              className="max-h-12 w-auto h-[38px] object-contain object-left"
-              src="https://cdn-portal.hunyuan.tencent.com/public/074e38834bdc4e9cf017.png"
-              alt="wenxin"
+              className="max-h-12  w-auto h-[38px] object-contain object-left"
+              src="https://ebui-cdn.bj.bcebos.com/yiyan-logo.png"
+              alt="Reform"
             />
+            <img className="max-h-12 w-auto h-[38px] object-contain object-left" src="https://ew6.cn/xunfei.png" alt="xunfei" />
             <div className="flex items-center relative">
               <img
                 className="max-h-12 w-full object-contain object-left"
