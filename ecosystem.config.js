@@ -1,3 +1,6 @@
+console.log('ENVIRONMENT', process.env.ENVIRONMENT)
+console.log('PORT', process.env.PORT)
+
 module.exports = {
   apps: [
     {
