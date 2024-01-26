@@ -8,7 +8,25 @@ export const modelList = [
   {
     inputPrice: '$0.01 / 1K tokens',
     outputPrice: '$0.03 / 1K tokens',
+    name: 'gpt-3.5-turbo',
+    source: 'Open AI'
+  },
+  {
+    inputPrice: '$0.01 / 1K tokens',
+    outputPrice: '$0.03 / 1K tokens',
+    name: 'gpt-3.5-turbo-0613',
+    source: 'Open AI'
+  },
+  {
+    inputPrice: '$0.01 / 1K tokens',
+    outputPrice: '$0.03 / 1K tokens',
     name: 'gpt-3.5-turbo-16k',
+    source: 'Open AI'
+  },
+  {
+    inputPrice: '$0.01 / 1K tokens',
+    outputPrice: '$0.03 / 1K tokens',
+    name: 'gpt-3.5-turbo-16k-0613',
     source: 'Open AI'
   },
   {

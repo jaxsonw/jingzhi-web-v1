@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination } from 'swiper/modules'
 import Hero from '../components/homePage/Hero'
 import FeedList from '../components/homePage/feedList'
+import HowUse from '../components/homePage/HowUse'
 
 import config from '../config'
 
@@ -27,7 +28,9 @@ export default function Example() {
         <SwiperSlide>
           <FeedList />
         </SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>
+          <HowUse />
+        </SwiperSlide>
         <SwiperSlide>Slide 5</SwiperSlide>
         <SwiperSlide>Slide 6</SwiperSlide>
         <SwiperSlide>Slide 7</SwiperSlide>
