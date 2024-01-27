@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Header from '../components/common/Header'
 import Footer from '../components/common/Footer'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css'
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
+      <Script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
       <body className={inter.className}>
         <ToastContainer
           style={{
