@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
       <body className={inter.className}>
         <ToastContainer
           style={{

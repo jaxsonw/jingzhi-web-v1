@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { FaRegCopy } from "react-icons/fa";
 import EditKeyModal from '../../../components/apiKeys/EditKeyModal'
 import DeleteConfirm from '../../../components/apiKeys/DeleteConfirm'
 import { getKeyList, editKey } from '../../../services/key'
+import { copyValue } from "../../../utils/index"
 
 const statuses = {
   1: {
@@ -56,7 +58,7 @@ export default function APIKeys() {
       setDeleteOpen(false)
       init()
     } else {
-      toast.error('删除失败')
+      toast.error(res?.message || '删除失败')
     }
   }
 
@@ -105,7 +107,13 @@ export default function APIKeys() {
                 {tableData?.map(item => (
                   <tr key={item.id}>
                     <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.name}</td>
-                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.openKey}</td>
+                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.openKey}    <button
+                      onClick={() => copyValue(item.openKey)}
+                      type="button"
+                      className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white  box-shadow  "
+                    >
+                      <FaRegCopy color='black' size={16} />
+                    </button> </td>
                     <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{statuses[item.status]?.text}</td>
                     <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item?.createTime}</td>
 
@@ -118,6 +126,7 @@ export default function APIKeys() {
                         >
                           删除
                         </button>
+
                       </span>
                     </td>
                   </tr>

@@ -68,33 +68,35 @@ export default function SpaceLayout({ children }) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
-                      <Image className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
+                      <Image width="35" height={65} src="https://ew6.cn/agicto-logo.png" alt="" />
                       <span className="font-bold text-2xl ml-2">{config.title}</span>
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
                           <ul role="list" className="-mx-2 space-y-1">
-                            {navigation.map(item => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                  )}
-                                >
-                                  <item.icon
+                            {navigation.map(item => {
+                              return item?.isMenu ? (
+                                <li key={item.name}>
+                                  <a
+                                    href={item.href}
                                     className={classNames(
-                                      item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                                      'h-6 w-6 shrink-0'
+                                      item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                     )}
-                                    aria-hidden="true"
-                                  />
-                                  {item.name}
-                                </a>
-                              </li>
-                            ))}
+                                  >
+                                    <item.icon
+                                      className={classNames(
+                                        item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                                        'h-6 w-6 shrink-0'
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                    {item.name}
+                                  </a>
+                                </li>
+                              ) : null
+                            })}
                           </ul>
                         </li>
 
@@ -121,7 +123,7 @@ export default function SpaceLayout({ children }) {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
-              <Image className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
+              <Image width="35" height={65} className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
               <span className="font-bold text-2xl ml-2">{config.title}</span>
             </a>
             <nav className="flex flex-1 flex-col">
@@ -129,6 +131,7 @@ export default function SpaceLayout({ children }) {
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map(item => {
+                      if (!item?.isMenu) return null
                       const current = currentPath === item.href
 
                       return (
@@ -183,7 +186,7 @@ export default function SpaceLayout({ children }) {
                     <span className="sr-only">用户中心</span>
                     <img
                       className="h-8 w-8 rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://ew6.cn/agicto-logo.png"
                       alt=""
                     />
                     <span className="hidden lg:flex lg:items-center">
@@ -223,7 +226,9 @@ export default function SpaceLayout({ children }) {
           </div>
 
           <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+            <div className="px-4 sm:px-6 lg:px-8">
+
+              {children}</div>
           </main>
         </div>
       </div>

@@ -81,7 +81,7 @@ export default function Login() {
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div className="flex items-center">
 
-              <Image className="w-[35px]" src="https://ew6.cn/agicto-logo.png" alt="" />
+              <Image className="w-[35px]" width="35" src="https://ew6.cn/agicto-logo.png" alt="" />
               <h2 className="ml-[10px] text-2xl font-bold leading-9 tracking-tight text-gray-900">登录&注册</h2>
             </div>
 

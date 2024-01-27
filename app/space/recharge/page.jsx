@@ -1,9 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
+import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
+import { ScaleLoader } from "react-spinners"
+import { createOrder, getOrderStatus, getWechatSign } from "../../../services/recharge"
+import Loading from "../../../components/common/Loading"
 import AliPay from "../../../icons/aliPay"
 import WeChatPay from "../../../icons/wechatPay"
+import { isPc, isWeixin, checkServer } from "../../../utils/index"
 
 
 const pricePlan = [
@@ -13,52 +19,154 @@ const pricePlan = [
   { label: '200元', value: 200 },
   { label: '自定义金额', value: 0 }
 ]
-const rechargeType = [
-  {
-    value: 1,
-    name: '微信',
-    icon: <WeChatPay />
-  },
-  {
-    value: 2,
-    name: '支付宝',
-    icon: <AliPay />
-  }
-]
+
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const rechargeType = [
+  {
+    name: '微信',
+    value: 1,
+    disabled: !isPc() && !isWeixin(),
+    icon: <WeChatPay size={20} className="mr-2 text-green-400" />,
+  },
+  {
+    name: '支付宝',
+    value: 2,
+    disabled: isWeixin(),
+    icon: <AliPay size={20} className="mr-2 text-[#327af6]" />,
+  },
+]
 
 export default function Example() {
+
+  const router = useRouter()
   const [selectedPrice, setSelectedPrice] = useState(pricePlan[0]?.value)
   const [inputPrice, setInputPrice] = useState(0)
 
   const [selectedType, setSelectedType] = useState(rechargeType[0]?.value)
+  const [createOrderLoading, setCreateOrderLoading] = useState(false)
 
   const onAmountChange = (e) => {
     // 移除非数字字符
-    const cleanedValue = e.target.value.replace(/\D/g, '');
-    const finalValue = cleanedValue.replace(/^0+/, '');
-
-
+    // const cleanedValue = e.target.value.replace(/\D/g, '');
+    // const finalValue = cleanedValue.replace(/^0+/, '');
     // 更新输入框的值
-    setInputPrice(finalValue);
+    setInputPrice(e.target.value);
 
   }
 
-  const onCreateOrder = () => {
+  // 微信支付
+  const weixinPay = async sign => {
+    if (!checkServer()) {
+      const wehchatRes = await getWechatSign({ url: window.location.href })
+      window.wx.config({
+        debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+        appId: wehchatRes.appId, // 必填，公众号的唯一标识
+        timestamp: wehchatRes.timestamp, // 必填，生成签名的时间戳
+        nonceStr: wehchatRes.nonceStr, // 必填，生成签名的随机串
+        signature: wehchatRes.signature, // 必填，签名
+        jsApiList: [...wehchatRes.jsApiList, 'chooseWXPay'], // 必填，需要使用的 JS 接口列表
+      })
+      window.wx?.ready(() => {
+        window.wx.chooseWXPay({
+          timestamp: sign?.timeStamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
+          nonceStr: sign?.nonceStr, // 支付签名随机串，不长于 32 位
+          package: sign?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+          signType: sign?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
+          paySign: sign?.paySign, // 支付签名
+          success: res => {
+            toast.success('支付成功～')
+            router.push('/space/recharge')
+          },
+          error: err => {
+            console.log('err', err)
+          },
+          finally: final => {
+            console.log('finally', final)
+          },
+        })
+      })
+    }
+  }
+
+  const onCreateOrder = async () => {
+    setCreateOrderLoading(true)
     let price = selectedPrice
     if (selectedPrice === 0) {
       price = inputPrice
     }
+    // if (price < 10) {
+    //   toast.error("最低充值金额10元～")
+    //     setCreateOrderLoading(false)
+
+    //   return
+    // }
+    const osType = isWeixin() ? 3 : isPc() ? 1 : 2
+
+    const params = {
+      money: price,
+      payType: selectedType,
+      osType
+    }
+
+    const res = await createOrder(params)
+    setCreateOrderLoading(false)
+
+    if (res?.code !== 0) {
+      toast.error(res?.data?.message || '创建订单失败，请稍后再试～')
+      return
+    }
+
+    let codeUrl = res?.data?.codeUrl
+    // pc微信支付｜pc支付宝支付｜h5 支付宝支付  跳转pay页面
+    if (osType === 3) {
+      codeUrl = JSON.stringify(codeUrl)
+    }
+    router.push(`/space/recharge/pay?payFee=${res?.data?.payFee}&orderSn=${res?.data?.orderSn}&payType=${selectedType}&osType=${osType}&codeUrl=${encodeURIComponent(codeUrl)}`)
+
+
+
 
   }
+
+  const init = async () => {
+    if (!checkServer()) {
+      // 普通浏览器环境
+      if (!isWeixin() && !isPc()) {
+        setSelectedType(2)
+      }
+
+      // 微信环境
+      if (isWeixin() && !isPc()) {
+        setSelectedType(1)
+        // 如果返回有code，授权成功
+        const code = seachParams.get('code')
+        // const selectGoodsId = seachParams.get('state')
+        if (code) {
+          const res = await getAuthCode({ code })
+          if (res?.code !== 0) {
+            toast.error(res?.message || '授权失败～')
+            return
+          }
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    init()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
   return (
     <div>
+      {createOrderLoading ? <Loading /> : null}
       <div className="mb-10">
         <h3 className="text-lg leading-6 font-medium text-gray-900">账户总览</h3>
         <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -67,7 +175,6 @@ export default function Example() {
               <dt className="text-sm font-medium text-gray-500 truncate">可用余额</dt>
               <dd className="mt-1 text-3xl font-semibold text-gray-900">¥100</dd>
             </div>
-            {/* <a href="/space/rechargeRecords" className='underline cursor-pointer'>账户记录</a> */}
           </div>
         </dl>
       </div>
@@ -79,24 +186,31 @@ export default function Example() {
             {rechargeType.map(item => {
               const active = selectedType === item.value
               return (
-                <RadioGroup.Option
-                  key={item.value}
-                  value={item}
-                  className={classNames(
-                    active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
-                    'relative mr-4 mt-4 block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none'
-                  )}
-                >
-                  <div className="flex items-center">
-                    <div className="text-sm">
-                      <RadioGroup.Label as="p" className="flex w-[100px] items-center font-medium text-gray-900">
-                        {item?.icon}<span className='ml-4'> {item.name}</span>
-                      </RadioGroup.Label>
+                <div key={item.value} className='flex items-center'>
+                  <RadioGroup.Option
+                    disabled={item?.disabled}
+
+                    value={item}
+                    className={classNames(
+                      active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                      'relative w-fit mr-4 mt-4 block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none'
+                    )}
+                  >
+                    <div className="flex items-center">
+                      <div className="text-sm">
+                        <RadioGroup.Label as="p" className="flex w-[100px] items-center font-medium text-gray-900">
+                          {item?.icon}<span className='ml-4'> {item.name}</span>
+
+                        </RadioGroup.Label>
+                      </div>
                     </div>
-                  </div>
-                </RadioGroup.Option>
+                  </RadioGroup.Option>
+                </div>
               )
             })}
+            {rechargeType?.[0]?.disabled && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持微信支付方式</span>}
+
+
           </div>
         </RadioGroup>
         <RadioGroup className="my-4" value={selectedPrice} onChange={e => {
@@ -138,9 +252,10 @@ export default function Example() {
       </div>
       <div className="flex mt-10">
         <button
+          disabled={createOrderLoading}
           onClick={onCreateOrder}
           type="button"
-          className="inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[250px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none  "
+          className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[250px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none ${createOrderLoading ? "bg-[#fafafa] text-[#ccc]" : ""} `}
         >
           立即支付
         </button>
