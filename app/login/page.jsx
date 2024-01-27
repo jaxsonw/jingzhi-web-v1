@@ -81,7 +81,7 @@ export default function Login() {
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div className="flex items-center">
 
-              <Image className="w-[35px]" width="35" src="https://ew6.cn/agicto-logo.png" alt="" />
+              <Image width="35" height="35" src="https://ew6.cn/agicto-logo.png" alt="" />
               <h2 className="ml-[10px] text-2xl font-bold leading-9 tracking-tight text-gray-900">登录&注册</h2>
             </div>
 
@@ -100,7 +100,7 @@ export default function Login() {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block px-2 w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block px-2 w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -117,7 +117,7 @@ export default function Login() {
                         type="text"
                         autoComplete="current-password"
                         required
-                        className="block px-2 w-2/3 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block px-2 w-2/3 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300  text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                       <button
                         disabled={sendLoading || isCodeSent}
@@ -153,7 +153,7 @@ export default function Login() {
           </div>
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
-          <Image alt="login" src="https://ew6.cn/login_bg.png" className="absolute inset-0 h-full w-full object-cover" />
+          <img alt="login" src="https://ew6.cn/login_bg.png" className="absolute inset-0 h-full w-full object-cover" />
           {/* <img
             className="absolute inset-0 h-full w-full object-cover"
             src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
