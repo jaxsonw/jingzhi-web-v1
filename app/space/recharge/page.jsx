@@ -94,6 +94,13 @@ export default function Example() {
     }
   }
 
+  const wxLogoin = async () => {
+    const url = window.location.href
+    window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(
+      url
+    )}&response_type=code&scope=snsapi_userinfo&state=${goodsId}#wechat_redirect`
+  }
+
   const onCreateOrder = async () => {
     setCreateOrderLoading(true)
     let price = selectedPrice
@@ -114,6 +121,11 @@ export default function Example() {
       osType
     }
 
+    if (!isPc() && isWeixin()) {
+      wxLogoin()
+      return
+    }
+
     const res = await createOrder(params)
     setCreateOrderLoading(false)
 
@@ -122,16 +134,8 @@ export default function Example() {
       return
     }
 
-    let codeUrl = res?.data?.codeUrl
-    // pc微信支付｜pc支付宝支付｜h5 支付宝支付  跳转pay页面
-    if (osType === 3) {
-      codeUrl = JSON.stringify(codeUrl)
-    }
+
     router.push(`/space/recharge/pay?orderSn=${res?.data?.orderSn}&payType=${selectedType}&osType=${osType}`)
-
-
-
-
   }
 
   const init = async () => {
@@ -146,13 +150,30 @@ export default function Example() {
         setSelectedType(1)
         // 如果返回有code，授权成功
         const code = seachParams.get('code')
-        // const selectGoodsId = seachParams.get('state')
+        const payFee = seachParams.get('payFee')
+
         if (code) {
           const res = await getAuthCode({ code })
           if (res?.code !== 0) {
             toast.error(res?.message || '授权失败～')
             return
           }
+
+          const params = {
+            payFee,
+            osType: 3,
+            payType: 1
+          }
+
+          const createOrderRes = await createOrder(params)
+          setCreateOrderLoading(false)
+
+          if (createOrderRes?.code !== 0) {
+            toast.error(createOrderRes?.message || '创建订单失败，请稍后再试～')
+            return
+          }
+          router.push(`/space/recharge/pay?orderSn=${createOrderRes?.data?.orderSn}&payType=${1}&osType=${3}`)
+
         }
       }
     }
@@ -208,7 +229,8 @@ export default function Example() {
                 </div>
               )
             })}
-            {rechargeType?.[0]?.disabled && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持微信支付方式</span>}
+            {(rechargeType?.[0]?.disabled || rechargeType?.[1]?.disabled) && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持该支付方式</span>}
+
 
 
           </div>
