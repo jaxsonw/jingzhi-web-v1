@@ -1,10 +1,10 @@
 'use client'
-import { Fragment, useState, createContext } from 'react'
+import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import config from '../../config'
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
@@ -18,13 +18,20 @@ function classNames(...classes) {
 export const SpaceContext = createContext()
 
 export default function SpaceLayout({ children }) {
+  const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { userInfo } = baseHooks()
+
 
   const currentPath = usePathname()
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
 
 
+  useEffect(() => {
+    if (!userInfo?.name) {
+      router.push("/login")
+    }
+  }, [])
   return (
     <>
       <div>
