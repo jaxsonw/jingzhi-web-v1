@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import config from '../../config'
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
+import { checkServer } from '@/utils'
 
 const userNavigation = [{ name: '退出登录', href: '/login' }]
 
@@ -28,10 +29,10 @@ export default function SpaceLayout({ children }) {
 
 
   useEffect(() => {
-    if (!userInfo?.name) {
+    if (!checkServer() && !localStorage.getItem("token")) {
       router.push("/login")
     }
-  }, [])
+  }, [userInfo])
   return (
     <>
       <div>
