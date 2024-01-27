@@ -13,6 +13,10 @@ import { isPc, isWeixin, checkServer } from "../../../utils/index"
 import { SpaceContext } from "../layout"
 
 
+
+const appid = 'wx45ecf372ff70d541' // 微信appid，测试 wx847c9937877744e5
+
+
 const pricePlan = [
   { label: '50元', value: 50 },
   { label: '100元', value: 100 },
@@ -62,39 +66,7 @@ export default function Example() {
 
   }
 
-  // 微信支付
-  const weixinPay = async sign => {
-    if (!checkServer()) {
-      const wehchatRes = await getWechatSign({ url: window.location.href })
-      window.wx.config({
-        debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
-        appId: wehchatRes.appId, // 必填，公众号的唯一标识
-        timestamp: wehchatRes.timestamp, // 必填，生成签名的时间戳
-        nonceStr: wehchatRes.nonceStr, // 必填，生成签名的随机串
-        signature: wehchatRes.signature, // 必填，签名
-        jsApiList: [...wehchatRes.jsApiList, 'chooseWXPay'], // 必填，需要使用的 JS 接口列表
-      })
-      window.wx?.ready(() => {
-        window.wx.chooseWXPay({
-          timestamp: sign?.timeStamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
-          nonceStr: sign?.nonceStr, // 支付签名随机串，不长于 32 位
-          package: sign?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-          signType: sign?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
-          paySign: sign?.paySign, // 支付签名
-          success: res => {
-            toast.success('支付成功～')
-            router.push('/space/recharge')
-          },
-          error: err => {
-            console.log('err', err)
-          },
-          finally: final => {
-            console.log('finally', final)
-          },
-        })
-      })
-    }
-  }
+
 
   const wxLogoin = async (price) => {
     const url = window.location.href
