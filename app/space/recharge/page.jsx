@@ -2,8 +2,9 @@
 'use client'
 import { useState, useEffect, useContext } from 'react'
 import { RadioGroup } from '@headlessui/react'
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "react-toastify"
+
 import { createOrder, getOrderStatus, getWechatSign } from "../../../services/recharge"
 import Loading from "../../../components/common/Loading"
 import AliPay from "../../../icons/aliPay"
@@ -44,6 +45,7 @@ const rechargeType = [
 
 export default function Example() {
   const spaceData = useContext(SpaceContext)
+  const searchParams = useSearchParams()
   const router = useRouter()
   const [selectedPrice, setSelectedPrice] = useState(pricePlan[0]?.value)
   const [inputPrice, setInputPrice] = useState(0)
@@ -149,8 +151,8 @@ export default function Example() {
       if (isWeixin() && !isPc()) {
         setSelectedType(1)
         // 如果返回有code，授权成功
-        const code = seachParams.get('code')
-        const payFee = seachParams.get('state')
+        const code = searchParams.get('code')
+        const payFee = searchParams.get('state')
 
         if (code) {
           const res = await getAuthCode({ code })
