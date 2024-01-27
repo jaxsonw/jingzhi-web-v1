@@ -1,15 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
-import { ScaleLoader } from "react-spinners"
 import { createOrder, getOrderStatus, getWechatSign } from "../../../services/recharge"
 import Loading from "../../../components/common/Loading"
 import AliPay from "../../../icons/aliPay"
 import WeChatPay from "../../../icons/wechatPay"
 import { isPc, isWeixin, checkServer } from "../../../utils/index"
+import { SpaceContext } from "../layout"
 
 
 const pricePlan = [
@@ -43,7 +43,7 @@ const rechargeType = [
 ]
 
 export default function Example() {
-
+  const spaceData = useContext(SpaceContext)
   const router = useRouter()
   const [selectedPrice, setSelectedPrice] = useState(pricePlan[0]?.value)
   const [inputPrice, setInputPrice] = useState(0)
@@ -127,7 +127,7 @@ export default function Example() {
     if (osType === 3) {
       codeUrl = JSON.stringify(codeUrl)
     }
-    router.push(`/space/recharge/pay?payFee=${res?.data?.payFee}&orderSn=${res?.data?.orderSn}&payType=${selectedType}&osType=${osType}&codeUrl=${encodeURIComponent(codeUrl)}`)
+    router.push(`/space/recharge/pay?orderSn=${res?.data?.orderSn}&payType=${selectedType}&osType=${osType}`)
 
 
 
@@ -173,7 +173,7 @@ export default function Example() {
           <div className="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6 flex items-center justify-between">
             <div>
               <dt className="text-sm font-medium text-gray-500 truncate">可用余额</dt>
-              <dd className="mt-1 text-3xl font-semibold text-gray-900">¥100</dd>
+              <dd className="mt-1 text-3xl font-semibold text-gray-900">¥{spaceData?.apiNum || 0}</dd>
             </div>
           </div>
         </dl>

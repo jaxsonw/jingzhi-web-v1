@@ -4,21 +4,19 @@ import qrcode from 'qrcode'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { HomeIcon } from '@heroicons/react/20/solid'
-import Loading from "../../../../components/common/Loading"
 import { PulseLoader } from 'react-spinners'
 import { PiShieldCheckeredFill } from 'react-icons/pi'
 import { RiWechatPayFill } from 'react-icons/ri'
 import { SiAlipay } from 'react-icons/si'
 import { toast } from 'react-toastify'
-import { getOrderStatus, getWechatSign } from '../../../../services/recharge'
-import { checkServer, isPc, isWeixin } from '../../../../utils/index'
+import { getOrderStatus, getWechatSign, getOrderPayInfo } from '../../../../services/recharge'
+import { checkServer, isWeixin, isPc } from '../../../../utils/index'
 
 let countdown = null
 const PayPage = () => {
 
 
     const searchParams = useSearchParams()
-    //     router.push(`/space/recharge/pay?payFee=${res?.data?.payFee}&orderSn=${res?.data?.orderSn}&payType=${selectedType}&osType=${osType}$codeUrl=${codeUrl}`)
     const [createOrderLoading, setCreateOrderLoading] = useState(false)
     const [startCount, setStartCount] = useState(false)
     const [aliPayForm, setAliPayForm] = useState('')
@@ -27,11 +25,20 @@ const PayPage = () => {
     const [orderStatus, setOrderStatus] = useState(0)
     const [count, setCount] = useState(180)
 
-    const osType = Number(searchParams.get('osType'))
-    const payFee = Number(searchParams.get('payFee'))
-    const payType = Number(searchParams.get('payType'))
+    const autoChangePayType = () => {
+        let payType = 1
+        // h5 支付宝
+        if (!isPc() && !isWeixin()) payType = 2
+        return payType
+        // if(isWeixin())
+    }
+    const osType = isWeixin() ? 3 : isPc() ? 1 : 2
+    const payType = Number(searchParams.get('payType')) || autoChangePayType()
     const orderSn = searchParams.get('orderSn')
-    const codeUrl = searchParams.get('codeUrl')
+    const [payFee, setPayFee] = useState(0)
+    const [codeUrl, setCodeUrl] = useState("")
+
+
 
     // pc微信
     const pcWechat = () => {
@@ -94,6 +101,23 @@ const PayPage = () => {
         }
     }
 
+    const getOrderInfo = async () => {
+        const res = await getOrderPayInfo({
+            orderSn,
+            payType,
+            osType
+        })
+        if (res?.code !== 0) {
+            toast.error(res?.message || "订单错误")
+        }
+        setPayFee(res?.data?.payFee)
+        setCodeUrl(res?.data?.codeUrl)
+
+
+    }
+
+
+
     const init = async () => {
         setCreateOrderLoading(true)
 
@@ -114,12 +138,18 @@ const PayPage = () => {
 
     }
 
-    useEffect(() => { init() }, [])
+    useEffect(() => { getOrderInfo() }, [])
+
+    useEffect(() => {
+        if (!payFee || !codeUrl) {
+            return
+        }
+        init()
+    }, [payFee, codeUrl])
 
 
 
     useEffect(() => {
-        console.log("codeUrl", codeUrl)
         if (!aliPayForm) return
         const dom = document.getElementById('alipay_submit')
         if (dom) {
@@ -215,14 +245,14 @@ const PayPage = () => {
                 {imgUrl && payModel === 1 && (
                     <>
                         <div className=" flex flex-col justify-center mt-20 w-[240px] h-[240px] relative items-center m-auto">
-                            {payFee ? <div className="text-lg font-bold mb-4">支付金额：{payFee}元</div> : null}
+                            {payFee ? <div className="text-lg font-bold mb-4 text-rose-700">支付金额：{payFee}元</div> : null}
                             {orderStatus === 1 && (
                                 <div className="absolute w-[240px] h-[240px] font-bold bg-[rgba(0,0,0,0.8)] z-10 text-white text-xl flex justify-center items-center">
                                     <PiShieldCheckeredFill size={20} className="mr-2" /> 支付成功
                                 </div>
                             )}
                             {payType === 1 ? (
-                                <RiWechatPayFill className="text-[#51a738] z-9 bg-white rounded mr-2 absolute top-[95px] left-[100px]" size={50} />
+                                <RiWechatPayFill className="text-[#51a738] z-9 bg-white rounded mr-2 absolute top-[110px] left-[100px]" size={50} />
                             ) : (
                                 <SiAlipay className="text-[#51a2d8] z-9 bg-white rounded mr-2 absolute top-[95px] left-[100px]" size={50} />
                             )}
@@ -240,7 +270,7 @@ const PayPage = () => {
 
                 {/* 微信支付模式 */}
                 {payModel === 2 && (
-                    <div className="w-full flex-col flex justify-center font-bold items-center">
+                    <div className="w-full flex-col pt-10 flex justify-center font-bold items-center">
                         <PulseLoader color="#4f46e5" />
 
                         <span className="mt-4">正在跳转到微信支付，请稍后...</span>
@@ -248,7 +278,7 @@ const PayPage = () => {
                 )}
                 {/* 跳转支付宝模式 */}
                 {payModel === 3 && (
-                    <div className="w-full flex-col flex justify-center font-bold items-center">
+                    <div className="w-full flex-col pt-10 flex justify-center font-bold items-center">
                         <PulseLoader color="#4f46e5" />
 
                         <span className="mt-4">正在跳转到支付宝，请稍后...</span>
@@ -256,11 +286,7 @@ const PayPage = () => {
                     </div>
                 )}
 
-                {
-                    payModel === 4 && (
-                        <div>订单已过期</div>
-                    )
-                }
+
             </div>
 
         </>

@@ -20,7 +20,7 @@ https://api.chateai.com/v1/together/chat
 - **temperature**：调整生成文本的多样性，值越高生成越随机。
 - **top_p**：Top-p采样参数，控制生成文本的多样性。
 - **top_k**：Top-k采样参数，限制模型在每步选择时考虑的token范围。
-- **enable_search**：设置为true时，允许模型进行联网搜索以获得更全面的信息。
+- **enable_search**：设置为true时，允许模型进行联网搜索以获得更全面的信息。(**联网功能仅支持「百川」、「通义千问」模型**)
 
  
 ## 示例

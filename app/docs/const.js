@@ -116,13 +116,15 @@ export const modelList = [
     inputPrice: '¥0.008 / 1K tokens',
     outputPrice: '¥0.008 / 1K tokens',
     name: 'Baichuan2-Turbo',
-    source: '百川'
+    source: '百川',
+    desc: <span className="text-rose-700">联网功能</span>
   },
   {
     inputPrice: '¥0.016 / 1K tokens',
     outputPrice: '¥0.016 / 1K tokens',
     name: 'Baichuan2-Turbo-192k',
-    source: '百川'
+    source: '百川',
+    desc: <span className="text-rose-700">联网功能</span>
   },
   {
     inputPrice: '¥0.01 / 1K tokens',
@@ -140,25 +142,29 @@ export const modelList = [
     inputPrice: '¥0.008 / 1K tokens',
     outputPrice: '¥0.008 / 1K tokens',
     name: 'qwen-turbo',
-    source: '通义千问'
+    source: '通义千问',
+    desc: <span className="text-rose-700">联网功能</span>
   },
   {
     inputPrice: '¥0.02 / 1K tokens',
     outputPrice: '¥0.02 / 1K tokens',
     name: 'qwen-plus',
-    source: '通义千问'
+    source: '通义千问',
+    desc: <span className="text-rose-700">联网功能</span>
   },
   {
     inputPrice: '¥0.008 / 1K tokens',
     outputPrice: '¥0.008 / 1K tokens',
     name: 'qwen-max-1201',
-    source: '通义千问'
+    source: '通义千问',
+    desc: <span className="text-rose-700">联网功能</span>
   },
   {
     inputPrice: '¥0.02 / 1K tokens',
     outputPrice: '¥0.02 / 1K tokens',
     name: 'qwen-max-longcontext',
-    source: '通义千问'
+    source: '通义千问',
+    desc: <span className="text-rose-700">联网功能</span>
   }
 ]
 

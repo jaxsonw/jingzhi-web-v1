@@ -1,5 +1,5 @@
 'use client'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, createContext } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
@@ -15,11 +15,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+export const SpaceContext = createContext()
+
 export default function SpaceLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { userInfo } = baseHooks()
+
   const currentPath = usePathname()
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
+
 
   return (
     <>
@@ -226,9 +230,13 @@ export default function SpaceLayout({ children }) {
           </div>
 
           <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">
+            <SpaceContext.Provider value={userInfo}>
 
-              {children}</div>
+
+              <div className="px-4 sm:px-6 lg:px-8">
+
+                {children}</div>
+            </SpaceContext.Provider>
           </main>
         </div>
       </div>

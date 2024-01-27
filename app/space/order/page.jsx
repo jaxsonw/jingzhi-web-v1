@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { orderList } from "../../../services/recharge"
 
@@ -9,11 +10,16 @@ const people = [
 ]
 
 export default function Example() {
+    const router = useRouter()
     const [orderListData, setOrderListData] = useState([])
 
     const init = async () => {
         const res = await orderList()
         setOrderListData(res?.data?.orderList)
+    }
+
+    const onPay = (item) => {
+        router.push(`/space/recharge/pay?orderSn=${item?.orderSn}`)
     }
 
     useEffect(() => {
@@ -39,6 +45,9 @@ export default function Example() {
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             支付金额
                                         </th>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                            操作
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -47,8 +56,16 @@ export default function Example() {
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 {item.orderSn}
                                             </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.orderStatus === 1 ? "已支付" : "未支付"}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> {(item.orderStatus === 0) ? "未支付" : ""}{(item.orderStatus === 2) ? "支付过期" : ""} {(item.orderStatus === 1) ? "已支付" : ""}</td>
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.orderStatus === 0 ? <button
+                                                onClick={() => onPay(item)}
+                                                type="button"
+                                                className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                                            >
+                                                继续支付
+                                            </button> : null}</td>
+
                                         </tr>
                                     ))}
                                 </tbody>

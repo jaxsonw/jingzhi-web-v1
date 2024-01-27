@@ -7,7 +7,8 @@ export default function FeedList() {
       <div className="mx-auto  px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
           <div className="mx-auto w-full max-w-xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 flex items-start">什么是{config.title}?</h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-left">什么是{config.title}?</p>
+
             <p className="mt-6 text-lg leading-8 text-gray-600  text-left">
               在AGICTO上，我们汇集了来自各个领域的优秀AI模型，并为其提供了统一的接口调用方式。这种整合的方式使得您无需耗费大量时间和精力去逐个了解和学习不同的AI模型接口调用方法，而是通过一个统一的接口直接进行调用和使用。
             </p>
