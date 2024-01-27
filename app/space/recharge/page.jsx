@@ -94,11 +94,11 @@ export default function Example() {
     }
   }
 
-  const wxLogoin = async () => {
+  const wxLogoin = async (price) => {
     const url = window.location.href
     window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(
       url
-    )}&response_type=code&scope=snsapi_userinfo&state=${goodsId}#wechat_redirect`
+    )}&response_type=code&scope=snsapi_userinfo&state=${price}#wechat_redirect`
   }
 
   const onCreateOrder = async () => {
@@ -150,7 +150,7 @@ export default function Example() {
         setSelectedType(1)
         // 如果返回有code，授权成功
         const code = seachParams.get('code')
-        const payFee = seachParams.get('payFee')
+        const payFee = seachParams.get('state')
 
         if (code) {
           const res = await getAuthCode({ code })
