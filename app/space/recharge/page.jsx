@@ -14,7 +14,7 @@ import { SpaceContext } from "../layout"
 
 
 
-const appid = 'wx847c9937877744e5' // 微信appid，测试 wx847c9937877744e5
+const appid = 'wx45ecf372ff70d541' // 微信appid，测试 wx847c9937877744e5
 
 
 const pricePlan = [
