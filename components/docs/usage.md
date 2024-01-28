@@ -6,7 +6,7 @@
 
 ``` js
 
-https://api.chateai.com/v1/agicto/chat
+https://api.ioii.cn/v1/agicto/chat
 
 ```
 

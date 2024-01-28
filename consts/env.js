@@ -1,1 +1,1 @@
-export const BASE_URL = `https://api.chateai.com`;
+export const BASE_URL = `https://api.ioii.cn`
