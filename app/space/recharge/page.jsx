@@ -138,7 +138,7 @@ export default function Example() {
           // }
 
           const params = {
-            payFee,
+            money: payFee,
             osType: 3,
             payType: 1
           }
