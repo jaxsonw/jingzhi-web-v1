@@ -73,6 +73,9 @@ export default function Example() {
     window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(
       url
     )}&response_type=code&scope=snsapi_userinfo&state=${price}#wechat_redirect`
+    console.log("href", `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(
+      url
+    )}&response_type=code&scope=snsapi_userinfo&state=${price}#wechat_redirect`)
   }
 
   const onCreateOrder = async () => {
@@ -96,6 +99,7 @@ export default function Example() {
     }
 
     if (!isPc() && isWeixin()) {
+      console.log("price", price)
       wxLogoin(price)
       return
     }
