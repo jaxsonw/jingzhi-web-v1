@@ -84,12 +84,12 @@ export default function Example() {
     if (selectedPrice === 0) {
       price = inputPrice
     }
-    // if (price < 10) {
-    //   toast.error("最低充值金额10元～")
-    //     setCreateOrderLoading(false)
+    if (price < 10) {
+      toast.error("最低充值金额10元～")
+      setCreateOrderLoading(false)
 
-    //   return
-    // }
+      return
+    }
     const osType = isWeixin() ? 3 : isPc() ? 1 : 2
 
     const params = {
