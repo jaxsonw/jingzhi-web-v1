@@ -203,7 +203,9 @@ export default function Example() {
                 </div>
               )
             })}
-            {(rechargeType?.[0]?.disabled || rechargeType?.[1]?.disabled) && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持该支付方式</span>}
+            {(rechargeType?.[0]?.disabled) && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持微信支付方式</span>}
+            {(rechargeType?.[1]?.disabled) && <span className="text-gray-400 text-md ml-2 mt-4">当前环境不支持支付宝支付方式</span>}
+
 
 
 
