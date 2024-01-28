@@ -5,7 +5,7 @@ import { RadioGroup } from '@headlessui/react'
 import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "react-toastify"
 
-import { createOrder, getOrderStatus, getWechatSign } from "../../../services/recharge"
+import { createOrder, getOrderStatus, getWechatSign, getAuthCode } from "../../../services/recharge"
 import Loading from "../../../components/common/Loading"
 import AliPay from "../../../icons/aliPay"
 import WeChatPay from "../../../icons/wechatPay"
@@ -96,7 +96,7 @@ export default function Example() {
     }
 
     if (!isPc() && isWeixin()) {
-      wxLogoin()
+      wxLogoin(price)
       return
     }
 

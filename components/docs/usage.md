@@ -6,7 +6,7 @@
 
 ``` js
 
-https://api.chateai.com/v1/together/chat
+https://api.chateai.com/v1/agicto/chat
 
 ```
 

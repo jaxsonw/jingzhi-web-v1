@@ -7,3 +7,5 @@ export const getWechatSign = ({ url }) => request.post(`${BASE_URL}/v1/wechat/ge
 
 export const getOrderPayInfo = params => request.post(`${BASE_URL}/v1/service/getOrderPayInfo`, params)
 export const orderList = params => request.post(`${BASE_URL}/v1/service/orderList`, params)
+
+export const getAuthCode = ({ code }) => request.post(`${BASE_URL}/v1/service/user/authCode`, { code })
