@@ -131,11 +131,11 @@ export default function Example() {
         const payFee = searchParams.get('state')
 
         if (code) {
-          const res = await getAuthCode({ code })
-          if (res?.code !== 0) {
-            toast.error(res?.message || '授权失败～')
-            return
-          }
+          // const res = await getAuthCode({ code })
+          // if (res?.code !== 0) {
+          //   toast.error(res?.message || '授权失败～')
+          //   return
+          // }
 
           const params = {
             payFee,
