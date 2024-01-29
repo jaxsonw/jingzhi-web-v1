@@ -1,30 +1,25 @@
-"use client"
-import { navigation } from "./const"
+'use client'
+import { navigation } from './const'
 import { Navigation } from '../../components/docs/Navigation'
-
-
-
+import { MobileNavigation } from '../../components/docs/MobileNavigation'
 
 export default function Layout({ children }) {
     return (
         <>
 
-
-            <div className="relative flex max-w-8xl   sm:px-2 lg:px-8 xl:px-12">
+            <div className="relative flex flex-col max-w-8xl   sm:px-2 lg:px-8 xl:px-12">
+                <div className="p-5 pb-0">
+                    <MobileNavigation navigation={navigation} />
+                </div>
                 <div className="hidden w-[200px] lg:relative lg:block lg:flex-none  h-[calc(100vh_-_82px)] overflow-y-auto border-r">
-                    <div className="sticky top-[4.6rem] -ml-0.5py-16">
+                    <div className="sticky top-[4.6rem] -ml-0.5 py-16">
                         <div className="absolute top-16 bottom-0 right-0 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
                         <div className="absolute top-28 bottom-0 right-0 hidden w-px bg-slate-800 dark:block" />
-                        <Navigation
-                            navigation={navigation}
-                            className="w-64 pr-8 xl:w-72 xl:pr-16"
-                        />
-                    </div>
 
+                        <Navigation navigation={navigation} className="w-64 pr-8 xl:w-72 xl:pr-16" />
+                    </div>
                 </div>
-                <div className='h-[calc(100vh_-_82px)] grow overflow-y-auto  px-10 py-10'>
-                    {children}
-                </div>
+                <div className="h-[calc(100vh_-_82px)] grow overflow-y-auto  px-5 py-5">{children}</div>
             </div>
         </>
     )

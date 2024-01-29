@@ -171,7 +171,10 @@ export const modelList = [
 export const navigation = [
   {
     title: '概览',
-    links: [{ title: '快速开始', href: '/docs/usage' }]
+    links: [
+      { title: '快速开始', href: '/docs/usage' },
+      { title: 'Open AI', href: '/docs/openai' }
+    ]
   },
   {
     title: '计费规则',

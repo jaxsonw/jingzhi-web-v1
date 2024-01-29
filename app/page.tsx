@@ -20,11 +20,11 @@ export default function Example() {
         slidesPerView={1}
         spaceBetween={30}
         mousewheel={true}
-        pagination={{
-          clickable: true
-        }}
-        modules={[Mousewheel, Pagination]}
-        className="mySwiper"
+        // pagination={{
+        //   clickable: false
+        // }}
+        modules={[Mousewheel]}
+        className="mySwiper swiper-no-swiping"
       >
         <SwiperSlide>
           <Hero />

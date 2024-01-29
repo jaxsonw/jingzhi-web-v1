@@ -17,13 +17,13 @@ export function MobileNavigation({ navigation }) {
       setIsOpen(false)
     }
 
-    router.events.on('routeChangeComplete', onRouteChange)
-    router.events.on('routeChangeError', onRouteChange)
+    // router.events.on('routeChangeComplete', onRouteChange)
+    // router.events.on('routeChangeError', onRouteChange)
 
-    return () => {
-      router.events.off('routeChangeComplete', onRouteChange)
-      router.events.off('routeChangeError', onRouteChange)
-    }
+    // return () => {
+    //   router.events.off('routeChangeComplete', onRouteChange)
+    //   router.events.off('routeChangeError', onRouteChange)
+    // }
   }, [router, isOpen])
 
   return (
@@ -65,10 +65,8 @@ export function MobileNavigation({ navigation }) {
               </svg>
             </button>
             <Link href="/">
-              <a className="ml-6 block w-10 overflow-hidden lg:w-auto">
-                <span className="sr-only">Home page</span>
-                {/* <Logo /> */}
-              </a>
+              <span className="sr-only">Home page</span>
+              {/* <Logo /> */}
             </Link>
           </div>
           <Navigation navigation={navigation} className="mt-5 px-1" />
