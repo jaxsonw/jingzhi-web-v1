@@ -7,10 +7,10 @@ export function Navigation({ navigation, className }) {
 
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
-      <ul className="space-y-9">
+      <ul className="space-y-9 w-full">
         {navigation?.map((section) => (
-          <li key={section.title}>
-            <h2 className="font-display font-medium text-slate-900 dark:text-white">
+          <li key={section.title} className="w-full">
+            <h2 className="font-display font-medium text-slate-900 dark:text-white w-full">
               {section.title}
             </h2>
             <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200">
