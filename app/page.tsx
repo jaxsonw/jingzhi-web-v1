@@ -11,6 +11,7 @@ import Vision from '../components/homePage/Vision'
 import Values from '../components/homePage/Values'
 
 import config from '../config'
+import { isPc } from '@/utils'
 
 export default function Example() {
   return (
@@ -20,11 +21,11 @@ export default function Example() {
         slidesPerView={1}
         spaceBetween={30}
         mousewheel={true}
-        // pagination={{
-        //   clickable: false
-        // }}
+        pagination={{
+          clickable: false
+        }}
         modules={[Mousewheel]}
-        className="mySwiper swiper-no-swiping"
+        className={`mySwiper ${isPc() ? 'swiper-no-swiping' : ''}`}
       >
         <SwiperSlide>
           <Hero />

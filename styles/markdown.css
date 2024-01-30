@@ -5,6 +5,10 @@
  * 全文字体 font-family: ptima-Regular;
  * 英文换行 word-break: break-all;
  */
+ .night-theme {
+    background-color: #333;
+    color: white;
+  }
  #nice {
     margin-top: 0;
     padding: 0;
@@ -180,8 +184,10 @@
     border-radius: 5px;
     width: 100%;
     overflow-x: scroll;
+    color: #333;
   }
   #nice pre code {
+    
   }
   /*
    * 表格

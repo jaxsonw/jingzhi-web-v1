@@ -81,7 +81,7 @@ export default function SpaceLayout({ children }) {
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
                       <Image width="35" height="65" src="https://ew6.cn/agicto-logo.png" alt="" />
-                      <span className="font-bold text-2xl ml-2">{config.title}</span>
+                      <span className="font-bold text-2xl ml-2 text-gray-900">{config.title}</span>
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -136,7 +136,7 @@ export default function SpaceLayout({ children }) {
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
               <Image width="35" height="65" className="w-auto h-[65px]" src="https://ew6.cn/agicto-logo.png" alt="" />
-              <span className="font-bold text-2xl ml-2">{config.title}</span>
+              <span className="font-bold text-2xl ml-2 text-gray-900">{config.title}</span>
             </a>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
