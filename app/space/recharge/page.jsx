@@ -90,9 +90,7 @@ export default function Example() {
 
       return
     }
-    if (price === 668800) {
-      price = 0.01
-    }
+
     const osType = isWeixin() ? 3 : isPc() ? 1 : 2
 
     const params = {
