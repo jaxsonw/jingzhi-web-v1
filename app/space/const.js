@@ -32,7 +32,7 @@ const navigation = [
     title: '订单列表',
     isMenu: true
   },
-  // { name: '费用明细', href: '/space/overflow', icon: UsersIcon, title: '费用明细', isMenu: true },
+  { name: '费用明细', href: '/space/costs', icon: UsersIcon, title: '费用明细', isMenu: true },
 
   { name: '订单支付', href: '/space/recharge/pay', icon: UsersIcon, title: '订单支付', isMenu: false }
 
