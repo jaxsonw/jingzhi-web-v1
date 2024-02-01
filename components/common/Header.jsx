@@ -13,7 +13,7 @@ const hiddenPath = ['/space']
 const navigation = [
   { name: '首页', href: '/' },
   // { name: '计费标准', href: '/pricing' },
-  { name: '开发文档', href: '/docs' }
+  { name: '开发文档', href: 'https://www.yuque.com/agicto/dev', target: "__blank" }
   //   { name: "在线平台", href: "/playground" },
   //   { name: "商店", href: "/shop" },
 ]
@@ -50,7 +50,7 @@ const Header = () => {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map(item => (
-            <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+            <a key={item.name} href={item.href} target={item?.target} className="text-sm font-semibold leading-6 text-gray-900">
               {item.name}
             </a>
           ))}
