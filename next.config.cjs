@@ -1,3 +1,4 @@
+ 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 })
@@ -13,6 +14,10 @@ module.exports = {
     domains: ['ew6.cn']
   },
   ...withMDX({
+    options: {
+      remarkPlugins: [require("remark-gfm")],
+      rehypePlugins: [],
+    },
     assetPrefix: assetPrefix[process.env.INIT_ENV],
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']
   })
