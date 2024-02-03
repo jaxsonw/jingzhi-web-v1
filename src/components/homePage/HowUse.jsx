@@ -35,7 +35,7 @@ export default function Example() {
     return (
         <div className=" bg-white py-24 sm:py-32">
             <div className="absolute inset-0 z-20 bg-[radial-gradient(45rem_100rem_at_top,theme(colors.indigo.200),white)] opacity-20" />
-            <div className="absolute inset-y-0 right-1/2 -z-10 mr-8 w-[300%] origin-top-left skew-x-[-40deg] skew-y-[0deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-8 xl:origin-center" />
+            <div className="absolute inset-y-0 right-1/2 -z-10 mr-8 w-[300%] origin-top-left skew-x-[-40deg] skew-y-[0deg] bg-white shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 sm:mr-28 lg:mr-0 xl:mr-8 xl:origin-center" />
 
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
@@ -49,7 +49,7 @@ export default function Example() {
                         {features.map((feature) => (
                             <div key={feature.name} className="relative pl-16">
                                 <dt className="text-base font-semibold leading-7 text-gray-900 text-left">
-                                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
                                         <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
                                     </div>
                                     {feature.name}

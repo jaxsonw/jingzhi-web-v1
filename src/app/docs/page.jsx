@@ -8,7 +8,7 @@ export default function Layout() {
   const router = useRouter()
 
   useEffect(() => {
-    router.push(navigation[0]?.links[0].href)
+    router.push(navigation[0]?.children?.[0]?.href)
   }, [])
   return (
     <>

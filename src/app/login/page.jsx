@@ -100,7 +100,7 @@ export default function Login() {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block px-2 w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block px-2 w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -117,13 +117,13 @@ export default function Login() {
                         type="text"
                         autoComplete="current-password"
                         required
-                        className="block px-2 w-2/3 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300  text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block px-2 w-2/3 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300  text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                       <button
                         disabled={sendLoading || isCodeSent}
                         onClick={handleSendCode}
                         type="button"
-                        className="rounded h-[35px] w-1/3 bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded h-[35px] w-1/3 bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                       >
                         {isCodeSent ? `${countdown} s` : '发送'}
                       </button>
@@ -134,7 +134,7 @@ export default function Login() {
                     <button
                       type="button"
                       onClick={onSubmit}
-                      className="flex  w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="flex  w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
                       登入
                     </button>

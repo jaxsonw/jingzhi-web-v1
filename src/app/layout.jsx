@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './globals.css'
-import '../styles/markdown.css'
+// import '../styles/markdown.css'
 
 import config from '../../config'
 

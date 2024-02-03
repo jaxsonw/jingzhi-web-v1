@@ -192,7 +192,7 @@ export default function Example() {
 
                     value={item}
                     className={classNames(
-                      active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                      active ? 'border-blue-500 ring-2 ring-blue-500' : '',
                       'relative w-fit mr-4 mt-4 block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none'
                     )}
                   >
@@ -229,7 +229,7 @@ export default function Example() {
                   key={plan.value}
                   value={plan}
                   className={classNames(
-                    currentChecked ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                    currentChecked ? 'border-blue-500 ring-2 ring-blue-500' : '',
                     'relative mr-4 mt-4 block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer flex justify-between focus:outline-none'
                   )}
                 >
@@ -245,7 +245,7 @@ export default function Example() {
                 name="price"
                 value={inputPrice}
                 onChange={onAmountChange}
-                className="block w-[150px] text-xl font-semibold px-6 py-3 mr-4 mt-4   rounded-md border-0 py-1.5 pl-7   text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 "
+                className="block w-[150px] text-xl font-semibold px-6 py-3 mr-4 mt-4   rounded-md border-0 py-1.5 pl-7   text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 "
                 placeholder="0.00"
               /> : null
             }
@@ -258,7 +258,7 @@ export default function Example() {
           disabled={createOrderLoading}
           onClick={onCreateOrder}
           type="button"
-          className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[250px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none ${createOrderLoading ? "bg-[#fafafa] text-[#ccc]" : ""} `}
+          className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[250px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none ${createOrderLoading ? "bg-[#fafafa] text-[#ccc]" : ""} `}
         >
           立即支付
         </button>

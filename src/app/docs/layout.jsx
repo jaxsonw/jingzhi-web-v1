@@ -1,84 +1,46 @@
 'use client'
+import { usePathname } from 'next/navigation'
 import { navigation } from './const'
 import { Navigation } from '../../components/docs/Navigation'
 import { MobileNavigation } from '../../components/docs/MobileNavigation'
 
 export default function Layout({ children }) {
+    const pathName = usePathname()
     return (
         <>
             <div className="p-5 pb-0 lg:hidden">
                 <MobileNavigation navigation={navigation} />
             </div>
-            <div className="relative flex  max-w-8xl   sm:px-2 lg:px-8 xl:px-5">
+            <div className="relative flex  lg:max-w-[80%] mx-auto sm:px-2 lg:px-8 xl:px-5">
+                <div className="hidden lg:block  w-64 h-[calc(100vh_-_82px)]  shrink-0  bg-white z-0">
+                    <div className="h-full py-10 overflow-y-scroll scrollbar border-r">
 
-                <div className="hidden w-[200px] lg:relative lg:block lg:flex-none  h-[calc(100vh_-_82px)] overflow-y-auto border-r">
-                    <div className="sticky top-[4.6rem] ">
-                        <div className="absolute top-16 bottom-0 right-0 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
-                        <div className="absolute top-28 bottom-0 right-0 hidden w-px bg-slate-800 dark:block" />
-                        <Navigation navigation={navigation} className="w-64 pr-8 xl:w-72 xl:pr-16 w-full" />
+                        {navigation?.map((item, index) => <div key={index} className="mb-5">
+                            <h4 className="w-full cursor-default">
+                                <div className="flex justify-between">
+                                    <p className="text-slate-800 mb-4 tracking-wide font-semibold text-md lg:text-sm">{item?.title}</p>
+                                </div>
+                            </h4>
+                            <ul>
+                                {
+                                    item?.children?.map((child, ind) => <li key={ind} className="items-center">
+                                        <a href={child?.href}>
+                                            <span
+                                                className={`text-slate-500 hover:text-slate-700 hover:border-slate-400 relative block border-l-2 ml-1 pl-4 py-1.5  font-normal text-md lg:text-sm transition-all ${pathName === child?.href ? "text-blue-500 border-current" : ""}`}
+                                                aria-hidden="true"
+                                            > {child?.title}
+                                            </span>
+                                        </a>
+                                    </li>)
+                                }
+                            </ul>
+
+                        </div>)}
+
                     </div>
                 </div>
-                <div className="h-[calc(100vh_-_82px)] grow overflow-y-auto  px-5 py-5">{children}</div>
+                <div className="h-[calc(100vh_-_82px)] grow overflow-y-scroll scrollbar lg:px-10 px-5 py-5">{children}</div>
             </div>
         </>
     )
 }
-
-// function useTableOfContents(tableOfContents) {
-//     let [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id)
-
-//     let getHeadings = useCallback(() => {
-//         function* traverse(node) {
-//             if (Array.isArray(node)) {
-//                 for (let child of node) {
-//                     yield* traverse(child)
-//                 }
-//             } else {
-//                 let el = document.getElementById(node.id)
-//                 if (!el) return
-
-//                 let style = window.getComputedStyle(el)
-//                 let scrollMt = parseFloat(style.scrollMarginTop)
-
-//                 let top = window.scrollY + el.getBoundingClientRect().top - scrollMt
-//                 yield { id: node.id, top }
-
-//                 for (let child of node.children ?? []) {
-//                     yield* traverse(child)
-//                 }
-//             }
-//         }
-
-//         return Array.from(traverse(tableOfContents))
-//     }, [tableOfContents])
-
-//     useEffect(() => {
-//         let headings = getHeadings()
-//         if (tableOfContents.length === 0 || headings.length === 0) return
-//         function onScroll() {
-//             let sortedHeadings = headings.concat([]).sort((a, b) => a.top - b.top)
-
-//             let top = window.pageYOffset
-//             let current = sortedHeadings[0].id
-//             for (let i = 0; i < sortedHeadings.length; i++) {
-//                 if (top >= sortedHeadings[i].top) {
-//                     current = sortedHeadings[i].id
-//                 }
-//             }
-//             setCurrentSection(current)
-//         }
-//         window.addEventListener('scroll', onScroll, {
-//             capture: true,
-//             passive: true,
-//         })
-//         onScroll()
-//         return () => {
-//             window.removeEventListener('scroll', onScroll, {
-//                 capture: true,
-//                 passive: true,
-//             })
-//         }
-//     }, [getHeadings, tableOfContents])
-
-//     return currentSection
-// }

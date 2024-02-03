@@ -5,7 +5,7 @@ export default function FeedList() {
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(45rem_100rem_at_top,theme(colors.indigo.200),white)] opacity-20" />
-      <div className="absolute inset-y-0 right-1/2 -z-10 mr-8 w-[300%] origin-top-left skew-x-[-40deg] skew-y-[0deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-8 xl:origin-center" />
+      <div className="absolute inset-y-0 right-1/2 -z-10 mr-8 w-[300%] origin-top-left skew-x-[-40deg] skew-y-[0deg] bg-white shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 sm:mr-28 lg:mr-0 xl:mr-8 xl:origin-center" />
       <div className="mx-auto  px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
           <div className="mx-auto w-full max-w-xl lg:mx-0">

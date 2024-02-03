@@ -68,7 +68,7 @@ export default function Example({ open, setOpen, onOk }) {
                     <input
                       onChange={onKeyNameChange}
                       type="text"
-                      className="shadow-sm h-[45px] outline-none border px-4 text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      className="shadow-sm h-[45px] outline-none border px-4 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       placeholder="名称"
                     />
                   </div>
@@ -86,7 +86,7 @@ export default function Example({ open, setOpen, onOk }) {
                   </button>
                   <button
                     type="button"
-                    className="flex  w-[65px] justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 ml-3 "
+                    className="flex  w-[65px] justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 ml-3 "
                     onClick={onCreate}
                   >
                     创建

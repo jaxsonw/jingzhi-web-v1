@@ -1,0 +1,79 @@
+import { Libraries } from '../../../components/docs/ModelList'
+
+export const metadata = {
+  title: '聚合接口接入',
+  description: '聚合接口接入'
+}
+
+# 聚合模型接入指南
+
+<Note>在尝试接入我们的一站式服务接口前，请先确保执行以下步骤，以保障您的使用体验无忧：</Note>
+
+- 查验您的账户余额以确认资金是否足够。
+- 访问我们的[计费规则](/docs/pricing)页面，详细了解不同模型的费用标准，帮助您进行预算规划。
+
+## 支持模型
+
+<Libraries />
+
+## 接口参数
+
+<Properties>
+  <Property name="model" type="string">
+    选择要使用的语言模型。可在[计费规则](/docs/pricing)页面查看
+  </Property>
+  <Property name="messages" type="array">
+    定义对话的消息列表，每个消息包含角色（user、assistant、system）和内容。
+  </Property>
+  <Property name="max_tokens" type="number">
+    限制生成文本的最大 token 数。
+  </Property>
+  <Property name="presence_penalty" type="number">
+    控制生成文本中的重复度，值越高表示重复度越低。
+  </Property>
+  <Property name="stream" type="boolean">
+    设置为 true 时，以流形式返回结果；设置为 false 时，返回完整的生成文本。
+  </Property>
+  <Property name="temperature" type="number">
+    调整生成文本的多样性，值越高生成越随机。
+  </Property>
+  <Property name="top_p" type="number">
+    采样参数，控制生成文本的多样性。
+  </Property>
+  <Property name="top_k" type="number">
+    限制模型在每步选择时考虑的 token 范围。
+  </Property>
+  <Property name="enable_search" type="boolean">
+    设置为 true 时，允许模型进行联网搜索以获得更全面的信息。(**联网功能仅支持「百川」、「通义千问」模型**)
+  </Property>
+</Properties>
+
+## 参数示例
+
+<CodeGroup>
+
+```json {{ title: '参数示例' }}
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    { "role": "system", "content": "You are a helpful assistant." },
+    { "role": "user", "content": "Tell me a joke." },
+    { "role": "assistant", "content": "Why did the chicken cross the road?" }
+  ],
+  "max_tokens": 50,
+  "presence_penalty": 0.5,
+  "stream": false,
+  "temperature": 0.7,
+  "top_p": 1.0,
+  "top_k": 50,
+  "enable_search": true
+}
+```
+
+</CodeGroup>
+
+## 注意事项
+
+- 请确保正确填写参数，以获得符合预期的生成文本。
+- 适度调整**temperature**、**top_p**和**top_k**以满足具体需求。
+- 联网搜索可能会增加生成时间，确保网络连接正常。 -->

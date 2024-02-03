@@ -170,15 +170,19 @@ export const modelList = [
 
 export const navigation = [
   {
-    title: '概览',
-    links: [
-      { title: '快速开始', href: '/docs/usage' },
-      { title: 'Open AI', href: '/docs/openai' }
+    title: '指南',
+    children: [
+      { title: 'Open AI 接入', href: '/docs/openai' },
+      { title: '其他模型接入', href: '/docs/polymerization' }
     ]
   },
   {
-    title: '计费规则',
-    links: [{ title: '计费标准', href: '/docs/pricing' }]
+    title: '资源',
+
+    children: [
+      { title: '计费标准', href: '/docs/pricing' },
+      { title: 'Open AI 文档', href: '/docs/openai-docs' }
+    ]
   }
 ]
 
