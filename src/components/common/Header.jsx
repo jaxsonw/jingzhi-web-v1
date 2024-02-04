@@ -13,7 +13,7 @@ const hiddenPath = ['/space']
 const navigation = [
   { name: '首页', href: '/' },
   // { name: '计费标准', href: '/pricing' },
-  { name: '开发文档', href: 'https://www.yuque.com/agicto/dev', target: "__blank" }
+  { name: '开发文档', href: '/docs', target: "__blank" }
   //   { name: "在线平台", href: "/playground" },
   //   { name: "商店", href: "/shop" },
 ]
