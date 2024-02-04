@@ -8,7 +8,7 @@ export default function Pricing() {
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="sm:flex sm:items-center">
                     <div className="sm:flex-auto">
-                        <h1 className="text-xl font-bold leading-6 text-gray-900">计费标准</h1>
+                        <h1 className="text-xl font-bold leading-6 text-gray-900">计费规则</h1>
                     </div>
                 </div>
                 <div className="mt-8 flow-root">

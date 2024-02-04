@@ -22,7 +22,7 @@ https://api.ioii.cn/v1
 
 ### 2. 在个人中心获取自己的 key
 
-<img src="/copy_key.jpg" />
+<img src="https://ew6.cn/copy_key.jpg" />
 ### 3. 在代码中运行
 
 <CodeGroup  >
@@ -50,7 +50,7 @@ response = client.chat.completions.create(
 const OpenAI = require('openai')
 
 const openai = new OpenAI({
-  apiKey: 'sk-nIzjQzAOItniimeoBgo7YCMfgKQmsRDvaUpNYkUCbJUJjcwg',
+  apiKey: '自己的API key',
   baseURL: 'https://api.ioii.cn/v1'
 })
 
@@ -68,6 +68,20 @@ async function main() {
   console.log(completion.choices[0])
 }
 main()
+```
+
+```bash {{ title: 'cURL' }}
+curl --location 'https://api.ioii.cn/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 自己的API key' \
+--data '{
+     "model": "gpt-3.5-turbo",
+     "messages": [
+        {"role": "system", "content": "你是AGICTO小助手"},
+        {"role": "user", "content": "翻译成英文：你好"}
+     ],
+     "temperature": 0.3
+   }'
 ```
 
 </CodeGroup>

@@ -24,6 +24,7 @@ const languageNames = {
   python: 'Python',
   ruby: 'Ruby',
   go: 'Go',
+  curl: "cURL"
 }
 
 function getPanelTitle({ title, language }) {

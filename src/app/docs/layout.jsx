@@ -11,9 +11,9 @@ export default function Layout({ children }) {
             <div className="p-5 pb-0 lg:hidden">
                 <MobileNavigation navigation={navigation} />
             </div>
-            <div className="relative flex  lg:max-w-[80%] mx-auto sm:px-2 lg:px-8 xl:px-5">
-                <div className="hidden lg:block  w-64 h-[calc(100vh_-_82px)]  shrink-0  bg-white z-0">
-                    <div className="h-full py-10 overflow-y-scroll scrollbar border-r">
+            <div className="relative flex  lg:max-w-[80%] h-[calc(100vh_-_82px)]  overflow-y-hidden  mx-auto sm:px-2 lg:px-8 xl:px-5">
+                <div className="hidden lg:block  w-64 h-[calc(100vh_-_82px)]  overflow-y-scroll scrollbar  shrink-0  bg-white z-0">
+                    <div className="h-full py-10 border-r">
 
                         {navigation?.map((item, index) => <div key={index} className="mb-5">
                             <h4 className="w-full cursor-default">

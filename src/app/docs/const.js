@@ -180,7 +180,7 @@ export const navigation = [
     title: '资源',
 
     children: [
-      { title: '计费标准', href: '/docs/pricing' },
+      { title: '计费规则', href: '/docs/pricing' },
       { title: 'Open AI 文档', href: '/docs/openai-docs' }
     ]
   }

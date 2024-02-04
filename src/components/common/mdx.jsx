@@ -8,7 +8,7 @@ export { CodeGroup, Code as code, Pre as pre } from './Code'
 
 export function wrapper({ children }) {
   return (
-    <article className="flex h-[calc(100vh_-_82px)] flex-col pb-10 pt-8 overflow-y-scroll scrollbar ">
+    <article className="flex  flex-col pb-10 pt-8 ">
       <Prose className="flex-auto">{children}</Prose>
     </article>
   )
@@ -69,7 +69,7 @@ export function Col({ children, sticky = false }) {
 
 export function Properties({ children }) {
   return (
-    <div className="my-6">
+    <div className="">
       <ul
         role="list"
         className="m-0 max-w-[calc(theme(maxWidth.lg)-theme(spacing.8))] list-none divide-y divide-zinc-900/5 p-0 dark:divide-white/5"

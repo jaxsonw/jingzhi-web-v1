@@ -12,11 +12,25 @@ export const metadata = {
 - 查验您的账户余额以确认资金是否足够。
 - 访问我们的[计费规则](/docs/pricing)页面，详细了解不同模型的费用标准，帮助您进行预算规划。
 
-## 支持模型
+## 基础域名
 
-<Libraries />
+<CodeGroup>
 
-## 接口参数
+```bash {{ language: 'shell' }}
+https://api.ioii.cn/v1/agicto/chat
+```
+
+</CodeGroup>
+
+## Header 参数
+
+<Properties>
+  <Property name="Authorization" type="string">
+    鉴权key值，可在[个人中心](/space)获取
+  </Property>
+</Properties>
+
+## Body 参数
 
 <Properties>
   <Property name="model" type="string">
@@ -71,6 +85,149 @@ export const metadata = {
 ```
 
 </CodeGroup>
+
+## 在代码中使用
+
+<CodeGroup>
+
+```bash {{ title: 'cURL' }}
+curl --location 'https://api.ioii.cn/v1/agicto/chat' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 自己的API key' \
+--data '{
+    "model": "360gpt-pro",
+    "messages": [
+
+        {
+            "role": "user",
+            "content": "讲个笑话"
+        }
+    ],
+    "max_tokens": 50,
+    "presence_penalty": 0.5,
+    "stream": false,
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "top_k": 50,
+    "enable_search": true
+}'
+```
+
+```js {{ title: 'Node.js' }}
+var request = require('request')
+var options = {
+  method: 'POST',
+  url: 'https://api.ioii.cn/v1/agicto/chat',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer 自己的API key'
+  },
+  body: JSON.stringify({
+    model: '360gpt-pro',
+    messages: [
+      {
+        role: 'user',
+        content: '讲个笑话'
+      }
+    ],
+    max_tokens: 50,
+    presence_penalty: 0.5,
+    stream: false,
+    temperature: 0.7,
+    top_p: 1,
+    top_k: 50,
+    enable_search: true
+  })
+}
+request(options, function (error, response) {
+  if (error) throw new Error(error)
+  console.log(response.body)
+})
+```
+
+```python {{ title: 'Python' }}
+import requests
+import json
+
+url = "https://api.ioii.cn/v1/agicto/chat"
+
+payload = json.dumps({
+  "model": "360gpt-pro",
+  "messages": [
+    {
+      "role": "user",
+      "content": "讲个笑话"
+    }
+  ],
+  "max_tokens": 50,
+  "presence_penalty": 0.5,
+  "stream": False,
+  "temperature": 0.7,
+  "top_p": 1,
+  "top_k": 50,
+  "enable_search": True
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer 自己的API key'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+
+```
+
+```php {{ title: 'PHP' }}
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('https://api.ioii.cn/v1/agicto/chat');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer 自己的API key'
+));
+$request->setBody('{\n    "model": "360gpt-pro",\n    "messages": [\n        \n        {\n            "role": "user",\n            "content": "讲个笑话"\n        } \n    ],\n    "max_tokens": 50,\n    "presence_penalty": 0.5,\n    "stream": false,\n    "temperature": 0.7,\n    "top_p": 1.0,\n    "top_k": 50,\n    "enable_search": true\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+
+```
+
+```java{{ title: 'Java' }}
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"model\": \"360gpt-pro\",\n    \"messages\": [\n        \n        {\n            \"role\": \"user\",\n            \"content\": \"讲个笑话\"\n        } \n    ],\n    \"max_tokens\": 50,\n    \"presence_penalty\": 0.5,\n    \"stream\": false,\n    \"temperature\": 0.7,\n    \"top_p\": 1.0,\n    \"top_k\": 50,\n    \"enable_search\": true\n}");
+Request request = new Request.Builder()
+  .url("https://api.ioii.cn/v1/agicto/chat")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer 自己的API key")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+</CodeGroup>
+
+## 支持模型
+
+<Libraries />
 
 ## 注意事项
 

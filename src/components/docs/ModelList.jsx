@@ -17,41 +17,46 @@ const libraries = [
         // logo: logoPhp,
     },
     {
-        href: "https://platform.openai.com/doc",
+        href: "https://help.aliyun.com/zh/dashscope/developer-reference/api-details?spm=a2c4g.11186623.0.0.dbf912b02dNFsa",
 
         name: '通义千问',
         description:
-            '国内大模型；可联网',
+            '阿里通义千问大模型；可联网',
         // logo: logoRuby,
     },
     {
-        href: "https://platform.openai.com/doc",
+        href: "https://platform.baichuan-ai.com/docs/api",
 
         name: '百川',
         description:
-            '国内大模型；可联网',
+            '汇聚世界知识，创作妙笔生花；可联网',
         // logo: logoNode,
     },
     {
-        href: "https://platform.openai.com/doc",
+        href: "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Nlks5zkzu",
 
-        name: '文心一言',
+        name: '文心大模型',
         description:
-            '国内大模型；不可联网',        // logo: logoPython,
+            '百度全新一代知识增强大语言模型',        // logo: logoPython,
     },
     {
-        href: "https://platform.openai.com/doc",
+        href: "https://www.xfyun.cn/doc/spark/Web.html#_1-%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E",
 
         name: '讯飞星火',
         description:
-            '国内大模型；不可联网',          // logo: logoGo,
+            '科大讯飞推出的新一代认知智能大模型',          // logo: logoGo,
     },
     {
-        href: "https://platform.openai.com/doc",
-
+        href: "https://cloud.tencent.com/document/product/1729/101848",
         name: '腾讯混元',
         description:
-            '国内大模型；不可联网',          // logo: logoGo,
+            `由腾讯研发的大语言模型`,          // logo: logoGo,
+    },
+    {
+        href: "https://ai.360.com/platform/docs/overview",
+        name: '360智脑',
+        description:
+            `由腾讯研发的大语言模型，具备强大的中文创作能力`,          // logo: logoGo,
     },
 
 ]
