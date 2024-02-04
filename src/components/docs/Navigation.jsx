@@ -1,40 +1,36 @@
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import clsx from 'clsx'
+import { usePathname } from 'next/navigation'
 
 export function Navigation({ navigation, className }) {
-  let router = useRouter()
+  const pathName = usePathname()
 
   return (
-    <nav className={clsx('text-base lg:text-sm', className)}>
-      <ul className="space-y-9 w-full">
-        {navigation?.map((section) => (
-          <li key={section.title} className="w-full">
-            <h2 className="font-display font-medium text-slate-900 dark:text-white w-full">
-              {section.title}
-            </h2>
-            <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200">
-              {section.links.map((link) => (
-                <li key={link.href} className="relative">
-                  <Link href={link.href} className={clsx(
-                    'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full',
-                    {
-                      'font-semibold text-sky-500 before:bg-sky-500':
-                        link.href === router.pathname,
-                      'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300':
-                        link.href !== router.pathname,
-                    }
-                  )}>
+    <div className=" w-64 h-[calc(100vh_-_82px)]  overflow-y-scroll scrollbar  shrink-0  bg-white z-0">
+      <div className="h-full py-10 border-r">
 
+        {navigation?.map((item, index) => <div key={index} className="mb-5">
+          <h4 className="w-full cursor-default">
+            <div className="flex justify-between">
+              <p className="text-slate-800 mb-4 tracking-wide font-semibold text-md lg:text-sm">{item?.title}</p>
+            </div>
+          </h4>
+          <ul>
+            {
+              item?.children?.map((child, ind) => <li key={ind} className="items-center">
+                <a href={child?.href}>
+                  <span
+                    className={`text-slate-500 hover:text-slate-700 hover:border-slate-400 relative block border-l-2 ml-1 pl-4 py-1.5  font-normal text-md lg:text-sm transition-all ${pathName === child?.href ? "text-blue-500 border-current" : ""}`}
+                    aria-hidden="true"
+                  > {child?.title}
+                  </span>
+                </a>
+              </li>)
+            }
+          </ul>
 
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </nav>
+        </div>)}
+
+      </div>
+    </div>
   )
 }
