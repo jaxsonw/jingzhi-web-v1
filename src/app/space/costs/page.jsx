@@ -1,72 +1,65 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import moment from "moment"
-import { AreaChart, Card, Title } from "@tremor/react";
-
+import { AreaChart, BarChart, Card, Title, DatePicker } from "@tremor/react";
+import { zhCN } from "date-fns/locale";
 import { getChartDetail, getChartModelList } from "../../../services/overflow"
-import { modelList } from '../../docs/const';
 
 
 
-const chartdata = [
-    {
-        date: "Jan 22",
-        SemiAnalysis: 2890,
-        "The Pragmatic Engineer": 2338,
-    },
-    {
-        date: "Feb 22",
-        SemiAnalysis: 2756,
-        "The Pragmatic Engineer": 2103,
-    },
-    {
-        date: "Mar 22",
-        SemiAnalysis: 3322,
-        "The Pragmatic Engineer": 2194,
-    },
-    {
-        date: "Apr 22",
-        SemiAnalysis: 3470,
-        "The Pragmatic Engineer": 2108,
-    },
-    {
-        date: "May 22",
-        SemiAnalysis: 3475,
-        "The Pragmatic Engineer": 1812,
-    },
-    {
-        date: "Jun 22",
-        SemiAnalysis: 3129,
-        "The Pragmatic Engineer": 1726,
-    },
-    //...
-];
+
+
 
 export default function Overflow() {
+    const [date, setDate] = useState(moment().format("YYYY-MM-DD"))
+    const [dataList, setDataList] = useState([])
+    const [totalFee, setTotalFee] = useState(0)
+
     const init = async () => {
         const res = await getChartModelList({
-            date: moment().unix() * 1000
+            date
         })
-        console.log("res", res)
 
+        const modelList = res?.data?.modelList?.map(item => ({
+            ...item,
+            "消费金额": item.fee,
+        }))
+        setDataList(modelList)
+        setTotalFee(res?.data?.totalFee)
     }
 
     useEffect(() => {
         init()
-    }, [])
-    const valueFormatter = (number) => `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
+    }, [date])
 
-
+    console.log("moment(date)", moment(date)?.format('ddd MMM DD YYYY HH:mm:ss ZZ'))
     return <Card>
-        <Title>Newsletter revenue over time (USD)</Title>
-        <AreaChart
-            className="h-72 mt-4"
-            data={chartdata}
-            index="date"
-            yAxisWidth={65}
-            categories={["SemiAnalysis", "The Pragmatic Engineer"]}
-            colors={["indigo", "cyan"]}
-            valueFormatter={valueFormatter}
+        <div className="flex justify-end"><DatePicker locale={zhCN}
+            placeholder="请选择日期" 
+            // value={
+            //     `${moment(date)?.format('ddd MMM DD YYYY HH:mm:ss ZZ')} (中国标准时间)`
+            // }
+            
+            value={
+                {
+                    form:`${moment(date)?.format('ddd MMM DD YYYY HH:mm:ss ZZ')}`,
+                    to:`${moment(date)?.format('ddd MMM DD YYYY HH:mm:ss ZZ')}`
+                }
+            }
+            onValueChange={(e) => {
+                console.log("e", e)
+                setDate(moment(e)?.format("YYYY-M-D"))
+            }} className="max-w-sm" /></div>
+        <Title className="flex justify-between"><span className="text-rose-400">消费总金额：{totalFee?.toFixed(4)} </span></Title>
+        <BarChart
+            className="mt-6"
+            data={dataList}
+            index="model"
+            categories={["消费金额"]}
+            colors={["blue-300"]}
+            valueFormatter={(v) => Number(v)?.toFixed(4)}
+            yAxisWidth={80}
+            showXAxis
         />
     </Card>
 }
