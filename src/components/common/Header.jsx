@@ -8,7 +8,7 @@ import Logo from '/public/logo.jpeg'
 import baseHooks from '../hooks/base'
 import config from '../../../config'
 
-const hiddenPath = ['/space']
+const hiddenPath = ['/space', "/login"]
 
 const navigation = [
   { name: '首页', href: '/' },
