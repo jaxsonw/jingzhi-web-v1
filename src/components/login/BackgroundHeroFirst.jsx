@@ -64,7 +64,7 @@ export default function BackgroundHeroFirst() {
                     <div className="grid grid-cols-3 gap-12 relative z-[11] ">
                         {modelList?.map((item, index) => (
                             <div key={index} className={`bg-slate-200 drop-shadow-md p-4  w-[112px] h-[125px] flex items-center justify-center flex-col ${item?.active ? "bg-white shadow-3xl shadow-[#93F8FF]" : ""}`}>
-                                <img src={item?.icon} alt="agicto-icon" className='w-[50px] h-[50px]' />
+                                <img src={item?.icon} alt="agicto-icon" className='w-[50px]' />
                                 <span className={`text-[14px] mt-[17px] text-black ${item?.active ? "text-[#3162FF]" : ""}`}>{item?.name}</span>
                             </div>
                         ))}

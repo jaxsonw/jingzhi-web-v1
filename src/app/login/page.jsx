@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Autoplay } from 'swiper/core';
 import { Mousewheel, Pagination } from 'swiper/modules'
 import { toast as Toast } from 'react-toastify'
 import BackgroundFirst from "../../components/login/BackgroundHeroFirst"
@@ -12,8 +13,13 @@ import { getEmailCode, login } from '../../services/index'
 import { vaildEmail, checkServer, isPc } from '../../utils/index'
 import { icon_logo_color } from "../../consts/img"
 import { title } from "../../../config"
+import "swiper/bundle"
+
+
+SwiperCore.use([Autoplay]);
 
 export default function Login() {
+
   const searchParams = useSearchParams()
   const [sendLoading, setSendLoading] = useState(false)
   const [submitLoading, setSubmitLoading] = useState(false)
@@ -43,6 +49,7 @@ export default function Login() {
       Toast.error(res?.message)
     }
   }
+
 
   const onSubmit = async () => {
     const params = {
@@ -156,15 +163,15 @@ export default function Login() {
         </div>
         <div className="relative hidden w-0 flex-1 lg:block ">
           <Swiper
+            loop
             slidesPerView={1}
             mousewheel={true}
-            loop
+            autoplay={{ delay: 3000 }}
             pagination={{
               clickable: false,
-
             }}
             modules={[Mousewheel, Pagination]}
-            className={`mySwiper  ${isPc() ? 'swiper-no-swiping' : ''}`}
+          // className={`  ${isPc() ? 'swiper-no-swiping' : ''}`}
           >
             <SwiperSlide>
               <BackgroundFirst />
