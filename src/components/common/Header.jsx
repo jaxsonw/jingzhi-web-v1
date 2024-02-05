@@ -4,9 +4,10 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import Logo from '/public/logo.jpeg'
+// import Logo from '/public/logo.jpeg'
 import baseHooks from '../hooks/base'
 import config from '../../../config'
+import { icon_logo_color } from "../../consts/img"
 
 const hiddenPath = ['/space', "/login"]
 
@@ -34,8 +35,7 @@ const Header = () => {
       <nav className="flex items-center justify-between p-6 lg:px-8 bg-white 123123" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
-            <Image className="w-[35px]" src={Logo} alt="" />
-            <span className="font-bold text-2xl ml-2 text-gray-900">{config.title}</span>
+            <img className="h-[35px]" src={icon_logo_color} alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -73,8 +73,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center -m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <Image className="w-[35px]" src={Logo} alt="" />
-              <span className="font-bold text-2xl ml-2 text-gray-900">{config.title}</span>
+              <img className="h-[35px]" src={icon_logo_color} alt="" />
             </a>
             <button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Close menu</span>
