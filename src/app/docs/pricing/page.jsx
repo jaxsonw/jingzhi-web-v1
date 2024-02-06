@@ -1,8 +1,23 @@
 'use client'
+import { useState, useEffect } from "react"
+import { Badge } from "@tremor/react"
+import { getModelPriceList } from "../../../services/overflow"
 
-import modelList from '../const.js'
+const colors = ["blue", "violet", "cyan", "rose"]
+
 
 export default function Pricing() {
+    const [data, setData] = useState()
+
+    const init = async () => {
+        const res = await getModelPriceList()
+        setData(res?.data?.modelPriceList)
+    }
+
+    useEffect(() => {
+        init()
+    }, [])
+
     return (
         <div className="h-[calc(100vh_-_82px)]">
             <div className="px-4 sm:px-6 lg:px-8">
@@ -35,16 +50,19 @@ export default function Pricing() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {modelList.map((item) => (
-                                        <tr key={item.name}>
-                                            <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.source}</td>
-                                            <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.name}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{item.inputPrice}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item.outputPrice}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item.desc}</td>
-
-                                        </tr>
-                                    ))}
+                                    {data?.map((item) => {
+                                        const currentRemark = item?.remark?.split(",")
+                                        console.log("currentRemark", currentRemark)
+                                        return (
+                                            <tr key={item.name}>
+                                                <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.source}</td>
+                                                <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.model}</td>
+                                                <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{item.inputPrice || "/"}</td>
+                                                <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item.outputPrice || "/"}</td>
+                                                <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item?.remark ? currentRemark?.map((val, index) => <Badge color={colors[index] || "#3b82f6"} key={val} className="mr-2">{val}</Badge>) : ""}</td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -54,3 +72,4 @@ export default function Pricing() {
         </div>
     )
 }
+
