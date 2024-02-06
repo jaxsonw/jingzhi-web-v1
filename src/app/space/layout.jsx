@@ -81,7 +81,7 @@ export default function SpaceLayout({ children }) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
-                      <img className="h-[45px]" src={icon_logo_color} alt="" />
+                      <img className="h-[25px]" src={icon_logo_color} alt="" />
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -139,8 +139,8 @@ export default function SpaceLayout({ children }) {
             </a>
             <nav className="flex flex-1 flex-col">
               <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
-                <div className="text-[#545759] text-center mb-4">{userInfo?.name||"AGICTO"}</div>
-                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-l px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                <div className="text-[#545759] text-center mb-4">{userInfo?.name||"loading..."}</div>
+                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
                   <span>剩余金额</span>
                   <span>{userInfo?.apiNum}</span>
                 </div>
@@ -226,7 +226,7 @@ export default function SpaceLayout({ children }) {
                 {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                <Link href="/login" className="flex items-center hover:font-bold">
+                <Link href="/login" className="flex items-center hover:font-bold text-black">
                
                   <RiLogoutBoxRLine className="mr-2" /> 退出登录
                 </Link>

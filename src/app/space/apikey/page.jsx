@@ -70,114 +70,76 @@ export default function APIKeys() {
     <div>
       <DeleteConfirm open={deleteOpen} setOpen={setDeleteOpen} onOk={onDelete} onCancel={() => setDeleteOpen(false)} />
       <EditKeyModal open={open} setOpen={setOpen} onOk={onCreateCb} />
-       <div className="flex items-center justify-end">
-        <button
-          onClick={onCreate}
-          type="button"
-          className="inline-flex text-center items-center justify-center w-[150px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          创建key
-        </button>
-      </div>
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead>
-                <tr>
-                  <th scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    名称
-                  </th>
-                  <th scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    key
-                  </th>
-                  <th scope="col" className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    状态
-                  </th>
-                  <th scope="col" className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    创建时间
-                  </th>
-                  <th scope="col" className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    操作
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {tableData?.map(item => (
-                  <tr key={item.id}>
-                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.name}</td>
-                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{item.openKey}    <button
-                      onClick={() => copyValue(item.openKey)}
-                      type="button"
-                      className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white  box-shadow  "
-                    >
-                      <FaRegCopy color='black' size={16} />
-                    </button> </td>
-                    <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{statuses[item.status]?.text}</td>
-                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{item?.createTime}</td>
 
-                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                      <span className="relative z-0 inline-flex shadow-sm rounded-md">
-                        <button
-                          onClick={() => onDeleteClick(item)}
-                          type="button"
-                          className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
-                        >
-                          删除
-                        </button>
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-end">
+          <button
+            onClick={onCreate}
+            type="button"
+            className="inline-flex text-center items-center justify-center w-[150px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#3162FF] hover:bg-[#3162FF] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            创建key
+          </button>
+        </div>
+        <div className="mt-4 flex flex-col">
+          <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md">
+                <table className="min-w-full divide-y divide-gray-300">
+                  <thead className="bg-[#3162FF] text-white ">
+                    <tr>
+                      <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white  sm:pl-6">
+                        自定义名称
+                      </th>
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                        Key
+                      </th>
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                        状态
+                      </th>
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                        创建时间
+                      </th>
+                      <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                        操作
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {tableData?.map(item => (
+                      <tr key={item.id}>
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{item.name}</td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm  flex items-center text-gray-500">
+                          <button
+                            onClick={() => copyValue(item.openKey)}
+                            type="button"
+                            className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium "
+                          >
+                            <FaRegCopy color="black" size={16} />
+                          </button>
+                          {item.openKey}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{statuses[item.status]?.text}</td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item?.createTime}</td>
 
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <span className="relative z-0 inline-flex">
+                            <button
+                              onClick={() => onDeleteClick(item)}
+                              type="button"
+                              className="inline-flex items-center px-2.5 py-1.5   text-xs font-medium shandow-none  text-[#F52F3E]"
+                            >
+                              删除
+                            </button>
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md">
-                            <table className="min-w-full divide-y divide-gray-300">
-                                <thead className="bg-[#3162FF] text-white ">
-                                    <tr>
-                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white  sm:pl-6">
-                                            订单编号
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
-                                            订单状态
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
-                                            支付金额
-                                        </th>
-                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
-                                            充值金额
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
-                                            操作
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200 bg-white">
-                                    {tableData?.map((item) => (
-                                        <tr key={item.orderSn}>
-                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {item.orderSn}
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> {item.name}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee?`${item.payFee}元`:"--"}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee?`${item.payFee}元`:"--"}</td>
-
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.orderStatus === 0 ? <button
-                                                onClick={() => onPay(item)}
-                                                type="button"
-                                                className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
-                                            >
-                                                继续支付
-                                            </button> :"--"}</td>
-
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
         </div>
       </div>
     </div>

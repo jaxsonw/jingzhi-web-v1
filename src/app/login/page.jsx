@@ -3,23 +3,21 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Autoplay } from 'swiper/core';
+import SwiperCore, { Autoplay } from 'swiper/core'
 import { Mousewheel, Pagination } from 'swiper/modules'
 import { toast as Toast } from 'react-toastify'
-import BackgroundFirst from "../../components/login/BackgroundHeroFirst"
-import BackgroundSecond from "../../components/login/BackgroundHeroSecond"
-import BackgroundThird from "../../components/login/BackgroundHeroThird"
+import BackgroundFirst from '../../components/login/BackgroundHeroFirst'
+import BackgroundSecond from '../../components/login/BackgroundHeroSecond'
+import BackgroundThird from '../../components/login/BackgroundHeroThird'
 import { getEmailCode, login } from '../../services/index'
 import { vaildEmail, checkServer, isPc } from '../../utils/index'
-import { icon_logo_color } from "../../consts/img"
-import { title } from "../../../config"
-import "swiper/bundle"
+import { icon_logo_color } from '../../consts/img'
+import { title } from '../../../config'
+import 'swiper/bundle'
 
-
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Autoplay])
 
 export default function Login() {
-
   const searchParams = useSearchParams()
   const [sendLoading, setSendLoading] = useState(false)
   const [submitLoading, setSubmitLoading] = useState(false)
@@ -49,7 +47,6 @@ export default function Login() {
       Toast.error(res?.message)
     }
   }
-
 
   const onSubmit = async () => {
     const params = {
@@ -90,25 +87,21 @@ export default function Login() {
   return (
     <>
       <div className="flex min-h-[calc(100vh_-_82px)] flex-1">
-
-        <div className='flex flex-col  w-2/5 p-6'>
-          <a href="/" className='flex h-[45px] items-center'>
-            <img className='h-[45px]' src={icon_logo_color} alt={title} />
-          </a >
+        <div className="flex flex-col  w-2/5 p-6">
+          <a href="/" className="flex h-[45px] items-center">
+            <img className="h-[45px]" src={icon_logo_color} alt={title} />
+          </a>
           <div className="flex flex-1 flex-col justify-center sm:px-6 ">
-
             <div className="mx-auto w-full max-w-sm lg:w-96">
-
               <div className="flex flex-col items-center">
-
                 <h2 className="  text-[32px]   leading-9 tracking-tight text-[#3162FF]">欢迎访问</h2>
-                <span className='spacing-10 text-[#8c8c8c] mt-2 tracking-widest	'>大模型调用枢纽</span>
+                <span className="spacing-10 text-[#8c8c8c] mt-2 tracking-widest	">大模型调用枢纽</span>
               </div>
 
               <div className="mt-10">
                 <div>
                   <div action="#" method="POST" className="space-y-6">
-                    <div >
+                    <div>
                       {/* <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                         邮箱
                       </label> */}
@@ -116,7 +109,7 @@ export default function Login() {
                         <input
                           onChange={e => setEmail(e?.target?.value)}
                           autoComplete="email"
-                          placeholder='请输入邮箱'
+                          placeholder="请输入邮箱"
                           required
                           className="block px-2 w-full  py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		 text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         />
@@ -124,11 +117,10 @@ export default function Login() {
                     </div>
 
                     <div>
-
                       <div className="mt-2 flex items-center border-b-2">
                         <input
                           onChange={e => setCode(e?.target?.value)}
-                          placeholder='请输入验证码'
+                          placeholder="请输入验证码"
                           autoComplete="current-password"
                           required
                           className="block px-2 w-2/3 h-[45px]   py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		  text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
@@ -155,8 +147,6 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -168,19 +158,19 @@ export default function Login() {
             mousewheel={true}
             autoplay={{ delay: 3000 }}
             pagination={{
-              clickable: false,
+              clickable: false
             }}
             modules={[Mousewheel, Pagination]}
-          // className={`  ${isPc() ? 'swiper-no-swiping' : ''}`}
-          >
+           >
             <SwiperSlide>
               <BackgroundFirst />
-
             </SwiperSlide>
             <SwiperSlide>
-              <BackgroundSecond />            </SwiperSlide>
+              <BackgroundSecond />
+            </SwiperSlide>
             <SwiperSlide>
-              <BackgroundThird />            </SwiperSlide>
+              <BackgroundThird />
+            </SwiperSlide>
           </Swiper>
         </div>
       </div>

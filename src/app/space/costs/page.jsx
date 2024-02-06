@@ -27,8 +27,7 @@ export default function Overflow() {
         init()
     }, [date])
 
-    console.log('moment(date)', moment(date)?.format('ddd MMM DD YYYY HH:mm:ss ZZ'))
-    return (
+     return (
         <Card>
             <div className="flex justify-end">
                 <DatePicker

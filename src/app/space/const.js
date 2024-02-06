@@ -8,13 +8,13 @@ import { IoStatsChartOutline } from "react-icons/io5";
 
 
 const navigation = [
-  { name: 'API keys', href: '/space/apikey', icon: AiOutlineKey, title: 'API keys', enTitle:"CREATE YOUR KEY", isMenu: true },
+  { name: 'API keys', href: '/space/apikey', icon: AiOutlineKey, title: '创建你的KEY', enTitle: 'CREATE YOUR KEY', isMenu: true },
   {
     name: '充值中心',
     href: '/space/recharge',
     icon: RiMoneyCnyCircleLine,
     title: '充值中心',
-    enTitle:"RECHARGE CENTER",
+    enTitle: 'RECHARGE CENTER',
     isMenu: true
   },
   {
@@ -22,10 +22,10 @@ const navigation = [
     href: '/space/order',
     icon: HiOutlineClipboardList,
     title: '我的订单',
-    enTitle:"MY ORDER",
+    enTitle: 'MY ORDER',
     isMenu: true
   },
-  { name: '消耗统计', href: '/space/costs', icon: IoStatsChartOutline, title: '消耗统计', enTitle:"EXPENDITURE STATISTICS", isMenu: true },
+  { name: '消耗统计', href: '/space/costs', icon: IoStatsChartOutline, title: '消耗统计', enTitle: 'EXPENDITURE STATISTICS', isMenu: true },
 
   { name: '订单支付', href: '/space/recharge/pay', icon: UsersIcon, title: '订单支付', isMenu: false }
 

@@ -6,7 +6,7 @@
       "editor.defaultFormatter": "vscode.json-language-features"
     },
     "jsc.transform.react.throwIfNamespace":false,
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "tabnine.experimentalAutoImports": true,
     "[typescriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

@@ -44,3 +44,32 @@ export const login_bg_two = 'https://ew6.cn/login_bg_two.png'
 
 // login 背景元素 第三张
 export const login_bg_three = 'https://ew6.cn/login_bg_three.png'
+
+// 充值中心头图
+export const recharge_center_bg1 = 'https://ew6.cn/agicto_recharge_head.png'
+
+// 客服微信 产品经理
+export const agicto_product_agent_wechat = "https://ew6.cn/agicto_product_agent_wechat.png"
+
+// 充值金额50
+export const recharge_50 = 'https://ew6.cn/recharge_50.png'
+
+// 充值金额100
+export const recharge_100 = 'https://ew6.cn/recharge_100.png'
+
+// 充值金额500
+export const recharge_500 = 'https://ew6.cn/recharge_500.png'
+
+// 充值金额1000
+export const recharge_1000 = 'https://ew6.cn/recharge_1000.png'
+
+// 充值金额5000
+export const recharge_5000 = 'https://ew6.cn/recharge_5000.png'
+
+// 充值金额 自定义
+export const recharge_custom_price = 'https://ew6.cn/recharge_custom_price.png'
+
+// 充值金额 元
+export const recharge_yuan = 'https://ew6.cn/recharge_yuan.png'
+
+
