@@ -1,7 +1,7 @@
 // 白色带icon logo
 export const icon_logo_white = 'https://ew6.cn/agicto_logo_white.png'
 // 彩色带icon logo
-export const icon_logo_color = 'https://ew6.cn/icon_logo_color.png'
+export const icon_logo_color = 'https://ew6.cn/agicto-logo-icon.png'
 // login 汇集精彩
 export const login_huijujingcai = 'https://ew6.cn/login_huijijingcai.png'
 // login 极致性价

@@ -70,8 +70,7 @@ export default function APIKeys() {
     <div>
       <DeleteConfirm open={deleteOpen} setOpen={setDeleteOpen} onOk={onDelete} onCancel={() => setDeleteOpen(false)} />
       <EditKeyModal open={open} setOpen={setOpen} onOk={onCreateCb} />
-      <h4 className="font-bold">请勿与他人共享API密钥，或在浏览器或其他客户端代码中公开该密钥。</h4>
-      <div className="flex items-center justify-end">
+       <div className="flex items-center justify-end">
         <button
           onClick={onCreate}
           type="button"
@@ -134,6 +133,51 @@ export default function APIKeys() {
               </tbody>
             </table>
           </div>
+
+          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md">
+                            <table className="min-w-full divide-y divide-gray-300">
+                                <thead className="bg-[#3162FF] text-white ">
+                                    <tr>
+                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white  sm:pl-6">
+                                            订单编号
+                                        </th>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                                            订单状态
+                                        </th>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                                            支付金额
+                                        </th>
+                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                                            充值金额
+                                        </th>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-white ">
+                                            操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200 bg-white">
+                                    {tableData?.map((item) => (
+                                        <tr key={item.orderSn}>
+                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                {item.orderSn}
+                                            </td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> {item.name}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee?`${item.payFee}元`:"--"}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee?`${item.payFee}元`:"--"}</td>
+
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.orderStatus === 0 ? <button
+                                                onClick={() => onPay(item)}
+                                                type="button"
+                                                className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                                            >
+                                                继续支付
+                                            </button> :"--"}</td>
+
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
         </div>
       </div>
     </div>

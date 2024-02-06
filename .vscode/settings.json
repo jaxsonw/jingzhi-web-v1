@@ -6,7 +6,7 @@
       "editor.defaultFormatter": "vscode.json-language-features"
     },
     "jsc.transform.react.throwIfNamespace":false,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "tabnine.experimentalAutoImports": true,
     "[typescriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -34,10 +34,13 @@
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascriptreact]": {
-      "editor.defaultFormatter": "vscode.typescript-language-features"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "workbench.preferredDarkColorTheme": "Visual Studio Dark",
-    "workbench.colorTheme": "Visual Studio Dark"
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnType": true
   }
   

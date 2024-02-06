@@ -2,18 +2,16 @@
 import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { RiLogoutBoxRLine } from "react-icons/ri";
+import { RiLogoutBoxRLine } from 'react-icons/ri'
+import { AiOutlineKey } from "react-icons/ai";
 
-import Link from "next/link"
-import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
-import config from '../../../config'
-import baseHooks from '../../components/hooks/base'
+import Link from 'next/link'
+ import { usePathname, useRouter } from 'next/navigation'
+ import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
 
- 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -25,14 +23,14 @@ export default function SpaceLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { userInfo } = baseHooks()
 
-
   const currentPath = usePathname()
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
+  const currentEnTitle = navigation?.find(item => item?.href === currentPath)?.enTitle
 
 
   useEffect(() => {
-    if (!checkServer() && !localStorage.getItem("token")) {
-      router.push("/login")
+    if (!checkServer() && !localStorage.getItem('token')) {
+      router.push('/login')
     }
   }, [userInfo])
 
@@ -83,7 +81,7 @@ export default function SpaceLayout({ children }) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
-                      <img className='h-[45px]' src={icon_logo_color} alt="" />
+                      <img className="h-[45px]" src={icon_logo_color} alt="" />
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -133,14 +131,21 @@ export default function SpaceLayout({ children }) {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[240px] lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200  bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
               <img className="w-auto h-[35px]" src={icon_logo_color} alt="" />
             </a>
             <nav className="flex flex-1 flex-col">
-              <ul role="list" className="flex flex-1 flex-col gap-y-7">
+              <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
+                <div className="text-[#545759] text-center mb-4">{userInfo?.name||"AGICTO"}</div>
+                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-l px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                  <span>剩余金额</span>
+                  <span>{userInfo?.apiNum}</span>
+                </div>
+              </div>
+              <ul role="list" className="flex flex-1 flex-col gap-y-7 pt-6">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map(item => {
@@ -148,12 +153,12 @@ export default function SpaceLayout({ children }) {
                       const current = currentPath === item.href
 
                       return (
-                        <li key={item.name}>
+                        <li key={item.name} >
                           <a
                             href={item?.href}
                             className={classNames(
-                              current ? 'bg-gray-50 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                              current ? 'bg-[#EFF3FF] text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50',
+                              'group flex gap-x-3 text-[16px] rounded-lg px-[22px] py-[11px] text-sm leading-6  '
                             )}
                           >
                             <item.icon
@@ -175,7 +180,7 @@ export default function SpaceLayout({ children }) {
           </div>
         </div>
 
-        <div className="lg:pl-72">
+        <div className="lg:pl-[240px]">
           <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
             <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
@@ -187,18 +192,57 @@ export default function SpaceLayout({ children }) {
 
             <div className="flex items-center flex-1 gap-x-4 self-stretch lg:gap-x-6">
               <div className="flex flex-1">
+                <nav className="flex flex-1 flex-col lg:block hidden">
+                  <div role="list" className="-mx-2  flex items-center  justify-center">
+                    <a
+                      href="/"
+                      className={classNames('text-gray-700', 'group flex  flex items-center h-[64px] text-sm leading-6 font-semibold')}
+                    >
+                      AGICTO
+                    </a>
+
+                    <a
+                      href="/docs"
+                      className={classNames(
+                        'text-gray-700',
+                        'group flex  flex items-center h-[63px] mx-[33px] text-sm leading-6 font-semibold'
+                      )}
+                    >
+                      开发文档
+                    </a>
+
+                    <a
+                      href="/space"
+                      className={classNames(
+                        'text-[#3162FF]',
+                        'group flex  flex items-center h-[64px] text-sm leading-6 font-semibold',
+                        'border-b-2 border-[#3162FF]'
+                      )}
+                    >
+                      个人中心
+                    </a>
+                  </div>
+                </nav>
                 {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                <Link href="/login" className="flex items-center hover:font-bold"> <RiLogoutBoxRLine className="mr-2" /> 退出登录</Link>
+                <Link href="/login" className="flex items-center hover:font-bold">
+               
+                  <RiLogoutBoxRLine className="mr-2" /> 退出登录
+                </Link>
               </div>
             </div>
           </div>
 
-          <main className="py-10">
+          <main className="py-10 bg-[#f3f8fe] min-h-[calc(100vh_-_64px)]">
             <SpaceContext.Provider value={userInfo}>
-              <div className="px-4 sm:px-6 lg:px-8">
-                {children}</div>
+              <div className="px-4 sm:px-6 lg:px-8 ">
+                <div className="flex items-center justify-center flex-col">
+                  <h2 className="text-[24px] text-gray-900 font-semibold tracking-widest	">{currentTitle}</h2>
+                  <span className="text-[#A3C6FF]">{currentEnTitle}</span>
+                </div>
+                {children}
+              </div>
             </SpaceContext.Provider>
           </main>
         </div>
