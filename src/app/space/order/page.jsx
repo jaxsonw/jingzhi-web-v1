@@ -62,7 +62,9 @@ export default function Example() {
                         {item.orderStatus === 2 ? '支付过期' : ''} {item.orderStatus === 1 ? '已支付' : ''}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee ? `${item.payFee}元` : '--'}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.payFee ? `${item.payFee}元` : '--'}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {item.rechargeFee ? `${item.rechargeFee}元` : '--'}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
