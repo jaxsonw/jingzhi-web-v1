@@ -137,11 +137,11 @@ export default function Example() {
       })
       window.wx?.ready(() => {
         window.wx.chooseWXPay({
-          timestamp: codeUrl?.timeStamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
-          nonceStr: codeUrl?.nonceStr, // 支付签名随机串，不长于 32 位
-          package: codeUrl?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-          signType: codeUrl?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
-          paySign: codeUrl?.paySign, // 支付签名
+          timestamp: sign?.timeStamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
+          nonceStr: sign?.nonceStr, // 支付签名随机串，不长于 32 位
+          package: sign?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+          signType: sign?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
+          paySign: sign?.paySign, // 支付签名
           success: res => {
             toast.success('支付成功～')
             window.location.href = '/space/recharge'
@@ -186,7 +186,7 @@ export default function Example() {
             toast.error(createOrderRes?.message || '创建订单失败，请稍后再试～')
             return
           }
-          weixinPay(createOrderRes?.data?.orderSn)
+          weixinPay(createOrderRes?.data?.codeUrl)
         }
       }
     }
@@ -202,7 +202,7 @@ export default function Example() {
       <PayModal orderDetail={orderDetail} isOpen={isOpenPayModal} setIsOpen={setIsOpenPayModal} />
       {createOrderLoading ? <Loading /> : null}
       <div className="w-full flex justify-end mb-[26px]">
-        <Link href="/docs/spcring" className="text-[#3162FF] underline">
+        <Link href="/docs/pricing" className="text-[#3162FF] underline">
           了解计费规则
         </Link>
       </div>

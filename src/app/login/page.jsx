@@ -87,7 +87,7 @@ export default function Login() {
   return (
     <>
       <div className="flex min-h-[calc(100vh_-_82px)] flex-1">
-        <div className="flex flex-col  w-2/5 p-6">
+        <div className="flex flex-col w-full lg:w-2/5 p-6">
           <a href="/" className="flex h-[45px] items-center">
             <img className="h-[45px]" src={icon_logo_color} alt={title} />
           </a>
