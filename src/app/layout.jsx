@@ -15,12 +15,22 @@ import config from '../../config'
 
 const inter = Inter({ subsets: ['latin'] })
 
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: ` 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?983fca994414ee989e1b88bd0193f557";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();`
+        }}
+      />
       <body className={inter.className}>
         <ToastContainer
           style={{
