@@ -282,7 +282,6 @@ const PayPage = () => {
                         <PulseLoader color="#4f46e5" />
 
                         <span className="mt-4">正在跳转到支付宝，请稍后...</span>
-                        {aliPayForm && <div className="w-full h-40" dangerouslySetInnerHTML={{ __html: aliPayForm }}></div>}
                     </div>
                 )}
 

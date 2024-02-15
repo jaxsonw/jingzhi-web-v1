@@ -3,11 +3,11 @@ import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { RiLogoutBoxRLine } from 'react-icons/ri'
-import { AiOutlineKey } from "react-icons/ai";
-
+import { RiCustomerService2Line } from 'react-icons/ri'
 import Link from 'next/link'
- import { usePathname, useRouter } from 'next/navigation'
- import baseHooks from '../../components/hooks/base'
+import { usePathname, useRouter } from 'next/navigation'
+import CustomerModal from "../../components/common/CustomerModal"
+import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
@@ -21,12 +21,12 @@ export const SpaceContext = createContext()
 export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [customerOpen,setCustomerOpen] = useState(false)
   const { userInfo } = baseHooks()
 
   const currentPath = usePathname()
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
   const currentEnTitle = navigation?.find(item => item?.href === currentPath)?.enTitle
-
 
   useEffect(() => {
     if (!checkServer() && !localStorage.getItem('token')) {
@@ -36,6 +36,7 @@ export default function SpaceLayout({ children }) {
 
   return (
     <>
+      <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -83,7 +84,15 @@ export default function SpaceLayout({ children }) {
                     <div className="flex h-16 shrink-0 items-center">
                       <img className="h-[25px]" src={icon_logo_color} alt="" />
                     </div>
+
                     <nav className="flex flex-1 flex-col">
+                      <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
+                        <div className="text-[#545759] text-center mb-4">{userInfo?.name || 'loading...'}</div>
+                        <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                          <span>剩余金额</span>
+                          <span>{userInfo?.apiNum}</span>
+                        </div>
+                      </div>
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
                           <ul role="list" className="-mx-2 space-y-1">
@@ -133,13 +142,13 @@ export default function SpaceLayout({ children }) {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[240px] lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200  bg-white px-6 pb-4">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto   bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
               <img className="w-auto h-[35px]" src={icon_logo_color} alt="" />
             </a>
             <nav className="flex flex-1 flex-col">
               <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
-                <div className="text-[#545759] text-center mb-4">{userInfo?.name||"loading..."}</div>
+                <div className="text-[#545759] text-center mb-4">{userInfo?.name || 'loading...'}</div>
                 <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
                   <span>剩余金额</span>
                   <span>{userInfo?.apiNum}</span>
@@ -153,7 +162,7 @@ export default function SpaceLayout({ children }) {
                       const current = currentPath === item.href
 
                       return (
-                        <li key={item.name} >
+                        <li key={item.name}>
                           <a
                             href={item?.href}
                             className={classNames(
@@ -226,15 +235,18 @@ export default function SpaceLayout({ children }) {
                 {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                <Link href="/login" className="flex items-center hover:font-bold text-black">
-               
-                  <RiLogoutBoxRLine className="mr-2" /> 退出登录
+                <button type="button" className="flex items-center mr-4" onClick={()=>setCustomerOpen(true)}>
+                  <RiCustomerService2Line />
+                  <span className="font-bold text-[#545759] ml-1">客服</span>
+                </button>
+                <Link href="/login" className="flex items-center hover:font-bold text-[#545759] font-bold">
+                  <RiLogoutBoxRLine className="mr-1" /> 退出登录
                 </Link>
               </div>
             </div>
           </div>
 
-          <main className="py-10 bg-[#f3f8fe] min-h-[calc(100vh_-_64px)]">
+          <main className="py-10 bg-[#f3f8fe] h-[calc(100vh_-_64px)] overflow-scroll">
             <SpaceContext.Provider value={userInfo}>
               <div className="px-4 sm:px-6 lg:px-8 ">
                 <div className="flex items-center justify-center flex-col">

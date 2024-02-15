@@ -63,9 +63,9 @@ export default function Example() {
   const [inputPrice, setInputPrice] = useState()
   const [isOpenPayModal, setIsOpenPayModal] = useState(false)
   const [orderDetail, setOrderDetail] = useState(null)
+      const [aliPayForm, setAliPayForm] = useState('')
 
-  const [selectedType, setSelectedType] = useState(rechargeType[0]?.value)
-  const [createOrderLoading, setCreateOrderLoading] = useState(false)
+   const [createOrderLoading, setCreateOrderLoading] = useState(false)
 
   const onAmountChange = e => {
     // 移除非数字字符
@@ -106,7 +106,7 @@ export default function Example() {
         payType: 1 // pc 1、2 都可以
       }
       const res = await createOrder(params)
-      setCreateOrderLoading(false)
+
       if (res?.code !== 0) {
         toast.error(res?.data?.message || '创建订单失败，请稍后再试～')
         return
@@ -121,12 +121,23 @@ export default function Example() {
       wxLogoin(price)
       return
     }
+
+    const params = {
+      money: price,
+      osType,
+      payType: 2
+    }
+    const res = await createOrder(params)
+    setAliPayForm(res?.data?.codeUrl)
   }
 
   // h5 微信
   const weixinPay = async sign => {
     if (!checkServer()) {
+
       const wehchatRes = await getWechatSign({ url: window.location.href })
+        setCreateOrderLoading(false)
+
       window.wx.config({
         debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
         appId: wehchatRes.appId, // 必填，公众号的唯一标识
@@ -142,14 +153,18 @@ export default function Example() {
           package: sign?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
           signType: sign?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
           paySign: sign?.paySign, // 支付签名
-          success: res => {
+          success: res => { 
+
             toast.success('支付成功～')
             window.location.href = '/space/recharge'
           },
-          error: err => {
+          error: err => { 
+
             console.log('err', err)
           },
           finally: final => {
+                    setCreateOrderLoading(false)
+
             console.log('finally', final)
           }
         })
@@ -159,16 +174,19 @@ export default function Example() {
 
   const init = async () => {
     if (!checkServer()) {
+  
+
       // 微信环境
-      if (isWeixin() && !isPc()) {
-        setSelectedType(1)
+      if (isWeixin() && !isPc()) { 
         // 如果返回有code，授权成功
         const code = searchParams.get('code')
         const payFee = searchParams.get('state')
 
         if (code) {
+          setCreateOrderLoading(true)
           const res = await getAuthCode({ code })
           if (res?.code !== 0) {
+            setCreateOrderLoading(false)
             toast.error(res?.message || '授权失败～')
             return
           }
@@ -180,10 +198,11 @@ export default function Example() {
           }
 
           const createOrderRes = await createOrder(params)
-          setCreateOrderLoading(false)
 
           if (createOrderRes?.code !== 0) {
             toast.error(createOrderRes?.message || '创建订单失败，请稍后再试～')
+            setCreateOrderLoading(false)
+
             return
           }
           weixinPay(createOrderRes?.data?.codeUrl)
@@ -197,8 +216,18 @@ export default function Example() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+        if (!aliPayForm) return
+        const dom = document.getElementById('alipay_submit')
+        if (dom) {
+            dom?.submit()
+        }
+    }, [aliPayForm])
+
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8">
+                              {aliPayForm && <div className="w-full h-40" dangerouslySetInnerHTML={{ __html: aliPayForm }}></div>}
+
       <PayModal orderDetail={orderDetail} isOpen={isOpenPayModal} setIsOpen={setIsOpenPayModal} />
       {createOrderLoading ? <Loading /> : null}
       <div className="w-full flex justify-end mb-[26px]">
