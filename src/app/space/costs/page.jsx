@@ -1,56 +1,106 @@
 'use client'
 import { useEffect, useState } from 'react'
 import moment from 'moment'
-import { AreaChart, BarChart, Card, Title, DatePicker } from '@tremor/react'
+import { AreaChart, BarChart, Card, Title, DatePicker, Select, SelectItem } from '@tremor/react'
 import { zhCN } from 'date-fns/locale'
-import { getChartDetail, getChartModelList } from '../../../services/overflow'
+import { consumeChart, consumeModelList, getModelPriceList } from '../../../services/overflow'
 
 export default function Overflow() {
-    const [date, setDate] = useState(moment().format('YYYY-MM-DD'))
+    const [singleDayDate, setSingleDayDate] = useState(moment().format('YYYY-MM-DD'))
     const [dataList, setDataList] = useState([])
+    const [modelList, setModelList] = useState([])
     const [totalFee, setTotalFee] = useState(0)
 
+    const [selectModel,setSelectModel] = useState(null)
+
+    console.log("selectModel", modelList)
+ 
     const init = async () => {
-        const res = await getChartModelList({
-            date
+        const modelListRes = await getModelPriceList()
+        setModelList(modelListRes?.data?.modelPriceList)
+
+    }
+
+    const getSingleDayData = async () => {
+        const consumeModelRes = await consumeModelList({
+            date: singleDayDate
         })
 
-        const modelList = res?.data?.modelList?.map(item => ({
+        const consumeModel = consumeModelRes?.data?.modelList?.map(item => ({
             ...item,
             消费金额: item.fee
         }))
-        setDataList(modelList)
-        setTotalFee(res?.data?.totalFee)
+        setDataList(consumeModel)
+        setTotalFee(consumeModelRes?.data?.totalFee)
     }
 
     useEffect(() => {
         init()
-    }, [date])
+    }, [])
 
-     return (
-        <Card>
-            <div className="flex justify-end">
+    useEffect(() => {
+        getSingleDayData()
+    }, [singleDayDate])
+
+    return (
+        <>
+            <div className="flex justify-between items-center mb-4 mt-[18px]">
+                <span className="text-[#545759]">单日消耗统计：<span className="text-[#3162FF] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
                 <DatePicker
                     locale={zhCN}
                     placeholder="请选择日期"
-                    value={new Date(date)}
-                    onValueChange={e => setDate(moment(e)?.format('YYYY-M-D'))}
+                    value={new Date(singleDayDate)}
+                    onValueChange={e => setSingleDayDate(moment(e)?.format('YYYY-M-D'))}
                     className="max-w-sm"
                 />
             </div>
-            <Title className="flex justify-between">
-                <span className="text-rose-400">消费总金额：{totalFee?.toFixed(4)} </span>
-            </Title>
-            <BarChart
-                className="mt-6"
-                data={dataList}
-                index="model"
-                categories={['消费金额']}
-                colors={['blue-300']}
-                valueFormatter={v => Number(v)?.toFixed(4)}
-                yAxisWidth={80}
-                showXAxis
-            />
-        </Card>
+            <Card>
+                <BarChart
+                    className="mt-6"
+                    data={dataList}
+                    index="model"
+                    categories={['消费金额']}
+                    colors={['blue-600']}
+                    valueFormatter={v => Number(v)?.toFixed(4)}
+                    yAxisWidth={80}
+                    showXAxis
+                />
+            </Card>
+
+
+            <div className="flex justify-between items-center mb-4 mt-[54px]">
+                <span className="text-[#545759]">所选日期范围共消耗： <span className="text-[#3162FF] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
+                <div className="flex items-center justify-end">
+                    <div className="mr-6">
+                        <Select onValueChange={(e)=>console.log("e",e)} placeholder="选择模型" >
+                            {
+                                modelList?.map((item, index) => <SelectItem key={index} value={item?.model} >
+                                    {item?.model}
+                                </SelectItem>)
+                            } 
+                        </Select>
+                    </div>
+                    <DatePicker
+                        locale={zhCN}
+                        placeholder="请选择日期"
+                        value={new Date(singleDayDate)}
+                        onValueChange={e => setSingleDayDate(moment(e)?.format('YYYY-M-D'))}
+                        className="max-w-sm"
+                    />
+                </div>
+            </div>
+            <Card>
+                <BarChart
+                    className="mt-6"
+                    data={dataList}
+                    index="model"
+                    categories={['消费金额']}
+                    colors={['blue-600']}
+                    valueFormatter={v => Number(v)?.toFixed(4)}
+                    yAxisWidth={80}
+                    showXAxis
+                />
+            </Card>
+        </>
     )
 }
