@@ -13,8 +13,7 @@ export default function Overflow() {
 
     const [selectModel,setSelectModel] = useState(null)
 
-    console.log("selectModel", modelList)
- 
+  
     const init = async () => {
         const modelListRes = await getModelPriceList()
         setModelList(modelListRes?.data?.modelPriceList)

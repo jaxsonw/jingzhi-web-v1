@@ -36,6 +36,33 @@ export const llma_icon_color = 'https://ew6.cn/llma_icon_color.png'
 // 讯飞彩色icon
 export const xunfei_icon_color = 'https://ew6.cn/xunfei_icon_color.png'
 
+
+
+// 360白色icon
+export const sanliuling_icon_color_white = 'https://ew6.cn/360_icon_color_white.png'
+ 
+// gpt白色icon
+export const gpt_icon_color_white = 'https://ew6.cn/gpt_icon_color_white.png'
+
+// 百川白色icon
+export const baichuan_icon_color_white = 'https://ew6.cn/baichuan_icon_color_white.png'
+
+// 浑源白色icon
+export const hunyuan_icon_color_white = 'https://ew6.cn/hunyuan_icon_color_white.png'
+
+// 通义白色icon
+export const tongyi_icon_color_white = 'https://ew6.cn/tongyi_icon_color_white.png'
+
+// 文心白色icon
+export const wenxin_icon_color_white = 'https://ew6.cn/wenxin_icon_color_white.png'
+
+// LLMA2白色icon
+export const llma_icon_color_white = 'https://ew6.cn/llma_icon_color_white.png'
+
+// 讯飞白色icon
+export const xunfei_icon_color_white = 'https://ew6.cn/xunfei_icon_color_white.png'
+
+
 // login 背景元素 圆形
 export const login_bg_round = 'https://ew6.cn/login_bg_round.png'
 
@@ -71,5 +98,8 @@ export const recharge_custom_price = 'https://ew6.cn/recharge_custom_price.png'
 
 // 充值金额 元
 export const recharge_yuan = 'https://ew6.cn/recharge_yuan.png'
+
+// 首页鼠标icon
+export const home_hero_slide = 'https://ew6.cn/slide.png'
 
 

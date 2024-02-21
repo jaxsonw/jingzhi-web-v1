@@ -15,7 +15,7 @@ import { isPc } from '../utils'
 
 export default function Example() {
   return (
-    <div className="h-[calc(100vh_-_82px)] ">
+    <div className="h-screen  bg-[#3162FF]">
       <Swiper
         direction={'vertical'}
         slidesPerView={1}

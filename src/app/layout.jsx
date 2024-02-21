@@ -1,6 +1,9 @@
+"use client"
 import { Inter } from 'next/font/google'
 import { ToastContainer, toast } from 'react-toastify'
+import {usePathname } from "next/navigation"
 import Header from '../components/common/Header'
+import HeaderBule from "../components/common/HeaderBlue"
 import Footer from '../components/common/Footer'
 import Head from 'next/head'
 import Script from 'next/script'
@@ -15,7 +18,9 @@ import config from '../../config'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children,page }) {
+    const pathname = usePathname()
+
   return (
     <html lang="en">
       <Script id="weixinopenjs" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
@@ -40,7 +45,7 @@ export default function RootLayout({ children }) {
             zIndex: 999999
           }}
         />
-        <Header />
+        {pathname==="/"?null:<Header />}
         {children}
         {/* <Footer /> */}
       </body>
