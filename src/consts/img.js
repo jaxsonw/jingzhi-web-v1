@@ -39,7 +39,7 @@ export const xunfei_icon_color = 'https://ew6.cn/xunfei_icon_color.png'
 
 
 // 360白色icon
-export const sanliuling_icon_color_white = 'https://ew6.cn/360_icon_color_white.png'
+export const sanliuling_icon_color_white = 'https://ew6.cn/sanliuling_icon_color_white.png'
  
 // gpt白色icon
 export const gpt_icon_color_white = 'https://ew6.cn/gpt_icon_color_white.png'
@@ -102,4 +102,23 @@ export const recharge_yuan = 'https://ew6.cn/recharge_yuan.png'
 // 首页鼠标icon
 export const home_hero_slide = 'https://ew6.cn/slide.png'
 
+// 首页hero背景
+export const home_hero_bg = 'https://ew6.cn/home_hero_bg.png'
 
+// 首页 howuse 文字背景
+export const home_howuse_text_bg  = "https://ew6.cn/home_howuse_text_bg.png"
+
+// 如何注册
+export const home_howuse_registry = 'https://ew6.cn/home_howuse_registry.png'
+
+export const home_howuse_recharge = 'https://ew6.cn/home_howuse_recharge.png'
+
+export const home_howuse_pricing = 'https://ew6.cn/home_howuse_pricing.png'
+
+export const home_howuse_docs = 'https://ew6.cn/home_howuse_docs.png'
+
+export const home_howuse_data = 'https://ew6.cn/home_howuse_data.png'
+
+export const home_howuse_bg2 = 'https://ew6.cn/home_howuse_bg2.png'
+
+export const home_howuse_bg1 = 'https://ew6.cn/home_howuse_bg1.png'

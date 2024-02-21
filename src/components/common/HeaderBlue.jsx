@@ -5,17 +5,16 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 // import Logo from '/public/logo.jpeg'
+import { title } from '../../../config.js'
 import baseHooks from '../hooks/base'
 import { icon_logo_white } from '../../consts/img'
 
+  
 const hiddenPath = ['/space', '/login']
 
 const navigation = [
-  { name: '首页', href: '/' },
-  // { name: '计费标准', href: '/pricing' },
-  { name: '开发文档', href: '/docs', target: '__blank' }
-  //   { name: "在线平台", href: "/playground" },
-  //   { name: "商店", href: "/shop" },
+  { name: "ACICTO", href: '/' }, 
+  { name: '开发文档', href: '/docs', target: '__blank' } 
 ]
 
 const Header = () => {
@@ -29,8 +28,10 @@ const Header = () => {
     }
   })
   if (!isShowHeader) return null
+
+
   return (
-    <header className="bg-white w-full z-[999] shadow top-0 left-0 bg-[#3162FF]">
+    <header className="bg-white w-full bg-[#3162FF]">
       <nav className="flex items-center justify-between p-6 bg-[#3162FF] lg:px-8 " aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
@@ -40,7 +41,7 @@ const Header = () => {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center jutify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -48,11 +49,20 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map(item => (
-            <a key={item.name} href={item.href} target={item?.target} className="text-sm font-semibold leading-6 text-white">
-              {item.name}
-            </a>
-          ))}
+          {navigation.map(item => {
+            const isActive = item?.href === pathname
+             return (
+              <a
+                key={item.name}
+                href={item.href}
+                target={item?.target}
+                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${isActive ? 'text-[#fff]' : ''}`}
+              >
+                <span>{item.name}</span>
+{isActive?                <span className='block mt-3 w-2/3 rounded-full h-1 bg-white' />
+:null}              </a>
+            )
+          })}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {userInfo?.name ? (

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination } from 'swiper/modules'
-import Hero from '../components/homePage/Hero'
+import Hero from '../components/homePage/HeroHome'
 import FeedList from '../components/homePage/feedList'
 import HowUse from '../components/homePage/HowUse'
 import Advantage from '../components/homePage/Advantage'
