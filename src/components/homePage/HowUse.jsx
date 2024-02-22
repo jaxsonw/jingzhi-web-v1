@@ -38,7 +38,8 @@ export default function Example() {
     const [current,setCurrent] = useState(0)
 
 
-    const handleHover = () => {
+    const handleHover = (index) => {
+        setCurrent(index)
         
     }
 
@@ -48,44 +49,97 @@ export default function Example() {
       <div className="relative w-full h-screen bg-[#F2F8FF]">
         <img src={home_howuse_bg1} className="absolute z-1 w-[68.125%] top-0 left-1/2  -translate-x-1/2" />
         <img src={home_howuse_bg2} className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2" />
-        <div className="relative" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-          <div className="w-10 h-10 bg-black rounded-full inline-block"></div>
-          <div className="absolute top-6 left-5 w-1 h-16 border-t border-black"></div>
-          <div className="absolute top-5 left-5 w-20 h-20 border border-black flex items-center justify-center">
-            <span className="text-black">Some Text</span>
+        <div
+          className="absolute z-1 group  top-[40px] left-[11.5%]  -translate-x-1/2 cursor-pointer flex items-center"
+          onMouseEnter={() => handleHover(1)}
+          onMouseLeave={handleLeave}
+        >
+          <div className="border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full group-hover:border-[#3162FF] group-hover:bg-[#3162FF] group-hover:text-white">
+            注册账号
           </div>
+          <span className="h-[1px] w-10  bg-transparent	 group-hover:bg-[#3162FF]" />
+          <div className="w-[30px] h-[30px] border rounded-full border-[#98E2FF] group-hover:border-[#3162FF]" />
+        </div>
+
+        <div
+          className="absolute z-[9] group  top-[328px] left-[18.5%]  -translate-x-1/2 cursor-pointer flex items-center"
+          onMouseEnter={() => handleHover(2)}
+          onMouseLeave={handleLeave}
+        >
+          <div className="border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full group-hover:border-[#3162FF] group-hover:bg-[#3162FF] group-hover:text-white">
+            选择服务
+          </div>
+          <span className="h-[1px] w-10  bg-transparent	 group-hover:bg-[#3162FF]" />
+          <div className="w-[30px] h-[30px] border rounded-full border-[#98E2FF] group-hover:border-[#3162FF]" />
+        </div>
+
+        <div
+          className="absolute z-[9] group  top-[328px] right-[6.5%]  -translate-x-1/2 cursor-pointer flex flex-row-reverse items-center"
+          onMouseEnter={() => handleHover(3)}
+          onMouseLeave={handleLeave}
+        >
+          <div className="border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full group-hover:border-[#3162FF] group-hover:bg-[#3162FF] group-hover:text-white">
+            配置项目
+          </div>
+          <span className="h-[1px] w-10  bg-transparent	 group-hover:bg-[#3162FF]" />
+          <div className="w-[30px] h-[30px] border rounded-full border-[#98E2FF] group-hover:border-[#3162FF]" />
+        </div>
+
+        <div
+          className="absolute z-[9] group  top-[40px] right-0  -translate-x-1/2 cursor-pointer flex flex-row-reverse	 items-center"
+          onMouseEnter={() => handleHover(4)}
+          onMouseLeave={handleLeave}
+        >
+          <div className="border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full group-hover:border-[#3162FF] group-hover:bg-[#3162FF] group-hover:text-white">
+            充值使用
+          </div>
+          <span className="h-[1px] w-10  bg-transparent	 group-hover:bg-[#3162FF]" />
+          <div className="w-[30px] h-[30px] border rounded-full border-[#98E2FF] group-hover:border-[#3162FF]" />
         </div>
         {current === 0 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_data} className="w-[23.4285%]" />
+            <img src={home_howuse_data} className="w-[328px]" />
             <span className="text-gray-900 font-bold">调用流程</span>
           </div>
         ) : null}
         {current === 1 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_registry} className="w-[23.4285%]" />
-            <span className="">点击页面右上角，注册/登录按钮 输入邮箱验证码快速注册账号</span>
+            <img src={home_howuse_registry} className="w-[57.734%]" />
+            <span className="text-gray-900 text-center">
+              点击页面右上角，注册/登录按钮 <br /> 输入邮箱验证码快速注册账号
+            </span>
           </div>
         ) : null}
         {current === 2 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_pricing} className="w-[23.4285%]" />
-            <span className="">浏览我们提供的计费标准 选择最适合您需求的服务</span>
+            <img src={home_howuse_pricing} className="w-[57.734%]" />
+            <span className="text-gray-900 text-center">
+              浏览我们提供的计费标准
+              <br /> 选择最适合您需求的服务
+            </span>
           </div>
         ) : null}
         {current === 3 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_docs} className="w-[23.4285%]" />
-            <span className="">查看开发文档 将我们的API接口传参融入到您的开发项目中</span>
+            <img src={home_howuse_docs} className="w-[57.734%]" />
+            <span className="text-gray-900 text-center">
+              查看开发文档
+              <br /> 将我们的API接口传参融入到您的开发项目中
+            </span>
           </div>
         ) : null}
 
         {current === 4 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_recharge} className="w-[23.4285%]" />
-            <span className="">在使用前请先查看您的账户情况 可进入充值中心按需充值</span>
+            <img src={home_howuse_recharge} className="w-[57.734%]" />
+            <span className="text-gray-900 text-center">
+              在使用前请先查看您的账户情况
+              <br /> 可进入充值中心按需充值
+            </span>
           </div>
         ) : null}
+
+        <img src={home_howuse_text_bg} className="absolute bottom-[51px] w-2/3 left-1/2  -translate-x-1/2" />
       </div>
       // <div className=" bg-white py-24 sm:py-32">
       //     <div className="absolute inset-0 z-20 bg-[radial-gradient(45rem_100rem_at_top,theme(colors.indigo.200),white)] opacity-20" />
