@@ -58,10 +58,41 @@ body {
   font-size: 18px; 
   display: flex;
   justify-content: center;
-  align-items: center;
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
+  align-items: center; 
 }
- 
+
+ @keyframes typing {
+   from {
+     width: 0;
+   }
+
+   to {
+     width: 100%;
+   }
+ }
+
+.typewriter {
+  width: fit-content;
+  overflow: hidden; 
+  white-space: nowrap; 
+  letter-spacing: .15em; 
+  animation: typing 2s steps(30, end);
+  text-align: left;
+  color: white; 
+  position: relative;
+}
+
+@keyframes blink {
+  0%, 50% { background-color: transparent; }
+  51%, 100% { background-color: white; }
+}
+
+.blink {
+  position: absolute; /* 绝对定位光标 */
+  top: 15px;
+  right: 0;
+  width: .15em; /* 光标宽度 */
+  height: 1.2em; /* 与文字行高一致 */
+  background-color: white; /* 光标颜色 */
+  animation: blink 1s steps(30, end) infinite;
+}

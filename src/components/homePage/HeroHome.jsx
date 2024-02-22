@@ -35,14 +35,16 @@ export default function HeroHome() {
       <HeaderBlue />
       <div className="px-[127px] py-8 relative">
         <div className="flex flex-col pt-[90px]">
-          <span className=" font-[16px] leading-8 opacity-[0.7]">
+          <span className=" font-[16px] leading-8 opacity-[0.7] text-white">
             AGICTO汇集了来自各个领域的优秀AI模型
             <br /> 您无需耗费大量时间和精力去逐一了解和学习不同的AI模型接口调用方法
             <br />
             现在，您只需要通过一个接口便可对众多模型进行调用和使用
           </span>
-          <div className="pt-[45px] text-[24px]">易用 / 稳定 / 全面 / 优价 </div>
-          <div className="text-[80px] font-bold mt-[45px]">AGICTO大模型调用基座</div>
+          <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
+          <div className="typewriter text-[80px] font-bold mt-[45px]">
+            AGICTO大模型调用基座 <span className="blink"></span>
+          </div>
           <span
             style={{
               backgroundImage: 'linear-gradient(97deg, #5F9BFF 3%, #3162FF 100%)'

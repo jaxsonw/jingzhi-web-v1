@@ -1,5 +1,6 @@
+import {useState} from "react"
 import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import {home_hero_slide,home_howuse_bg1,home_howuse_bg2,home_howuse_data,home_howuse_docs,home_howuse_pricing,home_howuse_recharge,home_howuse_registry,home_howuse_text_bg} from "../../consts/img"
+import {home_howuse_bg1,home_howuse_bg2,home_howuse_data,home_howuse_docs,home_howuse_pricing,home_howuse_recharge,home_howuse_registry,home_howuse_text_bg,home} from "../../consts/img"
 
 const features = [
     {
@@ -33,9 +34,58 @@ const features = [
 ]
 
 export default function Example() {
+
+    const [current,setCurrent] = useState(0)
+
+
+    const handleHover = () => {
+        
+    }
+
+    const handleLeave= ()=>setCurrent(0)
+
     return (
-      <div className="relative w-full">
+      <div className="relative w-full h-screen bg-[#F2F8FF]">
         <img src={home_howuse_bg1} className="absolute z-1 w-[68.125%] top-0 left-1/2  -translate-x-1/2" />
+        <img src={home_howuse_bg2} className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2" />
+        <div className="relative" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+          <div className="w-10 h-10 bg-black rounded-full inline-block"></div>
+          <div className="absolute top-6 left-5 w-1 h-16 border-t border-black"></div>
+          <div className="absolute top-5 left-5 w-20 h-20 border border-black flex items-center justify-center">
+            <span className="text-black">Some Text</span>
+          </div>
+        </div>
+        {current === 0 ? (
+          <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+            <img src={home_howuse_data} className="w-[23.4285%]" />
+            <span className="text-gray-900 font-bold">调用流程</span>
+          </div>
+        ) : null}
+        {current === 1 ? (
+          <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+            <img src={home_howuse_registry} className="w-[23.4285%]" />
+            <span className="">点击页面右上角，注册/登录按钮 输入邮箱验证码快速注册账号</span>
+          </div>
+        ) : null}
+        {current === 2 ? (
+          <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+            <img src={home_howuse_pricing} className="w-[23.4285%]" />
+            <span className="">浏览我们提供的计费标准 选择最适合您需求的服务</span>
+          </div>
+        ) : null}
+        {current === 3 ? (
+          <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+            <img src={home_howuse_docs} className="w-[23.4285%]" />
+            <span className="">查看开发文档 将我们的API接口传参融入到您的开发项目中</span>
+          </div>
+        ) : null}
+
+        {current === 4 ? (
+          <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+            <img src={home_howuse_recharge} className="w-[23.4285%]" />
+            <span className="">在使用前请先查看您的账户情况 可进入充值中心按需充值</span>
+          </div>
+        ) : null}
       </div>
       // <div className=" bg-white py-24 sm:py-32">
       //     <div className="absolute inset-0 z-20 bg-[radial-gradient(45rem_100rem_at_top,theme(colors.indigo.200),white)] opacity-20" />

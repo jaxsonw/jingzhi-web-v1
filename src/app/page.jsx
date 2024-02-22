@@ -31,11 +31,12 @@ export default function Example() {
           <Hero />
         </SwiperSlide>
         <SwiperSlide>
-          <FeedList />
-        </SwiperSlide>
-        <SwiperSlide>
           <HowUse />
         </SwiperSlide>
+        <SwiperSlide>
+          <FeedList />
+        </SwiperSlide>
+
         <SwiperSlide>
           <Advantage />
         </SwiperSlide>
