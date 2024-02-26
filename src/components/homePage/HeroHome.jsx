@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useEffect, useState } from 'react'
 import CustomerModal from '../common/CustomerModal'
 import HeaderBlue from "../common/HeaderBlue"
 import {
@@ -13,6 +14,8 @@ import {
   llma_icon_color_white,
   home_hero_bg
 } from '../../consts/img'
+import TypingEffect from "../common/TypingEffect"
+import {getSiteUseNumber} from "../../services/index"
 
 
 
@@ -28,6 +31,16 @@ const iconList = [
 ]
 
 export default function HeroHome() {
+  const [count,setCount] = useState()
+  const init = async() => {
+    const res = await getSiteUseNumber()
+    setCount(res?.data?.recordTotal)
+     
+  }
+
+  useEffect(() => {
+    init()
+  },[])
 
   return (
     <div className="w-full flex flex-col text-left h-screen relative">
@@ -43,7 +56,8 @@ export default function HeroHome() {
           </span>
           <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
           <div className="text-[80px] font-bold mt-[45px]">
-            AGICTO大模型调用基座 
+            <TypingEffect text="AGICTO大模型调用基座" typingDelay={150} />
+            {/* AGICTO大模型调用基座 <span className="blink"></span> */}
           </div>
           <span
             style={{
@@ -51,7 +65,8 @@ export default function HeroHome() {
             }}
             className="border flex items-center justify-center w-[400px] text-white rounded-full mt-[68px] px-10 py-3"
           >
-            已经产生 <strong className="text-[#8FDFFF]  tracking-widest		">124,443,938,23</strong> 次AI交流
+            已经产生 <strong className="text-[#8FDFFF]  tracking-widest		">{count?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</strong>{' '}
+            次AI交流
           </span>
         </div>
         <div className="flex justify-between mt-[67px] items-center">

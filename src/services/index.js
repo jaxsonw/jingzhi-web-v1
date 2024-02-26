@@ -12,3 +12,6 @@ export const getEmailCode = params => request.post(`${BASE_URL}/v1/sendVerifyCod
  * */
 export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params)
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
+
+export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)
+
