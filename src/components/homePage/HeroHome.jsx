@@ -42,8 +42,8 @@ export default function HeroHome() {
             现在，您只需要通过一个接口便可对众多模型进行调用和使用
           </span>
           <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
-          <div className="typewriter text-[80px] font-bold mt-[45px]">
-            AGICTO大模型调用基座 <span className="blink"></span>
+          <div className="text-[80px] font-bold mt-[45px]">
+            AGICTO大模型调用基座 
           </div>
           <span
             style={{
