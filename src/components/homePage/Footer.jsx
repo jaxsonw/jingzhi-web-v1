@@ -33,7 +33,7 @@ export default function Footer() {
           <span className="text-[#9E9E9E] text-center">{RECORD_NUMBER}</span>
         </div>
  
-          <img className="absolute right-16 bottom-16 w-full w-[10rem]" src={agicto_product_agent_wechat} alt={TITLE} />
+          <img className="absolute right-16 bottom-16 w-full w-[132px]" src={agicto_product_agent_wechat} alt={TITLE} />
       
       </div>
     )
