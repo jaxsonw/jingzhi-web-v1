@@ -31,7 +31,7 @@ export default function HeroHome() {
 
   return (
     <div className="w-full flex flex-col text-left h-screen relative">
-      <img src={home_hero_bg} className="absolute bottom-0 z-1  w-[64rem]  left-[50%] -translate-x-1/2		" />
+      <img src={home_hero_bg} className="absolute bottom-0 z-1  w-[61rem]  left-[50%] -translate-x-1/2		" />
       <HeaderBlue />
       <div className="px-[127px] py-8 relative">
         <div className="flex flex-col pt-[90px]">
