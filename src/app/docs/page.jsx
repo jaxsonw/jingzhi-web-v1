@@ -7,13 +7,13 @@ export default function Layout() {
 
   const router = useRouter()
 
-  useEffect(() => {
-    router.push(navigation[0]?.children?.[0]?.href)
-  }, [])
+  // useEffect(() => {
+  //   router.push(navigation[0]?.children?.[0]?.href)
+  // }, [])
   return (
     <>
-      loading..
-      {/* <iframe className="w-full h-full" src="https://tauacgr5lqv.feishu.cn/docx/ZnPedHE3loaQ5MxwE7TctC6PnNh"></iframe> */}
+      {/* loading.. */}
+      <iframe id="feishudocs" className="w-screen h-screen pt-[84px]" src="https://agictolab.feishu.cn/wiki/space/7338943089559470082"></iframe>
     </>
   )
 }

@@ -16,8 +16,9 @@ import {isPc} from "../../utils/index"
 const hiddenPath = ['/space', '/login']
 
 const navigation = [
-  { name: "ACICTO", href: '/' }, 
-  { name: '开发文档', href: '/docs', target: '__blank' } 
+  { name: 'ACICTO', href: '/' },
+  { name: '开发文档', href: '/docs', target: '__blank' },
+  { name: '计费规则', href: '/docs/pricing', target: '__blank' }
 ]
 
 const Header = () => {

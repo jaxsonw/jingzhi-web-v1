@@ -23,7 +23,7 @@ export default function Footer() {
           <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF] my-8">多样化的AI服务</span>
           <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
         </div>
-        <div className="text-right absolute w-[30%] z-1  top-[20rem] leading-10		 right-1/2 translate-x-[124%]  flex  flex-row-reverse items-end ">
+        <div className="text-right text-gray-900 absolute w-[30%] z-1  top-[20rem] leading-10		 right-1/2 translate-x-[124%]  flex  flex-row-reverse items-end ">
           成为全球领先的AI聚合平台
           <br /> 推动人工智能技术的广泛应用
           <br /> 为领域开发人员提供更智慧的LLM调用枢纽
@@ -32,9 +32,8 @@ export default function Footer() {
           <span className="text-[#B5B5B5] text-center">2024 · {TITLE}</span>
           <span className="text-[#9E9E9E] text-center">{RECORD_NUMBER}</span>
         </div>
- 
-          <img className="absolute right-16 bottom-16 w-[132px]" src={agicto_product_agent_wechat} alt={TITLE} />
-      
+
+        <img className="absolute right-16 bottom-16 w-[132px]" src={agicto_product_agent_wechat} alt={TITLE} />
       </div>
     )
 }

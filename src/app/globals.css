@@ -154,3 +154,6 @@ body {
     opacity: 0;
   }
 }
+#feishudocs .navigation-bar-wrapper{
+  display: none;
+}

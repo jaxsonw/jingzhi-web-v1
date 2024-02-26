@@ -19,7 +19,8 @@ export default function Pricing() {
     }, [])
 
     return (
-        <div className="h-[calc(100vh_-_82px)]">
+        // <div className="h-[calc(100vh_-_82px)]">
+        <div className="h-screen pt-[104px]">
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="sm:flex sm:items-center">
                     <div className="sm:flex-auto">
