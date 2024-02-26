@@ -20,10 +20,10 @@ import {getSiteUseNumber} from "../../services/index"
 
 
 const iconList = [
-  gpt_icon_color_white,
+  // gpt_icon_color_white,
   wenxin_icon_color_white,
   baichuan_icon_color_white,
-  llma_icon_color_white,
+  // llma_icon_color_white,
   hunyuan_icon_color_white,
   sanliuling_icon_color_white,
   xunfei_icon_color_white,
@@ -57,8 +57,7 @@ export default function HeroHome() {
           <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
           <div className="text-[80px] font-bold mt-[45px]">
             <TypingEffect text="AGICTO大模型调用基座" typingDelay={150} />
-            {/* AGICTO大模型调用基座 <span className="blink"></span> */}
-          </div>
+           </div>
           <span
             style={{
               backgroundImage: 'linear-gradient(97deg, #5F9BFF 3%, #3162FF 100%)'

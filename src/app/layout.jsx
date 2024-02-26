@@ -25,6 +25,8 @@ export default function RootLayout({ children,page }) {
   return (
     <html lang="en">
       <Script id="weixinopenjs" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
+      <Script id="feishusdk" src="https://lf1-cdn-tos.bytegoofy.com/goofy/locl/lark/external_js_sdk/h5-js-sdk-1.2.12.js" />
+
       <Script
         id="baidutongji"
         //   dangerouslySetInnerHTML={{
@@ -46,7 +48,7 @@ export default function RootLayout({ children,page }) {
             zIndex: 999999
           }}
         />
-        {hiddenHeaderPage?.includes(pathname)?null:<Header />}
+        {hiddenHeaderPage?.includes(pathname) ? null : <Header />}
         {children}
         {/* <Footer /> */}
       </body>
