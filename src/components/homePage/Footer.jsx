@@ -19,9 +19,9 @@ export default function Footer() {
           <span className="h-[1px] w-[100%] bg-[#98E2FF] " />
         </div>
         <div className="absolute w-[30%] z-1  top-[20rem] flex  flex-col   left-1/2 -translate-x-[124%]">
-          <span className="border rounded-full  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
-          <span className="border rounded-full  text-center py-2 w-[10rem] border-[#98E2FF] my-8">多样化的AI服务</span>
-          <span className="border rounded-full  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
+          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
+          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF] my-8">多样化的AI服务</span>
+          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
         </div>
         <div className="text-right absolute w-[30%] z-1  top-[20rem] leading-10		 right-1/2 translate-x-[124%]  flex  flex-row-reverse items-end ">
           成为全球领先的AI聚合平台
