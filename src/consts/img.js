@@ -64,13 +64,13 @@ export const xunfei_icon_color_white = 'https://ew6.cn/xunfei_icon_color_white.p
 
 
 // login 背景元素 圆形
-export const login_bg_round = 'https://ew6.cn/login_bg_round.png'
+export const login_bg_round = 'https://ew6.cn/login_bg_round.png?imageslim/zlevel/5'
 
 // login 背景元素 第二张
-export const login_bg_two = 'https://ew6.cn/login_bg_two.png'
+export const login_bg_two = 'https://ew6.cn/login_bg_two.png?imageslim/zlevel/5'
 
 // login 背景元素 第三张
-export const login_bg_three = 'https://ew6.cn/login_bg_three.png'
+export const login_bg_three = 'https://ew6.cn/login_bg_three.png?imageslim/zlevel/5'
 
 // 充值中心头图
 export const recharge_center_bg1 = 'https://ew6.cn/agicto_recharge_head.png'

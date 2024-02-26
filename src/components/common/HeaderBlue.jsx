@@ -4,10 +4,13 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { RiCustomerService2Line } from 'react-icons/ri'
 // import Logo from '/public/logo.jpeg'
+import CustomerModal from "./CustomerModal"
 import { title } from '../../../config.js'
 import baseHooks from '../hooks/base'
 import { icon_logo_white } from '../../consts/img'
+import {isPc} from "../../utils/index"
 
   
 const hiddenPath = ['/space', '/login']
@@ -20,6 +23,8 @@ const navigation = [
 const Header = () => {
   const { userInfo } = baseHooks()
   const pathname = usePathname()
+    const [customerOpen,setCustomerOpen] = useState(false)
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let isShowHeader = true
   hiddenPath.forEach(item => {
@@ -32,13 +37,16 @@ const Header = () => {
 
   return (
     <header className="bg-white w-full bg-[#3162FF]">
+      <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
+
       <nav className="flex items-center justify-between p-6 bg-[#3162FF] lg:px-8 " aria-label="Global">
-        <div className="flex lg:flex-1">
-          <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
+        <div className="flex">
+          <a href="/" className="flex items-center -m-1.5 p-1.5">
             <img className="h-[35px]" src={icon_logo_white} alt="" />
           </a>
         </div>
-        <div className="flex lg:hidden">
+        {/* {
+        !isPc()?<div className="flex lg:hidden">
           <button
             type="button"
             className="-m-2.5 inline-flex items-center jutify-center rounded-md p-2.5 text-gray-700"
@@ -47,24 +55,31 @@ const Header = () => {
             <span className="sr-only">Open main menu</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
-        </div>
+        </div>:null
+        } */}
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map(item => {
             const isActive = item?.href === pathname
-             return (
+            return (
               <a
                 key={item.name}
                 href={item.href}
                 target={item?.target}
-                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${isActive ? 'text-[#fff]' : ''}`}
+                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${
+                  isActive ? 'text-[#fff]' : ''
+                }`}
               >
-                <span>{item.name}</span>
-{isActive?                <span className='block mt-3 w-2/3 rounded-full h-1 bg-white' />
-:null}              </a>
+                <span className={`${isActive ? 'text-[#fff]' : ''}`}>{item.name}</span>
+                {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-white" /> : null}{' '}
+              </a>
             )
           })}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="flex items-center">
+          <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
+            <RiCustomerService2Line color="#fff" />
+            <span className="font-semibold text-[#fff] text-sm  ml-1">客服</span>
+          </button>
           {userInfo?.name ? (
             <a href="/space" className="text-sm font-semibold leading-6 text-white">
               个人中心

@@ -30,7 +30,7 @@ const Header = () => {
     <header className="bg-white w-full z-[999] shadow fixed top-0 left-0">
       <nav className="flex items-center justify-between p-6 bg-transparent	 lg:px-8 " aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="/" className="flex items-center w-full -m-1.5 p-1.5">
+          <a href="/" className="flex items-center-m-1.5 p-1.5">
             <img className="h-[35px]" src={icon_logo_color} alt="" />
           </a>
         </div>

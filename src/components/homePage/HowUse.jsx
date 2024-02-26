@@ -47,10 +47,10 @@ export default function Example() {
 
     return (
       <div className="relative w-full h-screen bg-[#F2F8FF]">
-        <img src={home_howuse_bg1} className="absolute z-1 w-[68.125%] top-0 left-1/2  -translate-x-1/2" />
-        <img src={home_howuse_bg2} className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2" />
+        <img src={home_howuse_bg1} className="absolute z-1 w-[61rem] top-0 left-1/2  -translate-x-1/2" />
+        <img src={home_howuse_bg2} className="absolute z-1 w-[59rem] top-0 left-1/2  -translate-x-1/2" />
         <div
-          className="absolute z-1 group  top-[40px] left-[11.5%]  -translate-x-1/2 cursor-pointer flex items-center"
+          className="absolute z-1 group  top-[6rem] left-[10.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
           onMouseEnter={() => handleHover(1)}
           onMouseLeave={handleLeave}
         >
@@ -62,7 +62,7 @@ export default function Example() {
         </div>
 
         <div
-          className="absolute z-[9] group  top-[328px] left-[18.5%]  -translate-x-1/2 cursor-pointer flex items-center"
+          className="absolute z-[9] group  top-[21rem] left-[19.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
           onMouseEnter={() => handleHover(2)}
           onMouseLeave={handleLeave}
         >
@@ -74,7 +74,7 @@ export default function Example() {
         </div>
 
         <div
-          className="absolute z-[9] group  top-[328px] right-[6.5%]  -translate-x-1/2 cursor-pointer flex flex-row-reverse items-center"
+          className="absolute z-[9] group  top-[21rem] right-[7rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse items-center"
           onMouseEnter={() => handleHover(3)}
           onMouseLeave={handleLeave}
         >
@@ -86,7 +86,7 @@ export default function Example() {
         </div>
 
         <div
-          className="absolute z-[9] group  top-[40px] right-0  -translate-x-1/2 cursor-pointer flex flex-row-reverse	 items-center"
+          className="absolute z-[9] group  top-[6rem] -right-[1.6rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse	 items-center"
           onMouseEnter={() => handleHover(4)}
           onMouseLeave={handleLeave}
         >
@@ -98,7 +98,7 @@ export default function Example() {
         </div>
         {current === 0 ? (
           <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
-            <img src={home_howuse_data} className="w-[328px]" />
+            <img src={home_howuse_data} className="w-[21rem]" />
             <span className="text-gray-900 font-bold">调用流程</span>
           </div>
         ) : null}

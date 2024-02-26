@@ -31,7 +31,7 @@ export default function HeroHome() {
 
   return (
     <div className="w-full flex flex-col text-left h-screen relative">
-      <img src={home_hero_bg} className="absolute bottom-0 z-1 w-[68.125%] left-[50%] -translate-x-1/2		" />
+      <img src={home_hero_bg} className="absolute bottom-0 z-1  w-[64rem]  left-[50%] -translate-x-1/2		" />
       <HeaderBlue />
       <div className="px-[127px] py-8 relative">
         <div className="flex flex-col pt-[90px]">
@@ -49,7 +49,7 @@ export default function HeroHome() {
             style={{
               backgroundImage: 'linear-gradient(97deg, #5F9BFF 3%, #3162FF 100%)'
             }}
-            className="border flex items-center justify-center w-[400px] rounded-full mt-[68px] px-10 py-3"
+            className="border flex items-center justify-center w-[400px] text-white rounded-full mt-[68px] px-10 py-3"
           >
             已经产生 <strong className="text-[#8FDFFF]  tracking-widest		">124,443,938,23</strong> 次AI交流
           </span>
@@ -57,7 +57,7 @@ export default function HeroHome() {
         <div className="flex justify-between mt-[67px] items-center">
           <div className="flex items-center">
             <img className="w-[25px]" src={home_hero_slide} />
-            <span className="text-[12px] ml-2">下滑进入首页</span>
+            <span className="text-[12px] ml-2  text-white ">下滑进入首页</span>
           </div>
           <div className="flex items-center justify-start  pb-10">
             {iconList?.map((item, index) => (

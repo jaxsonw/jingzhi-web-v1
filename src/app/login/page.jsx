@@ -157,10 +157,10 @@ export default function Login() {
             slidesPerView={1}
             mousewheel={true}
             autoplay={{ delay: 3000 }}
-            pagination={{
-              clickable: false
-            }}
-            modules={[Mousewheel, Pagination]}
+            // pagination={{
+            //   clickable: false
+            // }}
+            modules={[Mousewheel]}
            >
             <SwiperSlide>
               <BackgroundFirst />

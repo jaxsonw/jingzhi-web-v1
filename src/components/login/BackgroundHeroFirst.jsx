@@ -54,7 +54,7 @@ const modelList = [
 
 export default function BackgroundHeroFirst() {
     return (
-        <div className="w-full h-screen pt-10 bg-gradient-to-t from-[#7A81FF] to-[#3162FF] relative flex justify-center items-center">
+        <div className="w-full h-screen pt-20 bg-gradient-to-t from-[#7A81FF] to-[#3162FF] relative flex justify-center items-center">
             <div className="w-[639px] relative">
                 <div className="w-full flex justify-center items-center absolute -top-[170px] z-[10]">
                     <img src={login_huijujingcai} alt="AGICTO" className="w-[431px]" />

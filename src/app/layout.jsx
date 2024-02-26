@@ -17,6 +17,7 @@ import './globals.css'
 import config from '../../config'
 
 const inter = Inter({ subsets: ['latin'] })
+const hiddenHeaderPage = ["/","/demo"]
 
 export default function RootLayout({ children,page }) {
     const pathname = usePathname()
@@ -45,7 +46,7 @@ export default function RootLayout({ children,page }) {
             zIndex: 999999
           }}
         />
-        {pathname==="/"?null:<Header />}
+        {hiddenHeaderPage?.includes(pathname)?null:<Header />}
         {children}
         {/* <Footer /> */}
       </body>

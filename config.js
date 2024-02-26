@@ -1,5 +1,5 @@
-const TITLE = "AGICTO"
-const RECORD_NUMBER = "冀ICP备2023005620号-4"
+export const TITLE = "AGICTO"
+export const RECORD_NUMBER = "冀ICP备2023005620号-4"
 
 export default {
   title: TITLE,
