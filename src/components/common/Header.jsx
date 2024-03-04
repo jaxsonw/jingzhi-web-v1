@@ -12,8 +12,8 @@ const hiddenPath = ['/space', "/login"]
 
 const navigation = [
   { name: '首页', href: '/' },
-  { name: '开发文档', href: '/docs', target: '__blank' },
-  { name: '计费规则', href: '/docs/pricing', target: '__blank' }
+  { name: '开发文档', href: '/docs', target: '_self' },
+  { name: '计费规则', href: '/docs/pricing', target: '_self' }
 ]
 
 const Header = () => {
