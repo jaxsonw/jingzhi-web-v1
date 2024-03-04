@@ -17,7 +17,7 @@ const TypingEffect = ({ text, typingDelay = 100 }) => {
   }, [displayedText, text, typingDelay]);
 
   return (
-    <div className="typing-effect">
+    <div className="typing-effect text-[#fff]">
       {displayedText}
       <Cursor />
     </div>

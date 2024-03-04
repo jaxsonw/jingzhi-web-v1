@@ -22,8 +22,15 @@ export default function Example() {
       <Footer/> */}
       <Swiper
         direction={'vertical'}
-        slidesPerView={1} 
-        mousewheel={true}
+        slidesPerView={1}
+        freeMode
+        mousewheel={{
+          // invert: false, // true为鼠标滚轮往下是向上滑，false相反
+          sensitivity: 0.1, // 鼠标滚轮事件敏感度，值越大滚动越快
+          releaseOnEdges: true // 当滑动到Swiper的边缘时释放滚轮控制，这样页面会继续滚动
+        }}
+        allowTouchMove={false}
+        touchRatio={0.2}
         pagination={{
           clickable: false
         }}
