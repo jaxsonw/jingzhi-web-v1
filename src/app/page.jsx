@@ -3,13 +3,8 @@ import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination } from 'swiper/modules'
 import Hero from '../components/homePage/HeroHome'
-import Footer from "../components/homePage/Footer"
-import FeedList from '../components/homePage/feedList'
-import HowUse from '../components/homePage/HowUse'
-import Advantage from '../components/homePage/Advantage'
-import Mission from '../components/homePage/Mission'
-import Vision from '../components/homePage/Vision'
-import Values from '../components/homePage/Values'
+import Footer from "../components/homePage/Footer" 
+import HowUse from '../components/homePage/HowUse' 
 
 import config from '../../config'
 import { isPc } from '../utils'
@@ -24,14 +19,16 @@ export default function Example() {
         direction={'vertical'}
         slidesPerView={1}
         freeMode
+        simulateTouch={false}
+        touchAngle={30}
+        threshold={10}
+        touchRatio={0.5}
+        touchStartPreventDefault={false}
         mousewheel={{
-          // invert: false, // true为鼠标滚轮往下是向上滑，false相反
-          sensitivity: 0.1, // 鼠标滚轮事件敏感度，值越大滚动越快
-          releaseOnEdges: true // 当滑动到Swiper的边缘时释放滚轮控制，这样页面会继续滚动
+           sensitivity: 0.1 // 鼠标滚轮事件敏感度，值越大滚动越快
         }}
         allowTouchMove={false}
-        touchRatio={0.2}
-        pagination={{
+         pagination={{
           clickable: false
         }}
         modules={[Mousewheel]}
