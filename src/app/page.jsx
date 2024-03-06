@@ -24,11 +24,12 @@ export default function Example() {
         threshold={10}
         touchRatio={0.5}
         touchStartPreventDefault={false}
+        effect="fade"
         mousewheel={{
-           sensitivity: 0.1 // 鼠标滚轮事件敏感度，值越大滚动越快
+          sensitivity: 0.1 // 鼠标滚轮事件敏感度，值越大滚动越快
         }}
         allowTouchMove={false}
-         pagination={{
+        pagination={{
           clickable: false
         }}
         modules={[Mousewheel]}
