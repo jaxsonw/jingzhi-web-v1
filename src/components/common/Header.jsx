@@ -12,6 +12,7 @@ const hiddenPath = ['/space', "/login"]
 
 const navigation = [
   { name: '首页', href: '/' },
+  { name: '模型广场', href: '/model', target: '_self' },
   { name: '开发文档', href: '/docs', target: '_self' },
   { name: '计费规则', href: '/docs/pricing', target: '_self' }
 ]
@@ -46,11 +47,15 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map(item => (
-            <a key={item.name} href={item.href} target={item?.target} className="text-sm font-semibold leading-6 text-gray-900">
-              {item.name}
-            </a>
-          ))}
+          {navigation.map(item => {
+            const isActive = item?.href === pathname
+            return (
+              <a key={item.name} href={item.href} target={item?.target} className="text-sm flex flex-col  items-center font-semibold leading-6 text-gray-900 ">
+                <span className={`${isActive ? 'text-[#3162FF]' : ''}`}>{item.name}</span>
+                {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-[#3162FF]" /> : null}{' '}
+              </a>
+            )
+          })}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {userInfo?.name ? (

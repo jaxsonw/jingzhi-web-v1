@@ -17,6 +17,7 @@ const hiddenPath = ['/space', '/login']
 
 const navigation = [
   { name: 'ACICTO', href: '/' },
+  { name: '模型广场', href: '/model', target: '_self' },
   { name: '开发文档', href: '/docs', target: '_self' },
   { name: '计费规则', href: '/docs/pricing', target: '_self' }
 ]
