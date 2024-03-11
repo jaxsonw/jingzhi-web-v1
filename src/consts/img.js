@@ -123,4 +123,5 @@ export const home_howuse_bg2 = 'https://ew6.cn/home_howuse_bg2.png'
 
 export const home_howuse_bg1 = 'https://ew6.cn/home_howuse_bg1.png'
 
-export const home_bottom_bg = 'https://ew6.cn/home_bottom_bg.png'
+export const home_bottom_bg = 'https://ew6.cn/home_bottom_bg.jpg'
+export const home_bottom_bg_mofang = 'https://ew6.cn/home_footer_mofang.png'
