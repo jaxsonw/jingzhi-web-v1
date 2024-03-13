@@ -1,10 +1,9 @@
 "use client";
 
 import React,{Fragment, useState} from "react";
-import { HeadlessButton } from '@headlessui/react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import MobelTable from '../../components/common/ModelTable'
 const people = [
   { name: '全部类型' },
   { name: '聊天模型' },
@@ -136,7 +135,8 @@ const model = () => {
           </Listbox>
         </div>
       </div>
-     
+      <MobelTable
+      />
     </div>
    
     
