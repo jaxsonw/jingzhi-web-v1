@@ -1,12 +1,47 @@
-import { home_bottom_bg, agicto_product_agent_wechat } from '../../consts/img'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { home_bottom_bg, agicto_product_agent_wechat, home_bottom_bg_mofang } from '../../consts/img'
 import { TITLE, RECORD_NUMBER } from '../../../config'
-
+ 
 
 export default function Footer() {
+  // 处理鼠标移动的函数
+  // const handleMouseMove = e => {
+  //   const { clientX, clientY, currentTarget } = e
+  //   const { top, left, width, height } = currentTarget.getBoundingClientRect()
+
+  //   // 计算鼠标相对于元素中心的位置
+  //   const mouseX = clientX - left - width / 2
+  //   const mouseY = clientY - top - height / 2
+
+  //   // 设置元素的旋转和偏移
+  //   // 你可以根据需要调整"20"的值来控制移动的幅度
+  //   const xOffset = (mouseY / height) * 60
+  //   const yOffset = (mouseX / width) * 60
+
+  //   currentTarget.firstChild.style.transform = `translate(${yOffset}px, ${xOffset}px)`
+  // }
+
   return (
     <AnimatePresence mode="wait">
       <div className="relative bg-[#F2F8FF] h-screen p-4 w-full">
+        {/* <div
+          onMouseMove={handleMouseMove}
+          className="absolute z-10 w-[33%] top-[13rem] left-1/2 -translate-x-1/2"
+          style={{ display: 'inline-block' }}
+        >
+          <motion.img
+            className=" z-10 w-full top-[13rem] left-1/3 -translate-x-1/3"
+            src={home_bottom_bg_mofang}
+            style={{ willChange: 'transform' }} // 优化性能，告诉浏览器预期该元素将进行变化
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            transition={{ type: 'spring', stiffness: 100 }} // 确保图片移动平滑
+          />
+        </div> */}
+        <motion.div className="absolute z-10 w-[33%] top-[13rem] left-1/3 -translate-x-1/3" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+          <img src={home_bottom_bg_mofang}  />
+        </motion.div>
         <img src={home_bottom_bg} alt="" className="absolute z-1 w-[44rem] top-10 left-1/2  -translate-x-1/2 " />
         <div className="absolute w-[33%] z-1  top-[9.2rem] left-1/2 -translate-x-[124%]  flex items-end ">
           <motion.div
@@ -57,24 +92,62 @@ export default function Footer() {
               transition={{ duration: 1, delay: 0, type: 'spring' }}
             />
           </div>
-          {/* <motion.div
-            className="box h-[1px] w-[100%] bg-[#98E2FF]"
-            initial={{ x: '100%' }}
-            whileInView={{ x: '0%' }}
-            transition={{ type: 'spring' }}
-          /> */}
         </div>
 
         <div className="absolute w-[33%] z-1  top-[20rem] flex  flex-col   left-1/2 -translate-x-[124%]">
-          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
-          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF] my-8">多样化的AI服务</span>
-          <span className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]">多样化的AI服务</span>
+          <motion.div
+            className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]"
+            initial={{ x: '-100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 1, delay: 0 }}
+          >
+            <span>多样化的AI服务</span>
+          </motion.div>
+          <motion.div
+            className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF] my-8"
+            initial={{ x: '-100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <span>简单易用的界面</span>
+          </motion.div>
+          <motion.div
+            className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]"
+            initial={{ x: '-100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 2, delay: 1 }}
+          >
+            <span>安全可靠的平台</span>
+          </motion.div>
         </div>
-        <div className="text-right text-gray-900 absolute w-[33%] z-1  top-[20rem] leading-10		 right-1/2 translate-x-[124%]  flex  flex-row-reverse items-end ">
-          成为全球领先的AI聚合平台
-          <br /> 推动人工智能技术的广泛应用
-          <br /> 为领域开发人员提供更智慧的LLM调用枢纽
+
+        <div className="absolute w-[33%] z-1  top-[9.2rem] right-1/2 translate-x-[124%]  flex  flex-row-reverse items-end ">
+          <motion.div
+            className="text-right text-gray-900 absolute w-full z-1  top-[10rem] leading-10		 flex  flex-row-reverse items-end "
+            initial={{ x: '100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <span>成为全球领先的AI聚合平台</span>
+          </motion.div>
+          <motion.div
+            className="text-right text-gray-900 absolute w-full z-1  top-[13rem] leading-10		 flex  flex-row-reverse items-end "
+            initial={{ x: '100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <span>推动人工智能技术的广泛应用</span>
+          </motion.div>
+          <motion.div
+            className="text-right text-gray-900 absolute w-full z-1  top-[16rem] leading-10		 flex  flex-row-reverse items-end "
+            initial={{ x: '100%' }}
+            whileInView={{ x: '0%' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <span>为领域开发人员提供更智慧的LLM调用枢纽</span>
+          </motion.div>
         </div>
+
         <div className="absolute flex text-black flex-col z-1 w-full bottom-[10px] left-1/2  -translate-x-1/2">
           <span className="text-[#B5B5B5] text-center">2024 · {TITLE}</span>
           <span className="text-[#9E9E9E] text-center">{RECORD_NUMBER}</span>
