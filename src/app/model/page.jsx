@@ -7,7 +7,7 @@ import MobelTable from '../../components/common/ModelTable'
 import { getModelFilterList, getModelList } from "../../services/overflow"
 import { PRICE_HEADER } from '../../consts/modelheaderData'
 
-const model = () => {
+const Model = () => {
   const [typeData, setTypeData] = useState()
   const [modelSelected, setModelSelected] = useState(typeData?.modelTypeList[0])
   const [companySelected, setCompanySelected] = useState(typeData?.companyList[0])
