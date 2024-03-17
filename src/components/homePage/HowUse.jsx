@@ -43,7 +43,7 @@ const features = [
 ]
 
 export default function Example() {
-  const [current, setCurrent] = useState(0)
+  const [current, setCurrent] = useState(1)
 
   const [isPaused, setIsPaused] = useState(false)
 
@@ -69,7 +69,7 @@ export default function Example() {
 
   const handleLeave = () => {
     setIsPaused(false)
-    setCurrent(0)
+    // setCurrent(0)
   }
 
   return (

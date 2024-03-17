@@ -6,21 +6,21 @@ import { TITLE, RECORD_NUMBER } from '../../../config'
 
 export default function Footer() {
   // 处理鼠标移动的函数
-  // const handleMouseMove = e => {
-  //   const { clientX, clientY, currentTarget } = e
-  //   const { top, left, width, height } = currentTarget.getBoundingClientRect()
+  const handleMouseMove = e => {
+    const { clientX, clientY, currentTarget } = e
+    const { top, left, width, height } = currentTarget.getBoundingClientRect()
 
-  //   // 计算鼠标相对于元素中心的位置
-  //   const mouseX = clientX - left - width / 2
-  //   const mouseY = clientY - top - height / 2
+    // 计算鼠标相对于元素中心的位置
+    const mouseX = clientX - left - width / 2
+    const mouseY = clientY - top - height / 2
 
-  //   // 设置元素的旋转和偏移
-  //   // 你可以根据需要调整"20"的值来控制移动的幅度
-  //   const xOffset = (mouseY / height) * 60
-  //   const yOffset = (mouseX / width) * 60
+    // 设置元素的旋转和偏移
+    // 你可以根据需要调整"20"的值来控制移动的幅度
+    const xOffset = (mouseY / height) * 60
+    const yOffset = (mouseX / width) * 60
 
-  //   currentTarget.firstChild.style.transform = `translate(${yOffset}px, ${xOffset}px)`
-  // }
+    currentTarget.firstChild.style.transform = `translate(${yOffset}px, ${xOffset}px)`
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -39,9 +39,15 @@ export default function Footer() {
             transition={{ type: 'spring', stiffness: 100 }} // 确保图片移动平滑
           />
         </div> */}
-        <motion.div className="absolute z-10 w-[33%] top-[13rem] left-1/3 -translate-x-1/3" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
-          <img src={home_bottom_bg_mofang}  />
-        </motion.div>
+        <motion.img
+          onMouseMove={handleMouseMove}
+          src={home_bottom_bg_mofang}
+          className="absolute z-10 w-[33%] top-[13rem] left-1/2 -translate-x-1/2 scale-100	hover:scale-110 transition	"
+          // whileHover={{ scale: 1.2 }}
+          // whileTap={{ scale: 0.8 }}
+        >
+          {/* <img /> */}
+        </motion.img>
         <img src={home_bottom_bg} alt="" className="absolute z-1 w-[44rem] top-10 left-1/2  -translate-x-1/2 " />
         <div className="absolute w-[33%] z-1  top-[9.2rem] left-1/2 -translate-x-[124%]  flex items-end ">
           <motion.div
@@ -115,7 +121,7 @@ export default function Footer() {
             className="border rounded-full text-gray-900  text-center py-2 w-[10rem] border-[#98E2FF]"
             initial={{ x: '-100%' }}
             whileInView={{ x: '0%' }}
-            transition={{ duration: 2, delay: 1 }}
+            transition={{ duration: 1, delay: 1 }}
           >
             <span>安全可靠的平台</span>
           </motion.div>
