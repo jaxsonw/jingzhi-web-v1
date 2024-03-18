@@ -21,7 +21,7 @@ export default function ModelTable({modelData, headerData}) {
                                         {
                                             headerData?.map((item, itemIndex) => {
                                                 return (
-                                                    <th scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-center text-sm font-semibold sm:pl-0">
+                                                    <th key={itemIndex} scope="col" className="whitespace-nowrap py-3.5 pl-4 pr-3 text-center text-sm font-semibold sm:pl-0">
                                                         {item?.name}
                                                     </th>
                                                 )
@@ -42,9 +42,7 @@ export default function ModelTable({modelData, headerData}) {
                                         <th scope="col" className="whitespace-nowrap px-2 py-3.5 text-center text-sm font-semibold">
                                             备注
                                         </th> */}
-                                        {
-
-                                        }
+                        
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
