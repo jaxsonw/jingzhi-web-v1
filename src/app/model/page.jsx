@@ -45,14 +45,14 @@ const Model = () => {
       <h1 className="text-[30px] text-[#000B4D] pt-[33px] sm:flex sm:flex-auto sm:justify-center">大模型广场</h1>
       <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center">LARGEMMODEL HUB</h2>
       <div className="sm:flex pt-[22px]">
-         <div className=" sm:flex flex-auto sm:justify-end  sm:flex-grow-[1.78]">
+         {/* <div className=" sm:flex flex-auto sm:justify-end  sm:flex-grow-[1.78]">
             <button className="w-[120px] h-[40px] mr-[23px] bg-[#fff] text-[#1A1A1A] border-2 border-[#98E2FF] rounded-full" >
               重要参数
             </button>
             <button className="w-[120px] h-[40px] bg-[#3162FF] text-white rounded-full">
               费用介绍
             </button>
-          </div>
+          </div> */}
         <div className="sm:flex sm:flex-auto sm:justify-end">
           <Listbox value={modelSelected} onChange={setModelSelected}>
             <div className="relative mt-1">

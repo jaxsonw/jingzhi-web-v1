@@ -1,9 +1,8 @@
 'use client'
-import { useState, useEffect } from "react"
-import { Badge } from "@tremor/react"
-import { getModelPriceList } from "../../services/overflow"
 
-const colors = ["blue", "violet", "cyan", "rose"]
+import { FaRegCopy } from "react-icons/fa";
+import { copyValue } from "../../utils/index"
+
 
 
 export default function ModelTable({modelData, headerData}) {
@@ -33,11 +32,20 @@ export default function ModelTable({modelData, headerData}) {
                                 {modelData?.map((item) => {
                                     return (
                                         <tr key={item.model_name}>
-                                            <td className="whitespace-nowrap py-2 pl-4 pr-3  text-center text-sm text-gray-500 sm:pl-0">{item.model_name}</td>
+                                            <td className="whitespace-nowrap py-2 pl-4 pr-3 flex justify-center text-center text-sm text-gray-500 sm:pl-0">
+                                                {item.modelName}
+                                                <button
+                                                    onClick={() => copyValue(item.modelName)}
+                                                    type="button"
+                                                    className="inline-flex items-center px-2.5 border border-transparent text-sm  font-medium "
+                                                >
+                                                    <FaRegCopy color="black" size={14} />
+                                                </button>
+                                            </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3  text-center text-sm text-gray-500 sm:pl-0">{item.companyName}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm font-medium text-gray-900">{item.typeName || "/"}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.input_price || "/"}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.output_price || "/"}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.inputPrice || "/"}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.outputPrice || "/"}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.discount || "/"}</td>
 
                                             {/* <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item?.remark ? currentRemark?.map((val, index) => <Badge color={colors[index] || "#3b82f6"} key={val} className="mr-2">{val}</Badge>) : ""}</td> */}
