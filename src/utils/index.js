@@ -15,10 +15,10 @@ export const isLogin = () => {
 
 export const isPc = () => {
   if (checkServer()) return false;
-  if (!navigator || !navigator.userAgent) {
+  if (!window?.navigator || !window?.navigator.userAgent) {
     return false;
   }
-  const ua = navigator?.userAgent?.toLowerCase();
+  const ua = window?.navigator?.userAgent?.toLowerCase();
   if (
     /AppleWebKit.*Mobile/i.test(ua) ||
     /MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(
@@ -33,7 +33,7 @@ export const isPc = () => {
 // 判断微信环境
 export const isWeixin = () => {
   if (checkServer()) return false;
-  const u = navigator.userAgent;
+  const u = window?.navigator.userAgent;
   return !!u.match(/MicroMessenger/i);
 };
 
@@ -43,8 +43,11 @@ export const isWeixin = () => {
  * browser.versions.ios 判断是否是IOS设备
  */
 export const browser = () => {
-  if (navigator) {
-    const u = navigator ? navigator.userAgent : "";
+  if(!checkServer()){
+
+
+  if (window?.navigator) {
+    const u = window?.navigator ? window?.navigator.userAgent : "";
     return {
       trident: u.indexOf("Trident") > -1, // IE内核
       presto: u.indexOf("Presto") > -1, // opera内核
@@ -60,6 +63,7 @@ export const browser = () => {
       // qq: u.match(/\sQQ/i) === ' qq', // 是否QQ
     };
   }
+    }
   return {};
 };
 

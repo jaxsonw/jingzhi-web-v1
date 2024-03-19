@@ -157,3 +157,19 @@ body {
 #feishudocs .navigation-bar-wrapper{
   display: none;
 }
+
+.selectAnt :global .ant-select-selector {
+  border: 0px !important;
+  background-color: #333 !important;
+  color: #fff;
+}
+
+.selectAnt :global .ant-select-arrow {
+  color: #fff;
+}
+
+.selectAnt :global .menu {
+  color: #fff;
+  background-color: #333 !important;
+
+}
