@@ -2,6 +2,7 @@
 
 import { FaRegCopy } from "react-icons/fa";
 import { copyValue } from "../../utils/index"
+import { Button } from '../common/Button'
 
 
 
@@ -47,6 +48,11 @@ export default function ModelTable({modelData, headerData}) {
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.inputPrice || "/"}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.outputPrice || "/"}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.discount || "/"}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">
+                                                <Button href={`/playground?model=${item.modelName}`} variant="text" >
+                                                    试用
+                                                </Button>
+                                            </td>
 
                                             {/* <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item?.remark ? currentRemark?.map((val, index) => <Badge color={colors[index] || "#3b82f6"} key={val} className="mr-2">{val}</Badge>) : ""}</td> */}
                                         </tr>
