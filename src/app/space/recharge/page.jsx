@@ -106,6 +106,7 @@ export default function Example() {
         payType: 1 // pc 1、2 都可以
       }
       const res = await createOrder(params)
+      setCreateOrderLoading(false)
 
       if (res?.code !== 0) {
         toast.error(res?.data?.message || '创建订单失败，请稍后再试～')
@@ -119,6 +120,8 @@ export default function Example() {
 
     if (isWeixin() && !isPc()) {
       wxLogoin(price)
+        setCreateOrderLoading(false)
+
       return
     }
 
