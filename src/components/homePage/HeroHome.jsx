@@ -46,23 +46,23 @@ export default function HeroHome() {
     <div className="w-full flex flex-col text-left h-screen relative">
       <img src={home_hero_bg} className="absolute bottom-0 z-1  w-[61rem]  left-[50%] -translate-x-1/2		" />
       <HeaderBlue />
-      <div className="px-[127px] py-8 relative">
-        <div className="flex flex-col pt-[90px]">
-          <span className=" font-[16px] leading-8 opacity-[0.7] text-white">
+      <div className="lg:px-[127px] lg:py-8 px-5 py-4 relative">
+        <div className="flex flex-col lg:pt-[90px]">
+          <span className="font-[16px] leading-8 opacity-[0.7] text-white">
             AGICTO汇集了来自各个领域的优秀AI模型
             <br /> 您无需耗费大量时间和精力去逐一了解和学习不同的AI模型接口调用方法
             <br />
             现在，您只需要通过一个接口便可对众多模型进行调用和使用
           </span>
           <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
-          <div className="text-[80px] font-bold mt-[45px]">
+          <div className="lg:text-[80px] text-[48px] font-bold mt-[45px]">
             <TypingEffect text="AGICTO大模型调用基座" typingDelay={150} />
            </div>
           <span
             style={{
               backgroundImage: 'linear-gradient(97deg, #5F9BFF 3%, #3162FF 100%)'
             }}
-            className="border flex items-center justify-center w-[400px] text-white rounded-full mt-[68px] px-10 py-3"
+            className="border flex items-center justify-center lg:w-[400px]  w-full text-white rounded-full mt-[68px] px-10 py-3"
           >
             已经产生 <strong className="text-[#8FDFFF]  tracking-widest		">{count?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</strong>{' '}
             次AI交流
@@ -73,9 +73,9 @@ export default function HeroHome() {
             <img className="w-[25px]" src={home_hero_slide} />
             <span className="text-[12px] ml-2  text-white ">下滑进入首页</span>
           </div>
-          <div className="flex items-center justify-start  pb-10">
+          <div className="flex items-center justify-start  lg:pb-10">
             {iconList?.map((item, index) => (
-              <img key={index} className="w-[45px] mr-[33px]" src={item} />
+              <img key={index} className="lg:w-[45px] w-[24px] mr-2 lg:mr-[33px]" src={item} />
             ))}
           </div>
         </div>

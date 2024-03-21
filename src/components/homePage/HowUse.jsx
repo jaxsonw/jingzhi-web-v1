@@ -55,7 +55,8 @@ export default function Example() {
 
     // 设定定时器自动变换current
     const intervalId = setInterval(() => {
-      setCurrent(prevCurrent => (prevCurrent + 1) % 5) // 更新current, 使其循环在到4之间
+      setCurrent(prevCurrent => (prevCurrent + 1) % 5 === 0 ? 1 : (prevCurrent + 1) % 5) // 更新current, 使其循环在到4之间
+
     }, 2500) // 每1秒变换一次
 
     // 清理函数，组件卸载或变更时清除定时器
@@ -69,7 +70,6 @@ export default function Example() {
 
   const handleLeave = () => {
     setIsPaused(false)
-    // setCurrent(0)
   }
 
   return (
@@ -77,14 +77,13 @@ export default function Example() {
       <img src={home_howuse_bg1} className="absolute z-1 w-[61rem] top-0 left-1/2  -translate-x-1/2" />
       <img src={home_howuse_bg2} className="absolute z-1 w-[59rem] top-0 left-1/2  -translate-x-1/2" />
       <div
-        className="absolute z-1 group  top-[6rem] left-[10.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
+        className="lg:flex hidden  absolute z-1 group  top-[6rem] left-[10.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
         onMouseEnter={() => handleHover(1)}
         onMouseLeave={handleLeave}
       >
         <div
-          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${
-            current === 1 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
-          } `}
+          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${current === 1 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
+            } `}
         >
           注册账号
         </div>
@@ -93,14 +92,13 @@ export default function Example() {
       </div>
 
       <div
-        className="absolute z-[9] group  top-[21rem] left-[19.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
+        className="lg:flex hidden absolute z-[9] group  top-[21rem] left-[19.5rem]  -translate-x-1/2 cursor-pointer flex items-center"
         onMouseEnter={() => handleHover(2)}
         onMouseLeave={handleLeave}
       >
         <div
-          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${
-            current === 2 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
-          } `}
+          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${current === 2 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
+            } `}
         >
           选择服务
         </div>
@@ -109,14 +107,13 @@ export default function Example() {
       </div>
 
       <div
-        className="absolute z-[9] group  top-[21rem] right-[7rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse items-center"
+        className="lg:flex hidden absolute z-[9] group  top-[21rem] right-[7rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse items-center"
         onMouseEnter={() => handleHover(3)}
         onMouseLeave={handleLeave}
       >
         <div
-          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${
-            current === 3 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
-          } `}
+          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${current === 3 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
+            } `}
         >
           配置项目
         </div>
@@ -125,34 +122,33 @@ export default function Example() {
       </div>
 
       <div
-        className="absolute z-[9] group  top-[6rem] -right-[1.6rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse	 items-center"
+        className="lg:flex hidden absolute z-[9] group  top-[6rem] -right-[1.6rem]  -translate-x-1/2 cursor-pointer flex flex-row-reverse	 items-center"
         onMouseEnter={() => handleHover(4)}
         onMouseLeave={handleLeave}
       >
         <div
-          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${
-            current === 4 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
-          } `}
+          className={`border-[#98E2FF]  border px-6 py-2 text-gray-900 rounded-full ${current === 4 ? `border-[#3162FF] bg-[#3162FF] text-white` : ''
+            } `}
         >
           充值使用
         </div>
         <span className={`h-[1px] w-10  bg-transparent	 ${current === 4 ? '!bg-[#3162FF]' : ''}`} />
         <div className={`w-[30px] h-[30px] border rounded-full border-[#98E2FF] ${current === 4 ? '!border-[#3162FF]' : ''}`} />
       </div>
-      {current === 0 ? (
-        <div className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
+      {/* {current === 0 ? (
+        <div className="absolute z-1 w-[65.125%] top-1/2 lg:top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center">
           <img src={home_howuse_data} className="w-[21rem]" />
           <span className="text-gray-900 font-bold">调用流程</span>
         </div>
-      ) : null}
+      ) : null} */}
       {current === 1 ? (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 4, delay: 0, type: 'spring' }}
-          className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
+          className="absolute z-1 w-[65.125%] top-1/2 lg:top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
         >
-          <img src={home_howuse_registry} className="w-[57.734%]" />
+          <img src={home_howuse_registry} className="w-full lg:w-[57.734%]" />
           <span className="text-gray-900 text-center">
             点击页面右上角，注册/登录按钮 <br /> 输入邮箱验证码快速注册账号
           </span>
@@ -163,9 +159,9 @@ export default function Example() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 4, delay: 0, type: 'spring' }}
-          className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
+          className="absolute z-1 w-[65.125%] top-1/2 lg:top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
         >
-          <img src={home_howuse_pricing} className="w-[57.734%]" />
+          <img src={home_howuse_pricing} className="w-full lg:w-[57.734%]" />
           <span className="text-gray-900 text-center">
             浏览我们提供的计费标准
             <br /> 选择最适合您需求的服务
@@ -177,9 +173,9 @@ export default function Example() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 4, delay: 0, type: 'spring' }}
-          className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
+          className="absolute z-1 w-[65.125%] top-1/2 lg:top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
         >
-          <img src={home_howuse_docs} className="w-[57.734%]" />
+          <img src={home_howuse_docs} className="w-full lg:w-[57.734%]" />
           <span className="text-gray-900 text-center">
             查看开发文档
             <br /> 将我们的API接口传参融入到您的开发项目中
@@ -192,9 +188,9 @@ export default function Example() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 4, delay: 0, type: 'spring' }}
-          className="absolute z-1 w-[65.125%] top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
+          className="absolute z-1 w-[65.125%] top-1/2 lg:top-0 left-1/2  -translate-x-1/2 flex flex-col justify-center items-center"
         >
-          <img src={home_howuse_recharge} className="w-[57.734%]" />
+          <img src={home_howuse_recharge} className="w-full lg:w-[57.734%]" />
           <span className="text-gray-900 text-center">
             在使用前请先查看您的账户情况
             <br /> 可进入充值中心按需充值

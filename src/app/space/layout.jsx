@@ -81,9 +81,9 @@ export default function SpaceLayout({ children }) {
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                    <div className="flex h-16 shrink-0 items-center">
+                    <a  href="/" className="flex h-16 shrink-0 items-center">
                       <img className="h-[25px]" src={icon_logo_color} alt="" />
-                    </div>
+                    </a>
 
                     <nav className="flex flex-1 flex-col">
                       <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
