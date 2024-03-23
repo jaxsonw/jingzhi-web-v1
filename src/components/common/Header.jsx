@@ -13,6 +13,7 @@ const hiddenPath = ['/space', "/login"]
 const navigation = [
   { name: '首页', href: '/' },
   { name: '模型广场', href: '/model', target: '_self' },
+  { name: '调试平台', href: '/playground', target: '_self' },
   { name: '开发文档', href: '/docs', target: '_self' },
   { name: '计费规则', href: '/docs/pricing', target: '_self' }
 ]
@@ -30,10 +31,10 @@ const Header = () => {
   if (!isShowHeader) return null
   return (
     <header className="bg-white w-full z-[999] shadow fixed top-0 left-0">
-      <nav className="flex items-center justify-between p-6 bg-transparent	 lg:px-8 " aria-label="Global">
+      <nav className="flex items-center justify-between bg-transparent	py-[15px] lg:px-8 " aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center-m-1.5 p-1.5">
-            <img className="h-[35px]" src={icon_logo_color} alt="" />
+            <img className="h-[25px]" src={icon_logo_color} alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
