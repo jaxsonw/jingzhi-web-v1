@@ -11,6 +11,8 @@ const CommonHooks = () => {
       return;
     }
     setUserInfo(res?.data);
+    localStorage.setItem('userInfo', JSON.stringify(res?.data))
+
   };
   useEffect(() => {
     init();
