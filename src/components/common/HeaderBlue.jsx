@@ -2,14 +2,14 @@
 import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import { FiMenu } from 'react-icons/fi'
 import { usePathname } from 'next/navigation'
 import { RiCustomerService2Line } from 'react-icons/ri'
 // import Logo from '/public/logo.jpeg'
 import CustomerModal from "./CustomerModal"
 import { title } from '../../../config.js'
 import baseHooks from '../hooks/base'
-import { icon_logo_white } from '../../consts/img'
+import { icon_logo_white,icon_logo_color } from '../../consts/img'
 import {isPc} from "../../utils/index"
 
   
@@ -42,24 +42,12 @@ const Header = () => {
     <header className="bg-white w-full bg-[#3162FF]">
       <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
 
-      <nav className="flex items-center justify-between p-6 bg-[#3162FF] lg:px-8 " aria-label="Global">
+      <nav className=" flex items-center justify-between p-6 bg-[#3162FF] lg:px-8 " aria-label="Global">
         <div className="flex">
           <a href="/" className="flex items-center -m-1.5 p-1.5">
             <img className="h-[35px]" src={icon_logo_white} alt="" />
           </a>
         </div>
-        {/* {
-        !isPc()?<div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center jutify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>:null
-        } */}
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map(item => {
             const isActive = item?.href === pathname
@@ -78,7 +66,7 @@ const Header = () => {
             )
           })}
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center lg:flex hidden">
           <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
             <RiCustomerService2Line color="#fff" />
             <span className="font-semibold text-[#fff] text-sm  ml-1">客服</span>
@@ -93,14 +81,15 @@ const Header = () => {
             </a>
           )}
         </div>
+        <FiMenu className='lg:hidden' onClick={() => setMobileMenuOpen(true)} />
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-50" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+        <Dialog.Panel className="fixed inset-y-0 text-black right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
           <div className="flex items-center justify-between">
-            <a href="/" className="flex items-center -m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img className="h-[35px]" src={icon_logo_white} alt="" />
+            <a href="/" className="flex items-center outline-none -m-1.5 p-1.5">
+              <span className="sr-only">AGICTO</span>
+              <img className="h-[35px]" src={icon_logo_color} alt="" />
             </a>
             <button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Close menu</span>
@@ -114,7 +103,7 @@ const Header = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[white] hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
                   >
                     {item.name}
                   </a>
@@ -122,15 +111,25 @@ const Header = () => {
               </div>
               <div className="py-6">
                 {userInfo?.name ? (
-                  <a href="/space" className="text-sm font-semibold leading-6 text-[white]">
+                  <a
+                    href="/space"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
+                  >
                     个人中心
                   </a>
                 ) : (
-                  <a href="/login" className="text-sm font-semibold leading-6 text-[white]">
+                  <a
+                    href="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
+                  >
                     注册/登录
                   </a>
                 )}
               </div>
+              <button type="button" className="flex items-center border-none" onClick={() => setCustomerOpen(true)}>
+                <RiCustomerService2Line color="black" />
+                <span className="font-semibold text-black text-lg ml-2">客服</span>
+              </button>
             </div>
           </div>
         </Dialog.Panel>
