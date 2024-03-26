@@ -1,5 +1,7 @@
+import { fetchEventSource } from "@microsoft/fetch-event-source";
 import request from '../utils/request'
 import { BASE_URL } from '../consts/env'
+import { getTokenKey } from '@/src/utils/localStorage'
 
 /**
  * email 邮箱
@@ -14,7 +16,7 @@ export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
 
 export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)
- 
+
 
 export const suggest = params => request.post(`${BASE_URL}/v1/service/suggest`, params)
 
@@ -23,6 +25,103 @@ export const codeSearch = params => request.post(`${BASE_URL}/v1/service/chatgpt
 
 // 获取key
 export const checkCodeValid = data => request.post(`${BASE_URL}/v1/service/checkCodeValid`, data)
+// export const chatCode = data => request.post(`${BASE_URL}/v1/service/chatCode`, data)
+export const getModel = params => request.post(`${BASE_URL}/v1/service/chatCode/modelList `, params)
+
+export const chatCode = async (
+  data,
+  options
+) => {
+  // console.log(SSE)
+  let xtextContent = ''
+  // @ts-ignore;
+  // EventSource = SSE
+  var apiUrl = `https://apixijing.emkok.com/v1/service/chatCode`
+  // var params = {
+  //   model: 'text-davinci-003',
+  //   // model: "gpt-3.5-turbo",
+  //   prompt: data,
+  //   max_tokens: 2000,
+  //   temperature: 0.1,
+  //   top_p: 1,
+  //   stream: true,
+  //   frequency_penalty: 0,
+  //   presence_penalty: 0
+  // }
+  const controller = new AbortController()
+  const signal = controller.signal
+  console.log(controller, "aasta");
+  fetchEventSource(apiUrl, {
+    // @ts-ignore
+    withCredentials: true,
+    signal: signal,
+    headers: {
+      Authorization: 'Bearer ' + getTokenKey(),
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    },
+    method: 'POST',
+    body: JSON.stringify(data),
+    async onmessage(ev ) {
+      options.onMessage({ content: xtextContent })
+    },
+    onerror(err) {
+      console.log(err, "aasta");
+      options.onError(err)
+      controller.abort()
+    },
+    onclose() {
+      console.log('close')
+      options.onEnd()
+    }
+  })
+// console.log(evtSource, "aasta");
+  //    source.addEventListener('status', function(e) {
+  //        console.log('System status is now: ' + e.data);
+  //    });
+
+  // console.log(evtSource.readyState, "aareadyState");
+  // console.log(evtSource.url, "aaurl");
+
+  // evtSource.onopen = function () {
+  //   console.log('Connection to server opened.')
+  // }
+  //
+  // evtSource.onmessage = async function (e) {
+  //   const msg = e.data
+  //   if (msg.indexOf('[DONE]') !== -1) {
+  //     console.log('readEnd')
+  //     evtSource.close()
+  //     options.onEnd({ content: xtextContent })
+  //     return
+  //   }
+  //   const resultData = JSON.parse(e.data)
+  //   // console.log(e.data, "aasta");
+  //   xtextContent += resultData?.choices[0].text
+  //   options.onMessage({ content: xtextContent })
+  // }
+  //
+  // evtSource.onerror = function () {
+  //   console.log('EventSource failed.')
+  // }
+
+  // evtSource.addEventListener(
+  //   'ping',
+  //   function (e) {
+  //     console.log('ping')
+  //     console.log(e.data, 'pingData')
+  //   },
+  //   false
+  // )
+  // @ts-ignore;
+  // evtSource.stream()
+
+  return {
+    code: 0,
+    data: { content: '' }
+  }
+}
 
 // 获取代码 json方式
 export const openAiJson = async data => {

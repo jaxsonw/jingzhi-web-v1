@@ -12,14 +12,15 @@ import baseHooks from '../hooks/base'
 import { icon_logo_white } from '../../consts/img'
 import {isPc} from "../../utils/index"
 
-  
+
 const hiddenPath = ['/space', '/login']
 
 const navigation = [
   { name: 'ACICTO', href: '/' },
   { name: '模型广场', href: '/model', target: '_self' },
   { name: '开发文档', href: '/docs', target: '_self' },
-  { name: '计费规则', href: '/docs/pricing', target: '_self' }
+  { name: '计费规则', href: '/docs/pricing', target: '_self' },
+  { name: 'Chat Code', href: '/code', target: '_self' }
 ]
 
 const Header = () => {

@@ -39,7 +39,8 @@ function Markdown({ code, placeholder }) {
         height: '100%',
         width: '100%',
         padding: '3px 8px',
-        minHeight: '300px'
+        minHeight: '300px',
+        backgroundColor: 'rgb(23 23 23/var(--tw-bg-opacity))'
       }}
     >
       <div className="show-html" dangerouslySetInnerHTML={{ __html: markdownContent }}></div>
