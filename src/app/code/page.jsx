@@ -95,6 +95,10 @@ const Index = () => {
 
   const onClickMenu = (menu) => {
     setCurrentMenu(menu.type)
+    setCollapse(true)
+    if(msg) {
+      submit()
+    }
   }
 
   return (
@@ -115,6 +119,9 @@ const Index = () => {
           <div className="lg:w-64 md:w-64 sm:w-64 xs:42 ml-[10px]">
             <Selector options={modelList} defaultValue={modelList && modelList.length ? modelList[0] : null} placeholder="请选择模型" onChange={(v) => {
               setModel(v.id)
+              if(msg) {
+                submit()
+              }
             }}/>
           </div>
         </div>
