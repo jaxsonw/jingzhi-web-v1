@@ -3,19 +3,19 @@
 import { FaRegCopy } from "react-icons/fa";
 import { copyValue } from "../../utils/index"
 import { Button } from '../common/Button'
+import { AI_TYPE_TEXT } from '../../consts/modelheaderData'
 
 
-
-export default function ModelTable({modelData, headerData}) {
+export default function ModelTable({ modelData, headerData }) {
 
 
     return (
-         <div className="h-screen pt-[16px]">
+        <div className="h-screen pt-[16px]">
             <div className="mt-8 flow-root">
                 <div className="overflow-x-auto ">
                     <div className="inline-block min-w-full align-middle ">
                         <table className="min-w-full divide-y divide-gray-300 ">
-                            <thead className="bg-[#3162FF] text-[#ffffff]"> 
+                            <thead className="bg-[#3162FF] text-[#ffffff]">
                                 <tr>
                                     {
                                         headerData?.map((item) => {
@@ -26,7 +26,7 @@ export default function ModelTable({modelData, headerData}) {
                                             )
                                         })
                                     }
-                                  
+
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
@@ -49,7 +49,7 @@ export default function ModelTable({modelData, headerData}) {
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.outputPrice || "/"}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">{item.discount || "/"}</td>
                                             <td className="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-900">
-                                                <Button href={`/playground?model=${item.modelName}`} variant="text" >
+                                                <Button href={`/playground?model=${item.modelName}&modelType=${AI_TYPE_TEXT[item?.typeName]}`} variant="text" >
                                                     试用
                                                 </Button>
                                             </td>
