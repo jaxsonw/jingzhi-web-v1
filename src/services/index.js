@@ -2,7 +2,10 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 import request from '../utils/request'
 import { BASE_URL } from '../consts/env'
 import { getTokenKey } from '@/src/utils/localStorage'
-
+const TIMEOUT = 300
+let timerOut = null
+let timerOutCount = 0
+let errorTryCount = 0
 /**
  * email 邮箱
  * */
@@ -32,90 +35,74 @@ export const chatCode = async (
   data,
   options
 ) => {
-  // console.log(SSE)
   let xtextContent = ''
-  // @ts-ignore;
-  // EventSource = SSE
-  var apiUrl = `https://apixijing.emkok.com/v1/service/chatCode`
-  // var params = {
-  //   model: 'text-davinci-003',
-  //   // model: "gpt-3.5-turbo",
-  //   prompt: data,
-  //   max_tokens: 2000,
-  //   temperature: 0.1,
-  //   top_p: 1,
-  //   stream: true,
-  //   frequency_penalty: 0,
-  //   presence_penalty: 0
-  // }
-  const controller = new AbortController()
-  const signal = controller.signal
-  console.log(controller, "aasta");
-  fetchEventSource(apiUrl, {
-    // @ts-ignore
-    withCredentials: true,
-    signal: signal,
+  let needTimeOut = true
+  EventSource = SSE
+  var apiUrl = `https://api.ioii.cn/v1/service/chatCode`
+  const evtSource = new EventSource(apiUrl, {
     headers: {
       Authorization: 'Bearer ' + getTokenKey(),
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive'
+      'Content-Type': 'application/json'
     },
     method: 'POST',
-    body: JSON.stringify(data),
-    async onmessage(ev ) {
-      options.onMessage({ content: xtextContent })
-    },
-    onerror(err) {
-      console.log(err, "aasta");
-      options.onError(err)
-      controller.abort()
-    },
-    onclose() {
-      console.log('close')
-      options.onEnd()
-    }
+    payload: JSON.stringify(data)
   })
-// console.log(evtSource, "aasta");
-  //    source.addEventListener('status', function(e) {
-  //        console.log('System status is now: ' + e.data);
-  //    });
+  evtSource.onopen = function () {
+    console.log('Connection to server opened.')
+  }
 
-  // console.log(evtSource.readyState, "aareadyState");
-  // console.log(evtSource.url, "aaurl");
+  evtSource.onmessage = async function (e) {
+    clearInterval(timerOut)
+    timerOutCount = 0
+    needTimeOut = false
+    timerOut = setInterval(async () => {
+      if (needTimeOut && timerOutCount > TIMEOUT) {
+        clearInterval(timerOut)
+        timerOutCount = 0
+        options.onEnd({ content: xtextContent, canResend: true })
+        evtSource.close()
+        return
+      }
+      timerOutCount += 1
+    }, 1000)
 
-  // evtSource.onopen = function () {
-  //   console.log('Connection to server opened.')
-  // }
-  //
-  // evtSource.onmessage = async function (e) {
-  //   const msg = e.data
-  //   if (msg.indexOf('[DONE]') !== -1) {
-  //     console.log('readEnd')
-  //     evtSource.close()
-  //     options.onEnd({ content: xtextContent })
-  //     return
-  //   }
-  //   const resultData = JSON.parse(e.data)
-  //   // console.log(e.data, "aasta");
-  //   xtextContent += resultData?.choices[0].text
-  //   options.onMessage({ content: xtextContent })
-  // }
-  //
-  // evtSource.onerror = function () {
-  //   console.log('EventSource failed.')
-  // }
+    const msg = e.data
+    if (msg.indexOf('[DONE]') !== -1) {
+      console.log('readEnd')
+      evtSource.close()
+      options.onEnd({ content: xtextContent })
+      return
+    }
+    const resultData = JSON.parse(e.data)
+    // console.log(resultData, "aasta");
+    xtextContent += resultData?.choices[0].delta.content
+    options.onMessage({ content: xtextContent })
+  }
 
-  // evtSource.addEventListener(
-  //   'ping',
-  //   function (e) {
-  //     console.log('ping')
-  //     console.log(e.data, 'pingData')
-  //   },
-  //   false
-  // )
+  evtSource.onerror = function (e) {
+    console.log('EventSource failed.', e)
+    clearInterval(timerOut)
+    timerOutCount = 0
+    if (errorTryCount >= 2) {
+      options.onEnd({ content: xtextContent, canResend: true })
+      console.log('EventSource failed.')
+    } else {
+      errorTryCount++
+      console.log('EventSource_failed_TRY')
+      chatCode(data, options, xtextContent)
+    }
+  }
+
+  evtSource.addEventListener(
+    'ping',
+    function (e) {
+      console.log('ping')
+      console.log(e.data, 'pingData')
+    },
+    false
+  )
   // @ts-ignore;
-  // evtSource.stream()
+  evtSource.stream()
 
   return {
     code: 0,

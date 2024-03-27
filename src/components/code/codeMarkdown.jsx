@@ -43,7 +43,7 @@ function Markdown({ code, placeholder }) {
         backgroundColor: 'rgb(23 23 23/var(--tw-bg-opacity))'
       }}
     >
-      <div className="show-html" dangerouslySetInnerHTML={{ __html: markdownContent }}></div>
+      <div className="show-html" dangerouslySetInnerHTML={{ __html: marked.parse(markdownContent) }}></div>
     </div>
   )
 }
