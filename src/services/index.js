@@ -1,6 +1,11 @@
+import { fetchEventSource } from "@microsoft/fetch-event-source";
 import request from '../utils/request'
 import { BASE_URL } from '../consts/env'
-
+import { getTokenKey } from '@/src/utils/localStorage'
+const TIMEOUT = 300
+let timerOut = null
+let timerOutCount = 0
+let errorTryCount = 0
 /**
  * email 邮箱
  * */
@@ -14,7 +19,7 @@ export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
 
 export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)
- 
+
 
 export const suggest = params => request.post(`${BASE_URL}/v1/service/suggest`, params)
 
@@ -23,6 +28,87 @@ export const codeSearch = params => request.post(`${BASE_URL}/v1/service/chatgpt
 
 // 获取key
 export const checkCodeValid = data => request.post(`${BASE_URL}/v1/service/checkCodeValid`, data)
+// export const chatCode = data => request.post(`${BASE_URL}/v1/service/chatCode`, data)
+export const getModel = params => request.post(`${BASE_URL}/v1/service/chatCode/modelList `, params)
+
+export const chatCode = async (
+  data,
+  options
+) => {
+  let xtextContent = ''
+  let needTimeOut = true
+  EventSource = SSE
+  var apiUrl = `https://api.ioii.cn/v1/service/chatCode`
+  const evtSource = new EventSource(apiUrl, {
+    headers: {
+      Authorization: 'Bearer ' + getTokenKey(),
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    payload: JSON.stringify(data)
+  })
+  evtSource.onopen = function () {
+    console.log('Connection to server opened.')
+  }
+
+  evtSource.onmessage = async function (e) {
+    clearInterval(timerOut)
+    timerOutCount = 0
+    needTimeOut = false
+    timerOut = setInterval(async () => {
+      if (needTimeOut && timerOutCount > TIMEOUT) {
+        clearInterval(timerOut)
+        timerOutCount = 0
+        options.onEnd({ content: xtextContent, canResend: true })
+        evtSource.close()
+        return
+      }
+      timerOutCount += 1
+    }, 1000)
+
+    const msg = e.data
+    if (msg.indexOf('[DONE]') !== -1) {
+      console.log('readEnd')
+      evtSource.close()
+      options.onEnd({ content: xtextContent })
+      return
+    }
+    const resultData = JSON.parse(e.data)
+    // console.log(resultData, "aasta");
+    xtextContent += resultData?.choices[0].delta.content
+    options.onMessage({ content: xtextContent })
+  }
+
+  evtSource.onerror = function (e) {
+    console.log('EventSource failed.', e)
+    clearInterval(timerOut)
+    timerOutCount = 0
+    if (errorTryCount >= 2) {
+      options.onEnd({ content: xtextContent, canResend: true })
+      console.log('EventSource failed.')
+    } else {
+      errorTryCount++
+      console.log('EventSource_failed_TRY')
+      chatCode(data, options, xtextContent)
+    }
+  }
+
+  evtSource.addEventListener(
+    'ping',
+    function (e) {
+      console.log('ping')
+      console.log(e.data, 'pingData')
+    },
+    false
+  )
+  // @ts-ignore;
+  evtSource.stream()
+
+  return {
+    code: 0,
+    data: { content: '' }
+  }
+}
 
 // 获取代码 json方式
 export const openAiJson = async data => {

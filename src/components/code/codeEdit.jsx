@@ -19,7 +19,8 @@ const CodeEdit = ({ onChange, ...other }) => {
         style={{
           height: '100%',
           width: '100%',
-          minHeight: '300px'
+          minHeight: '300px',
+          backgroundColor: 'rgb(23 23 23/var(--tw-bg-opacity))'
         }}
         wrapEnabled={true}
         mode="markdown"
