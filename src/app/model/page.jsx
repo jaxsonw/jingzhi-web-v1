@@ -9,8 +9,8 @@ import { PRICE_HEADER } from '../../consts/modelheaderData'
 
 const Model = () => {
   const [typeData, setTypeData] = useState()
-  const [modelSelected, setModelSelected] = useState(typeData?.modelTypeList[0])
-  const [companySelected, setCompanySelected] = useState(typeData?.companyList[0])
+  const [modelSelected, setModelSelected] = useState({typeName: '选择类型'})
+  const [companySelected, setCompanySelected] = useState({ companyName: '选择服务商' })
   const [modelData, setModelData] = useState({})
 
 
@@ -20,8 +20,8 @@ const Model = () => {
    
 
     setTypeData(res?.data)
-    setModelSelected(res?.data?.modelTypeList[0])
-    setCompanySelected(res?.data?.companyList[0])
+    // setModelSelected(res?.data?.modelTypeList[0])
+    // setCompanySelected(res?.data?.companyList[0])
 
   }
 
