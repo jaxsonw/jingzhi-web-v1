@@ -51,3 +51,8 @@ export const PRICE_HEADER = [
         name: '操作',  
     }
 ]
+
+export const AI_TYPE_TEXT = {
+    '聊天': 'message',
+    '图片': 'image'
+}
