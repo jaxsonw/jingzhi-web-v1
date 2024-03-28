@@ -30,7 +30,7 @@ const Index = () => {
       console.log(res)
       if(res.data.recordList && res.data.recordList.length > 0) {
         setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName})))
-        const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')
+        const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
         setModel(defaultValue || res.data.recordList[0].apiModelName)
       }
     }
@@ -117,7 +117,7 @@ const Index = () => {
             </button>
             : <div className={`md:text-2xl sm:text-[0.4rem] font-bold text-[#3162FF]`}>Chat Code</div>}
           <div className="lg:w-64 md:w-64 sm:w-64 xs:42 ml-[10px]">
-            <Selector options={modelList} defaultValue={modelList && modelList.length ? modelList[0] : null} placeholder="请选择模型" onChange={(v) => {
+            <Selector options={modelList} defaultValue={model ? modelList.find(item => item.id === model) : modelList[0]} placeholder="请选择模型" onChange={(v) => {
               setModel(v.id)
               if(msg) {
                 submit()

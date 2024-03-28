@@ -73,10 +73,17 @@ export const chatCode = async (
       options.onEnd({ content: xtextContent })
       return
     }
-    const resultData = JSON.parse(e.data)
-    // console.log(resultData, "aasta");
-    xtextContent += resultData?.choices[0].delta.content
-    options.onMessage({ content: xtextContent })
+    try {
+      const resultData = JSON.parse(e.data)
+      if(resultData && Object.prototype.toString.call(resultData) === '[object Object]') {
+        xtextContent += resultData?.choices[0].delta.content
+        options.onMessage({ content: xtextContent })
+      }
+    }catch (error) {
+    }
+    if(e.data) {
+
+    }
   }
 
   evtSource.onerror = function (e) {
