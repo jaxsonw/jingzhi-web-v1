@@ -1,13 +1,13 @@
 "use client"
 import { Inter } from 'next/font/google'
 import { ToastContainer, toast } from 'react-toastify'
-import {usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import Header from '../components/common/Header'
 import HeaderBule from "../components/common/HeaderBlue"
 import Footer from '../components/common/Footer'
 import Head from 'next/head'
 import Script from 'next/script'
-
+import StyledComponentsRegistry from '../lib/AntdRegistry'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -17,10 +17,10 @@ import './globals.css'
 import config from '../../config'
 
 const inter = Inter({ subsets: ['latin'] })
-const hiddenHeaderPage = ["/","/demo"]
+const hiddenHeaderPage = ["/", "/demo"]
 
-export default function RootLayout({ children,page }) {
-    const pathname = usePathname()
+export default function RootLayout({ children, page }) {
+  const pathname = usePathname()
 
   return (
     <html lang="en">
@@ -29,10 +29,10 @@ export default function RootLayout({ children,page }) {
 
       <Script
         id="baidutongji"
-        //   dangerouslySetInnerHTML={{
-        //     __html: `
-        //  `
-        //   }}
+      //   dangerouslySetInnerHTML={{
+      //     __html: `
+      //  `
+      //   }}
       >
         {`var _hmt = _hmt || [];
         (function() {
@@ -49,7 +49,7 @@ export default function RootLayout({ children,page }) {
           }}
         />
         {hiddenHeaderPage?.includes(pathname) ? null : <Header />}
-        {children}
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         {/* <Footer /> */}
       </body>
     </html>

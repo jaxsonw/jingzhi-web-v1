@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "1.18.4",
     "@headlessui/react": "^1.7.18",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.1.1",
@@ -23,6 +24,7 @@
     "@types/mdx": "^2.0.10",
     "acorn": "^8.11.3",
     "antd": "^5.13.2",
+    "antd-xijing": "1.0.4",
     "axios": "^1.6.5",
     "clsx": "^2.1.0",
     "css-loader": "^6.9.1",
