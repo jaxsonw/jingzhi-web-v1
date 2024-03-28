@@ -127,8 +127,23 @@ module.exports = {
         2.5: '0.025',
         7.5: '0.075',
         15: '0.15'
+      },
+      keyframes: {
+        bounceLR: {
+          '0%, 100%': {
+            transform: 'translateX(-10%)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+          },
+          '50%': {
+            transform: 'translateX(0)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+          }
+        }
+      },
+      animation: {
+        bounceLR: 'bounceLR 2s infinite'
       }
-    }
+}
   },
   safelist: [
     {

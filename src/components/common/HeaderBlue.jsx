@@ -20,7 +20,8 @@ const navigation = [
   { name: '调试平台', href: '/playground', target: '_self' },
   { name: 'Prompt工程', href: '/prompt', target: '_self' },
   { name: '开发文档', href: '/docs', target: '_self' },
-  { name: '计费规则', href: '/docs/pricing', target: '_self' }
+  { name: '计费规则', href: '/docs/pricing', target: '_self' },
+  { name: 'Chat Code', href: '/code', target: '_self' }
 ]
 
 const Header = () => {
