@@ -21,7 +21,7 @@ export const SpaceContext = createContext()
 export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [customerOpen,setCustomerOpen] = useState(false)
+  const [customerOpen, setCustomerOpen] = useState(false)
   const { userInfo } = baseHooks()
 
   const currentPath = usePathname()
@@ -81,7 +81,7 @@ export default function SpaceLayout({ children }) {
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                    <a  href="/" className="flex h-16 shrink-0 items-center">
+                    <a href="/" className="flex h-16 shrink-0 items-center">
                       <img className="h-[25px]" src={icon_logo_color} alt="" />
                     </a>
 
@@ -211,11 +211,13 @@ export default function SpaceLayout({ children }) {
                     </a>
 
                     <a
-                      href="/docs"
+                      href="https://docs.agicto.com"
                       className={classNames(
                         'text-gray-700',
                         'group flex  flex items-center h-[63px] mx-[33px] text-sm leading-6 font-semibold'
                       )}
+
+                      target='_blank'
                     >
                       开发文档
                     </a>
@@ -235,7 +237,7 @@ export default function SpaceLayout({ children }) {
                 {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                <button type="button" className="flex items-center mr-4" onClick={()=>setCustomerOpen(true)}>
+                <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
                   <RiCustomerService2Line />
                   <span className="font-bold text-[#545759] ml-1">客服</span>
                 </button>

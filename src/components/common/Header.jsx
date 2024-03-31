@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 // import Logo from '/public/logo.jpeg'
 import baseHooks from '../hooks/base'
- import { icon_logo_color } from "../../consts/img"
+import { icon_logo_color } from "../../consts/img"
 
 const hiddenPath = ['/space', "/login", "/code"]
 
@@ -14,7 +14,7 @@ const navigation = [
   { name: '首页', href: '/' },
   { name: '模型广场', href: '/model', target: '_self' },
   { name: '调试平台', href: '/playground', target: '_self' },
-  { name: '开发文档', href: '/docs', target: '_self' },
+  { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
   { name: '计费规则', href: '/docs/pricing', target: '_self' },
   { name: 'Chat Code', href: '/code', target: '_self' }
 ]
