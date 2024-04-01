@@ -9,8 +9,8 @@ import { RiCustomerService2Line } from 'react-icons/ri'
 import CustomerModal from "./CustomerModal"
 import { title } from '../../../config.js'
 import baseHooks from '../hooks/base'
-import { icon_logo_white,icon_logo_color } from '../../consts/img'
-import {isPc} from "../../utils/index"
+import { icon_logo_white, icon_logo_color } from '../../consts/img'
+import { isPc } from "../../utils/index"
 
 
 const hiddenPath = ['/space', '/login']
@@ -19,7 +19,8 @@ const navigation = [
   { name: 'ACICTO', href: '/' },
   { name: '模型广场', href: '/model', target: '_self' },
   { name: '调试平台', href: '/playground', target: '_self' },
-  { name: '开发文档', href: '/docs', target: '_self' },
+  { name: 'Prompt工程', href: '/prompt', target: '_self' },
+  { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
   { name: '计费规则', href: '/docs/pricing', target: '_self' },
   { name: 'Chat Code', href: '/code', target: '_self' }
 ]
@@ -27,7 +28,7 @@ const navigation = [
 const Header = () => {
   const { userInfo } = baseHooks()
   const pathname = usePathname()
-    const [customerOpen,setCustomerOpen] = useState(false)
+  const [customerOpen, setCustomerOpen] = useState(false)
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let isShowHeader = true
@@ -57,9 +58,8 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 target={item?.target}
-                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${
-                  isActive ? 'text-[#fff]' : ''
-                }`}
+                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${isActive ? 'text-[#fff]' : ''
+                  }`}
               >
                 <span className={`${isActive ? 'text-[#fff]' : ''}`}>{item.name}</span>
                 {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-white" /> : null}{' '}
