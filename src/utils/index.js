@@ -123,3 +123,12 @@ export const vaildEmail = (email) => {
 
   return emailReg.test(email);
 };
+
+
+export const remarkToKey = (fieldJson, preNotice) => {
+  fieldJson.forEach(element => {
+    console.log('element', element)
+    preNotice = preNotice.replaceAll(`{{${element.remark}}}`, `{{${element.field}}}`)
+  })
+  return preNotice
+}
