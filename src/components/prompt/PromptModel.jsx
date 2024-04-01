@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Radio, Button, Checkbox, Spin, Dropdown, Input, Tooltip, Pagination, Drawer, Form, message, Row, Col } from 'antd'
 import { getUserAppList, createApp, deleteApp } from '../../services/promptService'
 import { isEmpty, mapKeys, map, debounce } from 'lodash'
+import { copyValue } from '../../utils/index'
 
 import {
   MoreOutlined,
