@@ -7,7 +7,7 @@ import { Layout, Tabs, Radio, Button, Checkbox, Spin, Dropdown, Input, Tooltip, 
 import PromptTextarea from '../../components/prompt/PromptTextarea'
 import PromptModel from '../../components/prompt/PromptModel'
 
-import { getAppList } from '../../services/promptService'
+import { getAppList, getCateList } from '../../services/promptService'
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -15,22 +15,21 @@ const prompt = () => {
   const [size, setSize] = useState('small');
   const [promptText, setPromptText] = useState('');
   const [openMobel, setOpenMobel] = useState(false);
-  const [appListParams, setAppListParams] = useState({
-    cid: "",
-    filterType: 1,
-    page: 1,
-    pageSize: 9,
-    search: ""
-  });
+  // const [appListParams, setAppListParams] = useState();
+  const [appListPage, setAppListPage] = useState(1);
+  const [appListCid, setAppListCid] = useState('');
+  const [appListSearch, setAppListSearch] = useState('');
 
   const [appList, setAppList] = useState([]);
 
+  const [cateList, setCateList] = useState([])
+
+
   const [appListLoading, setAppListLoading] = useState(false);
 
-  const getAppListData = async () => {
+  const getAppListData = async (appListParams) => {
     const res = await getAppList(appListParams)
     if (res.code === 0) {
-      console.log(res)
       if (res.data.recordList && res.data.recordList.length > 0) {
         setAppListLoading(false)
 
@@ -44,12 +43,35 @@ const prompt = () => {
   useEffect(() => {
     setAppListLoading(true)
 
-    getAppListData()
+    getAppListData({
+      cid: "",
+      filterType: 1,
+      page: 1,
+      pageSize: 9,
+      search: "",
+      type: ""
+    })
+    getClietCateList()
   }, [])
 
+
+  const getClietCateList = async () => {
+    const res = await getCateList()
+    const renderCateList = (res?.data?.recordList || []).map(item => ({ ...item, label: item.name }))
+    setCateList(renderCateList)
+  }
+
+
   useEffect(() => {
-    getAppListData()
-  }, [appListParams])
+    getAppListData({
+      cid: appListCid,
+      filterType: 1,
+      keyword: appListSearch,
+      page: appListPage,
+      pageSize: 9,
+      type: ""
+    })
+  }, [appListPage, appListCid, appListSearch])
 
   const openMobelClick = () => {
     setOpenMobel(true)
@@ -72,20 +94,26 @@ const prompt = () => {
           setAppList={setAppList}
           appListLoading={appListLoading}
           setAppListLoading={setAppListLoading}
-          setAppListParams={setAppListParams}
+          setAppListPage={setAppListPage}
+          setAppListCid={setAppListCid}
           openMobelClick={openMobelClick}
           getAppListData={getAppListData}
+          cateList={cateList}
+          appListCid={appListCid}
+          appListPage={appListPage}
+          appListSearch={appListSearch}
+          setAppListSearch={setAppListSearch}
         />,
       },
-      {
-        label: 'Prompt优化',
-        key: '2',
-        children: <PromptTextarea
-          setPromptText={setPromptText}
-          promptText={promptText}
-        />,
-        disabled: true,
-      }
+      // {
+      //   label: 'Prompt优化',
+      //   key: '2',
+      //   children: <PromptTextarea
+      //     setPromptText={setPromptText}
+      //     promptText={promptText}
+      //   />,
+      //   disabled: true,
+      // }
     ]
   return (
     <>

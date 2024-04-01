@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Radio, Button, Checkbox, Spin, Dropdown, Input, Tooltip, Pagination, Drawer, Form, message, Row, Col } from 'antd'
 import { getUserAppList, createApp, deleteApp } from '../../services/promptService'
-import { isEmpty } from 'lodash'
+import { isEmpty, mapKeys, map, debounce } from 'lodash'
 
 import {
   MoreOutlined,
@@ -21,15 +21,15 @@ const formItemLayout = {
 
 const APP_DROPDOWN = [{
   label: '复制',
-  key: '0'
+  key: 0
 }]
 
 const USER_DROPDOWN = [{
   label: '复制',
-  key: '0'
+  key: 0
 }, {
   label: '删除',
-  key: '1'
+  key: 1
 }]
 
 
@@ -37,7 +37,7 @@ const USER_DROPDOWN = [{
 const PromptModel = (props) => {
   const router = useRouter()
 
-  const { appList, setAppList, appListLoading, setAppListLoading, setAppListParams, openMobelClick, getAppListData } = props
+  const { appList, setAppList, appListLoading, appListPage, setAppListLoading, setAppListPage, openMobelClick, getAppListData, cateList, setAppListCid, appListCid, appListSearch, setAppListSearch } = props
   const [modelType, setMobelType] = useState(1)
   const [createOpen, setCreateOpen] = useState(false)
   const [createData, setCreateData] = useState({})
@@ -47,7 +47,18 @@ const PromptModel = (props) => {
   const [form] = Form.useForm()
 
 
+  const getUserData = async () => {
+    const res = await getUserAppList()
+    if (res.code === 0) {
+      if (res.data.recordList) {
+        setAppListLoading(false)
 
+        // setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName })))
+        // const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
+        setAppList(res.data)
+      }
+    }
+  }
 
   const handleCreateApp = async () => {
     const params = form.getFieldsValue()
@@ -63,12 +74,12 @@ const PromptModel = (props) => {
       message.success('新建成功')
       setCreateOpen(false)
       if (res?.data?.appId) {
-        router.push(`/prompt/${res?.data?.appId}`)
+        getUserData()
+        // router.push(`/prompt/${res?.data?.appId}`)
       }
     } else {
       message.error(res?.message || '创建失败，请稍后重试')
     }
-    console.log(res, 'resresresres')
 
   }
 
@@ -96,52 +107,81 @@ const PromptModel = (props) => {
   )
 
   const handleAppListaData = (e) => {
-    console.log(e, 'e')
     setAppListLoading(true)
 
-    setAppListParams({
-      cid: "",
-      filterType: 1,
-      page: e,
-      pageSize: 9,
-      search: ""
-
-    })
+    setAppListPage(e)
   }
+
 
   const handelModel = async (e) => {
     setAppListLoading(true)
 
     setMobelType(e.target.value);
     if (e.target.value === 1) {
-      getAppListData()
+      getAppListData({
+        cid: appListCid,
+        filterType: 1,
+        keyword: "",
+        page: appListPage,
+        pageSize: 9,
+        type: ""
+      })
     } else {
-      const res = await getUserAppList()
-      if (res.code === 0) {
-        console.log(res)
-        if (res.data.recordList) {
-          setAppListLoading(false)
+      getUserData()
+    }
+  }
 
-          // setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName })))
-          // const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
-          setAppList(res.data)
-        }
+
+
+
+
+  const removeItems = async (e, itemsId) => {
+    console.log(e, 'e')
+    if (e?.key === '0') {
+      copyValue(itemsId?.desc)
+      message.success('复制成功')
+    } else {
+      setAppListLoading(true)
+
+      const res = await deleteApp({
+        appId: itemsId?.appId
+      })
+      if (res?.code === 0) {
+        message.success('删除成功')
+        getUserData()
       }
     }
+
   }
 
+  const handleCitChange = (e) => {
+    setAppListCid(e.target.value)
+    setAppListLoading(true)
 
-  const removeItems = async (itemsId) => {
-    const res = await deleteApp({
-      appId: itemsId
+  }
+
+  const tabList = map([{ label: '全部', cid: '' }, ...cateList], obj => {
+    return mapKeys(obj, (value, key) => {
+      if (key === 'cid') {
+        return 'value'
+      } else {
+        return key
+      }
     })
-    if (res?.code) {
+  })
 
-    }
+  const onSearchChange = async event => {
+    setAppListSearch(event?.target?.value)
+    // getClientApplist({
+    //   propsType: attrValue,
+    //   propsCid: cid,
+    //   propsSearch: event?.target?.value,
+    //   filterType: sortValue
+    // })
   }
 
 
-  console.log(appList, 'appList')
+
   return (
     <div>
       <div className='tab-header flex  justify-between mb-[12px]'>
@@ -149,7 +189,15 @@ const PromptModel = (props) => {
           <Radio.Button value={1}>系统模版</Radio.Button>
           <Radio.Button value={2}>自定义模版</Radio.Button>
         </Radio.Group>
-        <div className='mb-[12px]'>
+        <div className='mb-[12px] flex '>
+          <Input
+            onChange={debounce(onSearchChange, 500)}
+            type="text"
+            placeholder="搜索你需要的应用"
+            className='mr-[10px]'
+            required
+            allowClear
+          />
           <Button type="primary" onClick={handelCreateDrawer}>新增模版</Button>
 
         </div>
@@ -157,11 +205,15 @@ const PromptModel = (props) => {
       {
         modelType === 1 &&
         <div className='mb-[12px]'>
-          <Checkbox>全部</Checkbox>
+          <Radio.Group onChange={handleCitChange} value={appListCid}>
+            {
+              tabList?.map((item) => {
+                return (<Radio value={item?.value}>{item?.label}</Radio>)
+              })
+            }
 
-          <Checkbox>文案创作</Checkbox>
-          <Checkbox>办公助理</Checkbox>
-          <Checkbox>学习助手</Checkbox>
+
+          </Radio.Group>
         </div>
       }
 
@@ -186,13 +238,14 @@ const PromptModel = (props) => {
                                 <Dropdown
                                   menu={
                                     {
-                                      items: modelType === 1 ? APP_DROPDOWN : USER_DROPDOWN
+                                      items: modelType === 1 ? APP_DROPDOWN : USER_DROPDOWN,
+                                      onClick: (e) => removeItems(e, items)
                                     }
                                   }
                                   trigger={['click']}
 
                                 >
-                                  <MoreOutlined onClick={() => removeItems(items?.appId)} />
+                                  <MoreOutlined />
 
                                 </Dropdown>
                               </div>
@@ -226,7 +279,13 @@ const PromptModel = (props) => {
                 </div>}
               </>
             ) : (
-              <div className='text-[12px] text-[#878aab]'>暂无模版</div>
+              <>
+                {
+                  !appListLoading && <div className='w-text-[12px] text-[#878aab] text-center w-full	mt-[30px]'>暂无模版</div>
+
+                }
+              </>
+
             )
           }
 

@@ -124,6 +124,31 @@ export const vaildEmail = (email) => {
   return emailReg.test(email);
 };
 
+export const keyToRemark = (fieldJson, preNotice) => {
+  fieldJson.forEach(item => {
+    preNotice = preNotice.replaceAll(item.field, item.remark)
+  })
+  return preNotice
+}
+
+
+export const getInputKeys = (value) => {
+  const regex = /\{\{([^}]+)\}\}/g
+  const keys =
+    value?.match(regex)?.map(item => {
+      return item.replace('{{', '').replace('}}', '')
+    }) || []
+  const keyObj = {}
+  // remove duplicate keys
+  const res = []
+  keys.forEach(key => {
+    if (keyObj[key]) return
+
+    keyObj[key] = true
+    res.push(key)
+  })
+  return res
+}
 
 export const remarkToKey = (fieldJson, preNotice) => {
   fieldJson.forEach(element => {
