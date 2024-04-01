@@ -260,7 +260,7 @@ const PromptModel = (props) => {
                           </div>
                         </div>
                         <div className='flex items-center pt-[8px] mt-[12px] border-solid border-t border-slate-100	]'>
-                          <span className='flex flex-1 justify-center cursor-pointer'>
+                          <span className='flex flex-1 justify-center cursor-pointer' onClick={() => { router.push(`/prompt/${items?.appId}`) }}>
                             <PieChartOutlined className='mr-[2px]' />
                             查看详情
                           </span>
