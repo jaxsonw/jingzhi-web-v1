@@ -28,6 +28,9 @@ const nextConfig = {
     images: {
       allowFutureImage: true
     }
+  },
+   compiler: {
+    styledComponents: true
   }
 }
 

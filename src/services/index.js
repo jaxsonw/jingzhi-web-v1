@@ -1,4 +1,4 @@
-import { fetchEventSource } from "@microsoft/fetch-event-source";
+// import { fetchEventSource } from "@microsoft/fetch-event-source";
 import request from '../utils/request'
 import { BASE_URL } from '../consts/env'
 import { getTokenKey } from '@/src/utils/localStorage'
