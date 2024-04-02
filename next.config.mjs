@@ -6,8 +6,8 @@
 const assetPrefix = {
   development: '',
   pre: '',
-  test: 'https://a.ew6.cn/testagicto',
-  prod: 'https://a.ew6.cn/agicto'
+  test: 'https://a.ew6.cn/agicto_test',
+  prod: 'https://a.ew6.cn/agicto_prod'
 }
 
 const nextConfig = {
