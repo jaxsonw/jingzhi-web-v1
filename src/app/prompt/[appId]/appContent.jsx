@@ -3,7 +3,7 @@ import { Button, Switch, Progress, Modal, Text } from '@nextui-org/react'
 import { message } from 'antd'
 
 import NProgress from 'nprogress'
-// import ChatConfig from './components/ChatConfig'
+import ChatConfig from './components/ChatConfig'
 import TextConfig from './components/TextConfig'
 import { getAppDetail, updateAppConfig } from '../../../services/promptService'
 import { remarkToKey } from '../../../utils/index'
@@ -79,16 +79,8 @@ export default function AppContent({ appId }) {
         </Modal>
       )}
       <div className="  w-full h-full md:max-w-[1400px]  m-auto shadow-lg rounded-2xl bg-[white]  ">
-        <TextConfig
-          getAllNewDetail={getAllNewDetail}
-          reloadDetail={reloadDetail}
-          setReloadDetail={setReloadDetail}
-          appDetail={appDetail}
-          newDetail={newDetail}
-          onSave={onSave}
 
-        />
-        {/* {appDetail?.type === 2 ? (
+        {appDetail?.type === 2 ? (
           <TextConfig
             getAllNewDetail={getAllNewDetail}
             reloadDetail={reloadDetail}
@@ -108,7 +100,7 @@ export default function AppContent({ appId }) {
             onSave={onSave}
 
           />
-        )} */}
+        )}
       </div>
     </div>
   )
