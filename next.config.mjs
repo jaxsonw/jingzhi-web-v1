@@ -11,8 +11,8 @@ import withSearch from './mdx/search.mjs'
 const assetPrefix = {
   development: '',
   pre: '',
-  test: 'https://a.ew6.cn/agicto-test',
-  prod: 'https://a.ew6.cn/agicto-prod'
+  test: 'https://a.ew6.cn/testagicto',
+  prod: 'https://a.ew6.cn/agicto'
 }
 
 const nextConfig = {
