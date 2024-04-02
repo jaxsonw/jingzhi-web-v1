@@ -122,7 +122,7 @@ const PromptModel = (props) => {
       getAppListData({
         cid: appListCid,
         filterType: 1,
-        keyword: "",
+        keywords: "",
         page: appListPage,
         pageSize: 9,
         type: ""

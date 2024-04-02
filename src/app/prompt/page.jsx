@@ -11,7 +11,7 @@ import { getAppList, getCateList } from '../../services/promptService'
 
 const CheckboxGroup = Checkbox.Group;
 
-const prompt = () => {
+const Prompt = () => {
   const [size, setSize] = useState('small');
   const [promptText, setPromptText] = useState('');
   const [openMobel, setOpenMobel] = useState(false);
@@ -66,7 +66,7 @@ const prompt = () => {
     getAppListData({
       cid: appListCid,
       filterType: 1,
-      keyword: appListSearch,
+      keywords: appListSearch,
       page: appListPage,
       pageSize: 9,
       type: ""
@@ -160,4 +160,4 @@ const prompt = () => {
 }
 
 
-export default prompt
+export default Prompt
