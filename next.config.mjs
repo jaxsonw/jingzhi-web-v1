@@ -1,8 +1,3 @@
-import nextMDX from '@next/mdx'
-import { recmaPlugins } from './mdx/recma.mjs'
-import { rehypePlugins } from './mdx/rehype.mjs'
-import { remarkPlugins } from './mdx/remark.mjs'
-import withSearch from './mdx/search.mjs'
 // import remarkGfm from 'remark-gfm'
 // import rehypePrism from '@mapbox/rehype-prism'
 
@@ -34,13 +29,13 @@ const nextConfig = {
   }
 }
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins,
-    rehypePlugins,
-    recmaPlugins
-  }
-})
+// const withMDX = nextMDX({
+//   extension: /\.mdx?$/,
+//   options: {
+//     remarkPlugins,
+//     rehypePlugins,
+//     recmaPlugins
+//   }
+// })
 
-export default withSearch(withMDX(nextConfig))
+export default nextConfig

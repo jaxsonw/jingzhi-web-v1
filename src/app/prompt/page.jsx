@@ -153,7 +153,6 @@ const Prompt = () => {
       >
         <p>调用模板，需要获取Access Key、Access Secret Key。具体使用方法请见调用文档。</p>
       </Modal>
-      {/* </Layout> */}
 
     </>
   )
