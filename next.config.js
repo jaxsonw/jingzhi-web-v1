@@ -1,8 +1,3 @@
-import nextMDX from '@next/mdx'
-import { recmaPlugins } from './mdx/recma.mjs'
-import { rehypePlugins } from './mdx/rehype.mjs'
-import { remarkPlugins } from './mdx/remark.mjs'
-import withSearch from './mdx/search.mjs'
 // import remarkGfm from 'remark-gfm'
 // import rehypePrism from '@mapbox/rehype-prism'
 
@@ -11,8 +6,8 @@ import withSearch from './mdx/search.mjs'
 const assetPrefix = {
   development: '',
   pre: '',
-  test: 'https://a.ew6.cn/testagicto',
-  prod: 'https://a.ew6.cn/agicto'
+  test: 'https://a.ew6.cn/agicto_test',
+  prod: 'https://a.ew6.cn/agicto_prod'
 }
 
 const nextConfig = {
@@ -29,18 +24,18 @@ const nextConfig = {
       allowFutureImage: true
     }
   },
-   compiler: {
+  compiler: {
     styledComponents: true
   }
 }
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins,
-    rehypePlugins,
-    recmaPlugins
-  }
-})
+// const withMDX = nextMDX({
+//   extension: /\.mdx?$/,
+//   options: {
+//     remarkPlugins,
+//     rehypePlugins,
+//     recmaPlugins
+//   }
+// })
 
-export default withSearch(withMDX(nextConfig))
+module.exports = nextConfig
