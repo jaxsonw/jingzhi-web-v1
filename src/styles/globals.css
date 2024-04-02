@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+}
+
+/* *::-webkit-scrollbar {
+    display: none;
+}
+
+*::-webkit-scrollbar-track {
+    display: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    display: none;
+} */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+button:focus {
+    outline: 0px dotted;
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+.ace_mobile-menu {
+    display: none !important;
+}
+
+ol {
+    list-style: outside;
+    padding-left: 20px;
+}
+
+ol li {
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+ol li::marker {
+    content: "";
+}
+
+.ace-terminal-theme .ace_comment {
+    color: #777;
+}
+
+pre {
+    white-space: break-spaces;
+
+}
+
+p {
+    width: 100%;
+    white-space: break-spaces;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+code {
+    white-space: break-spaces;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    position: relative;
+    /* width: 2px; */
+    /* height: 20px; */
+    /* background-color: #000; */
+}
+
+.blinking-cursor::after {
+    content: '';
+    position: absolute;
+    top: -13px;
+    left: 4px;
+    width: 2px;
+    height: 20px;
+    /* border-radius: 50%; */
+    background-color: #000;
+    opacity: 0;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.nextui-navbar-container {
+    max-width: 100% !important;
+}
+
+.nextui-button-text {
+    z-index: inherit !important;
+}
+
+.creator-index .nextui-grid-container {
+    height: 100%;
+}
+
+.app-setting-input .nextui-input-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.app-setting-input .nextui-input-main-container {
+    height: 35px;
+}
+
+.nextui-input-main-container {
+    height: 35px;
+}
+
+.nextui-input-container--normal {
+    height: 100% !important;
+}
+
+.config-textarea .nextui-input-wrapper {
+    height: 100% !important;
+}
+
+.config-textarea .nextui-input-textarea {
+    height: 100% !important;
+}
+
+.explore-item .nextui-avatar-text {
+    font-size: 36px !important;
+}
+
+
+.hero-bg-tag-list {
+    width: 60rem;
+    max-width: 90vw;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    gap: 2rem 0;
+    position: relative;
+    padding: 1.5rem 0;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loop-slider .inner {
+    display: flex;
+    width: fit-content;
+    animation-name: loop;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: var(--direction);
+    animation-duration: var(--duration);
+}
+
+.tag {
+    width: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0 0.2rem;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    background-color: #334155;
+    border-radius: 0.4rem;
+    padding: 0.7rem 1rem;
+    margin-right: 1rem;
+    box-shadow: 0 0.1rem 0.2rem rgb(0 0 0 / 20%),
+    0 0.1rem 0.5rem rgb(0 0 0 / 30%),
+    0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+
+
+}
+
+.tag span {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.fade {
+    pointer-events: none;
+    background: linear-gradient(90deg, #fff, transparent 30%, transparent 70%, #fff);
+    position: absolute;
+    inset: 0;
+}
+
+@keyframes loop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+li {
+    list-style: none;
+}
+
+.tag-select .ant-tag {
+    margin-right: 24px;
+    padding: 0 8px;
+    font-size: 14px;
+}
+

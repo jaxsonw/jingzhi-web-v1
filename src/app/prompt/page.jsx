@@ -105,15 +105,15 @@ const Prompt = () => {
           setAppListSearch={setAppListSearch}
         />,
       },
-      // {
-      //   label: 'Prompt优化',
-      //   key: '2',
-      //   children: <PromptTextarea
-      //     setPromptText={setPromptText}
-      //     promptText={promptText}
-      //   />,
-      //   disabled: true,
-      // }
+      {
+        label: 'Prompt优化',
+        key: '2',
+        children: <PromptTextarea
+          setPromptText={setPromptText}
+          promptText={promptText}
+        />,
+        disabled: true,
+      }
     ]
   return (
     <>

@@ -1,6 +1,10 @@
 import request from '../utils/request';
 import { BASE_URL } from "../consts/env";
 
+
+let timerOut = null
+let timerOutCount = 0
+let errorTryCount = 0
 /**
  * prompt文档
  * https://文档链接 https://note.youdao.com/s/7t3KS3Bg 
@@ -51,6 +55,10 @@ export const updateAppDialog = params => request.post(`${BASE_URL}/v1/service/up
 // 获取类别
 export const getCateList = params => request.post(`${BASE_URL}/v1/service/cateList`, params)
 
+// 模型列表
+
+export const getModelList = params => request.post(`${BASE_URL}/v1/service/site/modelList`, params)
+
 
 
 export const openAi = (data, options, oldCOntent = '') => {
@@ -63,7 +71,7 @@ export const openAi = (data, options, oldCOntent = '') => {
   let xtextContent = oldCOntent || ''
   // @ts-ignore;
   EventSource = SSE
-  var apiUrl = `https://api.ioii.cn/v1/chat/completions`
+  var apiUrl = `${BASE_URL}${data.path}`
   // const apiUrl = "https://api.openaixx.com/v1/inner/search";
   let params = {
     ...data,

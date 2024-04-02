@@ -79,7 +79,7 @@ export function Markdown(props) {
             )
           },
         }}
-        linkTarget={'_blank'}
+      // linkTarget={'_blank'}
       >
         {props.content}
       </ReactMarkdown>

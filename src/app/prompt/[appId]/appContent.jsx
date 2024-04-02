@@ -4,7 +4,7 @@ import { message } from 'antd'
 
 import NProgress from 'nprogress'
 // import ChatConfig from './components/ChatConfig'
-// import TextConfig from './components/TextConfig'
+import TextConfig from './components/TextConfig'
 import { getAppDetail, updateAppConfig } from '../../../services/promptService'
 import { remarkToKey } from '../../../utils/index'
 // import { toast } from 'react-toastify'
@@ -61,6 +61,7 @@ export default function AppContent({ appId }) {
     NProgress.start()
 
     const res = await getAppDetail({ appId })
+    console.log(res, 'res')
     NProgress.done()
     setAppDetail(res?.data)
   }
@@ -78,7 +79,15 @@ export default function AppContent({ appId }) {
         </Modal>
       )}
       <div className="  w-full h-full md:max-w-[1400px]  m-auto shadow-lg rounded-2xl bg-[white]  ">
+        <TextConfig
+          getAllNewDetail={getAllNewDetail}
+          reloadDetail={reloadDetail}
+          setReloadDetail={setReloadDetail}
+          appDetail={appDetail}
+          newDetail={newDetail}
+          onSave={onSave}
 
+        />
         {/* {appDetail?.type === 2 ? (
           <TextConfig
             getAllNewDetail={getAllNewDetail}

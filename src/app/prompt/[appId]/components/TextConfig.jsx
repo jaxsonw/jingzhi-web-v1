@@ -3,18 +3,18 @@ import React, { useEffect, useState, useRef, memo } from 'react'
 import { every, isEmpty } from 'lodash'
 import { toast as Toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
-import AppSetting from '@/components/workflowComponents/AppSetting'
+import AppSetting from '../../../../components/workflowComponents/AppSetting'
 import Debugger from './TextDebugger'
-import { getInputKeys, keyToRemark, remarkToKey } from '@/utils/index'
-import { openAi, updateApp } from '@/services/home'
-import { Markdown } from '@/components/Base/markdown'
+import { getInputKeys, keyToRemark, remarkToKey } from '../../../../utils/index'
+import { openAi, updateApp } from '../../../../services/promptService'
+import { Markdown } from '../../../../components/bacs/markdown'
 import copy from 'copy-to-clipboard'
-import { BASE_CDN_URL, QiNiuUploadImage } from '@/utils/qiniuTools'
+import { BASE_CDN_URL, QiNiuUploadImage } from '../../../../utils/qiniuTools'
 import AppConfig from './AppConfig'
 import Image from 'next/image'
-import ChatLogo from '/public/chat_logo.png'
-import { record as actionApi, latestRecordIdList } from '@/services/chat'
-import { getQiniuToken } from '@/services/user'
+// import ChatLogo from '/public/chat_logo.png'
+import { record as actionApi, latestRecordIdList } from '../../../../services/chat'
+import { getQiniuToken } from '../../../../services/user'
 const default_cue_word = `
 这是一段小红书文案专家示例词
 
@@ -380,7 +380,7 @@ const TextGenerate = ({ getAllNewDetail, appDetail, reloadDetail, setReloadDetai
                 <textarea
                   disabled={generateLoading}
                   value={cueWord}
-                  className="w-full flex h-full font-bold bg-[#f7f7f8]  text-md text-gray-900  p-5 pb-9 h-full outline-0"
+                  className="w-full flex h-full font-bold bg-[#f7f7f8]  text-md text-gray-900  p-5 pb-9 h-full outline-0 border-none"
                   onChange={e => {
                     setCueWord(e?.target?.value)
                     setChangeCueword(true)
@@ -479,7 +479,7 @@ const TextGenerate = ({ getAllNewDetail, appDetail, reloadDetail, setReloadDetai
           <div className="grow rounded-md mb-[20px] bg-[#EAEAEA] relative" style={{ flex: 'none', minHeight: resultHeight + 'px' }} >
             {!content ? (
               <div className="flex-col flex justify-center items-center h-full">
-                <Image src={ChatLogo} className="w-[100px] mb-2 mr-6" />
+                {/* <Image src={ChatLogo} className="w-[100px] mb-2 mr-6" /> */}
                 <div className="text-gray-400">
                   {' '}
                   下方输入您的问题

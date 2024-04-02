@@ -2,8 +2,8 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react'
 // import { Radio.Group, Radio, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react'
 import { Radio, Button, Popover } from "antd-xijing"
-import { Listbox, ListboxItem } from "@nextui-org/react";
-import { getCateList, getModelList } from '../../../../../services/home'
+// import { Listbox, ListboxItem } from "@nextui-org/react";
+import { getCateList, getModelList } from '../../../../services/promptService'
 
 
 const AppConfig = ({ appDetail, changeCueword, setChangeCueword }, ref) => {
@@ -30,7 +30,7 @@ const AppConfig = ({ appDetail, changeCueword, setChangeCueword }, ref) => {
 
   const getModules = async () => {
     const { data } = await getModelList({ sceneType: 3 })
-    setModelList(data)
+    setModelList(data?.recordList)
   }
 
   useImperativeHandle(ref, () => {
