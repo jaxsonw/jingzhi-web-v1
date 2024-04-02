@@ -7,14 +7,13 @@ import AppSetting from '../../../../components/workflowComponents/AppSetting'
 import { getInputKeys } from '../../../../utils/index'
 import { openAi, updateApp } from '../../../../services/promptService'
 import { latestRecordIdList } from '../../../../services/chat'
-import ChatModal from '../../../../app/chat/chatModal'
+import ChatModal from '../chat/chatModal'
 import { PulseLoader as Loading } from 'react-spinners'
 import Image from 'next/image'
 import ChatLogo from '/public/chat_logo.png'
 import AppConfig from './AppConfig'
-import { getQiniuToken } from '@/services/user'
-import { BASE_CDN_URL, QiNiuUploadImage } from '@/utils/qiniuTools'
-
+import { getQiniuToken } from '../../../../services/user'
+import { BASE_CDN_URL, QiNiuUploadImage } from '../../../../utils/qiniuTools'
 
 const TextGenerate = ({ getAllNewDetail, appDetail, reloadDetail, setReloadDetail, onSave, newDetail }) => {
   const messageRef = useRef()

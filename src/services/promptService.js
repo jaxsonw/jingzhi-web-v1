@@ -49,6 +49,16 @@ export const getMyAppDialog = params => request.post(`${BASE_URL}/v1/service/use
 // .创建应用会话
 export const createAppChat = params => request.post(`${BASE_URL}/v1/service/createAppDialog`, params)
 
+//  会话聊天记录
+export const getRecord = params => request.post(`${BASE_URL}/v1/service/chat/record`, params)
+
+/**
+ * dialogId
+ * .删除应用会话
+ * */
+export const deleteAppDialog = params => request.post(`${XIJING_API_URL}/v1/service/delAppDialog`, params)
+
+
 // .编辑&删除应用会话
 export const updateAppDialog = params => request.post(`${BASE_URL}/v1/service/updateAppDialog`, params)
 

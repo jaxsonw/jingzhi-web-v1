@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Layout, Tabs, Radio, Button, Checkbox, Spin, Dropdown, Input } from 'antd'
 import { isEmpty } from 'lodash'
 import { openAi } from '../../services/promptService'
-import { Markdown } from '../../components/bacs/markdown'
+import { Markdown } from '../base/markdown'
 
 const { TextArea } = Input;
 

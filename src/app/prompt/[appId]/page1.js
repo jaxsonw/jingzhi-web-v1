@@ -1,3 +1,6 @@
+
+
+
 "use client";
 
 import React, { useState, useEffect } from 'react'
@@ -6,7 +9,7 @@ import { useRouter, usePathname, useSearchParams, NextRequest } from 'next/navig
 import AppContent from './appContent'
 import { getUserAppList } from '../../../services/promptService'
 
-const AppList = ({params }) => {
+const AppList = ({ params }) => {
   const router = useRouter()
   const pathName = usePathname()
   const [appList, setAppList] = useState([])
@@ -39,6 +42,7 @@ const AppList = ({params }) => {
 
 
 
+
 // export function getServerSideProps(req) {
 //   return {
 //     props: {
@@ -48,8 +52,5 @@ const AppList = ({params }) => {
 //   }
 // }
 
-// export const getServerSideProps = async req => {
-//   return { props: { code: req.query.code || '', bindphone: req.query.bindphone || '' } }
-// }
 
 export default AppList

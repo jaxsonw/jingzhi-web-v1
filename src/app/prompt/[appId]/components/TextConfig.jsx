@@ -7,12 +7,12 @@ import AppSetting from '../../../../components/workflowComponents/AppSetting'
 import Debugger from './TextDebugger'
 import { getInputKeys, keyToRemark, remarkToKey } from '../../../../utils/index'
 import { openAi, updateApp } from '../../../../services/promptService'
-import { Markdown } from '../../../../components/bacs/markdown'
+import { Markdown } from '../../../../components/base/markdown'
 import copy from 'copy-to-clipboard'
 import { BASE_CDN_URL, QiNiuUploadImage } from '../../../../utils/qiniuTools'
 import AppConfig from './AppConfig'
 import Image from 'next/image'
-// import ChatLogo from '/public/chat_logo.png'
+import ChatLogo from '/public/chat_logo.png'
 import { record as actionApi, latestRecordIdList } from '../../../../services/chat'
 import { getQiniuToken } from '../../../../services/user'
 const default_cue_word = `
@@ -479,7 +479,7 @@ const TextGenerate = ({ getAllNewDetail, appDetail, reloadDetail, setReloadDetai
           <div className="grow rounded-md mb-[20px] bg-[#EAEAEA] relative" style={{ flex: 'none', minHeight: resultHeight + 'px' }} >
             {!content ? (
               <div className="flex-col flex justify-center items-center h-full">
-                {/* <Image src={ChatLogo} className="w-[100px] mb-2 mr-6" /> */}
+                <Image src={ChatLogo} className="w-[100px] mb-2 mr-6" />
                 <div className="text-gray-400">
                   {' '}
                   下方输入您的问题
