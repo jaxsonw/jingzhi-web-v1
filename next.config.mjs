@@ -11,8 +11,8 @@ import withSearch from './mdx/search.mjs'
 const assetPrefix = {
   development: '',
   pre: '',
-  test: 'https://a.ew6.cn/testagicto',
-  prod: 'https://a.ew6.cn/agicto'
+  test: 'https://a.ew6.cn/agicto-test',
+  prod: 'https://a.ew6.cn/agicto-prod'
 }
 
 const nextConfig = {
@@ -29,7 +29,7 @@ const nextConfig = {
       allowFutureImage: true
     }
   },
-   compiler: {
+  compiler: {
     styledComponents: true
   }
 }
