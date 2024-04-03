@@ -6,9 +6,9 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 // import Logo from '/public/logo.jpeg'
 import baseHooks from '../hooks/base'
-import { icon_logo_color } from "../../consts/img"
+import { icon_logo_color } from '../../consts/img'
 
-const hiddenPath = ['/space', "/login", "/code"]
+const hiddenPath = ['/space', '/login', '/code']
 
 const navigation = [
   { name: '首页', href: '/' },
@@ -16,7 +16,7 @@ const navigation = [
   { name: '调试平台', href: '/playground', target: '_self' },
   { name: 'Prompt工程', href: '/prompt', target: '_self' },
   { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
-  { name: '计费规则', href: '/docs/pricing', target: '_self' },
+  // { name: '计费规则', href: '/docs/pricing', target: '_self' },
   { name: 'Chat Code', href: '/code', target: '_self' }
 ]
 
@@ -53,7 +53,12 @@ const Header = () => {
           {navigation.map(item => {
             const isActive = item?.href === pathname
             return (
-              <a key={item.name} href={item.href} target={item?.target} className="text-sm flex flex-col  items-center font-semibold leading-6 text-gray-900 ">
+              <a
+                key={item.name}
+                href={item.href}
+                target={item?.target}
+                className="text-sm flex flex-col  items-center font-semibold leading-6 text-gray-900 "
+              >
                 <span className={`${isActive ? 'text-[#3162FF]' : ''}`}>{item.name}</span>
                 {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-[#3162FF]" /> : null}{' '}
               </a>
