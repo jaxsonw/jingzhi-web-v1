@@ -70,6 +70,14 @@ export const getCateList = params => request.post(`${BASE_URL}/v1/service/cateLi
 export const getModelList = params => request.post(`${BASE_URL}/v1/service/site/modelList`, params)
 
 
+// 钉钉 通知
+export const report = ({ content }) =>
+  request.post(`${BASE_URL}/v1/service/error/report`, {
+    content: {
+      ...content,
+      date: new Date(),
+    },
+  })
 
 export const openAi = (data, options, oldCOntent = '') => {
   let isCheckContent = false
@@ -87,11 +95,11 @@ export const openAi = (data, options, oldCOntent = '') => {
     ...data,
   }
   delete params.path
-
+  console.log(window.localStorage.getItem('open-key'), 'dadasdadada')
   const evtSource = new EventSource(apiUrl, {
     // @ts-ignore
     headers: {
-      Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      Authorization: 'Bearer ' + window.localStorage.getItem('open-key'),
       'Content-Type': 'application/json',
     },
     method: 'POST',

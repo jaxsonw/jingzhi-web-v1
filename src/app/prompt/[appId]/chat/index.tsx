@@ -69,7 +69,7 @@ const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
     getAppDialogList()
   }
 
-  const onDelete = async id => {
+  const onDelete = async (id: any) => {
     if (deleteDialogLoading) return
     setDeleteDialogLoading(true)
 

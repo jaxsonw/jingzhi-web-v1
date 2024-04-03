@@ -14,6 +14,8 @@ const PromptTextarea = (props) => {
   const { promptText, setPromptText } = props;
   const [keys, setKeys] = useState([])
   const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(false)
+
 
 
   const onTextChange = (e) => {
