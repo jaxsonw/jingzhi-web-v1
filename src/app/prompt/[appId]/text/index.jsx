@@ -65,6 +65,7 @@ const TextGenerate = ({ appDetail, appColor }) => {
       appId: appDetail?.appId,
       dialogId: 0,
       paramsList: keys,
+      model: 'gpt-3.5-turbo'
     }
 
     try {

@@ -45,13 +45,14 @@ const PromptTextarea = (props) => {
     //   return
     // }
 
-    // setLoading(true)
+    setLoading(true)
     // Router.push(`/app/${Router.query?.appId}?time=${new Date().getTime()}`)
     const params = {
       path: '/v1/service/apiAppGenerate',
       appId: '649d0349ce107',
       dialogId: 0,
       paramsList: keys,
+      model: 'gpt-3.5-turbo'
     }
 
     try {
@@ -90,7 +91,7 @@ const PromptTextarea = (props) => {
                 <span>{keys[0]?.key?.length}</span>
                 /1000
               </span>
-              <Button onClick={onGenerate} className='bg-[#fff]' type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
+              <Button onClick={onGenerate} loading={loading} className='bg-[#fff]' type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
             </span>
           </div>
         </div>
