@@ -6,12 +6,11 @@ import { FiMenu } from 'react-icons/fi'
 import { usePathname } from 'next/navigation'
 import { RiCustomerService2Line } from 'react-icons/ri'
 // import Logo from '/public/logo.jpeg'
-import CustomerModal from "./CustomerModal"
+import CustomerModal from './CustomerModal'
 import { title } from '../../../config.js'
 import baseHooks from '../hooks/base'
 import { icon_logo_white, icon_logo_color } from '../../consts/img'
-import { isPc } from "../../utils/index"
-
+import { isPc } from '../../utils/index'
 
 const hiddenPath = ['/space', '/login']
 
@@ -21,7 +20,7 @@ const navigation = [
   { name: '调试平台', href: '/playground', target: '_self' },
   { name: 'Prompt工程', href: '/prompt', target: '_self' },
   { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
-  { name: '计费规则', href: '/docs/pricing', target: '_self' },
+  // { name: '计费规则', href: '/docs/pricing', target: '_self' },
   { name: 'Chat Code', href: '/code', target: '_self' }
 ]
 
@@ -38,7 +37,6 @@ const Header = () => {
     }
   })
   if (!isShowHeader) return null
-
 
   return (
     <header className="bg-white w-full bg-[#3162FF]">
@@ -58,8 +56,9 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 target={item?.target}
-                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${isActive ? 'text-[#fff]' : ''
-                  }`}
+                className={`text-[16px] flex flex-col  items-center font-semibold leading-6 text-[rgba(255,255,255,0.5)] ${
+                  isActive ? 'text-[#fff]' : ''
+                }`}
               >
                 <span className={`${isActive ? 'text-[#fff]' : ''}`}>{item.name}</span>
                 {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-white" /> : null}{' '}
@@ -82,7 +81,7 @@ const Header = () => {
             </a>
           )}
         </div>
-        <FiMenu className='lg:hidden' onClick={() => setMobileMenuOpen(true)} />
+        <FiMenu className="lg:hidden" onClick={() => setMobileMenuOpen(true)} />
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-50" />
