@@ -61,7 +61,7 @@ const DetailLayout = ({ params: { appId } }) => {
 
       {/* <!-- Breadcrumb --> */}
       <nav
-        className="flex px-5 py-2 items-center  justify-between  text-gray-700 border border-gray-200   bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+        className="flex px-5 py-2 items-center  justify-between  text-gray-700 border border-gray-200   bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mt-[68px]"
         aria-label="Breadcrumb"
       >
         <ol className="inline-flex list-none	  items-center space-x-1 md:space-x-3">
