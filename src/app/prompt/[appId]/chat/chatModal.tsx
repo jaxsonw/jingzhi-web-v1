@@ -30,7 +30,7 @@ const ChatModal = ({ record, appDetail, messageRef, appColor, modelId, onReload 
       if (type === 3) {
         copy(item.content)
       }
-      toast.success(params[type]||'操作成功')
+      toast.success('操作成功')
     } else {
       toast.error('操作失败')
     }

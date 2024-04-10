@@ -28,7 +28,7 @@ export class QiNiuUploadImage {
 
   private readonly props: QiNiuUploadImageProps
   public abort: any
-  private inputDom
+  private inputDom: any
   private putExtra = {
     mimeType: filetypes.avatar,
   }
