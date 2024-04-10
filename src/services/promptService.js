@@ -1,6 +1,11 @@
 import request from '../utils/request';
 import { BASE_URL } from "../consts/env";
+import { violationContent } from './chat'
 
+
+let timerOut = null
+let timerOutCount = 0
+let errorTryCount = 0
 /**
  * prompt文档
  * https://文档链接 https://note.youdao.com/s/7t3KS3Bg 
@@ -45,13 +50,42 @@ export const getMyAppDialog = params => request.post(`${BASE_URL}/v1/service/use
 // .创建应用会话
 export const createAppChat = params => request.post(`${BASE_URL}/v1/service/createAppDialog`, params)
 
+//  会话聊天记录
+export const getRecord = params => request.post(`${BASE_URL}/v1/service/chat/record`, params)
+
+/**
+ * dialogId
+ * .删除应用会话
+ * */
+export const deleteAppDialog = params => request.post(`${BASE_URL}/v1/service/delAppDialog`, params)
+
+
 // .编辑&删除应用会话
 export const updateAppDialog = params => request.post(`${BASE_URL}/v1/service/updateAppDialog`, params)
 
 // 获取类别
 export const getCateList = params => request.post(`${BASE_URL}/v1/service/cateList`, params)
 
+// 模型列表
 
+export const getModelList = params => request.post(`${BASE_URL}/v1/service/site/modelList`, params)
+
+
+// 钉钉 通知
+export const report = ({ content }) =>
+  request.post(`${BASE_URL}/v1/service/error/report`, {
+    content: {
+      ...content,
+      date: new Date(),
+    },
+  })
+
+
+const checkContent = async params => {
+  if (!params?.text) return true
+  let res = await violationContent(params) 
+  return res?.data?.allow
+}
 
 export const openAi = (data, options, oldCOntent = '') => {
   let isCheckContent = false
@@ -63,17 +97,16 @@ export const openAi = (data, options, oldCOntent = '') => {
   let xtextContent = oldCOntent || ''
   // @ts-ignore;
   EventSource = SSE
-  var apiUrl = `https://api.ioii.cn/v1/chat/completions`
+  var apiUrl = `${BASE_URL}${data.path}`
   // const apiUrl = "https://api.openaixx.com/v1/inner/search";
   let params = {
     ...data,
   }
   delete params.path
-
   const evtSource = new EventSource(apiUrl, {
     // @ts-ignore
     headers: {
-      Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      Authorization: 'Bearer ' + window.localStorage.getItem('open-key'),
       'Content-Type': 'application/json',
     },
     method: 'POST',

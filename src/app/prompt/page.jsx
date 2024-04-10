@@ -8,6 +8,7 @@ import PromptTextarea from '../../components/prompt/PromptTextarea'
 import PromptModel from '../../components/prompt/PromptModel'
 
 import { getAppList, getCateList } from '../../services/promptService'
+import { getKeyList } from '../../services/key'
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -40,9 +41,18 @@ const Prompt = () => {
     }
   }
 
+  const getKeyListData = async () => {
+    const res = await getKeyList()
+    try {
+      if (res.data.recordList[0].openKey) localStorage.setItem('open-key', res.data.recordList[0].openKey)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     setAppListLoading(true)
-
+    getKeyListData()
     getAppListData({
       cid: "",
       filterType: 1,
@@ -105,15 +115,15 @@ const Prompt = () => {
           setAppListSearch={setAppListSearch}
         />,
       },
-      // {
-      //   label: 'Prompt优化',
-      //   key: '2',
-      //   children: <PromptTextarea
-      //     setPromptText={setPromptText}
-      //     promptText={promptText}
-      //   />,
-      //   disabled: true,
-      // }
+      {
+        label: 'Prompt优化',
+        key: '2',
+        children: <PromptTextarea
+          setPromptText={setPromptText}
+          promptText={promptText}
+        />,
+        disabled: true,
+      }
     ]
   return (
     <>

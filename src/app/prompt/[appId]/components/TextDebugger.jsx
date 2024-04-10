@@ -2,7 +2,7 @@ import React, { useEffect, useState, memo } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { cloneDeep } from 'lodash'
 import { Select } from 'antd-xijing'
-import { getModelList } from '@/services/home'
+import { getModelList } from '../../../../services/promptService'
 
 const Debugger = ({ generateLoading, fieldList, cueWord, onGenerate, setModelId, onReload }) => {
   const [inputFieldList, setInputFieldList] = useState([])
@@ -25,7 +25,8 @@ const Debugger = ({ generateLoading, fieldList, cueWord, onGenerate, setModelId,
 
   const getModules = async () => {
     const { data } = await getModelList({ sceneType: 3 })
-    const list = data.map(v => ({ ...v, value: v.modelId, label: v.modelName }))
+    const list = data?.recordList.map(v => ({ ...v, value: v.modelId, label: v.modelName }))
+
     setModelList(list)
   }
 
@@ -67,7 +68,7 @@ const Debugger = ({ generateLoading, fieldList, cueWord, onGenerate, setModelId,
     onReload()
     onGenerate(inputFieldList)
   }
-
+  console.log(modelList, 'modelList')
   return (
     <div className="relative grow h-full overflow-y-auto  py-4 px-6 bg-gray-50 flex flex-col">
       <div className="shrink-0">

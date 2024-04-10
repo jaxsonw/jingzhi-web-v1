@@ -1,6 +1,6 @@
 "use client";
 
-import React,{Fragment, useState, useEffect} from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import MobelTable from '../../components/common/ModelTable'
@@ -9,7 +9,7 @@ import { PRICE_HEADER } from '../../consts/modelheaderData'
 
 const Model = () => {
   const [typeData, setTypeData] = useState()
-  const [modelSelected, setModelSelected] = useState({typeName: '选择类型'})
+  const [modelSelected, setModelSelected] = useState({ typeName: '选择类型' })
   const [companySelected, setCompanySelected] = useState({ companyName: '选择服务商' })
   const [modelData, setModelData] = useState({})
 
@@ -17,7 +17,7 @@ const Model = () => {
 
   const init = async () => {
     const res = await getModelFilterList()
-   
+
 
     setTypeData(res?.data)
     // setModelSelected(res?.data?.modelTypeList[0])
@@ -26,26 +26,26 @@ const Model = () => {
   }
 
   const getModelData = async () => {
-     const modelData = await getModelList({
+    const modelData = await getModelList({
       companyId: companySelected?.companyId,
       typeId: modelSelected?.typeId
-     })
+    })
     setModelData(modelData?.data)
   }
 
   useEffect(() => {
-      init()
+    init()
   }, [])
 
   useEffect(() => {
-      getModelData()
+    getModelData()
   }, [modelSelected, companySelected])
   return (
     <div className="h-screen pt-[104px] lg:px-16">
       <h1 className="text-[30px] text-[#000B4D] pt-[33px] sm:flex sm:flex-auto sm:justify-center">大模型广场</h1>
       <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center">LARGEMMODEL HUB</h2>
       <div className="sm:flex pt-[22px]">
-         {/* <div className=" sm:flex flex-auto sm:justify-end  sm:flex-grow-[1.78]">
+        {/* <div className=" sm:flex flex-auto sm:justify-end  sm:flex-grow-[1.78]">
             <button className="w-[120px] h-[40px] mr-[23px] bg-[#fff] text-[#1A1A1A] border-2 border-[#98E2FF] rounded-full" >
               重要参数
             </button>
@@ -57,8 +57,9 @@ const Model = () => {
           <Listbox value={modelSelected} onChange={setModelSelected}>
             <div className="relative mt-1">
               <Listbox.Button
-                className="sm:flex sm:flex-auto  items-center w-[153px] h-[40px] mr-[21px] bg-[#fff] border-2  border-[#E4E4E4] hover:border-[#3162FF] text-[rgba(0, 0, 0, 0.65)] rounded-full"
-                // className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                style={{ border: '1px solid #E4E4E4' }}
+                className="sm:flex sm:flex-auto  items-center w-[153px] h-[40px] mr-[21px] bg-[#fff] border-2  border-[#E4E4E4] border-solid hover:border-[#3162FF] text-[rgba(0, 0, 0, 0.65)] rounded-full"
+              // className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
               >
                 <span className="sm:flex-grow-[1] truncate indent-4">{modelSelected?.typeName}</span>
                 <span className="pointer-events-none flex items-center pr-2">
@@ -80,9 +81,8 @@ const Model = () => {
                       {({ selected }) => (
                         <>
                           <span
-                            className={`block truncate ${
-                              selected ? 'text-[#3162FF]' : 'font-normal'
-                            }`}
+                            className={`block truncate ${selected ? 'text-[#3162FF]' : 'font-normal'
+                              }`}
                           >
                             {person.typeName}
                           </span>
@@ -102,8 +102,9 @@ const Model = () => {
           <Listbox value={companySelected} onChange={setCompanySelected}>
             <div className="relative mt-1">
               <Listbox.Button
+                style={{ border: '1px solid #E4E4E4' }}
                 className="sm:flex sm:flex-auto  items-center w-[153px] h-[40px]  bg-[#fff] border-2  border-[#E4E4E4] hover:border-[#3162FF] text-[rgba(0, 0, 0, 0.65)] rounded-full"
-                // className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+              // className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
               >
                 <span className="sm:flex-grow-[1] truncate indent-4">{companySelected?.companyName}</span>
                 <span className="pointer-events-none flex items-center pr-2">
@@ -125,13 +126,12 @@ const Model = () => {
                       {({ selected }) => (
                         <>
                           <span
-                            className={`block truncate ${
-                              selected ? 'text-[#3162FF]' : 'font-normal'
-                            }`}
+                            className={`block truncate ${selected ? 'text-[#3162FF]' : 'font-normal'
+                              }`}
                           >
                             {companyItem?.companyName}
                           </span>
-                        
+
                         </>
                       )}
                     </Listbox.Option>
