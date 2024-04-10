@@ -20,7 +20,6 @@ const DetailLayout = ({ params: { appId } }) => {
   const [appListLoading, setAppListLoading] = useState(false)
 
   const init = async () => {
-    console.log(appId, 'appId')
     setCurrentAppId(appId)
 
     if (!appId) return
@@ -64,7 +63,7 @@ const DetailLayout = ({ params: { appId } }) => {
         className="flex px-5 py-2 items-center  justify-between  text-gray-700 border border-gray-200   bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mt-[68px]"
         aria-label="Breadcrumb"
       >
-        <ol className="inline-flex list-none	  items-center space-x-1 md:space-x-3">
+        {/* <ol className="inline-flex list-none	  items-center space-x-1 md:space-x-3">
           <li className="inline-flex list-none	 items-center hover:text-[#3162FF] ">
             <a href="/" className="inline-flex  items-center text-sm font-medium text-gray-700  dark:text-gray-400 dark:hover:text-white">
               <svg aria-hidden="true" className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -168,14 +167,14 @@ const DetailLayout = ({ params: { appId } }) => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </a>
-        </div>
+        </div> */}
       </nav>
 
       <div className="flex">
         <div className="h-[calc(100vh_-_145px)] overflow-scroll flex-auto  rounded-md p-5">
           <div className="h-full">
-            {appDetail.type === 1 && <ChatModal appColor={appColor} loading={detailLoading} appDetail={appDetail} />}
-            {appDetail.type === 2 && <TextGenerate appColor={appColor} loading={detailLoading} appDetail={appDetail} />}
+            {appDetail.type === 1 && <ChatModal appId={appId} appColor={appColor} loading={detailLoading} appDetail={appDetail} />}
+            {appDetail.type === 2 && <TextGenerate appId={appId} appColor={appColor} loading={detailLoading} appDetail={appDetail} />}
           </div>
         </div>
       </div>

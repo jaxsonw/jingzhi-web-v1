@@ -13,9 +13,10 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 import '../styles/base.css'
-import './globals.css'
+// import './globals.css'
 import '../styles/globals.css'
 import '../styles/markdown.css'
+import '../styles/animation.css'
 
 // import '../styles/markdown.css'
 

@@ -1,5 +1,6 @@
 import request from '../utils/request';
 import { BASE_URL } from "../consts/env";
+import { violationContent } from './chat'
 
 
 let timerOut = null
@@ -56,7 +57,7 @@ export const getRecord = params => request.post(`${BASE_URL}/v1/service/chat/rec
  * dialogId
  * .删除应用会话
  * */
-export const deleteAppDialog = params => request.post(`${XIJING_API_URL}/v1/service/delAppDialog`, params)
+export const deleteAppDialog = params => request.post(`${BASE_URL}/v1/service/delAppDialog`, params)
 
 
 // .编辑&删除应用会话
@@ -78,6 +79,13 @@ export const report = ({ content }) =>
       date: new Date(),
     },
   })
+
+
+const checkContent = async params => {
+  if (!params?.text) return true
+  let res = await violationContent(params) 
+  return res?.data?.allow
+}
 
 export const openAi = (data, options, oldCOntent = '') => {
   let isCheckContent = false
@@ -118,6 +126,8 @@ export const openAi = (data, options, oldCOntent = '') => {
   evtSource.onopen = function () {}
 
   evtSource.onmessage = async function (e) {
+            console.log(e?.data, 'e?.data')
+
     clearInterval(timerOut)
     timerOutCount = 0
     needTimeOut = false

@@ -5,6 +5,7 @@ import { Layout, Tabs, Radio, Button, Checkbox, Spin, Dropdown, Input } from 'an
 import { isEmpty } from 'lodash'
 import { openAi } from '../../services/promptService'
 import { Markdown } from '../base/markdown'
+import { copyValue } from '../../utils/index'
 
 const { TextArea } = Input;
 
@@ -111,8 +112,8 @@ const PromptTextarea = (props) => {
           <div className='flex items-center justify-between mt-[8px]'>
             <span>本次消耗Token数为：</span>
             <span>
-              <Button type="primary" size={'small'} className='mr-[4px]'>复制</Button>
-              <Button type="primary" size={'small'}>保存为模版</Button>
+              <Button type="primary" size={'small'} className='mr-[4px]' disabled={isEmpty(content)} onClick={() => copyValue(content)} >复制</Button>
+              {/* <Button type="primary" size={'small'} disabled={isEmpty(content)} >保存为模版</Button> */}
             </span>
           </div>
         </div>

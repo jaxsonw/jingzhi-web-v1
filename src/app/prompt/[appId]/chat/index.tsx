@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Button, Progress } from '@nextui-org/react'
 import { PulseLoader as Loading } from 'react-spinners'
 import { Dialog } from '@headlessui/react'
-import Router from 'next/router'
+import Router from 'next/navigation'
 import Avatar from 'react-avatar'
 import ChatModal from './chatModal'
 import { getMyAppDialog, getRecord, deleteAppDialog, createAppChat, openAi } from '../../../../services/promptService'
@@ -16,13 +16,14 @@ interface ChatProps {
   appDetail: any
   loading: boolean
   appColor: string
+  appId: any
 }
 
-const CHAT_URL = '/v1/service/chat/generate'
-
-const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
+// const CHAT_URL = '/v1/service/chat/generate'
+const CHAT_URL = '/v1/service/apiAppGenerate'
+const Chat = ({ appId, appColor, loading, appDetail }: ChatProps) => {
   const router = useRouter()
-
+  console.log(appId, 'appId')
   const configList = appDetail?.config?.fieldList
 
   const newDialog: any = {
@@ -136,11 +137,12 @@ const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
   }
 
   const onSend = () => {
-    const userInfo = localStorage.getItem('userInfo') || '{}'
-    if (!JSON.parse(userInfo)?.mobile) {
-      showConfirm()
-      return
-    }
+    // const userInfo = localStorage.getItem('userInfo') || '{}'
+    // console.log(userInfo, 'userInfo')
+    // if (!JSON.parse(userInfo)?.mobile) {
+    //   showConfirm()
+    //   return
+    // }
 
     if (!input || generateLoading) return
     setGenerateLoading(true)
@@ -156,8 +158,7 @@ const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
       content: '',
       isAnswer: true,
     }
-    Router.push(`/app/${Router.query?.appId}?time=${new Date().getTime()}`)
-
+    router.push(`/prompt/${appId}?time=${new Date().getTime()}`)
     const list = [...appRecord, sendData, answerData]
     setAppRecord(JSON.parse(JSON.stringify(list)))
     const paramsData = {
@@ -166,6 +167,8 @@ const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
       dialogId: currentDialog.dialogId,
       message: input,
       paramsList: currentDialog.paramsList,
+      model: 'gpt-3.5-turbo'
+
     }
 
     try {
@@ -235,7 +238,7 @@ const Chat = ({ appColor, loading, appDetail }: ChatProps) => {
   return (
     <>
       <div className="flex h-full  overflow-y-auto">
-        <div className="h-full  hidden  md:block  w-1/5 overflow-scroll border-box shrink-0 flex flex-col bg-white pc:w-[244px] tablet:w-[192px] mobile:w-[240px]  border-r border-gray-200  ">
+        <div className="h-full  hidden  md:block  w-1/4 overflow-scroll border-box shrink-0 flex flex-col bg-white pc:w-[244px] tablet:w-[192px] mobile:w-[240px]  border-r border-gray-200  ">
           <div className="my-4 px-4 flex items-center space-x-3">
             <div className="w-[45px] h-[45px] flex items-center justify-center explore-item flex-none overflow-hidden rounded-lg   bg-white p-1">
               <Avatar

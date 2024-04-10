@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react'
-import { Button, Input, Modal } from 'antd-xijing'
+import { Button, Input, Modal } from 'antd'
 
 import { every, isEmpty } from 'lodash'
 import Avatar from 'react-avatar'
@@ -11,13 +11,13 @@ import { openAi } from '../../../../services/promptService'
 import { Markdown } from '../../../../components/base/markdown'
 import copy from 'copy-to-clipboard'
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 
 
 const { TextArea } = Input
 
-const TextGenerate = ({ appDetail, appColor }) => {
+const TextGenerate = ({ appId, appDetail, appColor }) => {
   const messageRef = useRef()
 
   const [loading, setLoading] = useState(false)
@@ -44,11 +44,11 @@ const TextGenerate = ({ appDetail, appColor }) => {
   }
 
   const onGenerate = () => {
-    const userInfo = localStorage.getItem('userInfo') || '{}'
-    if (Object.keys(JSON.parse(userInfo)) && !JSON.parse(userInfo)?.mobile) {
-      showConfirm()
-      return
-    }
+    // const userInfo = localStorage.getItem('userInfo') || '{}'
+    // if (Object.keys(JSON.parse(userInfo)) && !JSON.parse(userInfo)?.mobile) {
+    //   showConfirm()
+    //   return
+    // }
 
     const allValuesNotEmpty = every(keys, obj => {
       return every(obj, value => !isEmpty(value))
@@ -59,9 +59,11 @@ const TextGenerate = ({ appDetail, appColor }) => {
     }
 
     setLoading(true)
-    router.push(`/app/${router.query?.appId}?time=${new Date().getTime()}`)
+    router.push(`/prompt/${appId}?time=${new Date().getTime()}`)
+
     const params = {
-      path: '/v1/service/text/generate',
+      // path: '/v1/service/text/generate',
+      path: '/v1/service/apiAppGenerate',
       appId: appDetail?.appId,
       dialogId: 0,
       paramsList: keys,
@@ -125,7 +127,7 @@ const TextGenerate = ({ appDetail, appColor }) => {
     messageRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [content])
 
-  console.log('keys', keys)
+  console.log('appDetail', appDetail)
 
   return (
     <div className="flex h-full flex-col md:flex-row overflow-y-auto">
@@ -192,8 +194,9 @@ const TextGenerate = ({ appDetail, appColor }) => {
             <Button className="mr-2" onClick={onClear}>
               清空内容
             </Button>
-            <Button loading={loading} onClick={onGenerate} disabled={loading} type="primary">
-              <span className="font-bold text-md">运行</span>
+            <Button style={{ backgroungColor: '#1677ff' }} className='bg-[#1677ff]' type="primary" loading={loading} onClick={onGenerate} disabled={loading} >
+              运行
+              {/* <span className="font-bold text-md"></span> */}
             </Button>
           </div>
         </div>
