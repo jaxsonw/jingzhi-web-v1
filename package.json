@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "1.18.4",
+    "@ant-design/icons": "^5.3.6",
     "@headlessui/react": "^1.7.18",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.1.1",
