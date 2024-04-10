@@ -29,6 +29,7 @@
     "antd-xijing": "1.0.4",
     "axios": "^1.6.5",
     "clsx": "^2.1.0",
+    "copy-to-clipboard": "^3.3.3",
     "css-loader": "^6.9.1",
     "date-fns": "^3.3.1",
     "echarts": "^5.4.3",
