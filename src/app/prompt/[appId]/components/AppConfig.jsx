@@ -94,7 +94,6 @@ const AppConfig = ({ appDetail, changeCueword, setChangeCueword }, ref) => {
           onChange={(e) => {
             setOpenPrompt(e?.target?.value)
             setChangeCueword(true)
-            console.log("e", e)
           }}
           value={openPrompt}
         // onValueChange={(v) => {

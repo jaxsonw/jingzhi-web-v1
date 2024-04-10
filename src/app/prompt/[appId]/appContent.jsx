@@ -61,7 +61,6 @@ export default function AppContent({ appId }) {
     NProgress.start()
 
     const res = await getAppDetail({ appId })
-    console.log(res, 'res')
     NProgress.done()
     setAppDetail(res?.data)
   }

@@ -23,7 +23,6 @@ interface ChatProps {
 const CHAT_URL = '/v1/service/apiAppGenerate'
 const Chat = ({ appId, appColor, loading, appDetail }: ChatProps) => {
   const router = useRouter()
-  console.log(appId, 'appId')
   const configList = appDetail?.config?.fieldList
 
   const newDialog: any = {
@@ -180,7 +179,6 @@ const Chat = ({ appId, appColor, loading, appDetail }: ChatProps) => {
           setAppRecord(JSON.parse(JSON.stringify(list)))
         },
         onEnd: async (data: { content: any }) => {
-          console.log('end', data)
           setGenerateLoading(false)
           const newMsg = data?.content
           list[list.length - 1].content = newMsg
@@ -411,7 +409,7 @@ const Chat = ({ appId, appColor, loading, appDetail }: ChatProps) => {
                 }}
               >
                 {generateLoading ? (
-                  <Loading color="#36d7b7" size="sm" />
+                  <Loading color="#fff" size="sm" />
                 ) : (
                   <span className="text-[white] text-sm whitespace-pre-line flex">发送</span>
                 )}

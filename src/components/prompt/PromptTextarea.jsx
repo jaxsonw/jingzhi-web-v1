@@ -24,7 +24,6 @@ const PromptTextarea = (props) => {
     const indexItem = {
       'key': e?.target?.value,
     }
-    console.log(indexItem, 'indexItem')
     list[0] = indexItem
     setKeys(list)
 
@@ -76,9 +75,7 @@ const PromptTextarea = (props) => {
     }
   }
 
-  console.log(keys, 'keys')
 
-  //649d0349ce107
   return (
     <div className='bg-[#fff] rounded-xl p-[24px] h-[70vh] flex justify-between'>
       <div className='h-[100%] w-[49%]'>

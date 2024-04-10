@@ -103,7 +103,6 @@ export const openAi = (data, options, oldCOntent = '') => {
     ...data,
   }
   delete params.path
-  console.log(window.localStorage.getItem('open-key'), 'dadasdadada')
   const evtSource = new EventSource(apiUrl, {
     // @ts-ignore
     headers: {
@@ -126,8 +125,6 @@ export const openAi = (data, options, oldCOntent = '') => {
   evtSource.onopen = function () {}
 
   evtSource.onmessage = async function (e) {
-            console.log(e?.data, 'e?.data')
-
     clearInterval(timerOut)
     timerOutCount = 0
     needTimeOut = false

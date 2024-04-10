@@ -43,7 +43,6 @@ const Prompt = () => {
 
   const getKeyListData = async () => {
     const res = await getKeyList()
-    console.log(res, 'res')
     try {
       if (res.data.recordList[0].openKey) localStorage.setItem('open-key', res.data.recordList[0].openKey)
     } catch (err) {

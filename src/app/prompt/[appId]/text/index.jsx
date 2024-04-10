@@ -127,8 +127,6 @@ const TextGenerate = ({ appId, appDetail, appColor }) => {
     messageRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [content])
 
-  console.log('appDetail', appDetail)
-
   return (
     <div className="flex h-full flex-col md:flex-row overflow-y-auto">
       <section className="max-w-full md:w-1/3 p-4 rounded-l-2xl shrink-0 relative flex flex-col pb-10 md:h-full border-r border-gray-100 bg-white">

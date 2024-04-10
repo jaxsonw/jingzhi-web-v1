@@ -209,7 +209,7 @@ const PromptModel = (props) => {
           <Radio.Group onChange={handleCitChange} value={appListCid}>
             {
               tabList?.map((item) => {
-                return (<Radio value={item?.value}>{item?.label}</Radio>)
+                return (<Radio key={item?.value} value={item?.value}>{item?.label}</Radio>)
               })
             }
 
