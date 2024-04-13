@@ -33,6 +33,9 @@ export const PRICE_HEADER = [
         name: '模型名称',  
     },
     {
+        name: 'API调用',  
+    },
+    {
         name: '作者/开发商',  
     },
     {

@@ -15,7 +15,6 @@ const CheckboxGroup = Checkbox.Group;
 const Prompt = () => {
   const [size, setSize] = useState('small');
   const [promptText, setPromptText] = useState('');
-  const [openMobel, setOpenMobel] = useState(false);
   // const [appListParams, setAppListParams] = useState();
   const [appListPage, setAppListPage] = useState(1);
   const [appListCid, setAppListCid] = useState('');
@@ -83,14 +82,7 @@ const Prompt = () => {
     })
   }, [appListPage, appListCid, appListSearch])
 
-  const openMobelClick = () => {
-    setOpenMobel(true)
-  }
 
-  const handleOpenCancel = () => {
-    setOpenMobel(false)
-
-  }
 
 
 
@@ -106,7 +98,6 @@ const Prompt = () => {
           setAppListLoading={setAppListLoading}
           setAppListPage={setAppListPage}
           setAppListCid={setAppListCid}
-          openMobelClick={openMobelClick}
           getAppListData={getAppListData}
           cateList={cateList}
           appListCid={appListCid}
@@ -156,13 +147,7 @@ const Prompt = () => {
         />
         {/* </Layout> */}
       </div>
-      <Modal
-        title="模版调用"
-        open={openMobel}
-        onCancel={handleOpenCancel}
-      >
-        <p>调用模板，需要获取Access Key、Access Secret Key。具体使用方法请见调用文档。</p>
-      </Modal>
+
 
     </>
   )

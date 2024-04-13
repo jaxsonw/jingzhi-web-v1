@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { Button,  message } from 'antd'
+import { Button, message } from 'antd'
 import Selector from './components/Selector'
 import { chatCode, getModel } from '../../services/index'
 import { browser, copyValue } from '../../utils/index'
@@ -13,7 +13,7 @@ import { navList, pl, CodeEdit } from './consts'
 
 const Index = () => {
   const [msg, setMessage] = useState('')
-   const [code, setCode] = useState('')
+  const [code, setCode] = useState('')
   const [language, setLanguage] = useState('javascript')
   const [method, setMethod] = useState('1')
   const [loading, setLoading] = useState(false)
@@ -27,9 +27,8 @@ const Index = () => {
   const getModelList = async () => {
     const res = await getModel({})
     if (res.code === 0) {
-      console.log(res)
-      if(res.data.recordList && res.data.recordList.length > 0) {
-        setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName})))
+      if (res.data.recordList && res.data.recordList.length > 0) {
+        setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName })))
         const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
         setModel(defaultValue || res.data.recordList[0].apiModelName)
       }
@@ -39,7 +38,6 @@ const Index = () => {
     getModelList()
   }, [])
   const copy = () => {
-    copyValue(code)
     message.success('复制成功')
   }
 
@@ -78,11 +76,9 @@ const Index = () => {
 
         }
       }).then(res => {
-        console.log(res)
         setLoading(false)
       })
     } catch (e) {
-      console.log(e)
       setCode('')
       setLoading(false)
       message.info('请再试一次')
@@ -96,7 +92,7 @@ const Index = () => {
   const onClickMenu = (menu) => {
     setCurrentMenu(menu.type)
     setCollapse(true)
-    if(msg) {
+    if (msg) {
       submit()
     }
   }
@@ -107,9 +103,9 @@ const Index = () => {
         <div className="flex">
           {mobile ?
             <button onClick={() => setCollapse(!collapse)} type="button"
-                    className="mr-[1rem]">
+              className="mr-[1rem]">
               <svg t="1710999362926" className="icon" viewBox="0 0 1024 1024" version="1.1"
-                   xmlns="http://www.w3.org/2000/svg" p-id="23240" width="16" height="16">
+                xmlns="http://www.w3.org/2000/svg" p-id="23240" width="16" height="16">
                 <path
                   d="M66.488889 211.781818h891.022222c28.198788 0 50.980202-22.238384 50.980202-49.648485 0-27.397172-22.768485-49.648485-50.980202-49.648485H66.488889C38.341818 112.484848 15.508687 134.723232 15.508687 162.133333s22.833131 49.648485 50.980202 49.648485z m891.009293 248.242424H66.488889C38.277172 460.024242 15.508687 482.262626 15.508687 509.672727s22.768485 49.648485 50.980202 49.648485h891.022222c28.198788 0 50.980202-22.238384 50.980202-49.648485-0.012929-27.410101-22.923636-49.648485-50.993131-49.648485z m0 351.63798H66.488889c-28.134141 0-50.980202 22.238384-50.980202 49.648485s22.833131 49.648485 50.980202 49.648485h891.022222c28.198788 0 50.980202-22.238384 50.980202-49.648485-0.012929-27.397172-22.781414-49.648485-50.993131-49.648485z m0 0"
                   p-id="23241" fill="#ffffff"></path>
@@ -119,10 +115,10 @@ const Index = () => {
           <div className="lg:w-64 md:w-64 sm:w-64 xs:42 ml-[10px]">
             <Selector options={modelList} defaultValue={model ? modelList.find(item => item.id === model) : modelList[0]} placeholder="请选择模型" onChange={(v) => {
               setModel(v.id)
-              if(msg) {
+              if (msg) {
                 submit()
               }
-            }}/>
+            }} />
           </div>
         </div>
         <div>
@@ -172,10 +168,10 @@ const Index = () => {
             </div>
             {
               !mobile && <button onClick={() => setCollapse(!collapse)} type="button"
-                                 className="absolute right-[-2.6rem] top-[35%] z-[999] shrink-0 border-neutral-800 p-[0.2rem] border rounded-r-[3rem]">
+                className="absolute right-[-2.6rem] top-[35%] z-[999] shrink-0 border-neutral-800 p-[0.2rem] border rounded-r-[3rem]">
                 <svg t="1710988174253" viewBox="0 0 1024 1024" version="1.1"
-                     xmlns="http://www.w3.org/2000/svg" p-id="21305" width="32" height="32"
-                     className={`icon ${collapse ? 'transform rotate-180' : ''}`}>
+                  xmlns="http://www.w3.org/2000/svg" p-id="21305" width="32" height="32"
+                  className={`icon ${collapse ? 'transform rotate-180' : ''}`}>
                   <path
                     d="M631.04 161.941333a42.666667 42.666667 0 0 1 63.061333 57.386667l-2.474666 2.730667-289.962667 292.245333 289.706667 287.402667a42.666667 42.666667 0 0 1 2.730666 57.6l-2.474666 2.752a42.666667 42.666667 0 0 1-57.6 2.709333l-2.752-2.474667-320-317.44a42.666667 42.666667 0 0 1-2.709334-57.6l2.474667-2.752 320-322.56z"
                     fill="#ffffff" p-id="21306"></path>
@@ -201,7 +197,7 @@ const Index = () => {
             </div>
             <div className="flex justify-center">
               <Button type="primary" style={{ background: '#3162FF' }} loading={loading}
-                      onClick={submit}>发送</Button>
+                onClick={submit}>发送</Button>
             </div>
           </div>
         </div>

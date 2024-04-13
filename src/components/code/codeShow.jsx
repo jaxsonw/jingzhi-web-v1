@@ -18,24 +18,28 @@ const CodeEdit = ({ onChange, ...other }) => {
         style={{
           height: '100%',
           width: '100%',
-          minHeight: '300px',
-          backgroundColor: 'rgb(23 23 23/var(--tw-bg-opacity))'
+          minHeight: '400px',
+          padding: '16px'
+          // backgroundColor: 'rgb(23 23 23/var(--tw-bg-opacity))'
         }}
         wrapEnabled={true}
-        mode="markdown"
+        mode="javascript"
         theme="terminal"
         showPrintMargin={false} // 右侧的竖线
         fontSize={14}
         onChange={onChange}
+        readOnly={true}
+        enableSnippets={true}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
+
         setOptions={{
           enableBasicAutocompletion: false,
           enableLiveAutocompletion: false,
           enableSnippets: true,
           showLineNumbers: true,
           wrap: true,
-          copy: false,
+          copyWithEmptySelection: true,
           showFoldWidgets: false, // 显示折叠小三角
           displayIndentGuides: false // 显示缩进辅助线
         }}
