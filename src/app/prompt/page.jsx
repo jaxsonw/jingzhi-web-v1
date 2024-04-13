@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react'
-import { Layout, Tabs, Radio, Button, Checkbox, Spin, Dropdown, Input, Tooltip, Modal, Pagination } from 'antd'
-// import { Layout, Select, Form, Input } from 'antd'
+import { Tabs } from 'antd'
 
 import PromptTextarea from '../../components/prompt/PromptTextarea'
 import PromptModel from '../../components/prompt/PromptModel'
@@ -10,12 +9,9 @@ import PromptModel from '../../components/prompt/PromptModel'
 import { getAppList, getCateList } from '../../services/promptService'
 import { getKeyList } from '../../services/key'
 
-const CheckboxGroup = Checkbox.Group;
 
 const Prompt = () => {
-  const [size, setSize] = useState('small');
   const [promptText, setPromptText] = useState('');
-  // const [appListParams, setAppListParams] = useState();
   const [appListPage, setAppListPage] = useState(1);
   const [appListCid, setAppListCid] = useState('');
   const [appListSearch, setAppListSearch] = useState('');
@@ -32,9 +28,6 @@ const Prompt = () => {
     if (res.code === 0) {
       if (res.data.recordList && res.data.recordList.length > 0) {
         setAppListLoading(false)
-
-        // setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName })))
-        // const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
         setAppList(res.data)
       }
     }

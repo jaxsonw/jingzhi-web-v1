@@ -60,9 +60,6 @@ const PromptModel = (props) => {
     if (res.code === 0) {
       if (res.data.recordList) {
         setAppListLoading(false)
-
-        // setModelList(res.data.recordList.map(item => ({ id: item.apiModelName, name: item.apiModelName })))
-        // const defaultValue = res.data.recordList.find(item => item.apiModelName === 'gemma-7b-it')?.apiModelName
         setAppList(res.data)
       }
     }

@@ -6,7 +6,6 @@ import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/mode-markdown'
 import 'ace-builds/src-noconflict/theme-terminal' // monokai的主题样式
 import 'ace-builds/src-noconflict/ext-language_tools'
-// import 'ace-builds/webpack-resolver'
 
 const CodeEdit = ({ onChange, ...other }) => {
   function change(newValue) {
