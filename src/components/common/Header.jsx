@@ -17,8 +17,7 @@ const navigation = [
   { name: 'Prompt工程', href: '/prompt', target: '_self' },
   { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
   // { name: '计费规则', href: '/docs/pricing', target: '_self' },
-  { name: 'Chat Code', href: '/code', target: '_self' },
-  { name: '发票申请', href: '/invoice', target: '_self' }
+  { name: 'Chat Code', href: '/code', target: '_self' }
 ]
 
 const Header = () => {
