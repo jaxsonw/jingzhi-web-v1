@@ -1,5 +1,13 @@
+import Image from 'next/image'
+import Img1 from './assets/newplot.png'
+import Img2 from './assets/newplot (1).png'
+import Img3 from './assets/newplot (2).png'
+import Img4 from './assets/newplot (3).png'
+
+import './page.css'
+
 const HTML = `
-<div class="svelte-1bvc1p0"> <div class="table-wrap svelte-1bvc1p0" role="grid" tabindex="0" style="height: 700px; --cell-width-0: 70px; --cell-width-1: 189px; --cell-width-2: 99px; --cell-width-3: 99px; --cell-width-4: 89px; --cell-width-5: 129px; --cell-width-6: 149px; --cell-width-7: 99px;"><table class="svelte-1bvc1p0 fixed-layout"> <thead class="svelte-1bvc1p0"><tr class="svelte-1bvc1p0">
+<div class="svelte-1bvc1p0"> <div class="table-wrap svelte-1bvc1p0" role="grid" tabindex="0" style="height: auto; --cell-width-0: 70px; --cell-width-1: 189px; --cell-width-2: 99px; --cell-width-3: 99px; --cell-width-4: 89px; --cell-width-5: 129px; --cell-width-6: 149px; --cell-width-7: 99px;"><table class="svelte-1bvc1p0 fixed-layout"> <thead class="svelte-1bvc1p0"><tr class="svelte-1bvc1p0">
 
 
 
@@ -66,7 +74,7 @@ export default function Page() {
         margin: '0 auto'
       }}
     >
-      <h1 className="font-bold text-[25px]">大模型排行榜</h1>
+      <h1 className="font-bold text-[22px]">大模型排行榜</h1>
       <div
         style={{
           paddingTop: 20
@@ -75,6 +83,17 @@ export default function Page() {
           __html: HTML
         }}
       ></div>
+      <div className="font-bold text-[18px] mb-5 mt-8">模型A在所有非平局的A对B战斗中获胜的分数</div>
+      <Image src={Img1} width={930} alt="" />
+      <div className="font-bold text-[18px] mb-5">每个模型组合的战斗计数（无平局）</div>
+
+      <Image src={Img2} width={930} alt="" />
+      <div className="font-bold text-[18px] mb-5">模型强度的置信区间（通过自举）</div>
+
+      <Image src={Img3} width={930} alt="" />
+      <div className="font-bold text-[18px] mb-5">相对于所有其他模型的平均胜率（假设均匀采样且无平局）</div>
+
+      <Image src={Img4} width={930} alt="" />
     </div>
   )
 }
