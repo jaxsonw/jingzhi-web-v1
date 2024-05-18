@@ -134,7 +134,7 @@ export default function About() {
                     <div>
                       <h3 className="mt-8 font-semibold text-gray-900">第一阶段: 构建 AI 基础设施</h3>
                       <p className="mt-2">
-                        我们提供40+主流模型调用服务，并搭建了模型调用、API Key管理、计费和token统计系统：
+                        我们提供50+主流模型调用服务，并搭建了模型调用、API Key管理、计费和token统计系统：
                       </p>
                       <ul className="mt-4 space-y-2 text-gray-600">
                         <li>- 调用统计: 分析调用数据</li>
