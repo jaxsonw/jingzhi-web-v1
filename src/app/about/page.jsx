@@ -2,6 +2,7 @@
 'use client'
 import { useRef } from 'react'
 import InView from '../../components/Base/inView'
+import Footer from '@/src/components/common/Footer'
 
 const ComplateIcon = ({ className }) => (
   <svg
@@ -57,6 +58,7 @@ const PlanIcon = ({ className }) => (
 export default function About() {
   const listRef = useRef(null)
   return (
+    <>
     <div ref={listRef} className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
       <InView containerRef={listRef}>
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -85,7 +87,7 @@ export default function About() {
               </InView>
               <InView containerRef={listRef}>
                 <p className="mt-6 text-base leading-8 text-gray-700">
-                  在 AGICTO，我们相信人工智能，尤其是大型语言模型（LLM），具有增强人类能力的变革力量。我们的使命是让 LLM 应用程序开发变得容易、高效、惠及所有人。我们努力为开发人员提供一套集成工具，简化 LLM 系统的创建和部署，确保人人都能享受到这些技术的好处，并为人类进步做出积极贡献。
+                    在 AGICTO，我们坚信人工智能，特别是大型语言模型（LLM），具有提升人类能力的变革力量。我们的使命是让 LLM 应用程序的开发变得简单、高效，并惠及所有人。我们致力于为开发者提供一套集成工具，以简化 LLM 系统的创建和部署，确保每个人都能享受到这些技术带来的好处，从而为人类进步做出积极贡献。
                 </p>
               </InView>
             </div>
@@ -95,7 +97,7 @@ export default function About() {
               </InView>
               <InView containerRef={listRef}>
                 <p className="mt-6 text-base leading-8 text-gray-700">
-                  我们的目标是赋能100万大模型开发者，提供一个强大而灵活的LLM框架和平台，显著降低开发门槛，大幅提升开发效率，帮助他们轻松创建和部署高质量、可扩展的应用，重塑人工智能的应用格局。同时，我们也致力于助力传统企业实现数字化转型，与他们密切合作，提供定制化解决方案，利用大模型技术实现业务创新、增长和升级。
+                    我们的愿景是赋能百万开发者和企业,让他们轻松驾驭大模型的力量,用创新重塑行业格局。我们提供易用灵活的LLM平台和定制化方案,显著降低技术门槛,助力实现数字化转型和业务增长。
                 </p>
               </InView>
               <InView containerRef={listRef}>
@@ -125,38 +127,34 @@ export default function About() {
                 </div>
               </InView>
               <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-                <InView containerRef={listRef}>
-                  <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">我们做了哪些事情</h2>
-                </InView>
-                <InView containerRef={listRef}>
-                  <h3 className="mt-8 font-semibold text-gray-900">第一阶段:构建AI基础设施</h3>
-                  <p className="mt-2">
-                    我们已经实现了以下里程碑:
-                  </p>
-                  <ul className="mt-4 space-y-2 text-gray-600">
-                    <li>- 接入并提供了40+主流模型的调用服务</li>
-                    <li>- 搭建了完善的模型调用、key管理、计费和token统计系统</li>
-                  </ul>
-                  <p className="mt-4">
-                    在这一阶段,我们建立了以下关键组件和平台:
-                  </p>
-                  <ol className="mt-4 space-y-2 text-gray-600">
-                    <li>1. 调用统计:详尽记录和分析模型调用数据和用量指标</li>
-                    <li>2. 计费管理:灵活多样的计费方案,满足不同用户需求</li>
-                    <li>3. API Key管理:统一、便捷、安全的API密钥管理功能</li>
-                  </ol>
-                </InView>
-                <InView containerRef={listRef}>
-                  <h3 className="mt-8 font-semibold text-gray-900">第二阶段:打造模型服务中心</h3>
-                  <ul className="mt-4 space-y-2 text-gray-600">
-                    <li>- 模型广场:一站式模型体验和选择平台</li>
-                    <li>- 集成Prompt工程工具:提供Prompt优化和管理功能</li>
-                    <li>- 升级模型调试平台:强化模型测试和对比能力</li>
-                  </ul>
-                  <p className="mt-4">
-                    通过分阶段、有重点的建设,我们构建了强大的AI基础设施,并打造了丰富的模型服务中心,为开发者提供一站式、全流程的AI开发服务,助力各类AI应用的快速落地和规模化部署。
-                  </p>
-                </InView>
+                  <InView containerRef={listRef}>
+                    <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">我们做了哪些事情</h2>
+                  </InView>
+                  <InView containerRef={listRef}>
+                    <div>
+                      <h3 className="mt-8 font-semibold text-gray-900">第一阶段: 构建 AI 基础设施</h3>
+                      <p className="mt-2">
+                        我们提供40+主流模型调用服务，并搭建了模型调用、API Key管理、计费和token统计系统：
+                      </p>
+                      <ul className="mt-4 space-y-2 text-gray-600">
+                        <li>- 调用统计: 分析调用数据</li>
+                        <li>- 计费管理: 多样化计费方案</li>
+                        <li>- API Key管理: 统一、安全管理</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="mt-8 font-semibold text-gray-900">第二阶段: 打造模型服务中心</h3>
+                      <p className="mt-2">
+                        我们提供了一站式模型体验和选择，以及优化和管理工具，加强模型测试和对比。
+                      </p>
+                      <ul className="mt-4 space-y-2 text-gray-600">
+                        <li>- 模型广场: 一站式模型体验和选择</li>
+                        <li>- Prompt 工具: 提供优化和管理功能</li>
+                        <li>- 调试平台升级: 加强模型测试和对比</li>
+                      </ul>
+                    </div>
+                  </InView>
+
               </div>
             </div>
           </div>
@@ -165,26 +163,23 @@ export default function About() {
               <InView containerRef={listRef}>
                 <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">近期我们在做的事情</h2>
               </InView>
-              <InView containerRef={listRef}>
-                <h3 className="mt-8 font-semibold text-gray-900">第三阶段:构建应用中心</h3>
-                <ul className="mt-4 space-y-2 text-gray-600">
-                  <li>- 知识库:支持多源异构数据集成,提供高效知识管理</li>
-                  <li>- 智能体:引入对话型、任务型等智能体,提供智能服务</li>
-                  <li>- 插件系统:允许用户灵活扩展和定制应用功能</li>
-                  <li>
-                    - 开源企业级项目RagCTO:
-                    <ul className="mt-2 pl-6 space-y-1 text-gray-600">
-                      <li>- 基于检索增强生成技术的企业级知识库和客服应用</li>
-                      <li>- 提供完整的知识管理和智能客服功能,支持快速部署</li>
-                      <li>- 作为一个RAG引擎,可灵活更换向量数据库和大语言模型</li>
-                      <li>- 助力企业快速搭建特定垂直领域的智能客服系统</li>
+                <InView containerRef={listRef}>
+                  <div>
+                    <h3 className="mt-8 font-semibold text-gray-900">第三阶段: 构建应用中心</h3>
+                    <p className="mt-2">
+                      我们构建了功能丰富、可扩展的应用中心，满足各类 AI 应用需求。
+                    </p>
+                    <ul className="mt-4 space-y-2 text-gray-600">
+                      <li>- 知识库: 支持多源异构数据集成，提供高效知识管理</li>
+                      <li>- 智能体: 引入对话型、任务型等智能体，提供智能服务</li>
+                      <li>- 插件系统: 允许用户灵活扩展和定制应用功能</li>
                     </ul>
-                  </li>
-                </ul>
-                <p className="mt-4">
-                  这一阶段,我们构建了功能丰富、可扩展的应用中心,满足各类AI应用需求。同时,开源的RagCTO为企业提供了开箱即用的智能客服解决方案,展示了检索增强生成技术在企业级应用中的价值。
-                </p>
-              </InView>
+                    <p className="mt-4">
+                      我们正在开源企业级项目 RagCTO，基于检索增强生成技术，提供完整的知识管理和智能客服功能，支持快速部署。RagCTO作为一个RAG引擎，可灵活更换向量数据库和大语言模型，助力企业快速搭建特定垂直领域的智能客服系统。
+                    </p>
+                  </div>
+                </InView>
+
             </div>
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
               <InView containerRef={listRef}>
@@ -210,6 +205,9 @@ export default function About() {
           </div>
         </div>
       </div>
+      
     </div>
+    <Footer></Footer>
+    </>
   )
 }
