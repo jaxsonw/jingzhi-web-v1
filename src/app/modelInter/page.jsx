@@ -7,10 +7,13 @@ import MobelTable from '../../components/common/ModelTable'
 import { getModelFilterList, getModelList } from "../../services/overflow"
 import { PRICE_HEADER } from '../../consts/modelheaderData'
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 const Model = () => {
   const [typeData, setTypeData] = useState()
-  const [modelSelected, setModelSelected] = useState({ typeName: '选择类型' })
-  const [companySelected, setCompanySelected] = useState({ companyName: '选择服务商' })
+  const [modelSelected, setModelSelected] = useState({})
+  const [companySelected, setCompanySelected] = useState({})
   const [modelData, setModelData] = useState({})
 
 
@@ -20,14 +23,14 @@ const Model = () => {
 
 
     setTypeData(res?.data)
-    // setModelSelected(res?.data?.modelTypeList[0])
+    setModelSelected(res?.data?.modelTypeList[0])
     // setCompanySelected(res?.data?.companyList[0])
 
   }
 
   const getModelData = async () => {
     const modelData = await getModelList({
-      companyId: companySelected?.companyId,
+      // companyId: companySelected?.companyId,
       typeId: modelSelected?.typeId
     })
     setModelData(modelData?.data)
@@ -55,15 +58,32 @@ const Model = () => {
             </button>
           </div> */}
         <div className="flex flex-wrap gap-4">
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10	">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
-          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-[#1e80ff]">Viewing all</a>
+          {
+            typeData?.modelTypeList?.map((items) => {
+              return (
+                <span key={items?.typeId}
+                  onClick={() => {
+                    setModelSelected(items?.typeId)
+                  }}
+                  className={classNames(
+                    items.typeId === modelSelected?.typeId ? 'bg-[#2A3275] text-[#fff]' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50',
+                    'font-mono px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10	'
+                  )}
+                >
+                  <span className="block text-center min-w-20">{items?.typeName}</span>
+                </span>
+
+              )
+            })
+          }
+          {/* <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a>
+          <a className="font-mono	 px-[14px] py-[10px] text-sm	cursor-pointer	font-medium	border border-solid	border-[#2a3275] text-[#667085]  hover:text-blue-600 hover:bg-sky-400/10">Viewing all</a> */}
 
         </div>
 

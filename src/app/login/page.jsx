@@ -123,13 +123,15 @@ export default function Login() {
                           placeholder="请输入验证码"
                           autoComplete="current-password"
                           required
-                          className="block px-2 w-2/3 h-[45px]   py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		  text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                          className="block px-2 w-full  py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		 text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+
+                        // className="block px-2 w-2/3 h-[45px]   py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		  text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         />
                         <button
                           disabled={sendLoading || isCodeSent}
                           onClick={handleSendCode}
                           type="button"
-                          className="rounded h-[45px] w-1/3  px-2 py-1 text-xs text-right font-semibold text-[#B5B5B5] shadow-sm  "
+                          className="rounded h-[45px] w-1/3  px-2 py-1 text-xs text-right font-semibold text-[#B5B5B5]   "
                         >
                           {isCodeSent ? `${countdown} s` : '获取验证码'}
                         </button>
@@ -161,7 +163,7 @@ export default function Login() {
             //   clickable: false
             // }}
             modules={[Mousewheel]}
-           >
+          >
             <SwiperSlide>
               <BackgroundFirst />
             </SwiperSlide>
