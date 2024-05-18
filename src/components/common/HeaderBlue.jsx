@@ -20,7 +20,7 @@ const navigation = [
   { name: 'Prompt工程', href: '/prompt', target: '_self' },
   { name: '开发文档', href: 'https://docs.agicto.com', target: '_blank' },
   // { name: 'Chat Code', href: '/code', target: '_self' },
-  { name: '学习AGI', href: '/agi', target: '_self' },
+  // { name: '学习AGI', href: '/agi', target: '_self' },
   { name: '关于我们', href: '/about', target: '_self' }
 ]
 
