@@ -1,7 +1,7 @@
 
 'use client'
 import { useRef } from 'react'
-import InView from '../../components/Base/inView'
+import InView from '../../components/base/inView'
 import Footer from '@/src/components/common/Footer'
 
 const ComplateIcon = ({ className }) => (
