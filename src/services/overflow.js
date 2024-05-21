@@ -7,3 +7,4 @@ export const getModelPriceList = params => request.post(`${BASE_URL}/v1/modelPri
 
 export const getModelFilterList = params => request.post(`${BASE_URL}/v1/service/site/modelFilterList`, params)
 export const getModelList = params => request.post(`${BASE_URL}/v1/service/site/modelList`, params)
+export const getModelCateList = params => request.post(`${BASE_URL}/v1/service/site/modelCateList`, params)
