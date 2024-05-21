@@ -437,8 +437,8 @@ const PromptModel = (props) => {
       <div>
 
       </div>
-      <Spin className='h-[calc(100vh_-_384px)]' spinning={appListLoading}>
-        <div className='template flex flex-wrap  gap-4'>
+      <Spin className='h-[calc(100vh_-_384px)] ' spinning={appListLoading}>
+        <div className='template flex flex-wrap  gap-4 pb-[30px]'>
           {
             appList?.recordList?.length > 0 ? (
               <>
