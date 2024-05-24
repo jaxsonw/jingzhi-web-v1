@@ -227,7 +227,7 @@ export default function SpaceLayout({ children }) {
                     </a>
 
                     <a
-                      href="https://docs.agicto.com"
+                      href="/docs"
                       className={classNames(
                         'text-gray-700',
                         'group flex  flex items-center h-[63px] mx-[33px] text-sm leading-6 font-semibold'

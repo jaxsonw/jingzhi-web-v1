@@ -1,12 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Mousewheel, Pagination } from 'swiper/modules'
+import { Mousewheel } from 'swiper/modules'
 import Hero from '../components/homePage/HeroHome'
 import Footer from "../components/homePage/Footer"
 import HowUse from '../components/homePage/HowUse'
-
-import config from '../../config'
+import FeedListPage from "../components/homePage/FeedListPage"
 import { isPc } from '../utils'
 
 export default function Example() {
@@ -41,6 +40,9 @@ export default function Example() {
         </SwiperSlide>
         <SwiperSlide>
           <Footer />
+        </SwiperSlide>
+        <SwiperSlide>
+          <FeedListPage />
         </SwiperSlide>
       </Swiper>
     </div>
