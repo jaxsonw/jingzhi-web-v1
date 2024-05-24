@@ -108,7 +108,7 @@ export function FeedListPage() {
                 联系客服
               </span>
             </p>
-            <p className="mt-1 text-sm text-gray-700">任何问题均可扫码此二维码联系客服</p>
+            <p className="mt-1 text-sm text-gray-700">任何问题均可扫描此二维码联系客服</p>
           </div>
         </div>
       </div>
