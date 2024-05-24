@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { home_bottom_bg, agicto_product_agent_wechat, home_bottom_bg_mofang } from '../../consts/img'
 import { TITLE, RECORD_NUMBER } from '../../../config'
- 
+
 
 export default function Footer() {
   // 处理鼠标移动的函数
@@ -43,8 +43,8 @@ export default function Footer() {
           onMouseMove={handleMouseMove}
           src={home_bottom_bg_mofang}
           className="absolute z-10 w-[33%] top-[13rem] left-1/2 -translate-x-1/2 scale-100	hover:scale-110 transition	"
-          // whileHover={{ scale: 1.2 }}
-          // whileTap={{ scale: 0.8 }}
+        // whileHover={{ scale: 1.2 }}
+        // whileTap={{ scale: 0.8 }}
         >
           {/* <img /> */}
         </motion.img>
@@ -166,7 +166,7 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        <div className="absolute flex text-black flex-col z-1 w-full bottom-[10px] left-1/2  -translate-x-1/2">
+        {/* <div className="absolute flex text-black flex-col z-1 w-full bottom-[10px] left-1/2  -translate-x-1/2">
           <span className="text-[#B5B5B5] text-center">2024 · {TITLE}</span>
           <span className="text-[#9E9E9E] text-center">{RECORD_NUMBER}</span>
         </div>
@@ -175,7 +175,7 @@ export default function Footer() {
           className="absolute left-1/2 right-1/2 -translate-x-1/2	 lg:right-16 bottom-16 w-[132px]"
           src={agicto_product_agent_wechat}
           alt={TITLE}
-        />
+        /> */}
       </div>
     </AnimatePresence>
   )
