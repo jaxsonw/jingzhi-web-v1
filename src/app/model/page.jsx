@@ -17,8 +17,8 @@ const Model = () => {
 
   const init = async () => {
     const res = await getModelFilterList()
-    const resData = await getModelCateList()
-    console.log(resData, 'resDataresData')
+    // const resData = await getModelCateList()
+    // console.log(resData, 'resDataresData')
     setTypeData(res?.data)
     // setModelSelected(res?.data?.modelTypeList[0])
     // setCompanySelected(res?.data?.companyList[0])
@@ -42,7 +42,7 @@ const Model = () => {
   }, [modelSelected, companySelected])
   return (
     <div className="h-screen pt-[104px] lg:px-16">
-      <h1 className="text-[30px] text-[#000B4D]  sm:flex sm:flex-auto sm:justify-center">大模型广场</h1>
+      <h1 className="text-[30px] text-[#000B4D] pt-[33px]  sm:flex sm:flex-auto sm:justify-center">大模型广场</h1>
       <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center">LARGEMMODEL HUB</h2>
       <div className="sm:flex pt-[22px]">
         {/* <div className=" sm:flex flex-auto sm:justify-end  sm:flex-grow-[1.78]">
@@ -142,12 +142,12 @@ const Model = () => {
           </Listbox>
         </div>
       </div>
-      {/* <MobelTable
+      <MobelTable
         // TableHeaderList
         headerData={PRICE_HEADER}
         modelData={modelData?.recordList}
-      /> */}
-      <div className="flex w-full">
+      />
+      {/* <div className="flex w-full">
         <div className="basis-1/6 mr-[24px] border-r border-solid border-[#eaedf1]">
           <div className="px-[24px] py-[6px]">
             <section className="mb-[24px]">
@@ -205,7 +205,7 @@ const Model = () => {
 
         </div>
 
-      </div>
+      </div> */}
     </div>
   )
 }
