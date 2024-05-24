@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { NavLinks } from './NavLinks'
 import { agicto_product_agent_wechat, agicto_icon_color } from '../../consts/img'
 import { TITLE, RECORD_NUMBER } from '../../../config'
-import {isPc} from "../../../utils/index"
 
 const faqs = [
   {
@@ -27,7 +26,7 @@ const faqs = [
   {
     question: '如果开发过程中遇到问题，你们可以提供帮助吗?',
     answer: '当然可以，我们客服7*24小时在线，随时为你解答问题，并提供免费的专业技术支持。'
-  },
+  }
   // {
   //   question: '对于开发语言有限制吗?',
   //   answer: '我们支持多种开发语言，包括Python、Java、C++、Go等，你可以根据自己的需求选择适合的编程语言进行对接。'
@@ -87,7 +86,7 @@ export function FeedListPage() {
             </div>
           </div>
           <nav className="mt-11 flex gap-8">
-            <NavLinks  />
+            <NavLinks />
           </nav>
         </div>
         <div className="group relative -mx-4 flex items-center self-stretch p-4 transition-colors hover:bg-gray-100 sm:self-auto sm:rounded-2xl lg:mx-0 lg:self-auto lg:p-6">
