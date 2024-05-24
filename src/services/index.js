@@ -18,8 +18,9 @@ export const getEmailCode = params => request.post(`${BASE_URL}/v1/sendVerifyCod
 export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params)
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
 
-export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)
+export const getInviteSuccessList = () => request.post(`${BASE_URL}/v1/user/getInviteSuccessList`)
 
+export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)
 
 export const suggest = params => request.post(`${BASE_URL}/v1/service/suggest`, params)
 
@@ -31,10 +32,7 @@ export const checkCodeValid = data => request.post(`${BASE_URL}/v1/service/check
 // export const chatCode = data => request.post(`${BASE_URL}/v1/service/chatCode`, data)
 export const getModel = params => request.post(`${BASE_URL}/v1/service/chatCode/modelList `, params)
 
-export const chatCode = async (
-  data,
-  options
-) => {
+export const chatCode = async (data, options) => {
   let xtextContent = ''
   let needTimeOut = true
   EventSource = SSE
@@ -75,14 +73,12 @@ export const chatCode = async (
     }
     try {
       const resultData = JSON.parse(e.data)
-      if(resultData && Object.prototype.toString.call(resultData) === '[object Object]') {
+      if (resultData && Object.prototype.toString.call(resultData) === '[object Object]') {
         xtextContent += resultData?.choices[0].delta.content
         options.onMessage({ content: xtextContent })
       }
-    }catch (error) {
-    }
-    if(e.data) {
-
+    } catch (error) {}
+    if (e.data) {
     }
   }
 
@@ -136,15 +132,12 @@ export const openAiJson = async data => {
 }
 
 // 获取代码 流方式
-export const openAi = async (
-  data,
-  options
-) => {
+export const openAi = async (data, options) => {
   let xtextContent = ''
   // @ts-ignore;
   EventSource = SSE
   var apiUrl = 'https://openai.chatkok.com/v1/completions'
-   var params = {
+  var params = {
     model: 'text-davinci-003',
     // model: "gpt-3.5-turbo",
     prompt: data,
@@ -211,4 +204,3 @@ export const openAi = async (
     data: { content: '' }
   }
 }
-

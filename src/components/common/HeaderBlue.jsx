@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { FiMenu } from 'react-icons/fi'
@@ -8,6 +8,8 @@ import { RiCustomerService2Line } from 'react-icons/ri'
 // import Logo from '/public/logo.jpeg'
 import CustomerModal from './CustomerModal'
 import baseHooks from '../hooks/base'
+import { useRouter } from 'next/navigation'
+
 import { icon_logo_white, icon_logo_color } from '../../consts/img'
 import InviteModal from './InviteModal'
 const hiddenPath = ['/space', '/login']
@@ -24,9 +26,11 @@ const navigation = [
 
 const Header = () => {
   const { userInfo } = baseHooks()
+  const router = useRouter()
   const pathname = usePathname()
   const [customerOpen, setCustomerOpen] = useState(false)
   const [inviteVisible, setInviteVisible] = useState(false)
+  const [inviteUrl, setInviteUrl] = useState('')
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let isShowHeader = true
@@ -35,11 +39,17 @@ const Header = () => {
       isShowHeader = false
     }
   })
+
+  useEffect(() => {
+    setInviteUrl(`${window.origin}/?channel=${userInfo?.inviteCode}`)
+
+  }, [userInfo])
+
   if (!isShowHeader) return null
 
   return (
     <>
-      <InviteModal open={inviteVisible} setOpen={setInviteVisible} />
+      <InviteModal url={inviteUrl} open={inviteVisible} setOpen={setInviteVisible} />
       <header className="bg-white w-full bg-[#3162FF]">
         <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
 

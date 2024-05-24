@@ -1,12 +1,10 @@
-import { toast } from 'react-toastify'
 // import copyValue from 'copy-to-clipboard'
 import { copyValue } from "../../utils/index"
 
-export default function InviteModal({ open = true, setOpen, url = '123' }) {
+export default function InviteModal({ open = true, setOpen, url }) {
   const onCancel = () => setOpen(false)
   const onCopy = () => {
-    copyValue(`${url} 零代码创建可训练、多模型的AI应用，快来试试吧！`)
-    toast.success('复制成功～')
+    copyValue(`${url} 创建可训练、多模型的AI应用，快来试试吧！`)
   }
   return (
     <div
@@ -32,7 +30,7 @@ export default function InviteModal({ open = true, setOpen, url = '123' }) {
             </svg>
           </span>
         </div>
-        <div className="text-lg text-center font-bold py-2">邀请好友，领取无限Token</div>
+        <div className="text-lg text-center font-bold py-2">邀请好友，领取无限免费额度</div>
         <div className=" p-1 relative h-[150px] flex flex-col items-center justify-center">
           <svg width="274" height="148" viewBox="0 0 274 148" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute">
             <g filter="url(#big-card_svg__a)">
@@ -92,7 +90,7 @@ export default function InviteModal({ open = true, setOpen, url = '123' }) {
             </defs>
           </svg>
           <span className="block relative  max-w-[225px] text-md text-center">邀请好友注册后获得</span>
-          <span className="block relative  font-bold text-2xl py-2 text-cyan-700">20个水滴</span>
+          <span className="block relative  font-bold text-2xl py-2 text-cyan-700">3元免费额度</span>
 
           <span className="block relative text-md  font-bold  ">
             邀请奖励<span className=" text-md text-cyan-700">无上限</span>

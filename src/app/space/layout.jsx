@@ -11,7 +11,7 @@ import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
-
+import { getInviteSuccessList } from '../../services/index'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -22,6 +22,8 @@ export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [customerOpen, setCustomerOpen] = useState(false)
+  const [invite, setInvite] = useState(0)
+
   const { userInfo } = baseHooks()
 
   const currentPath = usePathname()
@@ -33,6 +35,16 @@ export default function SpaceLayout({ children }) {
       router.push('/login')
     }
   }, [userInfo])
+
+  const init = async () => {
+    const res = await getInviteSuccessList()
+    setInvite(parseInt(res?.data * 3))
+  }
+
+  useEffect(() => {
+    init()
+  }, [])
+
 
   return (
     <>
@@ -152,6 +164,10 @@ export default function SpaceLayout({ children }) {
                 <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
                   <span>剩余金额</span>
                   <span>{userInfo?.apiNum}</span>
+                </div>
+                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] mt-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                  <span >邀请额度</span>
+                  <span>{invite}</span>
                 </div>
               </div>
               <ul role="list" className="flex flex-1 flex-col gap-y-7 pt-6">
