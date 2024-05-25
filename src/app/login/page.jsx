@@ -52,7 +52,7 @@ export default function Login() {
     const params = {
       email,
       verify_code: code,
-      invite_code: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
+      inviteCode: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
     }
     if (!email || !code || submitLoading) return
     setSubmitLoading(true)
