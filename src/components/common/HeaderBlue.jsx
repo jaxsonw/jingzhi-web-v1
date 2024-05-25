@@ -8,7 +8,7 @@ import { RiCustomerService2Line } from 'react-icons/ri'
 // import Logo from '/public/logo.jpeg'
 import CustomerModal from './CustomerModal'
 import baseHooks from '../hooks/base'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { icon_logo_white, icon_logo_color } from '../../consts/img'
 import InviteModal from './InviteModal'
@@ -28,6 +28,8 @@ const navigation = [
 
 const Header = () => {
   const { userInfo } = baseHooks()
+  const searchParams = useSearchParams()
+
   const router = useRouter()
   const pathname = usePathname()
   const [customerOpen, setCustomerOpen] = useState(false)
@@ -43,6 +45,10 @@ const Header = () => {
   })
 
   useEffect(() => {
+    const invite_code = searchParams.get('channel') || ''
+    if (invite_code) {
+      localStorage.setItem('invite_code', invite_code.split(' ')?.[0])
+    }
     setInviteUrl(`${window.origin}/?channel=${userInfo?.inviteCode}`)
 
   }, [userInfo])

@@ -51,7 +51,8 @@ export default function Login() {
   const onSubmit = async () => {
     const params = {
       email,
-      verify_code: code
+      verify_code: code,
+      invite_code: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
     }
     if (!email || !code || submitLoading) return
     setSubmitLoading(true)
@@ -79,11 +80,11 @@ export default function Login() {
     return () => clearTimeout(timer)
   }, [countdown, isCodeSent])
 
-  useEffect(() => {
-    if (!checkServer()) {
-      window?.localStorage?.clear()
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!checkServer()) {
+  //     window?.localStorage?.clear()
+  //   }
+  // }, [])
   return (
     <>
       <div className="flex min-h-[calc(100vh_-_82px)] flex-1">
