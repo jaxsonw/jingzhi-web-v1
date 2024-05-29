@@ -24,37 +24,6 @@ const Model = async ({ params, searchParams }) => {
   const modelCateList = modelCateListRes?.data
   const modelData = modelDataRes?.data
 
-  // const params = useSearchParams()
-  console.log('params', modelData)
-  // const [typeData, setTypeData] = useState()
-  // const [modelSelected, setModelSelected] = useState({ typeName: '选择类型' })
-  // const [companySelected, setCompanySelected] = useState({ companyName: '选择服务商' })
-  // const [modelData, setModelData] = useState({})
-
-  const init = async () => {
-    const res = await getServerModelFilterList()
-    // const resData = await getModelCateList()
-    // console.log(resData, 'resDataresData')
-    // setTypeData(res?.data)
-    // setModelSelected(res?.data?.modelTypeList[0])
-    // setCompanySelected(res?.data?.companyList[0])
-  }
-
-  // const getModelData = async () => {
-  //   const modelData = await getModelList({
-  //     companyId: companySelected?.companyId,
-  //     typeId: modelSelected?.typeId
-  //   })
-  //   setModelData(modelData?.data)
-  // }
-
-  // useEffect(() => {
-  //   init()
-  // }, [])
-
-  // useEffect(() => {
-  //   getModelData()
-  // }, [modelSelected, companySelected])
   return (
     <div className="h-screen pt-[104px] lg:px-16">
       <h1 className="text-[30px] text-[#000B4D] pt-[33px]  sm:flex sm:flex-auto sm:justify-center">大模型广场</h1>
@@ -63,30 +32,6 @@ const Model = async ({ params, searchParams }) => {
       <div className="flex w-full">
         <div className="basis-1/6 h-[calc(100vh_-_185px)] overflow-scroll sticky top-[130px] mr-[24px] border-r border-solid border-[#eaedf1]">
           <div className="px-[24px] py-[6px]">
-            {/* <section className="mb-[24px]">
-              <h3 className="text-lg	font-bold	mb-[6px]">模型类型</h3>
-              <div className="flex flex-col">
-                <Link
-                  className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                    Number(type) === 0 ? 'bg-[#3162FF] text-white' : ''
-                  }`}
-                  href={`/model?cate=${cate || ''}&type=&company=${company || ''}`}
-                >
-                  全部
-                </Link>
-                {typeData?.modelTypeList?.map((item, index) => (
-                  <Link
-                    className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                      Number(type) === item?.typeId ? 'bg-[#3162FF] text-white' : ''
-                    }`}
-                    key={index}
-                    href={`/model?cate=${cate || ''}&type=${item?.typeId}&company=${company || ''}`}
-                  >
-                    {item?.typeName}
-                  </Link>
-                ))}
-              </div>
-            </section> */}
             <section className="mb-[24px]">
               <h3 className="text-lg	font-bold	mb-[6px]">使用场景</h3>
               <div className="flex flex-col">
@@ -140,8 +85,7 @@ const Model = async ({ params, searchParams }) => {
         <div className="grid grid-cols-3 py-4 gap-4	 basis-5/6">
           {modelData?.recordList?.map((item, index) => {
             return (
-              <Link
-                href={`/playground/?model=${item?.apiModelName}&modelType=message`}
+              <div
                 key={index}
                 className="h-[228px] cursor-pointer border border-solid border-1 border-gray-100  hover:border-[#3162FF] bg-white rounded-lg shadow-lg  min-w-100 overflow-hidden p-[20px] relative transition-all duration-300 ease-in-out"
               >
@@ -173,6 +117,14 @@ const Model = async ({ params, searchParams }) => {
                       </div>
                     </div>
                   </div>
+                  <div className="w-full h-10 absolute left-0 bottom-0 bg-white shadow-[-5_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                    <Link
+                      href={`/playground/?model=${item?.apiModelName}&modelType=message`}
+                      className="absolute font-bold text-md rounded flex items-center justify-center bg-[#3162FF] text-white shadow-md left-1/2 transform -translate-x-1/2 bottom-2 h-10 w-2/3 "
+                    >
+                      立即体验
+                    </Link>
+                  </div>
                   <div className="text-gray-700 text-sm font-normal h-[40px] leading-5 my-[10px] mb-[32px] truncate line-clamp-2	whitespace-normal	">
                     <span>{item?.detail}</span>
                   </div>
@@ -180,7 +132,7 @@ const Model = async ({ params, searchParams }) => {
                     <span className="text-gray-700 text-sm">@ {item?.companyName}</span>
                   </div>
                 </div>
-              </Link>
+              </div>
             )
           })}
         </div>
