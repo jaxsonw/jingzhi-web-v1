@@ -17,12 +17,14 @@ const Model = async ({ params, searchParams }) => {
   const modelDataRes = await getServerModelList({
     companyId: company || '',
     typeId: type || '',
-    cid: cate
+    cate: cate
   })
 
   const modelCateListRes = await getServerModelCateList()
   const modelCateList = modelCateListRes?.data
   const modelData = modelDataRes?.data
+  console.log('modelCateList', modelCateList)
+  console.log('modelData', modelData)
 
   return (
     <div className="h-screen pt-[104px] lg:px-16">
@@ -87,9 +89,12 @@ const Model = async ({ params, searchParams }) => {
             return (
               <div
                 key={index}
-                className="h-[228px] cursor-pointer border border-solid border-1 border-gray-100  hover:border-[#3162FF] bg-white rounded-lg shadow-lg  min-w-100 overflow-hidden p-[20px] relative transition-all duration-300 ease-in-out"
+                className=" h-[228px] group cursor-pointer border border-solid border-1 border-gray-100  hover:border-[#3162FF] bg-white rounded-lg shadow-lg  min-w-100 overflow-hidden p-[20px] relative transition-all duration-300 ease-in-out"
               >
-                <div>
+                <div className="absolute blur-md	 opacity-20	rounded-full -left-10 -top-40 z-0 bg-gradient-to-r from-sky-200 to-blue-200 w-60 h-60"></div>
+                <div className="absolute blur-md	 opacity-20	rounded-full -right-10 -top-40 z-0 bg-gradient-to-t from-sky-200 to-blue-200 w-80 h-80"></div>
+
+                <div className="relative">
                   <div className="flex mb-[16px] items-center">
                     <Image
                       className="border-[0.5px] border-solid border-gray-200 rounded overflow-hidden"
@@ -108,8 +113,8 @@ const Model = async ({ params, searchParams }) => {
                     <div className="flex-1">
                       <div className="flex gap-1">
                         <span className="flex items-center">
-                          {item?.tags?.map((v, i) => (
-                            <div key={i} className="font-normal bg-gray-200 text-gray-900 rounded-md text-xs h-5 leading-5 px-6">
+                          {item?.tagList?.map((v, i) => (
+                            <div key={i} className="font-normal mr-2 bg-gray-200 text-gray-900 rounded-md text-xs h-5 leading-5 px-6">
                               {v}
                             </div>
                           ))}
@@ -117,7 +122,7 @@ const Model = async ({ params, searchParams }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full h-10 absolute left-0 bottom-0 bg-white shadow-[-5_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                  <div className="w-full h-14  overflow-hidden group-hover:bottom-0 duration-500	absolute left-0 -bottom-full bg-white shadow-[-5_35px_60px_-15px_rgba(0,0,0,0.3)]">
                     <Link
                       href={`/playground/?model=${item?.apiModelName}&modelType=message`}
                       className="absolute font-bold text-md rounded flex items-center justify-center bg-[#3162FF] text-white shadow-md left-1/2 transform -translate-x-1/2 bottom-2 h-10 w-2/3 "
@@ -125,11 +130,11 @@ const Model = async ({ params, searchParams }) => {
                       立即体验
                     </Link>
                   </div>
-                  <div className="text-gray-700 text-sm font-normal h-[40px] leading-5 my-[10px] mb-[32px] truncate line-clamp-2	whitespace-normal	">
-                    <span>{item?.detail}</span>
+                  <div className="text-gray-400 text-sm text-wrap font-normal h-[40px] leading-5 my-[10px] mb-[32px] truncate line-clamp-2	whitespace-wrap	">
+                    {item?.detail}
                   </div>
-                  <div className="flex items-center color-[#737a87] text-sm font-normal justify-between leading-5 opacity-100 transition-all duration-100 ease-in-out delay-300">
-                    <span className="text-gray-700 text-sm">@ {item?.companyName}</span>
+                  <div className="flex group-hover:opacity-0 duration-200 items-center text-sm font-normal justify-between leading-5 opacity-100 transition-all duration-100 ease-in-out delay-300">
+                    <span className="text-gray-400 text-sm">@ {item?.companyName}</span>
                   </div>
                 </div>
               </div>
