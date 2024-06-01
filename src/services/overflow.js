@@ -13,4 +13,3 @@ export const getModelList = params => request.post(`${BASE_URL}/v1/service/site/
 export const getServerModelList = params => serverRequest(`${BASE_URL}/v1/service/site/modelList`, params)
 
 export const getModelCateList = params => request.post(`${BASE_URL}/v1/service/site/modelCateList`, params)
-export const getServerModelCateList = params => serverRequest(`${BASE_URL}/v1/service/site/modelCateList`, params)

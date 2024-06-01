@@ -12,19 +12,14 @@ import { PRICE_HEADER } from '../../consts/modelheaderData'
 const Model = async ({ params, searchParams }) => {
   const typeDataRes = await getServerModelFilterList()
   const typeData = typeDataRes?.data
-  const { company, type, cate } = searchParams
+  const { company, cate } = searchParams
 
   const modelDataRes = await getServerModelList({
     companyId: company || '',
-    typeId: type || '',
     cate: cate
   })
 
-  const modelCateListRes = await getServerModelCateList()
-  const modelCateList = modelCateListRes?.data
   const modelData = modelDataRes?.data
-  console.log('modelCateList', modelCateList)
-  console.log('modelData', modelData)
 
   return (
     <div className="h-screen pt-[104px] lg:px-16">
@@ -32,7 +27,7 @@ const Model = async ({ params, searchParams }) => {
       <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center">LARGEMMODEL HUB</h2>
 
       <div className="flex w-full">
-        <div className="basis-1/6 h-[calc(100vh_-_185px)] overflow-scroll sticky top-[130px] mr-[24px] border-r border-solid border-[#eaedf1]">
+        <div className="basis-1/6 h-[calc(100vh_-_220px)] overflow-scroll sticky top-[130px] mr-[24px] border-r border-solid border-[#eaedf1]">
           <div className="px-[24px] py-[6px]">
             <section className="mb-[24px]">
               <h3 className="text-lg	font-bold	mb-[6px]">使用场景</h3>
@@ -45,15 +40,15 @@ const Model = async ({ params, searchParams }) => {
                 >
                   全部
                 </Link>
-                {modelCateList?.map((item, index) => (
+                {typeData?.cateList?.map((item, index) => (
                   <Link
                     className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                      Number(cate) === item?.id ? 'bg-[#3162FF] text-white' : ''
+                      Number(cate) === item?.cateId ? 'bg-[#3162FF] text-white' : ''
                     }`}
                     key={index}
-                    href={`/model?cate=${item?.id}&company=${company || ''}`}
+                    href={`/model?cate=${item?.cateId}&company=${company || ''}`}
                   >
-                    {item?.cate_name}
+                    {item?.cateName}
                   </Link>
                 ))}
               </div>
@@ -65,7 +60,7 @@ const Model = async ({ params, searchParams }) => {
                   className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
                     Number(company) === 0 ? 'bg-[#3162FF] text-white' : ''
                   }`}
-                  href={`/model?type=${type}`}
+                  href={`/model?cate=${cate}`}
                 >
                   全部
                 </Link>
@@ -84,12 +79,12 @@ const Model = async ({ params, searchParams }) => {
             </section>
           </div>
         </div>
-        <div className="grid grid-cols-3 py-4 gap-4	 basis-5/6">
+        <div className="grid grid-cols-3 py-4 gap-4	 basis-5/6 h-fit">
           {modelData?.recordList?.map((item, index) => {
             return (
               <div
                 key={index}
-                className=" h-[228px] group cursor-pointer border border-solid border-1 border-gray-100  hover:border-[#3162FF] bg-white rounded-lg shadow-lg  min-w-100 overflow-hidden p-[20px] relative transition-all duration-300 ease-in-out"
+                className="max-h-[228px]  group cursor-pointer border border-solid border-1 border-gray-100  hover:border-[#3162FF] bg-white rounded-lg shadow-lg  min-w-100 overflow-hidden p-[20px] relative transition-all duration-300 ease-in-out"
               >
                 <div className="absolute blur-md	 opacity-20	rounded-full -left-10 -top-40 z-0 bg-gradient-to-r from-sky-200 to-blue-200 w-60 h-60"></div>
                 <div className="absolute blur-md	 opacity-20	rounded-full -right-10 -top-40 z-0 bg-gradient-to-t from-sky-200 to-blue-200 w-80 h-80"></div>
