@@ -372,3 +372,7 @@ li {
 .ace-terminal-theme .ace_marker-layer .ace_active-line {
     background: rgb(23 23 23/1);
 }
+
+.overflow-scroll-class::-webkit-scrollbar{
+  display: none;
+}
