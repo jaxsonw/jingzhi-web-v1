@@ -24,7 +24,7 @@ const Model = async ({ params, searchParams }) => {
   return (
     <div className="h-screen pt-[104px] lg:px-16">
       <h1 className="text-[30px] text-[#000B4D]    sm:flex sm:flex-auto sm:justify-center text-center">大模型广场</h1>
-      <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center text-center">LARGEMMODEL HUB</h2>
+      <h2 className="text-[16px] text-[#A3C6FF] sm:flex sm:flex-auto sm:justify-center text-center">LARGEMODEL HUB</h2>
 
       <div className="flex w-full">
         <div className="overflow-scroll-class basis-1/6 h-[calc(100vh_-_220px)] overflow-scroll sticky top-[80px]  border-r border-solid border-[#eaedf1]">
@@ -33,18 +33,16 @@ const Model = async ({ params, searchParams }) => {
               <h3 className="text-lg	font-bold	mb-[6px]">使用场景</h3>
               <div className="flex flex-col">
                 <Link
-                  className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                    Number(cate) === 0 ? 'bg-[#3162FF] text-white' : ''
-                  }`}
+                  className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${Number(cate) === 0 ? 'bg-[#3162FF] text-white' : ''
+                    }`}
                   href={`/model?cate=&company=${company || ''}`}
                 >
                   全部
                 </Link>
                 {typeData?.cateList?.map((item, index) => (
                   <Link
-                    className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                      Number(cate) === item?.cateId ? 'bg-[#3162FF] text-white' : ''
-                    }`}
+                    className={`my-1 py-2 px-2 font-semibold text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${Number(cate) === item?.cateId ? 'bg-[#3162FF] text-white' : ''
+                      }`}
                     key={index}
                     href={`/model?cate=${item?.cateId}&company=${company || ''}`}
                   >
@@ -83,18 +81,16 @@ const Model = async ({ params, searchParams }) => {
           <section className="mb-2 px-4 flex items-center sticky overflow-x-scroll top-[65px] h-20 z-10 bg-white">
             <div className="flex items-center text-md text-nowrap	">
               <Link
-                className={`mr-1 py-2 px-2   text-sm font-semibold  text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${
-                  Number(company) === 0 ? 'bg-[#3162FF]  text-white' : ''
-                }`}
+                className={`mr-1 py-2 px-2   text-sm font-semibold  text-gray-700 rounded-md hover:bg-[#3162FF]/90 hover:text-white ${Number(company) === 0 ? 'bg-[#3162FF]  text-white' : ''
+                  }`}
                 href={`/model?cate=${cate}`}
               >
                 全部
               </Link>
               {typeData?.companyList?.map((item, index) => (
                 <Link
-                  className={`mr-1 text-sm py-2 px-2  text-gray-700 rounded-md font-semibold hover:bg-[#3162FF]/90 hover:text-white ${
-                    Number(company) === item?.companyId ? 'bg-[#3162FF] text-white ' : ''
-                  }`}
+                  className={`mr-1 text-sm py-2 px-2  text-gray-700 rounded-md font-semibold hover:bg-[#3162FF]/90 hover:text-white ${Number(company) === item?.companyId ? 'bg-[#3162FF] text-white ' : ''
+                    }`}
                   key={index}
                   href={`/model?cate=${cate || ''}&company=${item?.companyId}`}
                 >
@@ -119,7 +115,7 @@ const Model = async ({ params, searchParams }) => {
                         className="border-[0.5px] border-solid border-gray-200 rounded overflow-hidden"
                         width="48"
                         height="48"
-                        src={LogoIcon}
+                        src={item?.icon || LogoIcon}
                       />
                       <div
                         className="text-gray-900 font-roboto text-base font-medium leading-28 ml-[12px] w-full"
