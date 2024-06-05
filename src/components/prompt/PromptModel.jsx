@@ -35,6 +35,10 @@ const USER_DROPDOWN = [{
   key: 1
 }]
 
+const DRAWER_TITLE = {
+  NEW: '新建Prompt模版',
+  DETAIL: '详情'
+}
 
 
 const PromptModel = (props) => {
@@ -48,6 +52,7 @@ const PromptModel = (props) => {
   const [drawerFooterDom, setDrawerFooterDom] = useState('')
   const [mobelCodeDom, setMobelCodeDom] = useState('')
   const [openMobel, setOpenMobel] = useState(false);
+  const [drawerTitle, setDrawerTitle] = useState(DRAWER_TITLE.NEW)
 
   const [appType, setAppType] = useState(2)
 
@@ -91,6 +96,7 @@ const PromptModel = (props) => {
 
   const handelCreateDrawer = () => {
     setCreateOpen(true)
+    setDrawerTitle(DRAWER_TITLE.NEW)
     setDrawerFooterDom(<>
       <div className='flex justify-between'>
         <div></div>
@@ -252,6 +258,7 @@ const PromptModel = (props) => {
 
   const handelDetailDrawer = (data) => {
     setCreateOpen(true)
+    setDrawerTitle(DRAWER_TITLE.DETAIL)
     const code = `curl 'https://api.ioii.cn/v1/service/apiAppGenerate' \\
   -H 'accept: */*' \\
   -H 'accept-language: zh-CN,zh;q=0.9' \\
@@ -475,7 +482,7 @@ const PromptModel = (props) => {
                             <Tooltip color="#fff" overlayInnerStyle={{ color: 'black', width: '300px', fontSize: '13px', padding: '14px' }} placement='bottom' title={items?.desc}>
 
                               <div className='line-clamp-2	text-xs text-slate-500 min-h-[44px]'>
-                                {items?.desc}
+                                {items?.prompt}
                               </div>
                             </Tooltip>
 
@@ -519,7 +526,7 @@ const PromptModel = (props) => {
 
       </Spin>
       <Drawer
-        title="新建Prompt模版"
+        title={drawerTitle}
         placement="right"
         open={createOpen}
         footer={drawerFooterDom}
