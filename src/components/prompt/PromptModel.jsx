@@ -13,6 +13,8 @@ import {
   MoreOutlined,
   PieChartOutlined
 } from '@ant-design/icons';
+import { color } from 'framer-motion';
+import { bg } from 'date-fns/locale';
 const formItemLayout = {
   labelCol: {
     span: 4,
@@ -40,6 +42,48 @@ const DRAWER_TITLE = {
   DETAIL: '详情'
 }
 
+const TAG_COLOR = {
+  1: {
+    color: '#1c67e1',
+    bg: '#e9f0fc'
+  },
+  2: {
+    color: '#a27851',
+    bg: '#f6f1ee'
+  },
+  3: {
+    color: '#0edc5e',
+    bg: '#e7fbee'
+  },
+  4: {
+    color: '#688653',
+    bg: '#eff3ec'
+  },
+  5: {
+    color: '#70d024',
+    bg: '#f1fbeb'
+  },
+  6: {
+    color: '#03487b',
+    bg: '#e7ecf2'
+  },
+  7: {
+    color: '#c780bc',
+    bg: '#f9f2f8'
+  },
+  8: {
+    color: '#102fc5',
+    bg: '#e6ebf9'
+  },
+  9: {
+    color: '#97c1cf',
+    bg: '#f4f9fa'
+  },
+  10: {
+    color: '#d43117',
+    bg: '#fcece8'
+  }
+}
 
 const PromptModel = (props) => {
   const router = useRouter()
@@ -418,8 +462,10 @@ const PromptModel = (props) => {
     //   filterType: sortValue
     // })
   }
-
-
+  const getRandomIntegerFromArray = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div>
@@ -500,10 +546,22 @@ const PromptModel = (props) => {
                                 {items?.prompt}
                               </div>
                             </Tooltip>
-
+                            <div className='content flex'>
+                              {
+                                items?.tagList?.map((item) => {
+                                  const randomNumber = getRandomIntegerFromArray(numbers);
+                                  return (
+                                    <div key={item.id} className={`flex items-center justify-center py-[2px] px-[10px] rounded-[10px] mr-[5px]`} style={{backgroundColor: TAG_COLOR[randomNumber].bg}}>
+                                      <span className={`block rounded-[100px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color}}></span>
+                                      <span className={`text-sm text-nowrap ml-[6px]`} style={{ color: TAG_COLOR[randomNumber].color}}>{ item.name }</span>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </div>
                           </div>
                         </div>
-                        <div className='flex items-center pt-[8px] mt-[12px] border-solid border-t border-slate-100	]'>
+                        <div className="flex items-center pt-[8px] mt-[12px] border-solid border-t border-slate-100	]">
                           <span className='flex flex-1 justify-center cursor-pointer hover:text-[#1677ff]' onClick={() => handelDetailDrawer(items)} >
                             <PieChartOutlined className='mr-[2px]' />
                             查看详情
