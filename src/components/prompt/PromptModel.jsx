@@ -221,7 +221,7 @@ const PromptModel = (props) => {
 
   const openMobelClick = (data) => {
     setOpenMobel(true)
-    const code = `curl 'https://api.ioii.cn/v1/service/apiAppGenerate' \\
+    const code = `curl 'https://api.agicto.cn/v1/service/apiAppGenerate' \\
   -H 'accept: */*' \\
   -H 'accept-language: zh-CN,zh;q=0.9' \\
   -H 'authorization: Bearer sk-NMIpYw8Trr4j1PeqEwPomSLSIRG8iKiCDsZL9q9iElnai83E' \\
@@ -259,7 +259,8 @@ const PromptModel = (props) => {
   const handelDetailDrawer = (data) => {
     setCreateOpen(true)
     setDrawerTitle(DRAWER_TITLE.DETAIL)
-    const code = `curl 'https://api.ioii.cn/v1/service/apiAppGenerate' \\
+    // https://api.agicto.cn/
+    const code = `curl 'https://api.agicto.cn/v1/service/apiAppGenerate' \\
   -H 'accept: */*' \\
   -H 'accept-language: zh-CN,zh;q=0.9' \\
   -H 'authorization: Bearer sk-NMIpYw8Trr4j1PeqEwPomSLSIRG8iKiCDsZL9q9iElnai83E' \\

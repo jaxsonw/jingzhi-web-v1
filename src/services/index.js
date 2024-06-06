@@ -36,7 +36,7 @@ export const chatCode = async (data, options) => {
   let xtextContent = ''
   let needTimeOut = true
   EventSource = SSE
-  var apiUrl = `https://api.ioii.cn/v1/service/chatCode`
+  var apiUrl = `https://api.agicto.cn/v1/service/chatCode`
   const evtSource = new EventSource(apiUrl, {
     headers: {
       Authorization: 'Bearer ' + getTokenKey(),
