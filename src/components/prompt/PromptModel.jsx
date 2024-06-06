@@ -300,6 +300,11 @@ const PromptModel = (props) => {
         </div>
         <div className='mb-[16px]'>
 
+          <div className='font-medium	pb-[8px]'> Prompt</div>
+          <div>{data?.prompt}</div>
+        </div>
+        <div className='mb-[16px]'>
+
           <div className='font-medium	pb-[8px]'>模版ID</div>
           <div>
             {data?.appId}
@@ -481,7 +486,7 @@ const PromptModel = (props) => {
                             </div>
                             <Tooltip color="#fff" overlayInnerStyle={{ color: 'black', width: '300px', fontSize: '13px', padding: '14px' }} placement='bottom' title={items?.desc}>
 
-                              <div className='line-clamp-2	text-xs text-slate-500 min-h-[44px]'>
+                              <div className='line-clamp-3	text-xs text-slate-500 min-h-[44px]'>
                                 {items?.prompt}
                               </div>
                             </Tooltip>
