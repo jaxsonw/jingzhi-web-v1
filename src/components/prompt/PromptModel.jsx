@@ -302,7 +302,16 @@ const PromptModel = (props) => {
         <div className='mb-[16px]'>
 
           <div className='font-medium	pb-[8px]'> Prompt</div>
-          <div>{data?.prompt}</div>
+          <div>
+            {data?.prompt}
+            <button
+              onClick={() => copyValue(data?.prompt)}
+              type="button"
+              className="inline-flex items-center px-2.5 border border-transparent text-sm  font-medium "
+            >
+              <FaRegCopy color="black" size={14} />
+            </button>
+          </div>
         </div>
         <div className='mb-[16px]'>
 
