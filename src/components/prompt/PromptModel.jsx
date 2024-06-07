@@ -91,7 +91,6 @@ const PromptModel = (props) => {
   const { appList, setAppList, appListLoading, appListPage, setAppListLoading, setAppListPage, getAppListData, cateList, setAppListCid, appListCid, appListSearch, setAppListSearch } = props
   const [modelType, setMobelType] = useState(1)
   const [createOpen, setCreateOpen] = useState(false)
-  const [createData, setCreateData] = useState({})
   const [drawerDom, setDrawerDom] = useState('')
   const [drawerFooterDom, setDrawerFooterDom] = useState('')
   const [mobelCodeDom, setMobelCodeDom] = useState('')
@@ -116,6 +115,9 @@ const PromptModel = (props) => {
 
   const handleCreateApp = async () => {
     const params = form.getFieldsValue()
+    console.log(params, 'params')
+    console.log(isEmpty(params.name), 'isEmpty(params.name)')
+
     if (isEmpty(params.name)) {
       message.error('请输入模板名称')
       return
@@ -123,7 +125,8 @@ const PromptModel = (props) => {
       message.error('请输入模版内容')
       return
     }
-    const res = await createApp(createData)
+
+    const res = await createApp(params)
     if (res.code === 0) {
       message.success('新建成功')
       setCreateOpen(false)
@@ -177,15 +180,7 @@ const PromptModel = (props) => {
 
           }}
           form={form}
-          onValuesChange={(_, values) => {
-            const newData = {}
-            Object.keys(values).forEach(item => {
-              if (values[item]) {
-                newData[item] = values[item]
-              }
-            })
-            setCreateData(newData)
-          }}
+
           layout="vertical"
 
         >
@@ -551,9 +546,9 @@ const PromptModel = (props) => {
                                 items?.tagList?.map((item) => {
                                   const randomNumber = getRandomIntegerFromArray(numbers);
                                   return (
-                                    <div key={item.id} className={`flex items-center justify-center py-[2px] px-[10px] rounded-[10px] mr-[5px]`} style={{backgroundColor: TAG_COLOR[randomNumber].bg}}>
-                                      <span className={`block rounded-[100px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color}}></span>
-                                      <span className={`text-sm text-nowrap ml-[6px]`} style={{ color: TAG_COLOR[randomNumber].color}}>{ item.name }</span>
+                                    <div key={item.id} className={`flex items-center justify-center py-[2px] px-[10px] rounded-[10px] mr-[5px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].bg }}>
+                                      <span className={`block rounded-[100px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
+                                      <span className={`text-sm text-nowrap ml-[6px]`} style={{ color: TAG_COLOR[randomNumber].color }}>{item.name}</span>
                                     </div>
                                   )
                                 })
