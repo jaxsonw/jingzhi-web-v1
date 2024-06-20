@@ -299,7 +299,7 @@ const ModelCard = (props) => {
         </div>
       </div>
       <div className="flex group-hover:hidden items-center pt-[10px] border-t border-solid border-[#D3D7FA]	">
-        <Image className="w-[30px] h-[30px] rounded-[100px]" src="" alt="" />
+        {props.icon && <img className="w-[20px] rounded-full mr-[10px]" src={props.icon} alt="" />}
         <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
       </div>
       <div className="btn flex transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
