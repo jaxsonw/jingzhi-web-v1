@@ -467,7 +467,7 @@ const PromptModel = (props) => {
       <div className='tab-header flex  justify-between mb-[12px]'>
         <Radio.Group onChange={handelModel} value={modelType}>
           <Radio.Button value={1}>系统模版</Radio.Button>
-          <Radio.Button value={2}>自定义模版</Radio.Button>
+          <Radio.Button value={2}> 自定义模版</Radio.Button>
         </Radio.Group>
         <div className='mb-[12px] flex '>
           <Input
