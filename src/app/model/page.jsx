@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -74,127 +74,70 @@ const ModelCard = () => {
         <span className="text-[12px] text-[#140E35]">字节跳动</span>
       </div>
       <div className="btn flex hidden group-hover:flex items-center justify-between">
-        <Link
+        <div
           className="flex-1 py-[10px] hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">查看详情
-        </Link>
-        <Link
-          href={`/playground/?model=${props?.apiModelName}&modelType=message`}
+        </div>
+        <div
           className="ml-[12px] flex-1 hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center text-[#fff] bg-[#3162FF]">
           立即体验
-        </Link>
+        </div>
       </div>
     </div>
   )
 }
 const Model = async ({ params, searchParams }) => {
-  const typeDataRes = await getServerModelFilterList()
-  const typeData = typeDataRes?.data
+  const [typeData, setTypeData] = useState({})
+  useEffect(() => {
+    getServerModelFilterList().then(res => {
+      setTypeData(res?.data)
+    })
+  }, [])
   const { company = null, cate = null } = searchParams
 
-  const modelDataRes = await getServerModelList({
-    companyId: company || '',
-    cate: cate
-  })
+  // console.log('typeData', typeData)
+  // const modelDataRes = await getServerModelList({
+  //   companyId: company || '',
+  //   cate: cate
+  // })
   const modalPriceTag = {
     title: '模型价格',
     list: [
       {
         name: '全部',
-        value: 'all',
+        value: 0,
         link: ''
       },
       {
         name: '收费',
-        value: 'charge',
+        value: 1,
         link: ''
       },
       {
         name: '免费',
-        value: 'free',
+        value: 2,
         link: ''
       }
     ]
   }
 
-  const usageScenario = {
-    title: '使用场景',
-    list: [
-      {
-        name: '全部',
-        value: 'all',
-        link: ''
-      },
-      {
-        name: '视觉处理',
-        value: 'charge',
-        link: ''
-      },
-      {
-        name: '文本处理',
-        value: 'free4',
-        link: ''
-      },
-      {
-        name: '图像处理',
-        value: 'free3',
-        link: ''
-      },
-      {
-        name: '多模态',
-        value: 'free2',
-        link: ''
-      },
-      {
-        name: '翻译',
-        value: 'free1',
-        link: ''
-      }
-    ]
+  const modelData = []
+
+  const handleList = (list, fn) => {
+    if(!list || list.length === 0) return []
+    return fn(list)
   }
-
-  const supplier = {
-    title: '提供公司',
-    list: [
-      {
-        name: '全部',
-        value: 'all',
-        link: ''
-      },
-      {
-        name: 'Open AI',
-        value: 'charge',
-        link: ''
-      },
-      {
-        name: '百度',
-        value: 'free4',
-        link: ''
-      },
-      {
-        name: '讯飞星火',
-        value: 'free3',
-        link: ''
-      },
-      {
-        name: '百川',
-        value: 'free2',
-        link: ''
-      },
-      {
-        name: '阿里',
-        value: 'free1',
-        link: ''
-      }
-    ]
-  }
-
-  const modelData = modelDataRes?.data
-
+console.log('modelData', typeData)
   return (
     <div className="h-screen pt-[104px] lg:px-16 bg-[#F4F5FE]">
       <TagListComponent {...modalPriceTag} />
-      <TagListComponent {...usageScenario} />
-      <TagListComponent {...supplier} />
+      <TagListComponent {...{
+        title: '使用场景',
+        list: handleList(typeData.cateList, (list) => list.map(item => ({name: item.cateName, value: item.cateId})))
+      }} />
+      <TagListComponent {...{
+        title: '提供公司',
+        list: handleList(typeData.companyList, (list) => list.map(item => ({name: item.companyName, value: item.companyId})))
+      }} />
       <div className="mt-[94px]">
         <Row gutter={[16,16]}>
           <Col span={8}>
