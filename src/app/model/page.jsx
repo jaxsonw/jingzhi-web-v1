@@ -304,7 +304,8 @@ const ModelCard = (props) => {
       </div>
       <div className="btn flex transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
         <div
-          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">查看详情
+          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
+          <Link href={`/modelDetail?modelName=${props?.modelName}`}>查看详情</Link>  
         </div>
         <div
           className="ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center text-[#fff] bg-[#3162FF]">
