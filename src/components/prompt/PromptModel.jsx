@@ -522,7 +522,7 @@ const PromptModel = (props) => {
                             <div className='flex justify-between items-center mb-[8px]'>
                               <span className='text-base font-medium	leading-[22px] text-[18px] max-w-[200px] line-clamp-1'>{items?.name}</span>
                               <div
-                                className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] p-[4px] rounded'
+                                className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] p-[4px] rounded cursor-pointer'
                                 onClick={() => {
                                   copyValue(items.prompt)
                                   message.success('复制成功')
