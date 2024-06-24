@@ -266,3 +266,5 @@ export const openAi = (data, options, oldCOntent = '') => {
     close,
   }
 }
+
+export const getAppTagList =(params)=>request.post(`${BASE_URL}/v1/service/appTagList`, params)

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Radio, Button, Modal, Spin, Dropdown, Input, Tooltip, Pagination, Drawer, Form, message, Row, Col } from 'antd'
 import { getUserAppList, createApp, deleteApp } from '../../services/promptService'
-import { isEmpty, mapKeys, map, debounce } from 'lodash'
+import { isEmpty, mapKeys, map, debounce, set } from 'lodash'
 import { copyValue } from '../../utils/index'
 import { FaRegCopy } from "react-icons/fa";
 import { CodeEdit } from './consts'
@@ -88,7 +88,7 @@ const TAG_COLOR = {
 const PromptModel = (props) => {
   const router = useRouter()
 
-  const { appList, setAppList, appListLoading, appListPage, setAppListLoading, setAppListPage, getAppListData, cateList, setAppListCid, appListCid, appListSearch, setAppListSearch } = props
+  const { appList, setAppList, appListLoading, appListPage, setAppListLoading, setAppListPage, getAppListData, cateList, setAppListCid, appListCid, appListSearch, setAppListSearch,appTagList,getAppTagList } = props
   const [modelType, setMobelType] = useState(1)
   const [createOpen, setCreateOpen] = useState(false)
   const [drawerDom, setDrawerDom] = useState('')
@@ -98,6 +98,8 @@ const PromptModel = (props) => {
   const [drawerTitle, setDrawerTitle] = useState(DRAWER_TITLE.NEW)
 
   const [appType, setAppType] = useState(2)
+  
+  const [appTagId, setAppTagId] = useState("")
 
   const { TextArea } = Input
   const [form] = Form.useForm()
@@ -110,7 +112,7 @@ const PromptModel = (props) => {
         setAppListLoading(false)
         setAppList(res.data)
       }
-    }else if(res.code === 40001){
+    } else if (res.code === 40001) {
       setAppListLoading(false)
       setAppList([])
       message.error("请先登录")
@@ -407,14 +409,28 @@ const PromptModel = (props) => {
         keywords: "",
         page: appListPage,
         pageSize: 12,
-        type: ""
+        type: "",
       })
     } else {
       getUserData()
     }
   }
 
-
+  const appTagSelect = async (id) => {
+    if (appTagId !== id) {
+      setAppTagId(id)
+      setAppListLoading(true)
+      getAppListData({
+        cid: appListCid,
+        filterType: 1,
+        keywords: "",
+        page: appListPage,
+        pageSize: 12,
+        type: "",
+        tagId: id
+      })
+    }
+  }
 
 
 
@@ -437,9 +453,11 @@ const PromptModel = (props) => {
   }
 
   const handleCitChange = (e) => {
-    if(appListPage!==1)setAppListPage(1)
+    if (appListPage !== 1) setAppListPage(1)
+    setAppTagId("")
     setAppListCid(e.target.value)
     setAppListLoading(true)
+    getAppTagList({cid:e.target.value})
   }
 
   const tabList = map([{ label: '全部', cid: '' }, ...cateList], obj => {
@@ -501,11 +519,23 @@ const PromptModel = (props) => {
         </div>
       }
 
-      <div>
+      {appTagList.length >0 && <div className='flex max-w-full flex-wrap'>
+        {
+          appTagList.map((items) => {
+            const randomNumber = getRandomIntegerFromArray(numbers);
+            return <div key={items.id}
+              className='cursor-pointer mb-[10px] mr-[16px] border border-solid border-[#140E351A] flex items-center bg-[#FFFFFFFF] rounded leading-[20px] text-[14px] text-[#140E35FF] px-[8px] py-[4px]'
+              onClick={() => {appTagSelect(items.id) }}
+            >
+              <span className={`block rounded-[100px] w-[8px] h-[8px] mt-[2px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
+              <span className='ml-[4px]'>{items.name}</span>
+            </div>
+          })
+        }
+      </div>}
 
-      </div>
       <Spin className='h-[calc(100vh_-_384px)] ' spinning={appListLoading}>
-        <div className='template flex flex-wrap  gap-4 pb-[30px]'>
+        <div className='template flex flex-wrap  gap-4 pb-[30px] mt-[23px]'>
           {
             appList?.recordList?.length > 0 ? (
               <>

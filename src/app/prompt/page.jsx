@@ -6,7 +6,7 @@ import { Tabs } from 'antd'
 import PromptTextarea from '../../components/prompt/PromptTextarea'
 import PromptModel from '../../components/prompt/PromptModel'
 
-import { getAppList, getCateList } from '../../services/promptService'
+import { getAppList, getAppTagList, getCateList } from '../../services/promptService'
 import { getKeyList } from '../../services/key'
 
 
@@ -20,6 +20,7 @@ const Prompt = () => {
 
   const [cateList, setCateList] = useState([])
 
+  const [appTagList, setAppTagList] = useState([])
 
   const [appListLoading, setAppListLoading] = useState(false);
 
@@ -32,6 +33,17 @@ const Prompt = () => {
       }else{
         setAppListLoading(false)
         setAppList([])
+      }
+    }
+  }
+
+  const getAppTagListData = async(cidParams)=>{
+    const res = await getAppTagList(cidParams)
+    if(res.code === 0) {
+      if (res.data.recordList && res.data.recordList.length > 0) {
+        setAppTagList(res.data.recordList)
+      }else{
+        setAppTagList([])
       }
     }
   }
@@ -54,9 +66,11 @@ const Prompt = () => {
       page: 1,
       pageSize: 12,
       search: "",
-      type: ""
+      type: "",
+      tagId:""
     })
     getClietCateList()
+    getAppTagListData({cid:""})
   }, [])
 
 
@@ -100,6 +114,8 @@ const Prompt = () => {
           appListPage={appListPage}
           appListSearch={appListSearch}
           setAppListSearch={setAppListSearch}
+          appTagList={appTagList}
+          getAppTagList={getAppTagListData}
         />,
       },
       {
