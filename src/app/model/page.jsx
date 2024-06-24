@@ -56,8 +56,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -80,8 +80,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -104,8 +104,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -128,8 +128,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -152,8 +152,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -176,8 +176,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -200,8 +200,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -224,8 +224,8 @@ const Loading = () => {
                 </span>
                 <span
                   className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">
-                    <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
-                  </span>
+                  <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
+                </span>
               </div>
               <div className="flex items-center divide-y pb-[18px]">
                 <div className="h-[20px] w-[200px] bg-slate-200 rounded"></div>
@@ -303,14 +303,18 @@ const ModelCard = (props) => {
         <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
       </div>
       <div className="btn flex transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
-        <div
-          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">查看详情
-        </div>
-        <div
-          className="ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center text-[#fff] bg-[#3162FF]">
-          <Link className="text-[#fff]"
-                href={`/playground/?model=${props?.apiModelName}&modelType=message`}>立即体验</Link>
-        </div>
+        <Link href={`/modelDetail?modelName=${props?.modelName}`} 
+        className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
+          <div>
+            查看详情
+          </div>
+        </Link>
+        <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center text-[#fff] bg-[#3162FF]"
+          href={`/playground/?model=${props?.apiModelName}&modelType=message`}>
+          <div>
+            立即体验
+          </div>
+        </Link>
       </div>
     </div>
   )
@@ -368,7 +372,7 @@ const Model = ({ params, searchParams }) => {
     <div className="h-screen overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE]">
       {
         loading ?
-          <Loading/>
+          <Loading />
           :
           <>
             <TagListComponent {...modalPriceTag} />
