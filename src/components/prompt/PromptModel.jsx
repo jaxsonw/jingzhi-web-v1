@@ -670,8 +670,12 @@ const PromptModel = (props) => {
                         </div>
                         <div className="flex items-center pt-[10px] mt-[12px] border-solid border-t border-slate-100	text-[#140E35FF]">
                           <Link className='flex flex-1 justify-center cursor-pointer hover:text-[#1677ff]'
-                            // onClick={() => handelDetailDrawer(items)}
-                            href={`/promptDetail?appId=${items.appId?items.appId:""}&name=${items.name?items.name:""}&cid=${items.cid?items.cid:""}&cName=${items.cName?items.cName:""}&viewNum=${items.viewNum?items.viewNum:""}&praiseNum=${items.praiseNum?items.praiseNum:""}&collectNum=${items.collectNum?items.collectNum:""}&prompt=${items.prompt?encodeURIComponent(items.prompt):""}&tagList=${JSON.stringify(items.tagList)}`}
+                            onClick={() => {
+                              // handelDetailDrawer(items)
+                              localStorage.setItem("agicto_PromptData", JSON.stringify(items))
+                            }}
+                            // href={`/promptDetail?appId=${items.appId ? items.appId : ""}&name=${items.name ? items.name : ""}&cid=${items.cid ? items.cid : ""}&cName=${items.cName ? items.cName : ""}&viewNum=${items.viewNum ? items.viewNum : ""}&praiseNum=${items.praiseNum ? items.praiseNum : ""}&collectNum=${items.collectNum ? items.collectNum : ""}&prompt=${items.prompt ? encodeURIComponent(items.prompt) : ""}&tagList=${JSON.stringify(items.tagList)}`}
+                            href={`/promptDetail`}
                           >
                             <PieChartOutlined className='mr-[2px]' />
                             <span className='ml-[4px]'>查看详情</span>
