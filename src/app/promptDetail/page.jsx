@@ -63,31 +63,31 @@ const PromptDetail = () => {
     const router = useRouter()
 
     useEffect(() => {
-        const data = JSON.parse(searchParams.get("data"))
-        if (searchParams.get("data")) {
-            setPromptData(data)
-            setIsLoading(false)
-        } else {
-            message.error("数据获取失败")
-        }
+        const data = {
+            appId: searchParams.get("appId"),
+            name: searchParams.get("name"),
+            cid: searchParams.get("cid"),
+            cName: searchParams.get("cName"),
+            viewNum: searchParams.get("viewNum"),
+            praiseNum: searchParams.get("praiseNum"),
+            collectNum: searchParams.get("collectNum"),
+            prompt: searchParams.get("prompt"),
+            tagList: JSON.parse(searchParams.get("tagList"))
+        } 
+        console.log(data)
+        setPromptData(data)
+        setIsLoading(false)
+
     }, [])
 
     const [promptData, setPromptData] = useState({
         appId: "",
         name: "",
-        desc: "",
-        icon: "",
-        iconBackground: "",
-        type: 0,
-        isWorkSpace: false,
-        status: 0,
-        copyright: "",
-        uid: 0,
         cid: 0,
         cName: "",
-        userPeople: 0,
-        open: 0,
-        chatNum: 0,
+        viewNum: "",
+        praiseNum: "",
+        collectNum: "",
         prompt: "",
         tagList: []
     })
