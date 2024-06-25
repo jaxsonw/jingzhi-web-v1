@@ -21,6 +21,7 @@ const Prompt = () => {
   const [cateList, setCateList] = useState([])
 
   const [appTagList, setAppTagList] = useState([])
+  const [appTagId, setAppTagId] = useState("")
 
   const [appListLoading, setAppListLoading] = useState(false);
 
@@ -88,7 +89,8 @@ const Prompt = () => {
       keywords: appListSearch,
       page: appListPage,
       pageSize: 12,
-      type: ""
+      type: "",
+      tagId:appTagId
     })
   }, [appListPage, appListCid, appListSearch])
 
@@ -116,6 +118,8 @@ const Prompt = () => {
           setAppListSearch={setAppListSearch}
           appTagList={appTagList}
           getAppTagList={getAppTagListData}
+          appTagId={appTagId}
+          setAppTagId={setAppTagId}
         />,
       },
       {
