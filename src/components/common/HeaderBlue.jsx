@@ -15,7 +15,7 @@ import InviteModal from './InviteModal'
 const hiddenPath = ['/space', '/login']
 
 const navigation = [
-  { name: 'ACICTO', href: '/' },
+  { name: 'AGICTO', href: '/' },
   { name: '模型广场', href: '/model', target: '_self' },
   // { name: '模型排行榜', href: '/llm-leaderboard', target: '_self' },
   { name: '调试平台', href: '/playground', target: '_self' },
