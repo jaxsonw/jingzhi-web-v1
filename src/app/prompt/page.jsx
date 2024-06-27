@@ -8,6 +8,7 @@ import PromptModel from '../../components/prompt/PromptModel'
 
 import { getAppList, getAppTagList, getCateList } from '../../services/promptService'
 import { getKeyList } from '../../services/key'
+import { useSearchParams } from 'next/navigation';
 
 
 const Prompt = () => {
@@ -31,22 +32,27 @@ const Prompt = () => {
       if (res.data.recordList && res.data.recordList.length > 0) {
         setAppListLoading(false)
         setAppList(res.data)
-      }else{
+      } else {
         setAppListLoading(false)
         setAppList([])
       }
     }
   }
 
-  const getAppTagListData = async(cidParams)=>{
-    const res = await getAppTagList(cidParams)
-    if(res.code === 0) {
-      if (res.data.recordList && res.data.recordList.length > 0) {
-        setAppTagList(res.data.recordList)
-      }else{
-        setAppTagList([])
+  const getAppTagListData = async (cidParams) => {
+    if (cidParams) {
+      const res = await getAppTagList(cidParams)
+      if (res.code === 0) {
+        if (res.data.recordList && res.data.recordList.length > 0) {
+          setAppTagList(res.data.recordList)
+        } else {
+          setAppTagList([])
+        }
       }
+    }else{
+      setAppTagList([])
     }
+
   }
 
   const getKeyListData = async () => {
@@ -58,20 +64,34 @@ const Prompt = () => {
     }
   }
 
+  const searchParams = useSearchParams()
+
   useEffect(() => {
     setAppListLoading(true)
     getKeyListData()
+    const cid = searchParams.get("cid")
+    const page = searchParams.get("page")
+    const tag = searchParams.get("tag")
+    if(cid)setAppListCid(parseInt(cid))
+    if(page)setAppListPage(page)
+    if(tag)setAppTagId(tag)
+    console.log("cid:"+cid,"page:"+page,"tag"+tag)
     getAppListData({
-      cid: "",
+      cid: cid ? cid : 1,
       filterType: 1,
-      page: 1,
+      page: page ? page : 1,
       pageSize: 12,
       search: "",
       type: "",
-      tagId:""
+      tagId: tag ? tag : ""
     })
     getClietCateList()
-    getAppTagListData({cid:""})
+    if(cid){
+      getAppTagListData({ cid: cid })
+    }else{
+      setAppTagList([])
+    }
+    
   }, [])
 
 
@@ -90,7 +110,7 @@ const Prompt = () => {
       page: appListPage,
       pageSize: 12,
       type: "",
-      tagId:appTagId
+      tagId: appTagId
     })
   }, [appListPage, appListCid, appListSearch])
 

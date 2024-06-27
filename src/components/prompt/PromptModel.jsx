@@ -395,10 +395,16 @@ const PromptModel = (props) => {
 
   const handleAppListaData = (e) => {
     setAppListLoading(true)
-
     setAppListPage(e)
+    setUrl(e, appListCid, appTagId)
   }
 
+  const setUrl = (page, cid, tagId) => {
+    const url = window.location
+    const arr = url.pathname.split('?')
+    arr.pop()
+    history.pushState("", "", `?page=${page || 1}&cid=${cid || ""}&tag=${tagId || ""}`)
+  }
 
   const handelModel = async (e) => {
     setAppListLoading(true)
@@ -432,6 +438,7 @@ const PromptModel = (props) => {
         type: "",
         tagId: id
       })
+      setUrl(appListPage,appListCid,id)
     }
   }
 
@@ -461,6 +468,7 @@ const PromptModel = (props) => {
     setAppListCid(e.target.value)
     setAppListLoading(true)
     getAppTagList({ cid: e.target.value })
+    setUrl(1, e.target.value, "")
   }
 
   const tabList = map([{ label: '全部', cid: '' }, ...cateList], obj => {
@@ -545,7 +553,7 @@ const PromptModel = (props) => {
                 {
                   appList?.recordList?.map((items) => {
                     return (
-                      <div key={items?.appId} className='templateCard  w-[calc(33.33%_-_11px)]  bg-[#fff] rounded-xl px-[16px] pt-[16px] pb-[10px] w-[24%] min-h-[240px]	relative	flex flex-col max-w-full overflow-hidden'>
+                      <div key={items?.appId} className='templateCard  bg-[#fff] rounded-xl px-[16px] pt-[16px] pb-[10px] w-[24%] min-h-[240px]	relative	flex flex-col max-w-full overflow-hidden'>
                         {/* <span className='absolute top-0 left-5 text-xs text-slate-500'>{items?.cName}</span> */}
                         <div className='templateContent flex items-start gap-4 flex-1 max-w-full'>
                           {/* <div className='content'>
@@ -670,12 +678,7 @@ const PromptModel = (props) => {
                         </div>
                         <div className="flex items-center pt-[10px] mt-[12px] border-solid border-t border-slate-100	text-[#140E35FF]">
                           <Link className='flex flex-1 justify-center cursor-pointer hover:text-[#1677ff]'
-                            onClick={() => {
-                              // handelDetailDrawer(items)
-                              localStorage.setItem("agicto_PromptData", JSON.stringify(items))
-                            }}
-                            // href={`/promptDetail?appId=${items.appId ? items.appId : ""}&name=${items.name ? items.name : ""}&cid=${items.cid ? items.cid : ""}&cName=${items.cName ? items.cName : ""}&viewNum=${items.viewNum ? items.viewNum : ""}&praiseNum=${items.praiseNum ? items.praiseNum : ""}&collectNum=${items.collectNum ? items.collectNum : ""}&prompt=${items.prompt ? encodeURIComponent(items.prompt) : ""}&tagList=${JSON.stringify(items.tagList)}`}
-                            href={`/promptDetail`}
+                            href={`/prompt/${items.appId}`}
                           >
                             <PieChartOutlined className='mr-[2px]' />
                             <span className='ml-[4px]'>查看详情</span>
