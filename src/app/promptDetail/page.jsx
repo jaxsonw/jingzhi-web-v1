@@ -102,7 +102,8 @@ const PromptDetail = () => {
     const [pageState, setPageState] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
 
-    return <div className="min-w-[1200px] max-w-[1200px] m-auto px-[120px] pt-[90px]">
+    return <div className="min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]">
+        <title>{`${promptData.name}`}</title>
         <div className="flex justify-between leading-[22px] text-base mb-[37px]">
             <div className="cursor-pointer flex items-center" onClick={() => { router.back() }}>
                 <img className="w-[10px] h-[14px] mr-[4px]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAACC0lEQVRIS62WvU7bUBSAz73XJrabOA1UhAxUNDRLt1ZN2foWeQcYujAwAlHHUjWo7QaiUtWtQ4r6AB2glSqVBbGgVFilYgQSHP/c3JtUrhMnim4SG9mz9fn8fOccI7jdg9Pa4uMOyPsyUXOUXW/d2GdrHgpF55VIUjl6jrH8SZaSOQQIKKvXGtZp4RbAEplWj5cY6nz2YRh4m3KXXZYt5/xlVCDW1UdFhDsfJaIVfJjLW6yxYzrGCgB0IgF1dWEJkFKVpTtzPsyhjDffZG28UYOa2ytdqBomEvOLipT6LhNt1is7b7uUcbOSymTKFxe/rME+TAQqyv28QrQDiSRzPoxyxpuvZmxWNsBwhps6DojTWv4JIOWrTLSsD3MY5fX3TfvPKgC0RYaMAJaIrp48BdSuylJyzlPDg7V4/Z3pw/43ICTQV4Nj9KHfTcopv3rbjWwkTNTlUWrsmo6xPC4yYZd19cEzQIkvk9QYN11BDQVqcMbNrbSdLf+FH3bYEQ2Aulb4OSWliz01Wux6756DXojUCBVh7MBuyod951wv5deiaQgVofeSruWLAFP7Q02pZG28PjivoYEAEK82/pfjFbubTayjF1QozuXQL3uc6yugihdsczuVubsZecH2qOITYFVm7PkNA74Fi3bixh5wLpRSUYCBUnGd0UApwaH/3bBOH0Y6o0PjNvJX5B/ruW4syLef1AAAAABJRU5ErkJggg==" />
