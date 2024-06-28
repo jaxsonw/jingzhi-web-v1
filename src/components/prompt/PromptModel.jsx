@@ -534,12 +534,21 @@ const PromptModel = (props) => {
         {
           appTagList.map((items) => {
             const randomNumber = getRandomIntegerFromArray(numbers);
-            return <Link href={`/prompt?page=${appListPage}&cid=${appListCid}&tag=${items.id}`}
-              onClick={() => { return false }}
+            return <Link
+              href={`/prompt?page=${appListPage}&cid=${appListCid}&tag=${items.id}`}
+              className='cursor-default'
+              onClick={(e) => {
+                e.preventDefault()
+                return false
+              }}
             >
               <div key={items.id}
                 className='cursor-pointer mb-[10px] mr-[16px] border border-solid border-[#140E351A] flex items-center bg-[#FFFFFFFF] rounded leading-[20px] text-[14px] text-[#140E35FF] px-[8px] py-[4px]'
-                onClick={() => { appTagSelect(items.id) }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  appTagSelect(items.id)
+                  return false
+                }}
               >
                 <span className={`block rounded-[100px] w-[8px] h-[8px] mt-[2px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
                 <span className='ml-[4px]'>{items.name}</span>
@@ -560,16 +569,16 @@ const PromptModel = (props) => {
                       <Link
                         href={`/prompt/${items.appId}`}
                         key={items?.appId}
-                        onClick={(e) => { 
+                        onClick={(e) => {
                           e.preventDefault()
-                          return false 
+                          return false
                         }}
                         className='templateCard cursor-default bg-[#fff] rounded-xl px-[16px] pt-[16px] pb-[10px] w-[24%] min-h-[240px]	relative	flex flex-col max-w-full overflow-hidden'
                       >
                         {/* <span className='absolute top-0 left-5 text-xs text-slate-500'>{items?.cName}</span> */}
                         <div
                           className='templateContent flex items-start gap-4 flex-1 max-w-full'
-                          onClick={(e)=>{e.preventDefault()}}
+                          onClick={(e) => { e.preventDefault() }}
                         >
                           {/* <div className='content'>
                             <img className='mt-[4px]' src="https://img.alicdn.com/imgextra/i2/O1CN01enEjUH1w4NvLmVzTZ_!!6000000006254-55-tps-40-40.svg" />
