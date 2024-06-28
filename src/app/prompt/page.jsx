@@ -49,7 +49,7 @@ const Prompt = () => {
           setAppTagList([])
         }
       }
-    }else{
+    } else {
       setAppTagList([])
     }
 
@@ -72,12 +72,12 @@ const Prompt = () => {
     const cid = searchParams.get("cid")
     const page = searchParams.get("page")
     const tag = searchParams.get("tag")
-    if(cid)setAppListCid(parseInt(cid))
-    if(page)setAppListPage(page)
-    if(tag)setAppTagId(tag)
-    console.log("cid:"+cid,"page:"+page,"tag"+tag)
+    if (cid) setAppListCid(parseInt(cid))
+    if (page) setAppListPage(page)
+    if (tag) setAppTagId(tag)
+    console.log("cid:" + cid, "page:" + page, "tag" + tag)
     getAppListData({
-      cid: cid ? cid : 1,
+      cid: cid ? cid : "",
       filterType: 1,
       page: page ? page : 1,
       pageSize: 12,
@@ -86,12 +86,12 @@ const Prompt = () => {
       tagId: tag ? tag : ""
     })
     getClietCateList()
-    if(cid){
+    if (cid) {
       getAppTagListData({ cid: cid })
-    }else{
-      setAppTagList([])
+    } else {
+      getAppTagListData({ cid: "" })
     }
-    
+
   }, [])
 
 

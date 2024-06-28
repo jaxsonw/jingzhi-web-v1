@@ -438,7 +438,7 @@ const PromptModel = (props) => {
         type: "",
         tagId: id
       })
-      setUrl(appListPage,appListCid,id)
+      setUrl(appListPage, appListCid, id)
     }
   }
 
@@ -534,13 +534,17 @@ const PromptModel = (props) => {
         {
           appTagList.map((items) => {
             const randomNumber = getRandomIntegerFromArray(numbers);
-            return <div key={items.id}
-              className='cursor-pointer mb-[10px] mr-[16px] border border-solid border-[#140E351A] flex items-center bg-[#FFFFFFFF] rounded leading-[20px] text-[14px] text-[#140E35FF] px-[8px] py-[4px]'
-              onClick={() => { appTagSelect(items.id) }}
+            return <Link href={`/prompt?page=${appListPage}&cid=${appListCid}&tag=${items.id}`}
+              onClick={() => { return false }}
             >
-              <span className={`block rounded-[100px] w-[8px] h-[8px] mt-[2px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
-              <span className='ml-[4px]'>{items.name}</span>
-            </div>
+              <div key={items.id}
+                className='cursor-pointer mb-[10px] mr-[16px] border border-solid border-[#140E351A] flex items-center bg-[#FFFFFFFF] rounded leading-[20px] text-[14px] text-[#140E35FF] px-[8px] py-[4px]'
+                onClick={() => { appTagSelect(items.id) }}
+              >
+                <span className={`block rounded-[100px] w-[8px] h-[8px] mt-[2px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
+                <span className='ml-[4px]'>{items.name}</span>
+              </div>
+            </Link>
           })
         }
       </div>}
@@ -553,20 +557,33 @@ const PromptModel = (props) => {
                 {
                   appList?.recordList?.map((items) => {
                     return (
-                      <div key={items?.appId} className='templateCard  bg-[#fff] rounded-xl px-[16px] pt-[16px] pb-[10px] w-[24%] min-h-[240px]	relative	flex flex-col max-w-full overflow-hidden'>
+                      <Link
+                        href={`/prompt/${items.appId}`}
+                        key={items?.appId}
+                        onClick={(e) => { 
+                          e.preventDefault()
+                          return false 
+                        }}
+                        className='templateCard cursor-default bg-[#fff] rounded-xl px-[16px] pt-[16px] pb-[10px] w-[24%] min-h-[240px]	relative	flex flex-col max-w-full overflow-hidden'
+                      >
                         {/* <span className='absolute top-0 left-5 text-xs text-slate-500'>{items?.cName}</span> */}
-                        <div className='templateContent flex items-start gap-4 flex-1 max-w-full'>
+                        <div
+                          className='templateContent flex items-start gap-4 flex-1 max-w-full'
+                          onClick={(e)=>{e.preventDefault()}}
+                        >
                           {/* <div className='content'>
                             <img className='mt-[4px]' src="https://img.alicdn.com/imgextra/i2/O1CN01enEjUH1w4NvLmVzTZ_!!6000000006254-55-tps-40-40.svg" />
                           </div> */}
                           <div className='content flex-1 flex flex-col max-w-full overflow-hidden'>
                             <div className='flex justify-between items-center mb-[8px]'>
-                              <span className='text-base font-medium	leading-[22px] text-[18px] max-w-[200px] line-clamp-1'>{items?.name}</span>
+                              <span className='text-base font-medium	leading-[22px] text-[18px] max-w-[200px] line-clamp-1 text-[#140E35FF]'>{items?.name}</span>
                               <div
                                 className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] p-[4px] rounded cursor-pointer'
-                                onClick={() => {
+                                onClick={(e) => {
+                                  e.preventDefault()
                                   copyValue(items.prompt)
                                   message.success('复制成功')
+                                  return false
                                 }} >
                                 <svg className='icon' xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
                                   <title>复制</title>
@@ -689,8 +706,7 @@ const PromptModel = (props) => {
                           <span className='flex flex-1 justify-center cursor-pointer hover:text-[#1677ff]' onClick={() => { router.push(`/prompt/${items?.appId}`) }}>对话</span>
 
                         </div>
-
-                      </div>
+                      </Link>
                     )
                   })
                 }
@@ -714,7 +730,7 @@ const PromptModel = (props) => {
         </div>
 
 
-      </Spin>
+      </Spin >
       <Drawer
         title={drawerTitle}
         placement="right"
@@ -737,7 +753,7 @@ const PromptModel = (props) => {
         <p className='mb-[16px]'>调用Prompt，可直接复制cUrl命令请求。</p>
         {mobelCodeDom}
       </Modal>
-    </div>
+    </div >
   )
 }
 
