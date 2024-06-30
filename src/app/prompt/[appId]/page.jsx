@@ -112,15 +112,15 @@ const PromptDetail = ({ params: appId }) => {
 
     return <div className="min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]">
         <title>{`${promptData.name}`}</title>
-        <meta name="description" content={promptData.desc}/>
+        <meta name="description" content={promptData.desc} />
         <meta name="keywords" content={`prompt 提示词 agicto`} />
         <div className="flex justify-between leading-[22px] text-base mb-[37px]">
             <div className="cursor-pointer flex items-center"
                 onClick={() => {
                     router.back()
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         location.reload()
-                    },300)
+                    }, 300)
                 }}>
                 <img className="w-[10px] h-[14px] mr-[4px]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAACC0lEQVRIS62WvU7bUBSAz73XJrabOA1UhAxUNDRLt1ZN2foWeQcYujAwAlHHUjWo7QaiUtWtQ4r6AB2glSqVBbGgVFilYgQSHP/c3JtUrhMnim4SG9mz9fn8fOccI7jdg9Pa4uMOyPsyUXOUXW/d2GdrHgpF55VIUjl6jrH8SZaSOQQIKKvXGtZp4RbAEplWj5cY6nz2YRh4m3KXXZYt5/xlVCDW1UdFhDsfJaIVfJjLW6yxYzrGCgB0IgF1dWEJkFKVpTtzPsyhjDffZG28UYOa2ytdqBomEvOLipT6LhNt1is7b7uUcbOSymTKFxe/rME+TAQqyv28QrQDiSRzPoxyxpuvZmxWNsBwhps6DojTWv4JIOWrTLSsD3MY5fX3TfvPKgC0RYaMAJaIrp48BdSuylJyzlPDg7V4/Z3pw/43ICTQV4Nj9KHfTcopv3rbjWwkTNTlUWrsmo6xPC4yYZd19cEzQIkvk9QYN11BDQVqcMbNrbSdLf+FH3bYEQ2Aulb4OSWliz01Wux6756DXojUCBVh7MBuyod951wv5deiaQgVofeSruWLAFP7Q02pZG28PjivoYEAEK82/pfjFbubTayjF1QozuXQL3uc6yugihdsczuVubsZecH2qOITYFVm7PkNA74Fi3bixh5wLpRSUYCBUnGd0UApwaH/3bBOH0Y6o0PjNvJX5B/ruW4syLef1AAAAABJRU5ErkJggg==" />
                 <span>返回</span>
@@ -212,17 +212,17 @@ const PromptDetail = ({ params: appId }) => {
                 </div>
             </div>
         </Skeleton>
-        <div className="flex w-full mt-[28px] relative z-1 text-[16px]">
-            <div className={`px-[33px] py-[6px]  ${pageState === 0 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"} `}
+        <div className="flex w-full mt-[28px] relative top-[2px] z-0 text-[16px]">
+            <div className={`px-[33px] py-[6px]  ${pageState === 0 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"}`}
                 onClick={() => { if (pageState !== 0) setPageState(0) }}>
                 模板内容
             </div>
         </div>
-        <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
+        <div className="w-full h-[2px] bg-[#D8D8D8FF]"></div>
         <div className="w-full p-[20px]">
             <div>
                 <div className="flex items-center">
-                    <span className="text-[24px] leading-[33px] mr-[10px]">模板ID</span>
+                    <span className="text-[20px] leading-[33px] mr-[10px]">模板ID</span>
                     <span className="cursor-pointer"
                         onClick={() => {
                             if (promptData.appId) copyValue(promptData.appId)
@@ -249,7 +249,7 @@ const PromptDetail = ({ params: appId }) => {
                     {promptData.appId}
                 </div>}
                 <div className="flex items-center">
-                    <span className="text-[24px] leading-[33px] mr-[10px]">Prompt</span>
+                    <span className="text-[20px] leading-[33px] mr-[10px]">Prompt</span>
                     <span className="cursor-pointer"
                         onClick={() => {
                             if (promptData.prompt) copyValue(promptData.prompt)
@@ -272,13 +272,13 @@ const PromptDetail = ({ params: appId }) => {
                         </svg>
                     </span>
                 </div>
-                {promptData.prompt && <div className="border-solid border-[#979797FF] border rounded-[8px] p-[15px] mt-[10px] mb-[28px]">
-                    <Markdown className="text-[18px] leading-[22px]">
+                {promptData.prompt && <div className="border-solid border-[#D8D8D8FF] border rounded-[8px] p-[15px] mt-[10px] mb-[28px]">
+                    <Markdown className="text-[14px] leading-[22px]">
                         {promptData.prompt}
                     </Markdown>
                 </div>}
                 <div className="flex items-center">
-                    <span className="text-[24px] leading-[33px] mr-[10px]">代码示例</span>
+                    <span className="text-[20px] leading-[33px] mr-[10px]">代码示例</span>
                 </div>
             </div>
         </div>
