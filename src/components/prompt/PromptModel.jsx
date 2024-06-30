@@ -511,7 +511,7 @@ const PromptModel = (props) => {
             required
             allowClear
           />
-          <Button type="primary" onClick={handelCreateDrawer}>新增模版</Button>
+          <Button type="primary" onClick={handelCreateDrawer} className='bg-[#3162FFFF]'>新增模版</Button>
 
         </div>
       </div>
@@ -585,7 +585,7 @@ const PromptModel = (props) => {
                           </div> */}
                           <div className='content flex-1 flex flex-col max-w-full overflow-hidden'>
                             <div className='flex justify-between items-center mb-[8px]'>
-                              <span className='text-base font-medium	leading-[22px] text-[18px] max-w-[200px] line-clamp-1 text-[#140E35FF]'>{items?.name}</span>
+                              <span className='text-base font-[600]	leading-[22px]  text-[18px] max-w-[200px] line-clamp-1 text-[#140E35FF]'>{items?.name}</span>
                               <div
                                 className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] p-[4px] rounded cursor-pointer'
                                 onClick={(e) => {
@@ -684,7 +684,7 @@ const PromptModel = (props) => {
                                 {items?.prompt}
                               </div>
                             </Tooltip> */}
-                            <div className='line-clamp-4	text-[14px] text-[#140E35CC] min-h-[44px] mt-[8px] mb-[4px] flex-1 leading-[20px] max-w-full'>
+                            <div className='line-clamp-4	text-[13px] text-[#140E3580] min-h-[44px] mt-[8px] mb-[4px] flex-1 leading-[20px] max-w-full'>
                               {items?.prompt || "暂无prompt"}
                             </div>
                             <div className='content flex flex-wrap w-full'>
@@ -694,7 +694,7 @@ const PromptModel = (props) => {
                                   return (
                                     <div key={item.id} className={`flex items-center justify-center py-[2px] px-[10px] rounded mr-[5px] mt-[8px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].bg }}>
                                       <span className={`block rounded-[100px] w-[6px] h-[6px]`} style={{ backgroundColor: TAG_COLOR[randomNumber].color }}></span>
-                                      <span className={`text-sm text-nowrap ml-[6px]`} style={{ color: TAG_COLOR[randomNumber].color }}>{item.name}</span>
+                                      <span className={`text-[12px] text-nowrap ml-[6px]`} style={{ color: TAG_COLOR[randomNumber].color }}>{item.name}</span>
                                     </div>
                                   )
                                 })
