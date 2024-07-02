@@ -86,10 +86,10 @@ const PromptTextarea = (props) => {
             <span></span>
             <span>
               <span className='mr-[8px]'>
-                <span>{keys[0]?.key?.length}</span>
+                <span>{keys[0]?.key?.length||"0"}</span>
                 /1000
               </span>
-              <Button onClick={onGenerate} loading={loading} className='bg-[#fff]' type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
+              <Button onClick={onGenerate} loading={loading} type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
             </span>
           </div>
         </div>
