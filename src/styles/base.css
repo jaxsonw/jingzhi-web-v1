@@ -74,9 +74,9 @@ button, input[type="reset"], input[type="button"], input[type="submit"] {
     line-height: normal !important;
 }
 
-/* button {
+button {
     background: transparent;
-} */
+}
 
 button:hover {
     cursor: pointer;
