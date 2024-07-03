@@ -86,10 +86,10 @@ const PromptTextarea = (props) => {
             <span></span>
             <span>
               <span className='mr-[8px]'>
-                <span>{keys[0]?.key?.length||"0"}</span>
+                <span>{keys[0]?.key?.length || "0"}</span>
                 /1000
               </span>
-              <Button onClick={onGenerate} loading={loading} type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
+              <Button onClick={onGenerate} loading={loading} className='bg-[#3162FFFF] mr-[4px]' type="primary" size={'small'} disabled={isEmpty(keys[0]?.key)}>优化</Button>
             </span>
           </div>
         </div>
@@ -109,7 +109,7 @@ const PromptTextarea = (props) => {
           <div className='flex items-center justify-between mt-[8px]'>
             <span>本次消耗Token数为：</span>
             <span>
-              <Button type="primary" size={'small'} className='mr-[4px]' disabled={isEmpty(content)} onClick={() => copyValue(content)} >复制</Button>
+              <Button type="primary" size={'small'} className='bg-[#3162FFFF] mr-[4px]' disabled={isEmpty(content)} onClick={() => copyValue(content)} >复制</Button>
               {/* <Button type="primary" size={'small'} disabled={isEmpty(content)} >保存为模版</Button> */}
             </span>
           </div>
