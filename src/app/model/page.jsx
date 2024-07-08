@@ -414,18 +414,5 @@ const Model = (props) => {
   )
 }
 
-export async function getServerSideProps(req) {
-
-  console.log(req, 'reqreqreq')
-  // 将数据传递给页面组件
-  // return { props: { data } };
-  return {
-    props: {
-      appId: req?.params?.appId || '',
-      // header: false,
-    },
-  }
-}
-
 
 export default Model;
