@@ -303,8 +303,8 @@ const ModelCard = (props) => {
         <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
       </div>
       <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
-        <Link href={`/model/${props?.modelName}`} 
-        className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
+        <Link href={`/model/${props?.modelName}`}
+          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
           <div>
             查看详情
           </div>
@@ -319,7 +319,7 @@ const ModelCard = (props) => {
     </div>
   )
 }
-const Model = ({ params, searchParams }) => {
+const Model = (props) => {
   const [typeData, setTypeData] = useState({ cateList: [], companyList: [] })
   const [queryParams, setQueryParams] = useState({ companyId: 0, typeId: 0, freeType: 0 })
   const [modelDataRes, setModelDataRes] = useState([])
@@ -414,4 +414,18 @@ const Model = ({ params, searchParams }) => {
   )
 }
 
-export default Model
+export async function getServerSideProps(req) {
+
+  console.log(req, 'reqreqreq')
+  // 将数据传递给页面组件
+  // return { props: { data } };
+  return {
+    props: {
+      appId: req?.params?.appId || '',
+      // header: false,
+    },
+  }
+}
+
+
+export default Model;
