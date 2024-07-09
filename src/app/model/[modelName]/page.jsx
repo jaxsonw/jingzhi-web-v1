@@ -8,11 +8,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import Markdown from "react-markdown";
 
-const ModelDetail = ({params:{modelName}}) => {
+const ModelDetail = ({ params: { modelName } }) => {
     const router = useRouter()
 
     useEffect(() => {
-        // const modelName = searchParams.get("modelName")
+        modelName = decodeURIComponent(modelName)
         getData(modelName)
     }, [])
 
@@ -53,8 +53,8 @@ const ModelDetail = ({params:{modelName}}) => {
     }
 
     return <div className="min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]">
-        <title>{modelName+"模型详情"}</title>
-        <meta name="description" content={modelData.desc}/>
+        <title>{modelName + "模型详情"}</title>
+        <meta name="description" content={modelData.desc} />
         <meta name="keywords" content={`${modelName}`} />
         <div className="flex justify-between leading-[22px] text-base mb-[37px]">
             <div className="cursor-pointer flex items-center" onClick={() => { router.back() }}>
