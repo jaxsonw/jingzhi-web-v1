@@ -2,10 +2,10 @@
 
 import ModelContentServer from "./contentServer";
 
-const ModelDetailPage = ({ params: modelName }) => {
-    return (
+const ModelDetailLayout = ({params:modelName})=>{
+    return <div>
         <ModelContentServer modelName={modelName}></ModelContentServer>
-    )
+    </div>
 }
 
-export default ModelDetailPage
+export default ModelDetailLayout

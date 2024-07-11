@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import Markdown from "react-markdown";
 
-const ModelDetail = ({data}) => {
+const ModelDetail = ({ data }) => {
     const router = useRouter()
     const modelData = data
 
@@ -68,7 +68,6 @@ const ModelDetail = ({data}) => {
                                     <span>{Item}</span>
                                 </li>)
                             }
-
                         </ul>
                     </div>
                     <Link href={`/playground/?model=${modelData?.apiModelName}&modelType=message`}>
@@ -78,18 +77,6 @@ const ModelDetail = ({data}) => {
                     </Link>
                 </div>
             </div>
-            {/* <div className="flex  flex justify-between">
-                <Link href="">
-                    <div className="bg-[#F6F8FA] w-[104px] h-[40px] mr-[8px] leading-[40px] rounded border border-solid border-[#CBD2DC] text-center">
-                        模型精调
-                    </div>
-                </Link>
-                <Link href="">
-                    <div className="bg-[#F6F8FA] w-[104px] h-[40px] mr-[8px] leading-[40px] rounded border border-solid border-[#CBD2DC] text-center">
-                        模型推理
-                    </div>
-                </Link>
-            </div> */}
         </div>
         <div className="flex w-full mt-[28px] relative z-1 text-[16px]">
             <div className={`px-[33px] py-[6px]  ${pageState === 0 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"} `}
@@ -102,46 +89,8 @@ const ModelDetail = ({data}) => {
             </div>
         </div>
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
-        <div className="w-full">
-            <Markdown>{modelData.mdContent}</Markdown>
-            {/* <div className="mt-[48px]">
-                <div className="leading-[33px] text-[24px] text-[#140E35] mb-[10px]">豆包模型介绍</div>
-                <div className="leading-[25px] text-[18px] text-[#140E35CC]">
-                    豆包（Doubao）是一款由字节跳动研发的语言模型，通过便捷的自然语言交互，能够高效的完成互动对话、信息获取、协助创作等任务。
-                </div>
-            </div>
-            <div className="mt-[48px]">
-                <div className="leading-[33px] text-[24px] text-[#140E35] mb-[10px]">模型介绍</div>
-                <div className="leading-[25px] text-[18px] text-[#140E35CC]">
-                    Doubao-lite，拥有极致的响应速度，更好的性价比，为客户不同场景提供更灵活的选择。支持4k上下文窗口的推理和精调。
-                </div>
-            </div>
-            <div className="mt-[48px]">
-                <div className="leading-[33px] text-[24px] text-[#140E35] mb-[10px]">相关模型</div>
-                <div>
-                    <ul className="text-[18px] leading-[40px]">
-                        {
-                            modelType.map((item, index) => <li className="flex text-[18px]" key={"modelType" + index}>
-                                <div className="w-[7px] h-[7px] rounded-full bg-[#30BD71] leading-[40px] mt-[16px] mr-[9px] " />
-                                <span className="flex-1">
-                                    <Link className="text-[#3162FFFF]" href="">
-                                        {item.modelName}
-                                    </Link>
-                                    <span className="text-[#140E35CC]">{" " + item.describe}</span>
-                                </span>
-                            </li>)
-                        }
-                    </ul>
-                </div>
-            </div>
-            <div className="mt-[48px]">
-                <div className="leading-[33px] text-[24px] text-[#140E35] mb-[10px]">相关协议</div>
-                <div>
-                    {
-                        modelAgreement.map((item, index) => <div className="leading-[40px] text-[18px] text-[#140E35FF]" key={"modelAgreement" + index}>{item}</div>)
-                    }
-                </div>
-            </div> */}
+        <div className="w-full pt-4">
+            <Markdown className="text-[18px]">{modelData.mdContent}</Markdown>
         </div>
     </div>
 }
