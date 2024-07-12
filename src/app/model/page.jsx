@@ -270,7 +270,7 @@ const TagListComponent = (props) => {
 const ModelCard = (props) => {
   return (
     <div
-      className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#c5d2fd] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] bg-[#fff] rounded-[12px] ">
+      className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#c5d2fd] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] bg-[#fff] rounded-[12px] h-[220px]">
       {props.isFree === 2 && <div className="absolute top-[10px] right-[10px] bg-[#fff] text-[#3162FF] px-[8px] py-[2px] rounded-[2px]">免费</div>}
       <h4 className="text-[#140E35] text-[20px] pb-[8px]">{props.modelName}</h4>
       <div className="flex items-center pb-[18px]">
@@ -303,8 +303,8 @@ const ModelCard = (props) => {
         <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
       </div>
       <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
-        <Link href={`/model/${props?.modelName}`} 
-        className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
+        <Link href={`/model/${encodeURIComponent(props?.modelName)}`}
+          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
           <div>
             查看详情
           </div>
@@ -319,7 +319,7 @@ const ModelCard = (props) => {
     </div>
   )
 }
-const Model = ({ params, searchParams }) => {
+const Model = (props) => {
   const [typeData, setTypeData] = useState({ cateList: [], companyList: [] })
   const [queryParams, setQueryParams] = useState({ companyId: 0, typeId: 0, freeType: 0 })
   const [modelDataRes, setModelDataRes] = useState([])
@@ -414,4 +414,5 @@ const Model = ({ params, searchParams }) => {
   )
 }
 
-export default Model
+
+export default Model;

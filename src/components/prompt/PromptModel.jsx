@@ -534,9 +534,9 @@ const PromptModel = (props) => {
         {
           appTagList.map((items) => {
             const randomNumber = getRandomIntegerFromArray(numbers);
-            return <Link
+            if (items.status === 1) return <Link
               href={`/prompt?page=${appListPage}&cid=${appListCid}&tag=${items.id}`}
-              className='cursor-default'
+              className={`cursor-default ${items.status === 2 ? "none" : ""}`}
               onClick={(e) => {
                 e.preventDefault()
                 return false
