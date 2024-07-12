@@ -18,10 +18,15 @@ const getData = async (params) => {
     }
 }
 
-const ModelContentServer = async ({ modelName: modelName }) => {
+export async function getServerSideProps(context) {
+    console.log(context)
+    return context
+}
+
+const ModelContentServer = async ({ modelName: modelName, status }) => {
     const { data, flag } = await getData(modelName)
     if (flag) {
-        return <ModelDetail data={data}></ModelDetail>
+        return <ModelDetail data={data} status={status}></ModelDetail>
     } else {
         return <div className="h-screen text-center leading-[100vh] text-[30px]">{data}</div>
     }

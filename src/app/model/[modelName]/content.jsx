@@ -5,11 +5,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import Markdown from "react-markdown";
 
-const ModelDetail = ({ data }) => {
+const ModelDetail = ({ data, status }) => {
     const router = useRouter()
     const modelData = data
+    const [pageStatus, setPageState] = useState(status)
 
-    const [pageState, setPageState] = useState(0)
+    const setUrl = (status) => {
+        const url = window.location
+        const arr = url.pathname.split('?')
+        arr.pop()
+        history.pushState("", "", `?status=${status}`)
+    }
 
     return <div className="min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]">
         <title>{modelData.modelName + "模型详情"}</title>
@@ -79,18 +85,36 @@ const ModelDetail = ({ data }) => {
             </div>
         </div>
         <div className="flex w-full mt-[28px] relative z-1 text-[16px]">
-            <div className={`px-[33px] py-[6px]  ${pageState === 0 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"} `}
-                onClick={() => { if (pageState !== 0) setPageState(0) }}>
+            <div className={`px-[33px] py-[6px]  ${pageStatus == 1 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"} `}
+                onClick={() => {
+                    if (pageStatus != 1) {
+                        setPageState(1)
+                        setUrl(1)
+                    }
+                }}
+            >
                 模型介绍
             </div>
-            <div className={`px-[33px] py-[6px]  ${pageState === 1 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"}`}
-                onClick={() => { if (pageState !== 1) setPageState(1) }}>
+            <div className={`px-[33px] py-[6px]  ${pageStatus == 2 ? "border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default" : "cursor-pointer"}`}
+                onClick={() => {
+                    if (pageStatus != 2) {
+                        setPageState(2)
+                        setUrl(2)
+                    }
+                }}
+            >
                 API调用
             </div>
         </div>
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
         <div className="w-full pt-4">
-            <Markdown className="text-[18px]">{modelData.mdContent}</Markdown>
+            {
+                pageStatus == 1 && <Markdown className="text-[18px]">{modelData.mdContent}</Markdown>
+            }
+            {
+                pageStatus == 2 && <Markdown className="text-[18px]">{modelData.code_content}</Markdown>
+            }
+
         </div>
     </div>
 }
