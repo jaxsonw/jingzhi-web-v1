@@ -269,54 +269,63 @@ const TagListComponent = (props) => {
 
 const ModelCard = (props) => {
   return (
-    <div
-      className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#c5d2fd] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] bg-[#fff] rounded-[12px] h-[220px]">
-      {props.isFree === 2 && <div className="absolute top-[10px] right-[10px] bg-[#fff] text-[#3162FF] px-[8px] py-[2px] rounded-[2px]">免费</div>}
-      <h4 className="text-[#140E35] text-[20px] pb-[8px]">{props.modelName}</h4>
-      <div className="flex items-center pb-[18px]">
-        <span className="block p-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">支持{props.typeName}</span>
-        <span
-          className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">上下文长度: {props.contextLen} tokens</span>
-      </div>
-      <div className="flex items-center pb-[18px]">
-        <div>
-          <div className="flex items-end">
-            <span className="text-[12px]">￥</span>
-            <span className="text-2xl  ml-[4px] font-bold leading-[25px]">{props.inputPrice}</span>
-            <span
-              className="flex mb-[2px] ml-[4px] w-[34px] justify-center bg-[#eaefff] rounded-[2px] text-[12px] text-[#3162FF] items-center border border-[#3162FF] border-solid">输入</span>
-          </div>
-          <span className="text-[12px] text-[#140E35]">/ 百万tokens</span>
+    <Link
+      href={`/model/${encodeURIComponent(props?.modelName)}`}
+      onClick={(e) => {
+        e.preventDefault()
+        return false
+      }}
+    >
+      <div
+        className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#c5d2fd] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
+        {props.isFree === 2 && <div className="absolute top-[10px] right-[10px] bg-[#fff] text-[#3162FF] px-[8px] py-[2px] rounded-[2px]">免费</div>}
+        <h4 className="text-[#140E35] text-[20px] pb-[8px]">{props.modelName}</h4>
+        <div className="flex items-center pb-[18px]">
+          <span className="block p-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">支持{props.typeName}</span>
+          <span
+            className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">上下文长度: {props.contextLen} tokens</span>
         </div>
-        <div className="ml-[24px]">
-          <div className="flex items-end">
-            <span className="text-[12px]">￥</span>
-            <span className="text-2xl ml-[4px] font-bold leading-[25px]">{props.outputPrice}</span>
-            <span
-              className="flex mb-[2px] ml-[4px] w-[34px] justify-center bg-[#feeded] rounded-[2px] text-[12px] text-[#F24B42] items-center border border-[#F24B42] border-solid">输出</span>
+        <div className="flex items-center pb-[18px]">
+          <div>
+            <div className="flex items-end">
+              <span className="text-[12px]">￥</span>
+              <span className="text-2xl  ml-[4px] font-bold leading-[25px]">{props.inputPrice}</span>
+              <span
+                className="flex mb-[2px] ml-[4px] w-[34px] justify-center bg-[#eaefff] rounded-[2px] text-[12px] text-[#3162FF] items-center border border-[#3162FF] border-solid">输入</span>
+            </div>
+            <span className="text-[12px] text-[#140E35]">/ 百万tokens</span>
           </div>
-          <span className="text-[12px] text-[#140E35]">/ 百万tokens</span>
+          <div className="ml-[24px]">
+            <div className="flex items-end">
+              <span className="text-[12px]">￥</span>
+              <span className="text-2xl ml-[4px] font-bold leading-[25px]">{props.outputPrice}</span>
+              <span
+                className="flex mb-[2px] ml-[4px] w-[34px] justify-center bg-[#feeded] rounded-[2px] text-[12px] text-[#F24B42] items-center border border-[#F24B42] border-solid">输出</span>
+            </div>
+            <span className="text-[12px] text-[#140E35]">/ 百万tokens</span>
+          </div>
+        </div>
+        <div className="flex group-hover:hidden items-center pt-[10px] border-t border-solid border-[#D3D7FA]	">
+          {props.icon && <img className="w-[20px] rounded-full mr-[10px]" src={props.icon} alt="" />}
+          <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
+        </div>
+        <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
+          <Link
+            href={`/model/${encodeURIComponent(props?.modelName)}`}
+            className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
+            <div>
+              查看详情
+            </div>
+          </Link>
+          <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
+            href={`/playground/?model=${props?.apiModelName}&modelType=message`}>
+            <div>
+              立即体验
+            </div>
+          </Link>
         </div>
       </div>
-      <div className="flex group-hover:hidden items-center pt-[10px] border-t border-solid border-[#D3D7FA]	">
-        {props.icon && <img className="w-[20px] rounded-full mr-[10px]" src={props.icon} alt="" />}
-        <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
-      </div>
-      <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
-        <Link href={`/model/${encodeURIComponent(props?.modelName)}`}
-          className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
-          <div>
-            查看详情
-          </div>
-        </Link>
-        <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
-          href={`/playground/?model=${props?.apiModelName}&modelType=message`}>
-          <div>
-            立即体验
-          </div>
-        </Link>
-      </div>
-    </div>
+    </Link>
   )
 }
 const Model = (props) => {
