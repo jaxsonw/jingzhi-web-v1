@@ -23,7 +23,8 @@ const navigation = [
   { name: '开发文档', href: '/docs', target: '_self' },
   // { name: 'Chat Code', href: '/code', target: '_self' },
   // { name: '学习AGI', href: '/agi', target: '_self' },
-  { name: '关于我们', href: '/about', target: '_self' }
+  { name: '关于我们', href: '/about', target: '_self' },
+  { name: '更新日志', href: '/changelog', target: '_self' }
 ]
 
 const Header = () => {
