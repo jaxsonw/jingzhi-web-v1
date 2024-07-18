@@ -10,11 +10,16 @@ let errorTryCount = 0
  * email 邮箱
  * */
 export const getEmailCode = params => request.post(`${BASE_URL}/v1/sendVerifyCode`, params)
-
 /**
  *   email 邮箱
     verify_code 验证码
  * */
+
+//获取手机号验证码
+export const getMobileCode = params => request.post(`${BASE_URL}/v1/sendCode`, params)
+//手机验证码登录
+export const loginByMobile = params => request.post(`${BASE_URL}/v1/loginByMobile`, params)
+
 export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params)
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
 
@@ -77,7 +82,7 @@ export const chatCode = async (data, options) => {
         xtextContent += resultData?.choices[0].delta.content
         options.onMessage({ content: xtextContent })
       }
-    } catch (error) {}
+    } catch (error) { }
     if (e.data) {
     }
   }

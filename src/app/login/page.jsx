@@ -9,11 +9,12 @@ import { toast as Toast } from 'react-toastify'
 import BackgroundFirst from '../../components/login/BackgroundHeroFirst'
 import BackgroundSecond from '../../components/login/BackgroundHeroSecond'
 import BackgroundThird from '../../components/login/BackgroundHeroThird'
-import { getEmailCode, login } from '../../services/index'
+import { getEmailCode, getMobileCode, login, loginByMobile } from '../../services/index'
 import { vaildEmail, checkServer, isPc } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
 import { title } from '../../../config'
 import 'swiper/bundle'
+import { Segmented } from 'antd';
 
 SwiperCore.use([Autoplay])
 
@@ -22,9 +23,11 @@ export default function Login() {
   const [sendLoading, setSendLoading] = useState(false)
   const [submitLoading, setSubmitLoading] = useState(false)
   const [email, setEmail] = useState('')
+  const [mobile, setMobile] = useState('')
   const [code, setCode] = useState('')
   const [isCodeSent, setIsCodeSent] = useState(false)
   const [countdown, setCountdown] = useState(60)
+  const [pageStatus, setPageStatus] = useState(0)
 
   const handleSendCode = async () => {
     if (!vaildEmail(email)) {
@@ -48,24 +51,69 @@ export default function Login() {
     }
   }
 
-  const onSubmit = async () => {
-    const params = {
-      email,
-      verify_code: code,
-      inviteCode: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
-    }
-    if (!email || !code || submitLoading) return
-    setSubmitLoading(true)
-    const res = await login(params)
-    setSubmitLoading(false)
-    if (res?.code !== 0) {
-      Toast.error(res?.message || '登录失败～')
+  const handleSendMobileCode = async () => {
+    const regex = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+    if (!regex.test(mobile)) {
+      Toast.error('请检查手机号格式')
       return
     }
+    if (isCodeSent) return
+
+    setSendLoading(true)
+    const res = await getMobileCode({
+      mobile: mobile,
+    })
+    setSendLoading(false)
+    setIsCodeSent(true)
+
     if (res?.code === 0) {
-      localStorage.setItem('token', res?.data?.access_token)
-      location.href = '/'
-      Toast.success('登录成功～')
+      Toast.success('验证码发送成功～')
+    } else {
+      Toast.error(res?.message)
+    }
+  }
+
+  const onSubmit = async () => {
+    //邮箱登录
+    if (pageStatus === 0) {
+      const params = {
+        email,
+        verify_code: code,
+        inviteCode: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
+      }
+      if (!email || !code || submitLoading) return
+      setSubmitLoading(true)
+      const res = await login(params)
+      setSubmitLoading(false)
+      if (res?.code !== 0) {
+        Toast.error(res?.message || '登录失败～')
+        return
+      }
+      if (res?.code === 0) {
+        localStorage.setItem('token', res?.data?.access_token)
+        location.href = '/'
+        Toast.success('登录成功～')
+      }
+    }
+    //手机号登录
+    if (pageStatus === 1) {
+      const params = {
+        mobile,
+        verify_code: code
+      }
+      if (!mobile || !code || submitLoading) return
+      setSubmitLoading(true)
+      const res = await loginByMobile(params)
+      setSubmitLoading(false)
+      if (res?.code !== 0) {
+        Toast.error(res?.message || '登录失败～')
+        return
+      }
+      if (res?.code === 0) {
+        localStorage.setItem('token', res?.data?.access_token)
+        location.href = '/'
+        Toast.success('登录成功～')
+      }
     }
   }
 
@@ -98,8 +146,23 @@ export default function Login() {
                 <h2 className="  text-[32px]   leading-9 tracking-tight text-[#3162FF]">欢迎访问</h2>
                 <span className="spacing-10 text-[#8c8c8c] mt-2 tracking-widest	">大模型调用枢纽</span>
               </div>
-
-              <div className="mt-10">
+              <div className='mt-5'>
+                <Segmented
+                  options={["邮箱登录", "手机号登录"]}
+                  onChange={(value) => {
+                    switch (value) {
+                      case "邮箱登录":
+                        setPageStatus(0);
+                        break
+                      case "手机号登录":
+                        setPageStatus(1);
+                        break
+                      default:
+                    }
+                  }}
+                />
+              </div>
+              <div className="mt-5">
                 <div>
                   <div action="#" method="POST" className="space-y-6">
                     <div>
@@ -108,9 +171,16 @@ export default function Login() {
                       </label> */}
                       <div className="mt-2 border-b-2">
                         <input
-                          onChange={e => setEmail(e?.target?.value)}
-                          autoComplete="email"
-                          placeholder="请输入邮箱"
+                          value={pageStatus === 0 ? email : pageStatus === 1 ? mobile : ""}
+                          onChange={e => {
+                            if (pageStatus === 0) {
+                              setEmail(e?.target?.value)
+                            } else if (pageStatus === 1) {
+                              setMobile(e?.target.value)
+                            }
+                          }}
+                          autoComplete={pageStatus === 0 ? "email" : pageStatus === 1 ? "mobile tel" : ""}
+                          placeholder={pageStatus === 0 ? "请输入邮箱" : pageStatus === 1 ? "请输入手机号" : ""}
                           required
                           className="block px-2 w-full  py-1.5 shadow-sm border-none focus:ring-0 shadow-none border-b border !foucs:outline-offset-0 !foucs:outline-0 		 text-gray-600 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         />
@@ -130,7 +200,13 @@ export default function Login() {
                         />
                         <button
                           disabled={sendLoading || isCodeSent}
-                          onClick={handleSendCode}
+                          onClick={() => {
+                            if (pageStatus === 0) {
+                              handleSendCode()
+                            } else if (pageStatus === 1) {
+                              handleSendMobileCode()
+                            }
+                          }}
                           type="button"
                           className="rounded h-[45px] w-1/3  px-2 py-1 text-xs text-right font-semibold text-[#B5B5B5]   "
                         >
