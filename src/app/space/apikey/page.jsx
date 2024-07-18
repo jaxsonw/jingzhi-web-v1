@@ -7,6 +7,7 @@ import EditKeyModal from '../../../components/apiKeys/EditKeyModal'
 import DeleteConfirm from '../../../components/apiKeys/DeleteConfirm'
 import { getKeyList, editKey } from '../../../services/key'
 import { copyValue } from "../../../utils/index"
+import { Link } from '@nextui-org/react';
 
 const statuses = {
   1: {
@@ -68,11 +69,28 @@ export default function APIKeys() {
 
   return (
     <div>
+      <div className="absolute top-[90px] right-[80px] text-[14px] text-gray-500 cursor-pointer hover:text-blue-500">
+        <Link href="/docs">
+          如何使用你的key?
+        </Link>
+      </div>
       <DeleteConfirm open={deleteOpen} setOpen={setDeleteOpen} onOk={onDelete} onCancel={() => setDeleteOpen(false)} />
       <EditKeyModal open={open} setOpen={setOpen} onOk={onCreateCb} />
 
       <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-between">
+          <div className='flex items-center'>
+            <span className='text-[16px] font-bold mr-2'>Base URL:</span>
+            <span className='text-[16px] text-blue-500 mr-2'>https://api.agicto.cn/v1</span>
+            <div
+              className='cursor-pointer'
+              onClick={() => {
+                copyValue("https://api.agicto.cn/v1")
+                message.success('复制成功')
+              }} >
+              <FaRegCopy color="gray" size={16} />
+            </div>
+          </div>
           <button
             onClick={onCreate}
             type="button"
