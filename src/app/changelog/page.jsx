@@ -254,20 +254,26 @@ const updateLogs = [
                 ],
             },
         ],
-    }, 
+    },
 ];
 
 const generateMarkdown = (logs) => {
     return logs.map((log, index) => (
-        <div key={"mdlog" + index} id={"log-" + index} className="mb-4">
-            <h2 className="text-2xl font-bold mb-2">{log.date}</h2>
-            <div className='bg-purple-50 border rounded-md px-4 pt-4 border-blue-400 border-solid'>
+        <div key={"mdlog" + index} id={"log-" + index} className="mb-4 bg-gray-100 px-4 py-2 rounded-lg">
+            <h2 className="text-xl font-bold mb-2">{log.date}</h2>
+            <div className='px-4'>
                 {log.childs.map((child, childIndex) => (
-                    <div key={"logChild" + childIndex} id={"log-" + index + "-" + childIndex} className="pb-4">
-                        <h3 className="text-lg font-semibold">{child.title}</h3>
-                        <ul className="list-decimal list-inside">
+                    <div key={"logChild" + childIndex} id={"log-" + index + "-" + childIndex} className="pb-4 hover:bg-gray-200 rounded-lg p-2">
+                        <div className='flex justify-between'>
+                            <h3 className="text-[16px] font-semibold">{child.title}</h3>
+                            <span className='text-gray-400'>{child.time}</span>
+                        </div>
+                        <ul className="list-decimal list-inside pl-4">
                             {child.commitList.map((commit, commitIndex) => (
-                                <li key={commitIndex}>{commit.content}</li>
+                                <li key={commitIndex} className='mt-2 flex items-center'>
+                                    <span className='rounded-full h-2 w-2 bg-green-400 mr-2' />
+                                    <span className='text-gray-500'>{commit.content}</span>
+                                </li>
                             ))}
                         </ul>
                     </div>
@@ -305,7 +311,7 @@ const ChangelogPage = () => {
                 </Col>
                 <Col
                     id="changeLogContainer"
-                    className='h-full overflow-y-scroll flex-1'
+                    className='h-full overflow-y-scroll flex-1 pr-[20%] pt-4'
                 >
                     {generateMarkdown(updateLogs)}
                 </Col>
