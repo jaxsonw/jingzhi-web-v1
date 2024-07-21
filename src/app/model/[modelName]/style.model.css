@@ -1,7 +1,7 @@
 .mdrom{
-    font-size: 18px;
-    font-family: 'Alibaba-PuHuiTi-R';
-    color: #140E35CC;
+    font-size: 14px;
+    font-family: 'pingfang';
+    color: #140e35cc;
 }
 
 .mdrom *{
@@ -10,9 +10,9 @@
 }
 
 .mdrom h3{
-    color: black;
-    font-size: 22px;
-    margin-top: 20px;
+    color: #000;
+    font-size: 20px;
+    margin-top: 40px;
 }
 
 .mdrom ul{
