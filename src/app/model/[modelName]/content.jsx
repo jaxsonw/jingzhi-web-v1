@@ -4,6 +4,7 @@ import { Link } from "@nextui-org/react"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 import Markdown from "react-markdown";
+import "./style.model.css"
 
 const ModelDetail = ({ data, status }) => {
     const router = useRouter()
@@ -107,9 +108,9 @@ const ModelDetail = ({ data, status }) => {
             </div>
         </div>
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
-        <div className="w-full pt-4">
+        <div className="w-full pt-4 px-[32px]">
             {
-                pageStatus == 1 && <Markdown className="text-[18px]">{modelData.mdContent}</Markdown>
+                pageStatus == 1 && <Markdown className="mdrom">{modelData.mdContent}</Markdown>
             }
             {
                 pageStatus == 2 && <Markdown className="text-[18px]">{modelData.code_content}</Markdown>

@@ -1,0 +1,29 @@
+.mdrom{
+    font-size: 18px;
+    font-family: 'Alibaba-PuHuiTi-R';
+    color: #140E35CC;
+}
+
+.mdrom *{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mdrom h3{
+    color: black;
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.mdrom ul{
+    padding-left: 36px;
+}
+
+.mdrom strong {
+    color: black;
+}
+
+.mdrom a{
+    color: #3162FFFF;
+    text-decoration: underline;
+}
