@@ -2,14 +2,53 @@
 
 import { Link } from "@nextui-org/react"
 import { useRouter } from "next/navigation";
-import { useState } from "react"
+import { useState } from "react";
+import Highlight from 'react-syntax-highlighter';
 import Markdown from "react-markdown";
 import "./style.model.css"
+import { routeros } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { copyValue } from "@/src/utils";
 
 const ModelDetail = ({ data, status }) => {
     const router = useRouter()
     const modelData = data
     const [pageStatus, setPageState] = useState(status)
+    const [codeType, setCodeType] = useState("py")
+    const pyCode = `from openai import OpenAI
+
+client = OpenAI(
+    api_key = "自己的API key",
+    base_url = "https://api.agicto.cn/v1"
+)
+        
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "你是谁，用中文回答",
+        }
+    ],
+    model="${modelData.modelName}",
+)
+print(chat_completion.choices[0].message.content)`
+    const jsCode = `import OpenAI from "openai";
+
+const openai = new OpenAI();
+
+async function main() {
+    const completion = await openai.chat.completions.create({
+        messages: [
+            {
+                "role": "user",
+                "content": "你是谁，用中文回答",
+            }],
+        model: "${modelData.modelName}",
+    });
+
+    console.log(completion.choices[0]);
+}
+
+main();`
 
     const setUrl = (status) => {
         const url = window.location
@@ -108,14 +147,63 @@ const ModelDetail = ({ data, status }) => {
             </div>
         </div>
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
-        <div className="w-full px-[32px]">
+        <div className="w-full px-[32px] pb-[50px]">
             {
                 pageStatus == 1 && <Markdown className="mdrom">{modelData.mdContent}</Markdown>
             }
             {
-                pageStatus == 2 && <Markdown className="mdrom">{modelData.code_content}</Markdown>
-            }
+                pageStatus == 2 && <div className="w-[70%]">
+                    <div className="text-[24px] mt-[45px] leading-[33px]">简单示例</div>
+                    <div className="flex justify-between  my-[2px]">
+                        <div className="flex">
+                            <div
+                                className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'py' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
+                                onClick={() => {
+                                    if (codeType !== 'py') {
+                                        setCodeType('py')
+                                    }
+                                }}
+                            >Python</div>
+                            <div
+                                className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'js' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
+                                onClick={() => {
+                                    if (codeType !== 'js') {
+                                        setCodeType('js')
+                                    }
+                                }}
+                            >JavaScript</div>
+                        </div>
+                        <div
+                            className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] py-[4px] px-[8px] rounded cursor-pointer'
+                            onClick={() => {
+                                copyValue(codeType === 'py' ? pyCode : jsCode)
+                                message.success('复制成功')
+                            }} >
+                            <svg className='icon' xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
+                                <title>复制</title>
+                                <g id="prompt" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" fillOpacity="0.5">
+                                    <g id="Prompt工程" transform="translate(-323.000000, -328.000000)" fill="#140E35" fillRule="nonzero">
+                                        <g id="Group-4" transform="translate(120.000000, 306.000000)">
+                                            <g id="Group-6" transform="translate(199.000000, 16.000000)">
+                                                <g id="复制" transform="translate(4.000000, 6.000000)">
+                                                    <path d="M4.2631579,0 L10.8947369,0 C11.5051568,0 12,0.494843171 12,1.10526315 L12,7.7368421 C12,8.34726209 11.5051568,8.84210527 10.8947369,8.84210527 L4.2631579,8.84210527 C3.65273791,8.84210527 3.15789473,8.34726209 3.15789473,7.7368421 L3.15789473,1.10526315 C3.15789473,0.494843165 3.65273791,0 4.2631579,0 Z M4.2631579,0.947368422 C4.17595505,0.947368422 4.10526316,1.0180603 4.10526316,1.10526315 L4.10526316,7.7368421 C4.10526316,7.82404496 4.17595504,7.89473684 4.2631579,7.89473684 L10.8947369,7.89473684 C10.9819397,7.89473684 11.0526316,7.82404495 11.0526316,7.7368421 L11.0526316,1.10526315 C11.0526316,1.0180603 10.9819397,0.947368422 10.8947369,0.947368422 L4.2631579,0.947368422 Z M7.89473684,9.78947369 C7.89473684,9.52786512 8.10681249,9.31578948 8.36842105,9.31578948 C8.63002962,9.31578948 8.84210527,9.52786512 8.84210527,9.78947369 L8.84210527,10.8947369 C8.84210527,11.5051568 8.34726209,12 7.7368421,12 L1.10526315,12 C0.494843171,12 0,11.5051568 0,10.8947369 L0,4.2631579 C0,3.65273791 0.494843165,3.15789473 1.10526315,3.15789473 L2.21052631,3.15789473 C2.47213488,3.15789473 2.68421052,3.36997038 2.68421052,3.63157895 C2.68421052,3.89318751 2.47213488,4.10526316 2.21052631,4.10526316 L1.10526315,4.10526316 C1.0180603,4.10526316 0.947368422,4.17595505 0.947368422,4.2631579 L0.947368422,10.8947369 C0.94736843,10.9819397 1.0180603,11.0526316 1.10526315,11.0526316 L7.7368421,11.0526316 C7.82404495,11.0526316 7.89473684,10.9819397 7.89473684,10.8947369 L7.89473684,9.78947369 Z" id="Shape" />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span className='text-[12px] ml-1'>复制</span>
+                        </div>
+                    </div>
+                    <div className="bg-[#f0f0f0] p-2">
+                        <Highlight language="python" style={routeros}>
+                            {codeType === "py" ? pyCode : jsCode}
+                        </Highlight>
+                    </div>
 
+                </div>
+            }
         </div>
     </div>
 }
