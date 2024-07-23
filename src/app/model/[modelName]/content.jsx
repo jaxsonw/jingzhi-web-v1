@@ -6,14 +6,14 @@ import { useState } from "react";
 import Highlight from 'react-syntax-highlighter';
 import Markdown from "react-markdown";
 import "./style.model.css"
-import { routeros } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { github, routeros } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { copyValue } from "@/src/utils";
 
 const ModelDetail = ({ data, status }) => {
     const router = useRouter()
     const modelData = data
     const [pageStatus, setPageState] = useState(status)
-    const [codeType, setCodeType] = useState("py")
+    const [codeType, setCodeType] = useState("python")
     const pyCode = `from openai import OpenAI
 
 client = OpenAI(
@@ -153,22 +153,22 @@ main();`
             }
             {
                 pageStatus == 2 && <div className="w-[70%]">
-                    <div className="text-[24px] mt-[45px] leading-[33px]">简单示例</div>
-                    <div className="flex justify-between  my-[2px]">
+                    <div className="text-[24px] mt-[45px] leading-[33px] mb-[20px]">简单示例</div>
+                    <div className="flex justify-between  mb-[4px]">
                         <div className="flex">
                             <div
-                                className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'py' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
+                                className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'python' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
                                 onClick={() => {
-                                    if (codeType !== 'py') {
-                                        setCodeType('py')
+                                    if (codeType !== 'python') {
+                                        setCodeType('python')
                                     }
                                 }}
                             >Python</div>
                             <div
-                                className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'js' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
+                                className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'javascript' ? "bg-[#EEEEEEFF]" : "text-[#140E3580] cursor-pointer"}`}
                                 onClick={() => {
-                                    if (codeType !== 'js') {
-                                        setCodeType('js')
+                                    if (codeType !== 'javascript') {
+                                        setCodeType('javascript')
                                     }
                                 }}
                             >JavaScript</div>
@@ -176,7 +176,7 @@ main();`
                         <div
                             className='text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] py-[4px] px-[8px] rounded cursor-pointer'
                             onClick={() => {
-                                copyValue(codeType === 'py' ? pyCode : jsCode)
+                                copyValue(codeType === 'python' ? pyCode : jsCode)
                                 message.success('复制成功')
                             }} >
                             <svg className='icon' xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
@@ -196,9 +196,9 @@ main();`
                             <span className='text-[12px] ml-1'>复制</span>
                         </div>
                     </div>
-                    <div className="bg-[#f0f0f0] p-2">
-                        <Highlight language="python" style={routeros}>
-                            {codeType === "py" ? pyCode : jsCode}
+                    <div className="bg-[#f8f8f8] p-2">
+                        <Highlight language={codeType} style={github}>
+                            {codeType === "python" ? pyCode : jsCode}
                         </Highlight>
                     </div>
 
