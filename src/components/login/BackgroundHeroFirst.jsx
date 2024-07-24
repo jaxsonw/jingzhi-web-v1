@@ -15,7 +15,7 @@ import {
 const modelList = [
     {
         icon: gpt_icon_color,
-        name: 'Chat GPT'
+        name: 'OpenAI'
     },
     {
         icon: baichuan_icon_color,
@@ -27,7 +27,7 @@ const modelList = [
     },
     {
         icon: llma_icon_color,
-        name: 'LLMa2'
+        name: 'Llama 2'
     },
     {
         icon: agicto_icon_color,
@@ -40,7 +40,7 @@ const modelList = [
     },
     {
         icon: wenxin_icon_color,
-        name: '文新一言'
+        name: '文心一言'
     },
     {
         icon: xunfei_icon_color,
