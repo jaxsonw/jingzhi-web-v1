@@ -48,7 +48,7 @@ const Header = () => {
   useEffect(() => {
     const invite_code = searchParams.get('channel') || ''
     if (invite_code) {
-      localStorage.setItem('invite_code', invite_code.split(' ')?.[0])
+      sessionStorage.setItem('invite_code', invite_code.split(' ')?.[0])
     }
     setInviteUrl(`${window.origin}/?channel=${userInfo?.inviteCode}`)
 

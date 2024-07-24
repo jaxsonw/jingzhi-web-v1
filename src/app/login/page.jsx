@@ -79,7 +79,7 @@ export default function Login() {
       const params = {
         email,
         verify_code: code,
-        inviteCode: localStorage.getItem('invite_code') || searchParams.get('channel') || ''
+        invite_code: sessionStorage.getItem('invite_code') || searchParams.get('channel') || ''
       }
       if (!email || !code || submitLoading) return
       setSubmitLoading(true)
@@ -99,7 +99,8 @@ export default function Login() {
     if (pageStatus === 1) {
       const params = {
         mobile,
-        verify_code: code
+        verify_code: code,
+        invite_code: sessionStorage.getItem('invite_code') || searchParams.get('channel') || ''
       }
       if (!mobile || !code || submitLoading) return
       setSubmitLoading(true)
