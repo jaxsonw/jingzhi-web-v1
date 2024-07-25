@@ -15,7 +15,7 @@ import {
   home_hero_bg
 } from '../../consts/img'
 import TypingEffect from "../common/TypingEffect"
-import {getSiteUseNumber} from "../../services/index"
+import { getSiteUseNumber } from "../../services/index"
 
 
 
@@ -31,16 +31,16 @@ const iconList = [
 ]
 
 export default function HeroHome() {
-  const [count,setCount] = useState()
-  const init = async() => {
+  const [count, setCount] = useState()
+  const init = async () => {
     const res = await getSiteUseNumber()
     setCount(res?.data?.recordTotal)
-     
+
   }
 
   useEffect(() => {
     init()
-  },[])
+  }, [])
 
   return (
     <div className="w-full flex flex-col text-left h-screen relative">
@@ -49,15 +49,15 @@ export default function HeroHome() {
       <div className="lg:px-[127px] lg:py-8 px-5 py-4 relative">
         <div className="flex flex-col lg:pt-[90px]">
           <span className="font-[16px] leading-8 opacity-[0.7] text-white">
-            AGICTO汇集了来自各个领域的优秀AI模型
-            <br /> 您无需耗费大量时间和精力去逐一了解和学习不同的AI模型接口调用方法
+            AGICTO 已经支持 120+ 大模型
+            <br /> 一键切换模型：所有模型均兼容 OpenAI SDK
             <br />
-            现在，您只需要通过一个接口便可对众多模型进行调用和使用
+            现在，你可以通过 <a href="/playground/">调试平台</a>，同时对话多个模型
           </span>
           <div className="pt-[45px] text-[24px] text-white">易用 / 稳定 / 全面 / 优价 </div>
           <div className="lg:text-[80px] text-[48px] font-bold mt-[45px]">
             <TypingEffect text="AGICTO大模型调用基座" typingDelay={150} />
-           </div>
+          </div>
           <span
             style={{
               backgroundImage: 'linear-gradient(97deg, #5F9BFF 3%, #3162FF 100%)'
