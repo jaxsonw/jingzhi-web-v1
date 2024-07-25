@@ -288,7 +288,7 @@ const ModelCard = (props) => {
         <div className='flex items-center pb-[8px]'>
           <h4 className="text-[#140E35] text-[20px]">{props.modelName}</h4>
           <div
-            className='cursor-pointer ml-[10px] flex items-center rounded-md border border-solid border-[#00000088] text-gray-500 px-[4px] py-[2px] text-[12px]'
+            className='cursor-pointer ml-[10px] flex items-center rounded-md border border-solid border-green-500 text-green-500 px-[4px] py-[2px] text-[12px]'
             onClick={(e) => {
               e.preventDefault()
               copyValue(props.modelName)
@@ -297,8 +297,8 @@ const ModelCard = (props) => {
             }} >
             <svg className='icon' xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
               <title>复制</title>
-              <g id="prompt" stroke="none" strokeWidth="1" fill="#000" fillRule="evenodd" fillOpacity="0.5">
-                <g id="Prompt工程" transform="translate(-323.000000, -328.000000)" fill="#000" fillRule="nonzero">
+              <g id="prompt" stroke="none" strokeWidth="1" fill="#000088" fillRule="evenodd" fillOpacity="0.5">
+                <g id="Prompt工程" transform="translate(-323.000000, -328.000000)" fill="#008800" fillRule="nonzero">
                   <g id="Group-4" transform="translate(120.000000, 306.000000)">
                     <g id="Group-6" transform="translate(199.000000, 16.000000)">
                       <g id="复制" transform="translate(4.000000, 6.000000)">
