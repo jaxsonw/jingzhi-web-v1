@@ -76,7 +76,7 @@ export const login_bg_three = 'https://ew6.cn/login_bg_three.png?imageslim/zleve
 export const recharge_center_bg1 = 'https://ew6.cn/agicto_recharge_head.png'
 
 // 客服微信 产品经理
-export const agicto_product_agent_wechat = "https://ew6.cn/agicto_product_agent_wechat.png"
+export const agicto_product_agent_wechat = "/server_wechat.jpg"
 
 // 充值金额50
 export const recharge_50 = 'https://ew6.cn/recharge_50.png'
