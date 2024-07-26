@@ -38,6 +38,7 @@ const updateLogs = [
 const generateMarkdown = (logs) => {
     return logs.map((log, index) => (
         <div key={"mdlog" + index} id={"log-" + index} className="mb-4 bg-gray-100 px-4 py-2 rounded-lg">
+            <title>更新日志</title>
             <h2 className="text-xl font-bold mb-2">{log.date}</h2>
             <div className='px-4'>
                 {log.childs.map((child, childIndex) => (

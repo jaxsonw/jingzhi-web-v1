@@ -155,6 +155,7 @@ const Prompt = () => {
   return (
     <>
       {/* <Layout> */}
+      <title>Prompt广场</title>
       <div className="pt-[80px] lg:px-16 bg-[#f2f8ff]  min-w-[1200px] min-h-[100vh] overscroll-auto	">
         {/* <div className='bg-[#fff] rounded-2xl flex items-center h-[108px] px-[20px] '>
           <img className='w-[68px] h-[68px] mr-[20px]' src="https://img.alicdn.com/imgextra/i3/O1CN014pVwxY1jsE1P8kVHO_!!6000000004603-55-tps-68-68.svg" />

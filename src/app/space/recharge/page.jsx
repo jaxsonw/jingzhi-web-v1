@@ -23,7 +23,7 @@ import {
 } from '../../../consts/img'
 import { isPc, isWeixin, checkServer } from '../../../utils/index'
 import { SpaceContext } from '../layout'
-import { title } from '../../../../config'
+import { TITLE } from '../../../../config'
 
 const appid = 'wx45ecf372ff70d541' // 微信appid，测试 wx847c9937877744e5
 
@@ -234,8 +234,8 @@ export default function Example() {
         </Link>
       </div>
       <div className="w-full relative">
-        <img src={agicto_product_agent_wechat} alt={title} className="absolute w-[8%] top-[14.28%] right-[5%]" />
-        <img src={recharge_center_bg1} alt={title} className="w-full" />
+        <img src={agicto_product_agent_wechat} alt={TITLE} className="absolute w-[8%] top-[14.28%] right-[5%]" />
+        <img src={recharge_center_bg1} alt={TITLE} className="w-full" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-[11] mt-[28px] ">

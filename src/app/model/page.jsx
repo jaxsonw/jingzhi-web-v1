@@ -411,6 +411,7 @@ const Model = (props) => {
   }
   return (
     <div className="h-screen overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE]">
+      <title>模型广场</title>
       {
         loading ?
           <Loading />

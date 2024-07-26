@@ -6,11 +6,13 @@ import Hero from '../components/homePage/HeroHome'
 import Footer from "../components/homePage/Footer"
 import HowUse from '../components/homePage/HowUse'
 import FeedListPage from "../components/homePage/FeedListPage"
+import HomeFooter from "../components/homePage/HomeFooter"
 import { isPc } from '../utils'
 
 export default function Example() {
   return (
-    <div className="h-screen  bg-[#3162FF]">
+    <div className="h-screen bg-[#3162FF]">
+      <title>AGICTO</title>
       {/* <Hero />
       <HowUse />
       <Footer/> */}
@@ -45,6 +47,22 @@ export default function Example() {
           <FeedListPage />
         </SwiperSlide>
       </Swiper>
+
+      {/* <div className='overflow-hidden'>
+        <Hero />
+      </div>
+      <div className='overflow-hidden'>
+        <HowUse />
+      </div>
+      <div className='overflow-hidden'>
+        <Footer />
+      </div>
+      <div className='overflow-hidden'>
+        <FeedListPage />
+      </div>
+      <div className='overflow-hidden'>
+        <HomeFooter />
+      </div> */}
     </div>
   )
 }
