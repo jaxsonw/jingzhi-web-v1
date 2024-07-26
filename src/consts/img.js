@@ -13,7 +13,7 @@ export const login_jisubushu = 'https://ew6.cn/login_jisubushu.png'
 export const sanliuling_icon_color = 'https://ew6.cn/360_icon_color.png'
 
 // agicto彩色icon
-export const agicto_icon_color = 'https://ew6.cn/agicto_icon_color.png'
+export const agicto_icon_color = '/agicto_icon_color.png'
 
 // gpt彩色icon
 export const gpt_icon_color = 'https://ew6.cn/gpt_icon_color.png'

@@ -93,7 +93,7 @@ export function FeedListPage() {
           <div className="relative flex h-36 w-36 flex-none items-center justify-center">
             <QrCodeBorder className="absolute inset-0 h-full w-full stroke-gray-300 transition-colors group-hover:stroke-cyan-500" />
             {/* <Image src={qrCode} alt="" unoptimized /> */}
-            <Image
+            <img
               width="120"
               height="120"
               // className="absolute left-1/2 right-1/2 -translate-x-1/2	 lg:right-16 bottom-16 w-[132px]"
