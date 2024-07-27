@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { getServerModelFilterList, getServerModelList } from '../../services/overflow'
 import { Col, Row } from 'antd'
 import { copyValue } from '@/src/utils';
+import HomeFooter from '@/src/components/homePage/HomeFooter';
 
 const Loading = () => {
   return (
@@ -410,48 +411,51 @@ const Model = (props) => {
     return fn(list)
   }
   return (
-    <div className="h-screen overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE]">
-      <title>模型广场</title>
-      {
-        loading ?
-          <Loading />
-          :
-          <>
-            <TagListComponent {...modalPriceTag} />
-            <TagListComponent {...{
-              title: '使用场景',
-              current: queryParams.typeId,
-              setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
-              list: handleList(typeData.cateList, (list) => [{
-                name: '全部',
-                value: 0
-              }].concat(list.map(item => ({ name: item.cateName, value: item.cateId }))))
-            }} />
-            <TagListComponent {...{
-              title: '提供公司',
-              current: queryParams.companyId,
-              setCurrent: (v) => setQueryParams({ ...queryParams, companyId: v }),
-              list: handleList(typeData.companyList, (list) => [{
-                name: '全部',
-                value: 0
-              }].concat(list.map(item => ({ name: item.companyName, value: item.companyId }))))
-            }} />
-            <div className="mt-[60px]">
-              <Row gutter={[16, 16]}>
-                {
-                  modelDataRes && modelDataRes.length > 0 ? modelDataRes?.map(item => {
-                    return (
-                      // eslint-disable-next-line react/jsx-key
-                      <Col lg={8} xs={24} md={12}>
-                        <ModelCard {...item} />
-                      </Col>
-                    )
-                  }) : <div className="text-center text-[#999] w-full">暂无数据~</div>
-                }
-              </Row>
-            </div>
-          </>
-      }
+    <div>
+      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE]">
+        <title>模型广场</title>
+        {
+          loading ?
+            <Loading />
+            :
+            <>
+              <TagListComponent {...modalPriceTag} />
+              <TagListComponent {...{
+                title: '使用场景',
+                current: queryParams.typeId,
+                setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
+                list: handleList(typeData.cateList, (list) => [{
+                  name: '全部',
+                  value: 0
+                }].concat(list.map(item => ({ name: item.cateName, value: item.cateId }))))
+              }} />
+              <TagListComponent {...{
+                title: '提供公司',
+                current: queryParams.companyId,
+                setCurrent: (v) => setQueryParams({ ...queryParams, companyId: v }),
+                list: handleList(typeData.companyList, (list) => [{
+                  name: '全部',
+                  value: 0
+                }].concat(list.map(item => ({ name: item.companyName, value: item.companyId }))))
+              }} />
+              <div className="mt-[60px]">
+                <Row gutter={[16, 16]}>
+                  {
+                    modelDataRes && modelDataRes.length > 0 ? modelDataRes?.map(item => {
+                      return (
+                        // eslint-disable-next-line react/jsx-key
+                        <Col lg={8} xs={24} md={12}>
+                          <ModelCard {...item} />
+                        </Col>
+                      )
+                    }) : <div className="text-center text-[#999] w-full">暂无数据~</div>
+                  }
+                </Row>
+              </div>
+            </>
+        }
+      </div>
+      {!loading && <HomeFooter />}
     </div>
   )
 }

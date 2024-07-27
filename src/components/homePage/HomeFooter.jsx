@@ -91,8 +91,8 @@ const HomeFooter = () => {
                 </div>)}
             </div>
         </div>
-        <div className="mt-[50px] pt-[20px] border-t-[1px] border-solid border-[rgba(255,255,255,0.3)] text-[#C8C8C8] text-[14px]">
-            <p>Copyright © 2024 AGICTO</p>
+        <div className="mt-[50px] pt-[20px] border-t-[1px] border-solid border-[rgba(255,255,255,0.3)] text-[#C8C8C8] text-[14px] text-center">
+            <p>Copyright © 2024 AGICTO & AGI大模型基座</p>
             <a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2023005620号-4</a>
         </div>
     </div>

@@ -9,6 +9,7 @@ import PromptModel from '../../components/prompt/PromptModel'
 import { getAppList, getAppTagList, getCateList } from '../../services/promptService'
 import { getKeyList } from '../../services/key'
 import { useSearchParams } from 'next/navigation';
+import HomeFooter from '@/src/components/homePage/HomeFooter';
 
 
 const Prompt = () => {
@@ -185,7 +186,7 @@ const Prompt = () => {
         {/* </Layout> */}
       </div>
 
-
+      <HomeFooter />
     </>
   )
 }
