@@ -218,58 +218,22 @@ export default function SpaceLayout({ children }) {
             <div className="flex items-center flex-1 gap-x-4 self-stretch lg:gap-x-6">
               <div className="flex flex-1">
                 <nav className="flex flex-1 flex-col items-center lg:block hidden">
-                  <div role="list" className="mx-auto w-[60%] flex items-center justify-between">
-                    <a
-                      href="/"
-                      className={classNames('text-gray-700', 'group flex items-center h-[64px] text-sm leading-6 font-semibold')}
-                    >
-                      首页
-                    </a>
+                  <div role="list" className="mx-auto flex items-center justify-center">
 
                     <a
-                      href="/model"
-                      className={classNames('text-gray-700', 'group flex items-center h-[64px] text-sm leading-6 font-semibold')}
+                      href="/"
+                      className={classNames(
+                        'text-gray-700 mx-8',
+                        'group flex items-center h-[64px] text-sm leading-6 font-semibold'
+                      )}
                     >
                       模型广场
                     </a>
 
                     <a
-                      href="/playground"
-                      className={classNames('text-gray-700', 'group flex items-center h-[64px] text-sm leading-6 font-semibold')}
-                    >
-                      调试平台
-                    </a>
-
-                    <a
-                      href="/prompt"
-                      className={classNames('text-gray-700', 'group flex items-center h-[64px] text-sm leading-6 font-semibold')}
-                    >
-                      Prompt工程
-                    </a>
-
-                    <a
-                      href="/docs"
-                      className={classNames(
-                        'text-gray-700',
-                        'group flex items-center h-[63px] text-sm leading-6 font-semibold'
-                      )}
-
-                      target='_blank'
-                    >
-                      开发文档
-                    </a>
-
-                    <a
-                      href="/about"
-                      className={classNames('text-gray-700', 'group flex items-center h-[64px] text-sm leading-6 font-semibold')}
-                    >
-                      关于我们
-                    </a>
-
-                    <a
                       href="/space"
                       className={classNames(
-                        'text-[#3162FF]',
+                        'text-[#3162FF] mx-8',
                         'group flex items-center h-[64px] text-sm leading-6 font-semibold',
                         'border-b-2 border-[#3162FF]'
                       )}

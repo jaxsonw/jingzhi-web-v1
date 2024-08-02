@@ -3,9 +3,6 @@ import { Inter } from 'next/font/google'
 import { ToastContainer, toast } from 'react-toastify'
 import { usePathname } from "next/navigation"
 import Header from '../components/common/Header'
-import HeaderBule from "../components/common/HeaderBlue"
-import Footer from '../components/common/Footer'
-import Head from 'next/head'
 import Script from 'next/script'
 import StyledComponentsRegistry from '../lib/AntdRegistry'
 import 'react-toastify/dist/ReactToastify.css'
@@ -23,7 +20,7 @@ import '../styles/animation.css'
 import config from '../../config'
 
 const inter = Inter({ subsets: ['latin'] })
-const hiddenHeaderPage = ["/", "/demo"]
+const hiddenHeaderPage = []
 
 export default function RootLayout({ children, page }) {
   const pathname = usePathname()
