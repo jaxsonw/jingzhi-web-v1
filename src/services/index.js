@@ -6,6 +6,11 @@ const TIMEOUT = 300
 let timerOut = null
 let timerOutCount = 0
 let errorTryCount = 0
+
+//获取授权登录地址
+export const getLoginUrl = params => request.post(`${BASE_URL}/v1/service/site/config`, params)
+// code登录
+export const loginByCode = params => request.post(`${BASE_URL}/v1/service/loginByCode`, params)
 /**
  * email 邮箱
  * */

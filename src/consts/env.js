@@ -1,1 +1,1 @@
-export const BASE_URL = `https://api.agicto.cn`
+export const BASE_URL = `https://jzapi.ctoee.com`

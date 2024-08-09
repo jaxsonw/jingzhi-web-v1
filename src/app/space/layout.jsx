@@ -22,7 +22,7 @@ export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [customerOpen, setCustomerOpen] = useState(false)
-  const [invite, setInvite] = useState(0)
+  // const [invite, setInvite] = useState(0)
 
   const { userInfo } = baseHooks()
 
@@ -36,14 +36,14 @@ export default function SpaceLayout({ children }) {
     }
   }, [userInfo])
 
-  const init = async () => {
-    const res = await getInviteSuccessList()
-    setInvite(parseInt(res?.data * 3))
-  }
+  // const init = async () => {
+  //   const res = await getInviteSuccessList()
+  //   setInvite(parseInt(res?.data * 3))
+  // }
 
-  useEffect(() => {
-    init()
-  }, [])
+  // useEffect(() => {
+  //   init()
+  // }, [])
 
 
   return (
@@ -165,10 +165,10 @@ export default function SpaceLayout({ children }) {
                   <span>剩余金额</span>
                   <span>{userInfo?.apiNum}</span>
                 </div>
-                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] mt-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                {/* <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] mt-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
                   <span >邀请额度</span>
                   <span>{invite}</span>
-                </div>
+                </div> */}
               </div>
               <ul role="list" className="flex flex-1 flex-col gap-y-7 pt-6">
                 <li>
