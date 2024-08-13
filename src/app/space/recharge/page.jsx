@@ -234,7 +234,7 @@ export default function Example() {
         </Link>
       </div>
       <div className="w-full relative">
-        <img src={agicto_product_agent_wechat} alt={TITLE} className="absolute w-[8%] top-[14.28%] right-[5%]" />
+        {/* <img src={agicto_product_agent_wechat} alt={TITLE} className="absolute w-[8%] top-[14.28%] right-[5%]" /> */}
         <img src={recharge_center_bg1} alt={TITLE} className="w-full" />
       </div>
 

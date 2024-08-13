@@ -26,12 +26,7 @@ const navigation = [
   { name: '消耗统计', href: '/space/costs', icon: IoStatsChartOutline, title: '消耗统计', enTitle: 'EXPENDITURE STATISTICS', isMenu: true },
 
   { name: '订单支付', href: '/space/recharge/pay', icon: UsersIcon, title: '订单支付', isMenu: false },
-  { name: '我要开发票', href: '/space/invoice', icon: AiFillTags, title: '我要开发票', enTitle: 'INVOICING', isMenu: true }
-
-  // { name: "Projects", href: "apiKeys", icon: FolderIcon, current: false },
-  // { name: "Calendar", href: "apiKeys", icon: CalendarIcon, current: false },
-  // { name: "Documents", href: "apiKeys", icon: DocumentDuplicateIcon, current: false },
-  // { name: "Reports", href: "apiKeys", icon: ChartPieIcon, current: false },
+  // { name: '我要开发票', href: '/space/invoice', icon: AiFillTags, title: '我要开发票', enTitle: 'INVOICING', isMenu: true }
 ]
 
 export default navigation

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import moment from 'moment'
 import { AreaChart, BarChart, Card, Title, DatePicker, Select, SelectItem } from '@tremor/react'
 import { zhCN } from 'date-fns/locale'
-import { consumeChart, consumeModelList, getModelPriceList } from '../../../services/overflow'
+import { consumeChart, consumeModelList, getModelList, getModelPriceList } from '../../../services/overflow'
 
 export default function Overflow() {
     const [singleDayDate, setSingleDayDate] = useState(moment().format('YYYY-MM-DD'))
@@ -11,12 +11,12 @@ export default function Overflow() {
     const [modelList, setModelList] = useState([])
     const [totalFee, setTotalFee] = useState(0)
 
-    const [selectModel,setSelectModel] = useState(null)
+    const [selectModel, setSelectModel] = useState(null)
 
-  
+
     const init = async () => {
-        const modelListRes = await getModelPriceList()
-        setModelList(modelListRes?.data?.modelPriceList)
+        const modelListRes = await getModelList()
+        setModelList(modelListRes?.data?.recordList)
 
     }
 
@@ -71,12 +71,16 @@ export default function Overflow() {
                 <span className="text-[#545759]">所选日期范围共消耗： <span className="text-[#3162FF] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
                 <div className="flex items-center justify-end">
                     <div className="mr-6">
-                        <Select onValueChange={(e)=>console.log("e",e)} placeholder="选择模型" >
+                        <Select
+                            onValueChange={(e) => { console.log("e", e) }}
+                            placeholder="选择模型"
+                        // value={selectModel}
+                        >
                             {
-                                modelList?.map((item, index) => <SelectItem key={index} value={item?.model} >
-                                    {item?.model}
+                                modelList?.map((item, index) => <SelectItem key={item?.modelId} value={item?.modelName} >
+                                    {item?.modelName}
                                 </SelectItem>)
-                            } 
+                            }
                         </Select>
                     </div>
                     <DatePicker

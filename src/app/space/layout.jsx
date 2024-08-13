@@ -156,7 +156,7 @@ export default function SpaceLayout({ children }) {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto   bg-white px-6 pb-4">
             <a href="/" className="flex h-16 shrink-0 items-center">
-              <img className="w-auto h-[35px]" src={icon_logo_color} alt="" />
+              {/* <img className="w-auto h-[35px]" src={icon_logo_color} alt="" /> */}
             </a>
             <nav className="flex flex-1 flex-col">
               <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
@@ -245,10 +245,10 @@ export default function SpaceLayout({ children }) {
                 {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
+                {/* <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
                   <RiCustomerService2Line />
                   <span className="font-bold text-[#545759] ml-1">客服</span>
-                </button>
+                </button> */}
                 <Link href="/login" className="flex items-center hover:font-bold text-[#545759] font-bold">
                   <RiLogoutBoxRLine className="mr-1" /> 退出登录
                 </Link>

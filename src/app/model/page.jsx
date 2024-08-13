@@ -184,7 +184,7 @@ const Model = (props) => {
             :
             <>
               <TagListComponent {...modalPriceTag} />
-              <TagListComponent {...{
+              {/* <TagListComponent {...{
                 title: '使用场景',
                 current: queryParams.typeId,
                 setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
@@ -192,7 +192,7 @@ const Model = (props) => {
                   name: '全部',
                   value: 0
                 }].concat(list.map(item => ({ name: item.cateName, value: item.cateId }))))
-              }} />
+              }} /> */}
               <TagListComponent {...{
                 title: '提供公司',
                 current: queryParams.companyId,

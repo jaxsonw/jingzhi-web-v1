@@ -30,7 +30,7 @@ const Header = () => {
       <nav className="flex items-center justify-between bg-transparent	py-[15px] lg:px-8 " aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center-m-1.5 p-1.5">
-            <img className="h-[25px]" src={icon_logo_color} alt="" />
+            {/* <img className="h-[25px]" src={icon_logo_color} alt="" /> */}
           </a>
         </div>
         <div className="flex lg:hidden">
