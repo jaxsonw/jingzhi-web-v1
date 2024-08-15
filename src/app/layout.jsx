@@ -52,7 +52,7 @@ export default function RootLayout({ children, page }) {
             zIndex: 999999
           }}
         />
-        {hiddenHeaderPage?.includes(pathname) ? null : <Header />}
+        {/* {hiddenHeaderPage?.includes(pathname) ? null : <Header />} */}
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         {/* <Footer /> */}
       </body>

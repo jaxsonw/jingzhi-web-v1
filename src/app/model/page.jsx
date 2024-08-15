@@ -177,7 +177,7 @@ const Model = (props) => {
   return (
     <div>
       <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE]">
-        <title>模型广场</title>
+        {/* <title>模型广场</title> */}
         {
           loading ?
             <LoadingSkeleton />

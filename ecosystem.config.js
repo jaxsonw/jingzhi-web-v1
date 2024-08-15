@@ -1,18 +1,15 @@
-console.log('ENVIRONMENT', process.env.ENVIRONMENT)
-console.log('PORT', process.env.PORT)
-
 module.exports = {
   apps: [
     {
-      name: `agicto-${process.env.ENVIRONMENT}`,
+      name: `jingzhi`,
       script: './server.js',
       autorestart: true,
       watch: true,
       exec_mode: 'cluster',
       max_memory_restart: '1G',
-      instances: `${process.env.ENVIRONMENT == 'prod' ? 2 : 1}`,
+      instances: 2,
       node_args: '--max-http-header-size=2400',
-      PORT: `${process.env.PORT}`
+      PORT: 5002
     }
   ]
 }

@@ -1,7 +1,6 @@
 const express = require('express')
 const next = require('next')
-const port = parseInt(process.env.PORT, 10) || 8888
-console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+const port = 5002
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()

@@ -1,6 +1,6 @@
 
 
-import { getModelDetail } from "../../services/overflow"
+import { getModelDetail } from "../../../services/overflow"
 import ModelDetail from "./content"
 
 
