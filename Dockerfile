@@ -25,11 +25,14 @@ RUN ls -l /app
 # 构建 Next.js 应用
 RUN pnpm build
 
+
+RUN chown -R node:node /app/.next
+
 # 调试：列出构建目录中的文件和权限
 RUN ls -l /app/.next
 
 # 暴露应用运行的端口
-EXPOSE 5002
+EXPOSE 5003
 
 # 启动应用
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+CMD ["pm2", "start", "ecosystem.config.js"]

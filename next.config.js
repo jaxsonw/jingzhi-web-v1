@@ -1,6 +1,4 @@
 const nextConfig = {
-  // 如果需要使用不同环境的 assetPrefix，可以取消注释以下行
-  // assetPrefix: assetPrefix[process.env.INIT_ENV],
   images: {
     domains: ['ew6.cn']
   },
