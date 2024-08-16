@@ -4,6 +4,7 @@ FROM node:20.0.0
 # 设置工作目录
 WORKDIR /app
 
+
 # 复制项目的package.json和pnpm-lock.yaml
 COPY package.json pnpm-lock.yaml ./
 
