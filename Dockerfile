@@ -35,4 +35,4 @@ RUN ls -l /app/.next
 EXPOSE 5003
 
 # 启动应用
-CMD ["pm2", "start", "ecosystem.config.js"]
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]

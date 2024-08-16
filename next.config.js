@@ -9,6 +9,10 @@ const nextConfig = {
   },
   compiler: {
     styledComponents: true
+  },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.cache = false
+    return config
   }
 }
 
