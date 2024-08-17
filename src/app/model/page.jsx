@@ -35,7 +35,7 @@ const TagListComponent = (props) => {
 const ModelCard = (props) => {
   return (
     <Link
-      href={`/${encodeURIComponent(props?.modelName)}`}
+      href={`/model/${encodeURIComponent(props?.modelName)}`}
       onClick={(e) => {
         e.preventDefault()
         return false
@@ -107,18 +107,18 @@ const ModelCard = (props) => {
         </div>
         <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
           <Link
-            href={`/${encodeURIComponent(props?.modelName)}`}
+            href={`/model/${encodeURIComponent(props?.modelName)}`}
             className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]">
             <div>
               查看详情
             </div>
           </Link>
-          <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
+          {/* <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
             href={`/`}>
             <div>
               立即体验
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </Link>

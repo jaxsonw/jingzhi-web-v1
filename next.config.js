@@ -1,15 +1,19 @@
+const env = process.env.NODE_ENV
+console.log('enve', env)
 const nextConfig = {
-  basePath: '/model'
+  basePath: env === 'development' ? '' : '/model',
+  pageExtensions: ['js', 'jsx', 'tsx', 'mdx'],
+  reactStrictMode: false,
+  experimental: {
+    newNextLinkBehavior: true,
+    scrollRestoration: true,
+    images: {
+      allowFutureImage: true
+    }
+  },
+  compiler: {
+    styledComponents: true
+  }
 }
-
-// 如果你还需要使用 MDX，可以取消注释并配置相应的插件
-// const withMDX = nextMDX({
-//   extension: /\.mdx?$/,
-//   options: {
-//     remarkPlugins,
-//     rehypePlugins,
-//     recmaPlugins
-//   }
-// })
 
 module.exports = nextConfig

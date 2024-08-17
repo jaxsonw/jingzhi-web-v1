@@ -1,30 +1,16 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-// import Image from 'next/image'
-// import { useSearchParams } from 'next/navigation'
-// import { Swiper, SwiperSlide } from 'swiper/react'
-// import SwiperCore, { Autoplay } from 'swiper/core'
-// import { Mousewheel, Pagination } from 'swiper/modules'
-// import { toast as Toast } from 'react-toastify'
-// import BackgroundFirst from '../../components/login/BackgroundHeroFirst'
-// import BackgroundSecond from '../../components/login/BackgroundHeroSecond'
-// import BackgroundThird from '../../components/login/BackgroundHeroThird'
-import { getEmailCode, getLoginUrl, getMobileCode, login, loginByCode, loginByMobile } from '../../services/index'
-// import { vaildEmail, checkServer, isPc } from '../../utils/index'
-// import { icon_logo_color } from '../../consts/img'
-// import { title } from '../../../config'
-import 'swiper/bundle'
-import { Button, Segmented } from 'antd';
+import { getLoginUrl, loginByCode } from '../../services/index'
 
-// SwiperCore.use([Autoplay])
+import 'swiper/bundle'
+import { Button } from 'antd';
 
 export default function Login({ searchParams }) {
   const gotoLogin = async () => {
     try {
       const res = await getLoginUrl({
-        url: "http://localhost:3000/login"
+        url: window.location.href
       })
-      console.log(res)
       if (res.code == 0) {
         location.href = res.data.loginUrl
       }
@@ -36,29 +22,22 @@ export default function Login({ searchParams }) {
   const getToken = async (code) => {
     const res = await loginByCode({ code: code })
     if (res.code == 0) {
-      console.log(res?.data?.accessToken)
       localStorage.setItem('token', res?.data?.accessToken)
-      // location.href = "/"
+      location.href = "/space"
     } else {
-      console.log(res.message)
+      console.log("loginByCode", res.message)
     }
   }
 
   useEffect(() => {
     if (searchParams.code) {
-      console.log(searchParams.code)
       getToken(searchParams.code)
     } else {
       gotoLogin()
     }
   }, [])
 
-  return <div>
-    <Button onClick={gotoLogin}>
-      去登录
-    </Button>
-  </div>
-
+  return null
   // const searchParams = useSearchParams()
   // const [sendLoading, setSendLoading] = useState(false)
   // const [submitLoading, setSubmitLoading] = useState(false)

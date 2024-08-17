@@ -4,7 +4,7 @@ import { Link } from "@nextui-org/react"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Highlight from 'react-syntax-highlighter';
-import Markdown from "react-markdown";
+import ReactMarkdown from 'react-markdown';
 import "./style.model.css"
 import { github, routeros } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { copyValue } from "@/src/utils";
@@ -14,6 +14,7 @@ const ModelDetail = ({ data, status }) => {
     const modelData = data
     const [pageStatus, setPageState] = useState(status)
     const [codeType, setCodeType] = useState("python")
+    console.log(modelData)
     const pyCode = `from openai import OpenAI
 
 client = OpenAI(
@@ -32,6 +33,7 @@ chat_completion = client.chat.completions.create(
 )
 print(chat_completion.choices[0].message.content)`
     const jsCode = `import OpenAI from "openai";
+import from from '../../../../.next/server/app/model/[modelName]/page';
 
 const openai = new OpenAI();
 
@@ -149,7 +151,7 @@ main();`
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
         <div className="w-full px-[32px] pb-[50px]">
             {
-                pageStatus == 1 && <Markdown className="mdrom">{modelData.mdContent}</Markdown>
+                pageStatus == 1 && <ReactMarkdown className="mdrom" >{modelData?.mdContent?.replaceAll("\\n", "\n")}</ReactMarkdown>
             }
             {
                 pageStatus == 2 && <div className="w-[70%]">

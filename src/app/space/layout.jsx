@@ -11,7 +11,6 @@ import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
-import { getInviteSuccessList } from '../../services/index'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -32,7 +31,7 @@ export default function SpaceLayout({ children }) {
 
   useEffect(() => {
     if (!checkServer() && !localStorage.getItem('token')) {
-      router.push('/login')
+      router.push('/signin')
     }
   }, [userInfo])
 
@@ -249,7 +248,11 @@ export default function SpaceLayout({ children }) {
                   <RiCustomerService2Line />
                   <span className="font-bold text-[#545759] ml-1">客服</span>
                 </button> */}
-                <Link href="/login" className="flex items-center hover:font-bold text-[#545759] font-bold">
+                <Link href="/login" onClick={
+                  () => {
+                    window.localStorage.removeItem("token")
+                  }
+                } className="flex items-center hover:font-bold text-[#545759] font-bold">
                   <RiLogoutBoxRLine className="mr-1" /> 退出登录
                 </Link>
               </div>
