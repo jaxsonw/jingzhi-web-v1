@@ -62,7 +62,6 @@ const PayPage = () => {
     // pc h5支付宝
     const aliPay = () => {
         setPayModel(3)
-        console.log("codeUrl", codeUrl)
         setAliPayForm(codeUrl)
     }
 

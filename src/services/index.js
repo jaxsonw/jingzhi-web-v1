@@ -55,9 +55,7 @@ export const chatCode = async (data, options) => {
     method: 'POST',
     payload: JSON.stringify(data)
   })
-  evtSource.onopen = function () {
-    console.log('Connection to server opened.')
-  }
+  evtSource.onopen = function () {}
 
   evtSource.onmessage = async function (e) {
     clearInterval(timerOut)
@@ -76,7 +74,6 @@ export const chatCode = async (data, options) => {
 
     const msg = e.data
     if (msg.indexOf('[DONE]') !== -1) {
-      console.log('readEnd')
       evtSource.close()
       options.onEnd({ content: xtextContent })
       return
@@ -87,33 +84,23 @@ export const chatCode = async (data, options) => {
         xtextContent += resultData?.choices[0].delta.content
         options.onMessage({ content: xtextContent })
       }
-    } catch (error) { }
+    } catch (error) {}
     if (e.data) {
     }
   }
 
   evtSource.onerror = function (e) {
-    console.log('EventSource failed.', e)
     clearInterval(timerOut)
     timerOutCount = 0
     if (errorTryCount >= 2) {
       options.onEnd({ content: xtextContent, canResend: true })
-      console.log('EventSource failed.')
     } else {
       errorTryCount++
-      console.log('EventSource_failed_TRY')
       chatCode(data, options, xtextContent)
     }
   }
 
-  evtSource.addEventListener(
-    'ping',
-    function (e) {
-      console.log('ping')
-      console.log(e.data, 'pingData')
-    },
-    false
-  )
+  evtSource.addEventListener('ping', function (e) {}, false)
   // @ts-ignore;
   evtSource.stream()
 
@@ -169,21 +156,11 @@ export const openAi = async (data, options) => {
     payload: JSON.stringify(params)
   })
 
-  //    source.addEventListener('status', function(e) {
-  //        console.log('System status is now: ' + e.data);
-  //    });
-
-  // console.log(evtSource.readyState, "aareadyState");
-  // console.log(evtSource.url, "aaurl");
-
-  evtSource.onopen = function () {
-    console.log('Connection to server opened.')
-  }
+  evtSource.onopen = function () {}
 
   evtSource.onmessage = async function (e) {
     const msg = e.data
     if (msg.indexOf('[DONE]') !== -1) {
-      console.log('readEnd')
       evtSource.close()
       options.onEnd({ content: xtextContent })
       return
@@ -198,14 +175,7 @@ export const openAi = async (data, options) => {
     console.log('EventSource failed.')
   }
 
-  evtSource.addEventListener(
-    'ping',
-    function (e) {
-      console.log('ping')
-      console.log(e.data, 'pingData')
-    },
-    false
-  )
+  evtSource.addEventListener('ping', function (e) {}, false)
   // @ts-ignore;
   evtSource.stream()
 

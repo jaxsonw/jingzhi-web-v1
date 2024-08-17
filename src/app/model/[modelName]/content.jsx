@@ -14,7 +14,6 @@ const ModelDetail = ({ data, status }) => {
     const modelData = data
     const [pageStatus, setPageState] = useState(status)
     const [codeType, setCodeType] = useState("python")
-    console.log(modelData)
     const pyCode = `from openai import OpenAI
 
 client = OpenAI(
@@ -118,11 +117,11 @@ main();`
                             }
                         </ul>
                     </div>
-                    <Link href={`/playground/?model=${modelData?.apiModelName}&modelType=message`}>
+                    {/* <Link href={`/playground/?model=${modelData?.apiModelName}&modelType=message`}>
                         <div className="bg-[#3162FF] w-[201px] h-[42px] ml-[81px] rounded-lg leading-[42px] text-center text-[#fff] text-[16px]">
                             立即体验
                         </div>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </div>

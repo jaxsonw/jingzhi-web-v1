@@ -15,7 +15,6 @@ export default function Login({ searchParams }) {
         location.href = res.data.loginUrl
       }
     } catch (err) {
-      console.log("网络错误")
     }
   }
 
@@ -24,8 +23,6 @@ export default function Login({ searchParams }) {
     if (res.code == 0) {
       localStorage.setItem('token', res?.data?.accessToken)
       location.href = "/space"
-    } else {
-      console.log("loginByCode", res.message)
     }
   }
 

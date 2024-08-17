@@ -1,5 +1,4 @@
 const env = process.env.NODE_ENV
-console.log('enve', env)
 const nextConfig = {
   basePath: env === 'development' ? '' : '/model',
   pageExtensions: ['js', 'jsx', 'tsx', 'mdx'],
