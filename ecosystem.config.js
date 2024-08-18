@@ -7,7 +7,7 @@ module.exports = {
       watch: true,
       exec_mode: 'cluster',
       max_memory_restart: '4000M',
-      instances: 2,
+      instances: 1,
       node_args: '--max-http-header-size=2400',
       PORT: 5002
     }

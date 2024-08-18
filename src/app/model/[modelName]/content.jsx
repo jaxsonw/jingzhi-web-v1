@@ -18,7 +18,7 @@ const ModelDetail = ({ data, status }) => {
 
 client = OpenAI(
     api_key = "自己的API key",
-    base_url = "https://api.agicto.cn/v1"
+    base_url = "http://47.93.21.166:8000/mapi/v1"
 )
         
 chat_completion = client.chat.completions.create(
