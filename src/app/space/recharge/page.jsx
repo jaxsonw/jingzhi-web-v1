@@ -160,12 +160,10 @@ export default function Example() {
             window.location.href = '/space/recharge'
           },
           error: err => {
-            console.log('err', err)
           },
           finally: final => {
             setCreateOrderLoading(false)
 
-            console.log('finally', final)
           }
         })
       })
@@ -262,9 +260,8 @@ export default function Example() {
                   disabled={createOrderLoading}
                   onClick={() => onCreateOrder(item?.value)}
                   type="button"
-                  className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#ff8035] rounded-lg hover:bg-[#ff5005] focus:outline-none ${
-                    createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
-                  } `}
+                  className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#ff8035] rounded-lg hover:bg-[#ff5005] focus:outline-none ${createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
+                    } `}
                 >
                   购买
                 </button>
@@ -298,9 +295,8 @@ export default function Example() {
                 disabled={createOrderLoading}
                 onClick={() => onCreateOrder(inputPrice)}
                 type="button"
-                className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#3162FF] rounded-lg hover:bg-blue-700 focus:outline-none ${
-                  createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
-                } `}
+                className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#3162FF] rounded-lg hover:bg-blue-700 focus:outline-none ${createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
+                  } `}
               >
                 购买
               </button>

@@ -48,11 +48,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    // console.log('response', response)
-    // if(response?.data.code !== 0) {
-    //   message.error(response?.data.message || 'error')
-    // }
-
     return response
   },
   err => {

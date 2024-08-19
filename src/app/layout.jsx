@@ -1,8 +1,5 @@
 "use client"
-import { Inter } from 'next/font/google'
 import { ToastContainer, toast } from 'react-toastify'
-import { usePathname } from "next/navigation"
-import Header from '../components/common/Header'
 import Script from 'next/script'
 import StyledComponentsRegistry from '../lib/AntdRegistry'
 import 'react-toastify/dist/ReactToastify.css'
@@ -17,13 +14,9 @@ import '../styles/animation.css'
 
 // import '../styles/markdown.css'
 
-import config from '../../config'
 
-const inter = Inter({ subsets: ['latin'] })
-const hiddenHeaderPage = []
 
-export default function RootLayout({ children, page }) {
-  const pathname = usePathname()
+function RootLayout({ children }) {
 
   return (
     <html lang="en">
@@ -31,31 +24,17 @@ export default function RootLayout({ children, page }) {
       <Script id="weixinopenjs" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" />
       <Script id="feishusdk" src="https://lf1-cdn-tos.bytegoofy.com/goofy/locl/lark/external_js_sdk/h5-js-sdk-1.2.12.js" />
 
-      <Script
-        id="baidutongji"
-      //   dangerouslySetInnerHTML={{
-      //     __html: `
-      //  `
-      //   }}
-      >
-        {`var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?983fca994414ee989e1b88bd0193f557";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();`}
-      </Script>
-      <body className={inter.className}>
+      <body >
         <ToastContainer
           style={{
             zIndex: 999999
           }}
         />
-        {/* {hiddenHeaderPage?.includes(pathname) ? null : <Header />} */}
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        {/* <Footer /> */}
       </body>
     </html>
   )
 }
+
+
+export default RootLayout

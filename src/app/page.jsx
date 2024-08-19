@@ -6,9 +6,9 @@ import { useEffect } from "react"
 
 const HomePage = () => {
     const router = useRouter()
-    useEffect(() => {
-        router.replace('/model')
-    }, [])
+    // useEffect(() => {
+    //     router.replace('/model')
+    // }, [])
     return <div>
 
     </div>

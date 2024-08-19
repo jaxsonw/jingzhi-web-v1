@@ -72,7 +72,6 @@ export default function Overflow() {
                 <div className="flex items-center justify-end">
                     <div className="mr-6">
                         <Select
-                            onValueChange={(e) => { console.log("e", e) }}
                             placeholder="选择模型"
                         // value={selectModel}
                         >
