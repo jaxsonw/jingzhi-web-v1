@@ -1,13 +1,17 @@
 import moment from "moment";
 import { toast } from "react-toastify";
 
+function getCookie(key){
+	return document.cookie.match( new RegExp("(^|\\s)"+ key +"=([^;]+)(;|$)"))[2]
+}
+
 export const checkServer = () => {
   return typeof window === "undefined";
 };
 
 export const isLogin = () => {
   if (!checkServer()) {
-    const token = localStorage.getItem("token");
+    const token = getCookie('idToken');
     return !!token;
   }
   return false;

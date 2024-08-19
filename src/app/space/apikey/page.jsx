@@ -94,7 +94,7 @@ export default function APIKeys() {
           <button
             onClick={onCreate}
             type="button"
-            className="inline-flex text-center items-center justify-center w-[150px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#3162FF] hover:bg-[#3162FF] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex text-center items-center justify-center w-[150px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff6015]"
           >
             创建key
           </button>
@@ -104,7 +104,7 @@ export default function APIKeys() {
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md">
                 <table className="min-w-full divide-y divide-gray-300">
-                  <thead className="bg-[#3162FF] text-white ">
+                  <thead className="bg-[#ff5005] text-white ">
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white  sm:pl-6">
                         自定义名称

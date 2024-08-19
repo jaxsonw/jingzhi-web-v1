@@ -4,12 +4,16 @@ import { message } from 'antd'
 // import { axiosAddToken, nodeAddToken } from './addToken'
 // import { baseUrl } from './config';
 // import { API_BASE_URL } from '@../consts/env';
-import { getTokenKey } from './localStorage'
+// import { getTokenKey } from './localStorage'
 
 axios.defaults.withCredentials = true
 axios.defaults.timeout = 50000
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 // axios.defaults.baseURL = baseUrl;
+
+function getCookie(key){
+	return document.cookie.match( new RegExp("(^|\\s)"+ key +"=([^;]+)(;|$)"))[2]
+}
 
 // 中间件 拦截请求-
 axios.interceptors.request.use(
@@ -18,7 +22,7 @@ axios.interceptors.request.use(
       startTime: new Date().getTime()
     }
 
-    let token = getTokenKey()
+    let token = getCookie('idToken')
 
     if (config.url.includes('api.openai.com')) {
       token = sessionStorage.getItem('openkey')

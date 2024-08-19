@@ -53,8 +53,8 @@ const Header = () => {
                 target={item?.target}
                 className="text-sm flex flex-col  items-center font-semibold leading-6 text-gray-900 "
               >
-                <span className={`${isActive ? 'text-[#3162FF]' : ''}`}>{item.name}</span>
-                {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-[#3162FF]" /> : null}{' '}
+                <span className={`${isActive ? 'text-[#ff5005]' : ''}`}>{item.name}</span>
+                {isActive ? <span className="block mt-3 w-2/3 rounded-full h-1 bg-[#ff5005]" /> : null}{' '}
               </a>
             )
           })}

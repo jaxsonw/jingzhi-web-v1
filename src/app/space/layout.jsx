@@ -30,8 +30,12 @@ export default function SpaceLayout({ children }) {
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
   const currentEnTitle = navigation?.find(item => item?.href === currentPath)?.enTitle
 
+  const getCookie = (key) => {
+    return document.cookie.match(new RegExp("(^|\\s)" + key + "=([^;]+)(;|$)"))[2]
+  }
+
   useEffect(() => {
-    if (!checkServer() && !localStorage.getItem('token')) {
+    if (!checkServer() && !getCookie('idToken')) {
       router.push('/login')
     }
   }, [userInfo])
@@ -94,13 +98,13 @@ export default function SpaceLayout({ children }) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                     <a href="/" className="flex h-16 shrink-0 items-center">
-                      <img className="h-[25px]" src={icon_logo_color} alt="" />
+                      {/* <img className="h-[25px]" src={icon_logo_color} alt="" /> */}
                     </a>
 
                     <nav className="flex flex-1 flex-col">
                       <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
                         <div className="text-[#545759] text-center mb-4">{userInfo?.name || 'loading...'}</div>
-                        <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                        <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#ff5005] to-[#ff8035]">
                           <span>剩余金额</span>
                           <span>{userInfo?.apiNum}</span>
                         </div>
@@ -114,13 +118,13 @@ export default function SpaceLayout({ children }) {
                                   <a
                                     href={item.href}
                                     className={classNames(
-                                      item.current ? 'bg-gray-50 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50',
+                                      item.current ? 'bg-gray-50 text-[#ff5005]' : 'text-gray-700 hover:text-[#ff5005] hover:bg-gray-50',
                                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                     )}
                                   >
                                     <item.icon
                                       className={classNames(
-                                        item.current ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600',
+                                        item.current ? 'text-[#ff5005]' : 'text-gray-400 group-hover:text-[#ff5005]',
                                         'h-6 w-6 shrink-0'
                                       )}
                                       aria-hidden="true"
@@ -161,7 +165,7 @@ export default function SpaceLayout({ children }) {
             <nav className="flex flex-1 flex-col">
               <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
                 <div className="text-[#545759] text-center mb-4">{userInfo?.name || 'loading...'}</div>
-                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#3162FF] to-[#7AA9FF]">
+                <div className="flex justify-between text-[14px] text-white items-center bg-gradient-to-r px-[15px] py-[5px] rounded-md	from-[#ff5005] to-[#ffa055]">
                   <span>剩余金额</span>
                   <span>{userInfo?.apiNum}</span>
                 </div>
@@ -182,13 +186,13 @@ export default function SpaceLayout({ children }) {
                           <a
                             href={item?.href}
                             className={classNames(
-                              current ? 'bg-[#EFF3FF] text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50',
+                              current ? 'bg-[#fff0a5] text-[#ff5005]' : 'text-gray-700 hover:text-[#ff5005] hover:bg-gray-50',
                               'group flex gap-x-3 text-[16px] rounded-lg px-[22px] py-[11px] text-sm leading-6  '
                             )}
                           >
                             <item.icon
                               className={classNames(
-                                current ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600',
+                                current ? 'text-[#ff5005]' : 'text-gray-400 group-hover:text-[#ff5005]',
                                 'h-6 w-6 shrink-0'
                               )}
                               aria-hidden="true"
@@ -233,9 +237,9 @@ export default function SpaceLayout({ children }) {
                     <a
                       href="/space"
                       className={classNames(
-                        'text-[#3162FF] mx-8',
+                        'text-[#ff5005] mx-8',
                         'group flex items-center h-[64px] text-sm leading-6 font-semibold',
-                        'border-b-2 border-[#3162FF]'
+                        'border-b-2 border-[#ff5005]'
                       )}
                     >
                       个人中心
@@ -261,7 +265,7 @@ export default function SpaceLayout({ children }) {
               <div className="px-4 sm:px-6 lg:px-8 ">
                 <div className="flex items-center justify-center flex-col">
                   <h2 className="text-[24px] text-gray-900 font-semibold tracking-widest	">{currentTitle}</h2>
-                  <span className="text-[#A3C6FF]">{currentEnTitle}</span>
+                  <span className="text-[#ffa055]">{currentEnTitle}</span>
                 </div>
                 {children}
               </div>

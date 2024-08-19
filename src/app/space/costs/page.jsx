@@ -44,7 +44,7 @@ export default function Overflow() {
     return (
         <>
             <div className="flex justify-between items-center mb-4 mt-[18px]">
-                <span className="text-[#545759]">单日消耗统计：<span className="text-[#3162FF] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
+                <span className="text-[#545759]">单日消耗统计：<span className="text-[#ff5005] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
                 <DatePicker
                     locale={zhCN}
                     placeholder="请选择日期"
@@ -68,7 +68,7 @@ export default function Overflow() {
 
 
             <div className="flex justify-between items-center mb-4 mt-[54px]">
-                <span className="text-[#545759]">所选日期范围共消耗： <span className="text-[#3162FF] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
+                <span className="text-[#545759]">所选日期范围共消耗： <span className="text-[#ff5005] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
                 <div className="flex items-center justify-end">
                     <div className="mr-6">
                         <Select

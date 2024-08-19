@@ -229,7 +229,7 @@ export default function Example() {
       <PayModal orderDetail={orderDetail} isOpen={isOpenPayModal} setIsOpen={setIsOpenPayModal} />
       {createOrderLoading ? <Loading /> : null}
       <div className="w-full flex justify-end mb-[26px]">
-        <Link href="/model" className="text-[#3162FF] underline">
+        <Link href="/model" className="text-[#ff5005] underline">
           了解计费规则
         </Link>
       </div>
@@ -262,7 +262,7 @@ export default function Example() {
                   disabled={createOrderLoading}
                   onClick={() => onCreateOrder(item?.value)}
                   type="button"
-                  className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#3162FF] rounded-lg hover:bg-blue-700 focus:outline-none ${
+                  className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#ff8035] rounded-lg hover:bg-[#ff5005] focus:outline-none ${
                     createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
                   } `}
                 >

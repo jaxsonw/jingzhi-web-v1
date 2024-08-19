@@ -33,7 +33,7 @@ export default function Example() {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md">
               <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-[#3162FF] text-white ">
+                <thead className="bg-[#ff5005] text-white ">
                   <tr>
                     <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white  sm:pl-6">
                       订单编号

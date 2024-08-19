@@ -22,7 +22,7 @@ const TagListComponent = (props) => {
               <div
                 key={item.value}
                 onClick={() => onChange(item.value)}
-                className={`my-1 whitespace-nowrap cursor-pointer py-[5px] px-[12px] mx-[8px] text-[14px] rounded-md ${props.current === item.value ? 'bg-[#3162FF] text-[#fff] hover:text-[#fff]' : 'bg-[#F4F5FE] text-[#140E35] hover:text-[#3162FF]'}`}
+                className={`my-1 whitespace-nowrap cursor-pointer py-[5px] px-[12px] mx-[8px] text-[14px] rounded-md ${props.current === item.value ? 'bg-[#ff5005] text-[#fff] hover:text-[#fff]' : 'bg-[#F4F5FE] text-[#140E35] hover:text-[#3162FF]'}`}
               >{item.name}</div>
             )
           })
@@ -42,7 +42,7 @@ const ModelCard = (props) => {
       }}
     >
       <div
-        className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#c5d2fd] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
+        className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] border-solid bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
         {props.isFree === 1 && <div
           className="absolute top-0 right-0 w-[80px] text-[#fff] text-[14px] pl-[14px] pr-[10px] py-[8px] rounded-tr-[12px] rounded-bl-[12px]"
           style={{
@@ -113,12 +113,12 @@ const ModelCard = (props) => {
               查看详情
             </div>
           </Link>
-          <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
+          {/* <Link className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 py-[10px] rounded-[8px] flex items-center justify-center bg-[#3162FF]"
             href={`/`}>
             <div>
               立即体验
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </Link>

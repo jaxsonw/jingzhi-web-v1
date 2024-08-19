@@ -15,6 +15,7 @@ import { getEmailCode, getLoginUrl, getMobileCode, login, loginByCode, loginByMo
 // import { title } from '../../../config'
 import 'swiper/bundle'
 import { Button, Segmented } from 'antd';
+import { BASE_URL } from '../../consts/env';
 
 // SwiperCore.use([Autoplay])
 
@@ -22,7 +23,7 @@ export default function Login({ searchParams }) {
   const gotoLogin = async () => {
     try {
       const res = await getLoginUrl({
-        url: "http://localhost:3000/login"
+        url: `${BASE_URL}/login`
       })
       console.log(res)
       if (res.code == 0) {
@@ -38,7 +39,7 @@ export default function Login({ searchParams }) {
     if (res.code == 0) {
       console.log(res?.data?.accessToken)
       localStorage.setItem('token', res?.data?.accessToken)
-      // location.href = "/"
+      location.href = "/"
     } else {
       console.log(res.message)
     }
