@@ -32,7 +32,6 @@ chat_completion = client.chat.completions.create(
 )
 print(chat_completion.choices[0].message.content)`
     const jsCode = `import OpenAI from "openai";
-import from from '../../../../.next/server/app/model/[modelName]/page';
 
 const openai = new OpenAI();
 

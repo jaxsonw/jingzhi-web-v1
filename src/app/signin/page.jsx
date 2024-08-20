@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { getLoginUrl, loginByCode } from '../../services/index'
 
 import 'swiper/bundle'
-import { Button } from 'antd';
 
 export default function Login({ searchParams }) {
   const gotoLogin = async () => {
@@ -11,6 +10,7 @@ export default function Login({ searchParams }) {
       const res = await getLoginUrl({
         url: window.location.href
       })
+      console.log("res",res)
       if (res.code == 0) {
         location.href = res.data.loginUrl
       }
@@ -34,7 +34,7 @@ export default function Login({ searchParams }) {
     }
   }, [])
 
-  return null
+  return <div></div>
   // const searchParams = useSearchParams()
   // const [sendLoading, setSendLoading] = useState(false)
   // const [submitLoading, setSubmitLoading] = useState(false)

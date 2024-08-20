@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import axios from 'axios'
 import { message } from 'antd'
+import { getCookie } from './index'
 // import { axiosAddToken, nodeAddToken } from './addToken'
 // import { baseUrl } from './config';
 // import { API_BASE_URL } from '@../consts/env';
@@ -10,10 +11,6 @@ axios.defaults.withCredentials = true
 axios.defaults.timeout = 50000
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 // axios.defaults.baseURL = baseUrl;
-
-function getCookie(key){
-	return document.cookie.match( new RegExp("(^|\\s)"+ key +"=([^;]+)(;|$)"))[2]
-}
 
 // 中间件 拦截请求-
 axios.interceptors.request.use(

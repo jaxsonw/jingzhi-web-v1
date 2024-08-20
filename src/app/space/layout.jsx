@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import CustomerModal from "../../components/common/CustomerModal"
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
-import { checkServer } from '../../utils/index'
+import { checkServer, getCookie } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,17 +28,6 @@ export default function SpaceLayout({ children }) {
   const currentPath = usePathname()
   const currentTitle = navigation?.find(item => item?.href === currentPath)?.title
   const currentEnTitle = navigation?.find(item => item?.href === currentPath)?.enTitle
-
-  const getCookie = (key) => {
-    return document.cookie.match(new RegExp("(^|\\s)" + key + "=([^;]+)(;|$)"))[2]
-  }
-
-  function setCookie(obj, time) {
-    let date = new Date(new Date().getTime() + time * 24 * 60 * 60 * 1000).toUTCString();
-    for (let key in obj) {
-      document.cookie = key + "=" + obj[key] + "; expires=" + date;
-    }
-  }
 
   useEffect(() => {
     if (!checkServer() && !getCookie('idToken')) {
@@ -262,7 +251,7 @@ export default function SpaceLayout({ children }) {
                 <Link href="/login" onClick={
                   () => {
                     // window.localStorage.removeItem("token")
-                    setCookie({ ['idToken']: "" }, -1)
+                    setCookie({ ['idToken']: "" }, { days: -1, secure: true, sameSite: 'Strict' })
                   }
                 } className="flex items-center hover:font-bold text-[#545759] font-bold">
                   <RiLogoutBoxRLine className="mr-1" /> 退出登录

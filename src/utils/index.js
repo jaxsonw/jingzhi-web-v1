@@ -1,8 +1,33 @@
 import moment from "moment";
 import { toast } from "react-toastify";
 
-function getCookie(key){
-	return document.cookie.match( new RegExp("(^|\\s)"+ key +"=([^;]+)(;|$)"))[2]
+export const getCookie = (key) => {
+  if (typeof document === 'undefined') return null;
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === key) {
+      return decodeURIComponent(value);
+    }
+  }
+  return null;
+}
+
+export const setCookie = (obj, options = {}) => {
+  const { days = 0, path = '/', domain, secure = true, sameSite = 'Strict' } = options;
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  
+  for (let key in obj) {
+    let cookieString = `${key}=${encodeURIComponent(obj[key])}; expires=${date.toUTCString()}; path=${path}`;
+    
+    if (domain) cookieString += `; domain=${domain}`;
+    if (secure) cookieString += '; Secure';
+    cookieString += `; SameSite=${sameSite}`;
+    cookieString += '; HttpOnly';
+    
+    document.cookie = cookieString;
+  }
 }
 
 export const checkServer = () => {
