@@ -22,7 +22,10 @@ RUN pnpm install
 COPY . .
 
 # 调试：列出工作目录中的文件和权限
-RUN ls -l /app
+RUN ls -l /
+
+ENV NODE_ENV=production
+
 
 # 构建 Next.js 应用
 RUN pnpm build
@@ -35,6 +38,7 @@ RUN chown -R node:node /app/.next
 
 # 暴露应用运行的端口
 EXPOSE 5003
+
 
 # 启动应用
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]

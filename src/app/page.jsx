@@ -1,17 +1,11 @@
-"use client"
+'use client'
 
-
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const HomePage = () => {
-    const router = useRouter()
-    // useEffect(() => {
-    //     router.replace('/model')
-    // }, [])
-    return <div>
-
-    </div>
+  const router = useRouter()
+  return <div></div>
 }
 
 export default HomePage
