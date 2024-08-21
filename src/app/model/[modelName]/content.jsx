@@ -58,7 +58,7 @@ main();`
   }
 
   return (
-    <div className="min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]">
+    <div className={"min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]"}>
       <title>{modelData.modelName + '模型详情'}</title>
       <meta name="description" content={modelData.desc} />
       <meta name="keywords" content={`${modelData.modelName}`} />
@@ -148,9 +148,8 @@ main();`
       </div>
       <div className="flex w-full mt-[28px] relative z-1 text-[16px]">
         <div
-          className={`px-[33px] py-[6px]  ${
-            pageStatus == 1 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
-          } `}
+          className={`px-[33px] py-[6px]  ${pageStatus == 1 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
+            } `}
           onClick={() => {
             if (pageStatus != 1) {
               setPageState(1)
@@ -161,9 +160,8 @@ main();`
           模型介绍
         </div>
         <div
-          className={`px-[33px] py-[6px]  ${
-            pageStatus == 2 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
-          }`}
+          className={`px-[33px] py-[6px]  ${pageStatus == 2 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
+            }`}
           onClick={() => {
             if (pageStatus != 2) {
               setPageState(2)
@@ -183,9 +181,8 @@ main();`
             <div className="flex justify-between  mb-[4px]">
               <div className="flex">
                 <div
-                  className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${
-                    codeType === 'python' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
-                  }`}
+                  className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'python' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
+                    }`}
                   onClick={() => {
                     if (codeType !== 'python') {
                       setCodeType('python')
@@ -195,9 +192,8 @@ main();`
                   Python
                 </div>
                 <div
-                  className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${
-                    codeType === 'javascript' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
-                  }`}
+                  className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'javascript' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
+                    }`}
                   onClick={() => {
                     if (codeType !== 'javascript') {
                       setCodeType('javascript')
