@@ -12,7 +12,7 @@ const nextConfig = {
     styledComponents: true
   },
   serverRuntimeConfig: {
-    maxHeaderSize: 100 * 1024, // 配置最大接收请求长度 16KB
+    maxHeaderSize: 100 * 1024, // 配置最大接收请求长度 100KB
   },
 }
 

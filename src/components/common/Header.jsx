@@ -11,7 +11,7 @@ import { icon_logo_color } from '../../consts/img'
 const hiddenPath = ['/space', '/login', '/code']
 
 const navigation = [
-  { name: '模型广场', href: '/'},
+  { name: '模型广场', href: '/model' },
 ]
 
 const Header = () => {

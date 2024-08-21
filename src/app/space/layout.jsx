@@ -220,7 +220,7 @@ export default function SpaceLayout({ children }) {
                   <div role="list" className="mx-auto flex items-center justify-center">
 
                     <a
-                      href="/"
+                      href="/model"
                       className={classNames(
                         'text-gray-700 mx-8',
                         'group flex items-center h-[64px] text-sm leading-6 font-semibold'
