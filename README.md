@@ -1,8 +1,3 @@
-## 更新
-
-2024年05月18日：
-增加 about
-
 ## Getting Started
 
 

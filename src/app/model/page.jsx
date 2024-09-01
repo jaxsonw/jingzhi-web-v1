@@ -5,6 +5,7 @@ import { getServerModelFilterList, getServerModelList } from '../../services/ove
 import { Col, Row } from 'antd'
 import { copyValue } from '@/src/utils'
 import { LoadingSkeleton } from '@/src/components/common/LoadingSkeleton'
+import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 
 const TagListComponent = props => {
   const { list, title } = props
@@ -21,11 +22,10 @@ const TagListComponent = props => {
             <div
               key={item.value}
               onClick={() => onChange(item.value)}
-              className={`my-1 whitespace-nowrap cursor-pointer py-[5px] px-[12px] mx-[8px] text-[14px] rounded-md ${
-                props.current === item.value
-                  ? 'bg-[#ff5005] text-[#fff] hover:text-[#fff]'
-                  : 'bg-[#F4F5FE] text-[#140E35] hover:text-[#3162FF]'
-              }`}
+              className={`my-1 whitespace-nowrap cursor-pointer py-[5px] px-[12px] mx-[8px] text-[14px] rounded-md ${props.current === item.value
+                ? 'bg-[#ff5005] text-[#fff] hover:text-[#fff]'
+                : 'bg-[#F4F5FE] text-[#140E35] hover:text-[#3162FF]'
+                }`}
             >
               {item.name}
             </div>
@@ -187,7 +187,8 @@ const Model = props => {
   }
   return (
     <div>
-      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">
+      <HeaderJingzhi />
+      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">  
         {/* <title>模型广场</title> */}
         {loading ? (
           <LoadingSkeleton />
