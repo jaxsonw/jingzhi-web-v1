@@ -11,6 +11,7 @@ import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer, getCookie } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
+import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -49,6 +50,7 @@ export default function SpaceLayout({ children }) {
     <>
       <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
+        <HeaderJingzhi active='/space'/>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -92,9 +94,9 @@ export default function SpaceLayout({ children }) {
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                    <a href="/" className="flex h-16 shrink-0 items-center">
-                      {/* <img className="h-[25px]" src={icon_logo_color} alt="" /> */}
-                    </a>
+                    {/* <a href="/" className="flex h-16 shrink-0 items-center">
+                      <img className="h-[25px]" src={icon_logo_color} alt="" />
+                    </a> */}
 
                     <nav className="flex flex-1 flex-col">
                       <div className="pb-6 border-b-[2px] border-[#EAEAEA]">
@@ -205,13 +207,11 @@ export default function SpaceLayout({ children }) {
         </div>
 
         <div className="lg:pl-[240px]">
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+          {/* <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
             <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
-
-            {/* Separator */}
             <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
             <div className="flex items-center flex-1 gap-x-4 self-stretch lg:gap-x-6">
@@ -241,13 +241,12 @@ export default function SpaceLayout({ children }) {
                     </a>
                   </div>
                 </nav>
-                {/* <h1 className="flex font-bold items-center">{currentTitle}</h1> */}
               </div>
               <div className="flex items-center ">
-                {/* <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
+                <button type="button" className="flex items-center mr-4" onClick={() => setCustomerOpen(true)}>
                   <RiCustomerService2Line />
                   <span className="font-bold text-[#545759] ml-1">客服</span>
-                </button> */}
+                </button>
                 <Link href="/login" onClick={
                   () => {
                     // window.localStorage.removeItem("token")
@@ -258,9 +257,9 @@ export default function SpaceLayout({ children }) {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <main className="py-10 bg-[#f3f8fe] h-[calc(100vh_-_64px)] overflow-scroll">
+          <main className="py-10 bg-[#f3f8fe] h-[calc(100vh_-_56px)] overflow-scroll mt-[56px]">
             <SpaceContext.Provider value={userInfo}>
               <div className="px-4 sm:px-6 lg:px-8 ">
                 <div className="flex items-center justify-center flex-col">

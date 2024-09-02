@@ -8,17 +8,17 @@ import { consumeChart, consumeModelList, getModelList, getModelPriceList } from 
 export default function Overflow() {
     const [singleDayDate, setSingleDayDate] = useState(moment().format('YYYY-MM-DD'))
     const [dataList, setDataList] = useState([])
-    const [modelList, setModelList] = useState([])
+    // const [modelList, setModelList] = useState([])
     const [totalFee, setTotalFee] = useState(0)
 
-    const [selectModel, setSelectModel] = useState(null)
+    // const [selectModel, setSelectModel] = useState(null)
 
 
-    const init = async () => {
-        const modelListRes = await getModelList()
-        setModelList(modelListRes?.data?.recordList)
+    // const init = async () => {
+    //     const modelListRes = await getModelList()
+    //     setModelList(modelListRes?.data?.recordList)
 
-    }
+    // }
 
     const getSingleDayData = async () => {
         const consumeModelRes = await consumeModelList({
@@ -33,9 +33,9 @@ export default function Overflow() {
         setTotalFee(consumeModelRes?.data?.totalFee)
     }
 
-    useEffect(() => {
-        init()
-    }, [])
+    // useEffect(() => {
+    //     init()
+    // }, [])
 
     useEffect(() => {
         getSingleDayData()
@@ -44,7 +44,7 @@ export default function Overflow() {
     return (
         <>
             <div className="flex justify-between items-center mb-4 mt-[18px]">
-                <span className="text-[#545759]">单日消耗统计：<span className="text-[#ff5005] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
+                <span className="text-[#545759]">单日消耗统计：<span className="text-[#ff5005] font-bold text-xl">{totalFee?.toFixed(4) || "0.0000"}元</span> </span>
                 <DatePicker
                     locale={zhCN}
                     placeholder="请选择日期"
@@ -59,7 +59,7 @@ export default function Overflow() {
                     data={dataList}
                     index="model"
                     categories={['消费金额']}
-                    colors={['blue-600']}
+                    colors={['orange-600']}
                     valueFormatter={v => Number(v)?.toFixed(4)}
                     yAxisWidth={80}
                     showXAxis
@@ -67,7 +67,7 @@ export default function Overflow() {
             </Card>
 
 
-            <div className="flex justify-between items-center mb-4 mt-[54px]">
+            {/* <div className="flex justify-between items-center mb-4 mt-[54px]">
                 <span className="text-[#545759]">所选日期范围共消耗： <span className="text-[#ff5005] font-bold text-xl">{totalFee?.toFixed(4)}元</span> </span>
                 <div className="flex items-center justify-end">
                     <div className="mr-6">
@@ -102,7 +102,7 @@ export default function Overflow() {
                     yAxisWidth={80}
                     showXAxis
                 />
-            </Card>
+            </Card> */}
         </>
     )
 }

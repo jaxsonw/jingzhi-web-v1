@@ -6,6 +6,7 @@ import { Col, Row } from 'antd'
 import { copyValue } from '@/src/utils'
 import { LoadingSkeleton } from '@/src/components/common/LoadingSkeleton'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
+import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
 
 const TagListComponent = props => {
   const { list, title } = props
@@ -187,9 +188,9 @@ const Model = props => {
   }
   return (
     <div>
-      <HeaderJingzhi />
-      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">  
-        {/* <title>模型广场</title> */}
+      <HeaderJingzhi active="/model"/>
+      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">
+        <title>模型广场</title>
         {loading ? (
           <LoadingSkeleton />
         ) : (
@@ -238,6 +239,7 @@ const Model = props => {
           </>
         )}
       </div>
+      <FooterJingzhi />
     </div>
   )
 }

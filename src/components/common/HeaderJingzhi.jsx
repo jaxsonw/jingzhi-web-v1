@@ -1,10 +1,11 @@
+import { getCookie, setCookie } from "@/src/utils";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
-const HeaderJingzhi = () => {
+const HeaderJingzhi = ({ active }) => {
     const [showChildren, setShowChildren] = useState(false)
-    let showTimer
+    let showTimer = ""
     const navArray = [
         { title: '首页', href: '/' },
         { title: '模型仓库', href: '/models' },
@@ -19,11 +20,47 @@ const HeaderJingzhi = () => {
         { title: '算力资源（即将上线）', href: '#' },
         { title: '社区活动', href: '/salons' },
         { title: '知识宝库', href: '/daily_papers' },
-        { title: '大模型广场', href: '#', active: true },
-        { title: 'API', href: '#' }
+        { title: '大模型广场', href: '/model' },
+        { title: 'API', href: '/space' }
     ];
 
-    return <div className="absolute top-0 bg-white w-full">
+    const menuItem = [
+        [
+            { title: '个人信息', href: 'javascript:;' },
+            { title: '账号设置', href: 'javascript:;' },
+        ], [
+            { title: '+ 新建模型', href: 'javascript:;' },
+            { title: '+ 新建数据集', href: 'javascript:;' },
+        ], [
+            { title: '+ 新建组织', href: 'javascript:;' },
+        ],
+    ]
+
+    const [isLogin, setIsLogin] = useState(false)
+
+    useEffect(() => {
+        if (getCookie('idToken')) {
+            setIsLogin(true)
+        }
+    }, [])
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const targetElement = event.target;
+            if (!targetElement.closest("#el-id-8837-1")) {
+                // 这里是点击元素之外的区域，可以触发相应事件
+                if (showChildren === "menu") setShowChildren(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    return <div className="absolute top-0 bg-white w-full z-[100]">
         <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
             <div>
                 <div>
@@ -62,7 +99,7 @@ const HeaderJingzhi = () => {
                             >
                                 {item.title}
                                 <i
-                                    className={`w-[12px] h-[12px] absolute right-[20px] transition-transform duration-200 ${showChildren === index?"transform rotate-180":""} `}
+                                    className={`w-[12px] h-[12px] absolute right-[20px] transition-transform duration-200 ${showChildren === index ? "transform rotate-180" : ""} `}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 1024 1024">
                                         <path fill="currentColor" d="M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z">
@@ -88,10 +125,10 @@ const HeaderJingzhi = () => {
                         </li> : <li
                             key={index}
                             role="menuitem"
-                            className={`px-[20px] h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${item.active ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`px-[20px] h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${item.href === active ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                         >
-                            {item.active ? item.title : <Link
+                            {item.href === active ? item.title : <Link
                                 className="h-full"
                                 href={item.href}
                             >
@@ -103,15 +140,65 @@ const HeaderJingzhi = () => {
                 </ul>
             </div>
             <div className="flex items-center">
-                <div className="el-dropdown pl-1">
-                    <div className="el-dropdown-link el-tooltip__trigger el-tooltip__trigger" id="el-id-8837-1" role="button" tabIndex="0" aria-controls="el-id-8837-2" aria-expanded="false" aria-haspopup="menu">
-                        <div className="relative">
+                <div className="pl-1">
+                    <div className="" id="el-id-8837-1" role="button" tabIndex="0" aria-controls="el-id-8837-2" aria-expanded="false" aria-haspopup="menu">
+                        {isLogin ? <div className="relative flex-col items-center ">
                             <div
                                 className="rounded-full h-[40px] w-[40px] overflow-hidden bg-[#c0c4cc]"
+                                onClick={() => {
+                                    if (showTimer) clearTimeout(showTimer)
+                                    if (showChildren === "menu") {
+                                        setShowChildren(false)
+                                    } else {
+                                        setShowChildren("menu")
+                                    }
+                                }}
+
                             >
                                 <img src="https://cdn.casbin.org/img/casbin.svg" />
                             </div>
-                        </div>
+                            <div
+                                className={`absolute top-[54px] left-1/2 transform -translate-x-1/2 overflow-hidden text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showChildren === "menu" ? "py-1 border-solid" : "h-0"}`}
+                            >
+                                {menuItem.map((item, index) => <div key={"menuItems" + index} className="border-b border-[#ddd] border-solid">
+                                    {item.map((it, id) => <div
+                                        key={"menuItem" + id}
+                                        className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]"
+                                    >
+                                        <Link
+                                            className="w-full h-full px-[10px] block"
+                                            href={it.href}
+                                        >
+                                            {it.title}
+                                        </Link>
+                                    </div>)}
+                                </div>
+                                )}
+                                <div className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]" >
+                                    <span
+                                        className="w-full h-full px-[10px] block"
+                                        onClick={
+                                            () => {
+                                                setCookie({ ['idToken']: "" }, { days: -1, secure: true, sameSite: 'Strict' })
+                                                location.reload()
+                                            }
+                                        }
+                                    >
+                                        退出登录
+                                    </span>
+                                </div>
+                            </div>
+                        </div> : <div>
+                            <button
+                                type="button"
+                                className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
+                                onClick={()=>{
+                                    location.href="/signin"
+                                }}
+                            >
+                                登录
+                            </button>
+                        </div>}
                     </div>
                 </div>
             </div>

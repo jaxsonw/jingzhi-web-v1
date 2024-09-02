@@ -15,6 +15,7 @@ export default function Login({ searchParams }) {
         location.href = res.data.loginUrl
       }
     } catch (err) {
+      
     }
   }
 
@@ -22,7 +23,7 @@ export default function Login({ searchParams }) {
     const res = await loginByCode({ code: code })
     if (res.code == 0) {
       localStorage.setItem('token', res?.data?.accessToken)
-      location.href = "/space"
+      // location.href = "/space"
     }
   }
 

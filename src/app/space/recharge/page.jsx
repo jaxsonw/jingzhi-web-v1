@@ -227,19 +227,19 @@ export default function Example() {
       <PayModal orderDetail={orderDetail} isOpen={isOpenPayModal} setIsOpen={setIsOpenPayModal} />
       {createOrderLoading ? <Loading /> : null}
       <div className="w-full flex justify-end mb-[26px]">
-        <Link href="/model" className="text-[#ff5005] underline">
+        {/* <Link href="/model" className="text-[#ff5005] underline">
           了解计费规则
-        </Link>
+        </Link> */}
       </div>
       <div className="w-full relative">
         {/* <img src={agicto_product_agent_wechat} alt={TITLE} className="absolute w-[8%] top-[14.28%] right-[5%]" /> */}
-        <img src={recharge_center_bg1} alt={TITLE} className="w-full" />
+        {/* <img src={recharge_center_bg1} alt={TITLE} className="w-full" /> */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-[11] mt-[28px] ">
         {pricePlan?.map((item, index) => (
           <div key={index} className="rounded-md   overflow-hidden bg-white">
-            <div className={`w-full h-[10px] ${item?.headColor}`}></div>
+            <div className={`w-full h-[10px] bg-gradient-to-r from-[#FEE4B6] to-[#FDCD79]`}></div>
             <div className="p-[35px]">
               <div className="w-full  flex items-end justify-center mb-[35px]">
                 <img src={item?.label} alt="agicto-icon" className="h-[55px]" />
@@ -271,7 +271,7 @@ export default function Example() {
           </div>
         ))}
         <div className="rounded-md overflow-hidden bg-white">
-          <div className={`w-full h-[10px] bg-gradient-to-r from-[#8331FF] to-[#2BB1F8] to-[#00D9B6]`}></div>
+          <div className={`w-full h-[10px] bg-gradient-to-r from-[#FEE4B6] to-[#FDCD79]`}></div>
           <div className="p-[35px]">
             <div className="w-full  flex items-end justify-center  mb-[35px]">
               <img src={recharge_custom_price} alt="agicto-icon" className="h-[55px]" />
@@ -282,7 +282,7 @@ export default function Example() {
                 name="price"
                 value={inputPrice}
                 onChange={onAmountChange}
-                className="block w-full my-2 text-xl font-semibold px-6 py-3 mr-4 mt-4   rounded-md border-0 py-1.5 pl-7   text-gray-900 ring-1 ring-inset ring-gray-300   focus:ring-2 focus:ring-inset focus:ring-[#3162FF] "
+                className="block w-full my-2 text-xl font-semibold px-6 py-3 mr-4 mt-4   rounded-md border-0 py-1.5 pl-7   text-gray-900 ring-1 ring-inset ring-gray-300   focus:ring-2 focus:ring-inset focus:ring-[#ff5005] "
                 placeholder="输入金额"
               />
             </div>
@@ -295,7 +295,7 @@ export default function Example() {
                 disabled={createOrderLoading}
                 onClick={() => onCreateOrder(inputPrice)}
                 type="button"
-                className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#3162FF] rounded-lg hover:bg-blue-700 focus:outline-none ${createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
+                className={`inline-flex h-[45px] text-center items-center justify-center w-full  lg:w-[130px] px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-lg shadow-sm text-white bg-[#ff8035] rounded-lg hover:bg-[#ff5005] focus:outline-none ${createOrderLoading ? 'bg-[#fafafa] text-[#ccc]' : ''
                   } `}
               >
                 购买
