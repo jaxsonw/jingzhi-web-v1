@@ -9,6 +9,7 @@ import './style.model.css'
 import { github, routeros } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { copyValue } from '@/src/utils'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
+import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
 
 const ModelDetail = ({ data, status }) => {
   const router = useRouter()
@@ -244,6 +245,7 @@ main();`
           )}
         </div>
       </div>
+      <FooterJingzhi />
     </div>
   )
 }

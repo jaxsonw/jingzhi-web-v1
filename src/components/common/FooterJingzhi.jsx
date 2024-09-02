@@ -2,8 +2,6 @@ import { PoliceBadge } from '@/src/icons/police_badge';
 import Link from 'next/link';
 
 const FooterJingzhi = () => {
-    
-
     return (
         <div className="w-full bg-[#181f31]">
             <div className="pt-[64px] bg-[#181f31] text-white max-w-[1440px] m-auto w-full">
@@ -44,7 +42,7 @@ const FooterJingzhi = () => {
                     <div className="mt-[64px] border-t pb-[48px] opacity-60 border-solid">
                         <div className="pt-[32px] flex justify-between">
                             <div className="flex items-center text-[12px] font-[400] text-[#223B99] leading=[20px]">
-                                <PoliceBadge/>
+                                <PoliceBadge />
                                 <Link href="https://beian.mps.gov.cn/" target="_blank" className="text-white inline-block ml-[8px]">京公网安备11010802027721号</Link>
                                 <span className="inline-block">｜</span>
                                 <Link href="https://beian.miit.gov.cn/" target="_blank" className="text-white inline-block">京ICP备09013372号</Link>

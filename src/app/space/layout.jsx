@@ -12,6 +12,7 @@ import navigation from './const'
 import { checkServer, getCookie } from '../../utils/index'
 import { icon_logo_color } from '../../consts/img'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
+import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -50,7 +51,7 @@ export default function SpaceLayout({ children }) {
     <>
       <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
-        <HeaderJingzhi active='/space'/>
+        <HeaderJingzhi active='/space' />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -259,14 +260,17 @@ export default function SpaceLayout({ children }) {
             </div>
           </div> */}
 
-          <main className="py-10 bg-[#f3f8fe] h-[calc(100vh_-_56px)] overflow-scroll mt-[56px]">
+          <main className="bg-[#f3f8fe] h-[calc(100vh_-_56px)] overflow-scroll mt-[56px]">
             <SpaceContext.Provider value={userInfo}>
-              <div className="px-4 sm:px-6 lg:px-8 ">
-                <div className="flex items-center justify-center flex-col">
-                  <h2 className="text-[24px] text-gray-900 font-semibold tracking-widest	">{currentTitle}</h2>
-                  <span className="text-[#ffa055]">{currentEnTitle}</span>
+              <div>
+                <div className="px-4 sm:px-6 lg:px-8 py-10 min-h-[calc(100vh_-_56px)]">
+                  <div className="flex items-center justify-center flex-col">
+                    <h2 className="text-[24px] text-gray-900 font-semibold tracking-widest	">{currentTitle}</h2>
+                    <span className="text-[#ffa055]">{currentEnTitle}</span>
+                  </div>
+                  {children}
                 </div>
-                {children}
+                <FooterJingzhi />
               </div>
             </SpaceContext.Provider>
           </main>
