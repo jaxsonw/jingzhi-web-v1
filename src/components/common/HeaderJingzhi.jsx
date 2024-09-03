@@ -1,3 +1,4 @@
+import { getUserInfo } from "@/src/services";
 import { getCookie, setCookie } from "@/src/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const HeaderJingzhi = ({ active }) => {
     const [showChildren, setShowChildren] = useState(false)
+    const [userData, setUserData] = useState(null)
     let showTimer = ""
     const navArray = [
         { title: '首页', href: '/' },
@@ -26,22 +28,36 @@ const HeaderJingzhi = ({ active }) => {
 
     const menuItem = [
         [
-            { title: '个人信息', href: 'javascript:;' },
-            { title: '账号设置', href: 'javascript:;' },
+            { title: '个人信息', href: userData?`/profile/${userData.id}`:"/signin" },
+            { title: '账号设置', href: '/settings/profile' },
         ], [
-            { title: '+ 新建模型', href: 'javascript:;' },
-            { title: '+ 新建数据集', href: 'javascript:;' },
+            { title: '+ 新建模型', href: '/models/new' },
+            { title: '+ 新建数据集', href: '/datasets/new' },
         ], [
-            { title: '+ 新建组织', href: 'javascript:;' },
-        ],
+            { title: '+ 新建组织', href: '/organizations/new' },
+        ], [
+            { title: '论文推荐', href: '/daily_papers/new' },
+        ]
     ]
 
     const [isLogin, setIsLogin] = useState(false)
 
-    useEffect(() => {
-        if (getCookie('idToken')) {
-            setIsLogin(true)
+    useEffect(async () => {
+        try {
+            if (getCookie('idToken')) {
+                setIsLogin(true)
+                const res = await getUserInfo()
+                if (res.code === 0) {
+                    setUserData(res.data)
+                } else {
+                    toast("token失效")
+                    setUserData(null)
+                }
+            }
+        } catch (err) {
+
         }
+
     }, [])
 
     useEffect(() => {
@@ -125,11 +141,11 @@ const HeaderJingzhi = ({ active }) => {
                         </li> : <li
                             key={index}
                             role="menuitem"
-                            className={`px-[20px] h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${item.href === active ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${item.href === active ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                         >
-                            {item.href === active ? item.title : <Link
-                                className="h-full"
+                            {item.href === active ? <span className="h-full px-[20px] w-full block">{item.title}</span> : <Link
+                                className="h-full px-[20px] w-full block"
                                 href={item.href}
                             >
                                 {item.title}
@@ -155,7 +171,7 @@ const HeaderJingzhi = ({ active }) => {
                                 }}
 
                             >
-                                <img src="https://cdn.casbin.org/img/casbin.svg" />
+                                <img src={userData?userData.avatar:""} alt="avatar" />
                             </div>
                             <div
                                 className={`absolute top-[54px] left-1/2 transform -translate-x-1/2 overflow-hidden text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showChildren === "menu" ? "py-1 border-solid" : "h-0"}`}
@@ -174,7 +190,17 @@ const HeaderJingzhi = ({ active }) => {
                                     </div>)}
                                 </div>
                                 )}
-                                <div className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]" >
+                                <div
+                                    className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]"
+                                >
+                                    <Link
+                                        className="w-full h-full px-[10px] block"
+                                        href="/logout"
+                                    >
+                                        退出登录
+                                    </Link>
+                                </div>
+                                {/* <div className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]" >
                                     <span
                                         className="w-full h-full px-[10px] block"
                                         onClick={
@@ -186,14 +212,14 @@ const HeaderJingzhi = ({ active }) => {
                                     >
                                         退出登录
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div> : <div>
                             <button
                                 type="button"
                                 className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
-                                onClick={()=>{
-                                    location.href="/signin"
+                                onClick={() => {
+                                    location.href = "/signin"
                                 }}
                             >
                                 登录
