@@ -87,7 +87,7 @@ const PayPage = () => {
                     paySign: codeUrl?.paySign, // 支付签名
                     success: res => {
                         toast.success('支付成功～')
-                        window.location.href = '/space/recharge'
+                        window.location.href = '/space/recharge/'
                     },
                     error: err => {
                         console.log('err', err)
@@ -165,7 +165,7 @@ const PayPage = () => {
             setOrderStatus(1)
             setCount(0)
             toast.success('支付成功～')
-            window.location.href = "/space/recharge"
+            window.location.href = "/space/recharge/"
         }
     }
 
@@ -200,7 +200,7 @@ const PayPage = () => {
                     <ol role="list" className="bg-white rounded-md shadow px-6 flex space-x-4">
                         <li className="flex">
                             <div className="flex items-center">
-                                <a href="/space" className="text-gray-400 hover:text-gray-500">
+                                <a href="/space/" className="text-gray-400 hover:text-gray-500">
                                     <HomeIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                                     <span className="sr-only">Home</span>
                                 </a>
@@ -218,7 +218,7 @@ const PayPage = () => {
                                 >
                                     <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                 </svg>
-                                <a href="/space/recharge" className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                                <a href="/space/recharge/" className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
                                     充值中心
                                 </a>
                             </div>

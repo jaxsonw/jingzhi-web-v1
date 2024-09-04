@@ -157,7 +157,7 @@ export default function Example() {
           paySign: sign?.paySign, // 支付签名
           success: res => {
             toast.success('支付成功～')
-            window.location.href = '/space/recharge'
+            window.location.href = '/space/recharge/'
           },
           error: err => {
           },

@@ -1,4 +1,4 @@
-import { getUserInfo } from "@/src/services";
+import { getNavList, getUserInfo } from "@/src/services";
 import { getCookie, setCookie } from "@/src/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,41 +8,23 @@ const HeaderJingzhi = ({ active }) => {
     const [showChildren, setShowChildren] = useState(false)
     const [userData, setUserData] = useState(null)
     let showTimer = ""
-    const navArray = [
-        { title: '首页', href: '/' },
-        { title: '模型仓库', href: '/models' },
-        { title: '数据集库', href: '/datasets' },
-        {
-            title: '供需对接', href: '#', children: [
-                { title: '需求卡片', href: '/ai_issues/new' },
-                { title: '供给卡片', href: '/organizations/collection' }
-            ]
-        },
-        { title: '应用集合（即将上线）', href: '#' },
-        { title: '算力资源（即将上线）', href: '#' },
-        { title: '社区活动', href: '/salons' },
-        { title: '知识宝库', href: '/daily_papers' },
-        { title: '大模型广场', href: '/model' },
-        { title: 'API', href: '/space' }
-    ];
+    const [navArray, setNavArrary] = useState([])
 
     const menuItem = [
         [
-            { title: '个人信息', href: userData?`/profile/${userData.id}`:"/signin" },
+            { title: '个人信息', href: userData ? `/profile/${userData.id}` : "/login" },
             { title: '账号设置', href: '/settings/profile' },
         ], [
             { title: '+ 新建模型', href: '/models/new' },
             { title: '+ 新建数据集', href: '/datasets/new' },
         ], [
             { title: '+ 新建组织', href: '/organizations/new' },
-        ], [
-            { title: '论文推荐', href: '/daily_papers/new' },
         ]
     ]
 
     const [isLogin, setIsLogin] = useState(false)
 
-    useEffect(async () => {
+    const getUserData = async () => {
         try {
             if (getCookie('idToken')) {
                 setIsLogin(true)
@@ -50,14 +32,28 @@ const HeaderJingzhi = ({ active }) => {
                 if (res.code === 0) {
                     setUserData(res.data)
                 } else {
-                    toast("token失效")
-                    setUserData(null)
+                    window.location.href = '/login'
                 }
             }
         } catch (err) {
 
         }
+    }
 
+    const getNavData = async () => {
+        try {
+            const res = await getNavList()
+            if (res.code === 0) {
+                setNavArrary(res.data)
+            }
+        } catch (err) {
+
+        }
+    }
+
+    useEffect(() => {
+        getUserData()
+        getNavData()
     }, [])
 
     useEffect(() => {
@@ -95,7 +91,7 @@ const HeaderJingzhi = ({ active }) => {
                     role="menubar"
                 >
                     {navArray.map((item, index) => (
-                        item.children ? <li
+                        item.subs ? <li
                             key={index}
                             role="menuitem"
                             className="pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative"
@@ -126,13 +122,14 @@ const HeaderJingzhi = ({ active }) => {
                             <div
                                 className={`absolute top-[64px] left-0 overflow-hidden text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showChildren === index ? "py-1 border-solid" : "h-0"}`}
                             >
-                                {item.children.map((child, index) => <div
+                                {item.subs.map((child, index) => <div
                                     key={index}
                                     className="w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]"
                                 >
                                     <Link
                                         className="w-full h-full px-[10px] block"
-                                        href={child.href}
+                                        href={child.index}
+                                        target={child.target ? child.target : "_self"}
                                     >
                                         {child.title}
                                     </Link>
@@ -146,7 +143,8 @@ const HeaderJingzhi = ({ active }) => {
                         >
                             {item.href === active ? <span className="h-full px-[20px] w-full block">{item.title}</span> : <Link
                                 className="h-full px-[20px] w-full block"
-                                href={item.href}
+                                href={item.index}
+                                target={item.target ? item.target : "_self"}
                             >
                                 {item.title}
                             </Link>}
@@ -171,7 +169,7 @@ const HeaderJingzhi = ({ active }) => {
                                 }}
 
                             >
-                                <img src={userData?userData.avatar:""} alt="avatar" />
+                                <img src={userData ? userData.avatar : ""} alt="avatar" />
                             </div>
                             <div
                                 className={`absolute top-[54px] left-1/2 transform -translate-x-1/2 overflow-hidden text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showChildren === "menu" ? "py-1 border-solid" : "h-0"}`}
@@ -219,7 +217,7 @@ const HeaderJingzhi = ({ active }) => {
                                 type="button"
                                 className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
                                 onClick={() => {
-                                    location.href = "/signin"
+                                    location.href = "/login"
                                 }}
                             >
                                 登录

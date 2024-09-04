@@ -28,6 +28,9 @@ export const loginByMobile = params => request.post(`${BASE_URL}/v1/loginByMobil
 export const login = params => request.post(`${BASE_URL}/v1/loginByCode`, params)
 export const getUserInfo = () => request.get(`${BASE_URL}/v1/me`)
 
+//获取导航
+export const getNavList = ()=>request.post(`${BASE_URL}/v1/service/navList`)
+
 export const getInviteSuccessList = () => request.post(`${BASE_URL}/v1/user/getInviteSuccessList`)
 
 export const getSiteUseNumber = () => request.post(`${BASE_URL}/v1/plat/info`)

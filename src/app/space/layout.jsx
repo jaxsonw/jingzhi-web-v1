@@ -51,7 +51,7 @@ export default function SpaceLayout({ children }) {
     <>
       <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
-        <HeaderJingzhi active='/space' />
+        <HeaderJingzhi active='/space/' />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child

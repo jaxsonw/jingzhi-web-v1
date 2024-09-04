@@ -19,7 +19,7 @@ export default function Example() {
   }
 
   const onPay = item => {
-    router.push(`/space/recharge/pay?orderSn=${item?.orderSn}`)
+    router.push(`/space/recharge/pay?orderSn=${item?.orderSn}/`)
   }
 
   useEffect(() => {

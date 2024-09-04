@@ -39,13 +39,6 @@ const TagListComponent = props => {
 
 const ModelCard = props => {
   return (
-    <Link
-      href={`/model/${encodeURIComponent(props?.modelName)}`}
-      onClick={e => {
-        e.preventDefault()
-        return false
-      }}
-    >
       <div className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] border-solid bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
         {props.isFree === 1 && (
           <div
@@ -120,7 +113,7 @@ const ModelCard = props => {
         </div>
         <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
           <Link
-            href={`/model/${encodeURIComponent(props?.modelName)}`}
+            href={`/modelplaza/${encodeURIComponent(props?.modelName)}/`}
             className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]"
           >
             <div>查看详情</div>
@@ -133,7 +126,6 @@ const ModelCard = props => {
           </Link> */}
         </div>
       </div>
-    </Link>
   )
 }
 
@@ -188,7 +180,7 @@ const Model = props => {
   }
   return (
     <div>
-      <HeaderJingzhi active="/model"/>
+      <HeaderJingzhi active="/modelplaza/"/>
       <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">
         <title>模型广场</title>
         {loading ? (
