@@ -1,5 +1,5 @@
 import { getNavList, getUserInfo } from "@/src/services";
-import { getCookie, setCookie } from "@/src/utils";
+import { getCookie } from "@/src/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -32,7 +32,6 @@ const HeaderJingzhi = ({ active }) => {
                 if (res.code === 0) {
                     setUserData(res.data)
                 } else {
-                    window.location.href = '/login'
                 }
             }
         } catch (err) {
@@ -72,6 +71,8 @@ const HeaderJingzhi = ({ active }) => {
         };
     }, []);
 
+    const activeRegex = new RegExp(active)
+
     return <div className="absolute top-0 bg-white w-full z-[100]">
         <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
             <div>
@@ -90,7 +91,7 @@ const HeaderJingzhi = ({ active }) => {
                     className="flex w-full text-[14px] h-full leading-[58px]"
                     role="menubar"
                 >
-                    {navArray.map((item, index) => (
+                    {navArray.length == 0 ? "" : navArray.map((item, index) => (
                         item.subs ? <li
                             key={index}
                             role="menuitem"
@@ -138,10 +139,10 @@ const HeaderJingzhi = ({ active }) => {
                         </li> : <li
                             key={index}
                             role="menuitem"
-                            className={`h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${item.href === active ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${activeRegex.test(item.index) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                         >
-                            {item.href === active ? <span className="h-full px-[20px] w-full block">{item.title}</span> : <Link
+                            {activeRegex.test(item.index) ? <span className="h-full px-[20px] w-full block">{item.title}</span> : <Link
                                 className="h-full px-[20px] w-full block"
                                 href={item.index}
                                 target={item.target ? item.target : "_self"}

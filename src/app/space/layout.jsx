@@ -1,18 +1,15 @@
 'use client'
 import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { RiLogoutBoxRLine } from 'react-icons/ri'
-import { RiCustomerService2Line } from 'react-icons/ri'
-import Link from 'next/link'
+import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from 'next/navigation'
 import CustomerModal from "../../components/common/CustomerModal"
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer, getCookie } from '../../utils/index'
-import { icon_logo_color } from '../../consts/img'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -23,7 +20,6 @@ export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [customerOpen, setCustomerOpen] = useState(false)
-  // const [invite, setInvite] = useState(0)
 
   const { userInfo } = baseHooks()
 
@@ -33,25 +29,16 @@ export default function SpaceLayout({ children }) {
 
   useEffect(() => {
     if (!checkServer() && !getCookie('idToken')) {
-      router.push('/signin')
+      router.push('/login')
     }
   }, [userInfo])
-
-  // const init = async () => {
-  //   const res = await getInviteSuccessList()
-  //   setInvite(parseInt(res?.data * 3))
-  // }
-
-  // useEffect(() => {
-  //   init()
-  // }, [])
 
 
   return (
     <>
       <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
-        <HeaderJingzhi active='/space/' />
+        <HeaderJingzhi active='space' />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child

@@ -61,7 +61,7 @@ main();`
 
   return (
     <div>
-      <HeaderJingzhi active="/model/" />
+      <HeaderJingzhi active="model" />
 
       <div className={"min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]"}>
 
