@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 
 const HeaderJingzhi = ({ active }) => {
+
     const [showChildren, setShowChildren] = useState(false)
     const [userData, setUserData] = useState(null)
     let showTimer = ""
@@ -95,7 +96,7 @@ const HeaderJingzhi = ({ active }) => {
                         item.subs ? <li
                             key={index}
                             role="menuitem"
-                            className="pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative"
+                            className={`pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                             onMouseEnter={() => {
                                 if (showTimer) clearTimeout(showTimer)
@@ -127,13 +128,17 @@ const HeaderJingzhi = ({ active }) => {
                                     key={index}
                                     className="w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]"
                                 >
-                                    <Link
-                                        className="w-full h-full px-[10px] block"
+                                    {activeRegex.test(child.index) ? <span
+                                            className="w-full h-full px-[10px] block text-[#ff5005] font-bold cursor-pointer"
+                                        >
+                                            {child.title}
+                                        </span> : <Link
+                                        className="w-full h-full px-[10px] block font-normal"
                                         href={child.index}
                                         target={child.target ? child.target : "_self"}
                                     >
                                         {child.title}
-                                    </Link>
+                                    </Link>}
                                 </div>)}
                             </div>
                         </li> : <li

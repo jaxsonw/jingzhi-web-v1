@@ -187,8 +187,10 @@ const Model = props => {
           <LoadingSkeleton />
         ) : (
           <>
-            <TagListComponent {...modalPriceTag} />
-            {/* <TagListComponent {...{
+            <div className='flex items-center'>
+              <div className='flex-1'>
+                <TagListComponent {...modalPriceTag} />
+                {/* <TagListComponent {...{
                 title: '使用场景',
                 current: queryParams.typeId,
                 setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
@@ -197,21 +199,34 @@ const Model = props => {
                   value: 0
                 }].concat(list.map(item => ({ name: item.cateName, value: item.cateId }))))
               }} /> */}
-            <TagListComponent
-              {...{
-                title: '提供公司',
-                current: queryParams.companyId,
-                setCurrent: v => setQueryParams({ ...queryParams, companyId: v }),
-                list: handleList(typeData.companyList, list =>
-                  [
-                    {
-                      name: '全部',
-                      value: 0
-                    }
-                  ].concat(list.map(item => ({ name: item.companyName, value: item.companyId })))
-                )
-              }}
-            />
+                <TagListComponent
+                  {...{
+                    title: '提供公司',
+                    current: queryParams.companyId,
+                    setCurrent: v => setQueryParams({ ...queryParams, companyId: v }),
+                    list: handleList(typeData.companyList, list =>
+                      [
+                        {
+                          name: '全部',
+                          value: 0
+                        }
+                      ].concat(list.map(item => ({ name: item.companyName, value: item.companyId })))
+                    )
+                  }}
+                />
+              </div>
+              <div className='h-full mr-[80px] ml-[50px]'>
+                <button
+                  type="button"
+                  className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-[14px] font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
+                  onClick={() => {
+                    location.href = "/space/apikey/"
+                  }}
+                >
+                  充值管理
+                </button>
+              </div>
+            </div>
             <div className="mt-[60px]">
               <Row gutter={[16, 16]}>
                 {modelDataRes && modelDataRes.length > 0 ? (

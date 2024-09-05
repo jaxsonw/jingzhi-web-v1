@@ -3,7 +3,6 @@ import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from 'next/navigation'
-import CustomerModal from "../../components/common/CustomerModal"
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
 import { checkServer, getCookie } from '../../utils/index'
@@ -19,7 +18,6 @@ export const SpaceContext = createContext()
 export default function SpaceLayout({ children }) {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [customerOpen, setCustomerOpen] = useState(false)
 
   const { userInfo } = baseHooks()
 
@@ -36,7 +34,6 @@ export default function SpaceLayout({ children }) {
 
   return (
     <>
-      <CustomerModal isOpen={customerOpen} setIsOpen={setCustomerOpen} />
       <div>
         <HeaderJingzhi active='space' />
         <Transition.Root show={sidebarOpen} as={Fragment}>
