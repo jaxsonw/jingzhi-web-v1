@@ -10,6 +10,7 @@ import { github, routeros } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { copyValue } from '@/src/utils'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
+import { BASE_URL } from '../../../consts/env'
 
 const ModelDetail = ({ data, status }) => {
   const router = useRouter()
@@ -20,7 +21,7 @@ const ModelDetail = ({ data, status }) => {
 
 client = OpenAI(
     api_key = "自己的API key",
-    base_url = "http://47.93.21.166:8000/mapi/v1"
+    base_url = "${BASE_URL}"
 )
         
 chat_completion = client.chat.completions.create(
@@ -35,7 +36,10 @@ chat_completion = client.chat.completions.create(
 print(chat_completion.choices[0].message.content)`
   const jsCode = `import OpenAI from "openai";
 
-const openai = new OpenAI();
+const openai = new OpenAI({
+  apiKey: '你自己的 key',
+  baseURL: '${BASE_URL}',
+});
 
 async function main() {
     const completion = await openai.chat.completions.create({
@@ -61,7 +65,7 @@ main();`
 
   return (
     <div>
-      <HeaderJingzhi active="model" />
+      <HeaderJingzhi active="modelplaza" />
 
       <div className={"min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]"}>
 
