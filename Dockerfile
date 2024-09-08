@@ -3,6 +3,7 @@ FROM node:20.0.0
 
 # 更新包管理器并安装 vim 和 lsof
 RUN apt-get update && apt-get install -y vim lsof
+
 # 设置工作目录
 WORKDIR /app
 
@@ -26,19 +27,8 @@ RUN ls -l /
 
 ENV NODE_ENV=production
 
-
-# 构建 Next.js 应用
-RUN pnpm build
-
-# 调试：列出构建目录中的文件和权限
-RUN ls -l /app/.next
-
-# 修改权限
-RUN chown -R node:node /app/.next
-
 # 暴露应用运行的端口
 EXPOSE 5003
 
-
-# 启动应用
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+# 在运行时构建和启动应用
+CMD ["sh", "-c", "pnpm build && pm2-runtime start ecosystem.config.js"]

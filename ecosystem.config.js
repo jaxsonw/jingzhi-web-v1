@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: `jingzhi`,
+      name: 'jingzhi',
       script: './server.js',
       autorestart: true,
       watch: true,
@@ -9,7 +9,11 @@ module.exports = {
       max_memory_restart: '4000M',
       instances: 1,
       node_args: '--max-http-header-size=10000',
-      PORT: 5002
+      env: {
+        NODE_ENV: 'production',
+        PORT: 5003,
+        NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL
+      }
     }
   ]
 }
