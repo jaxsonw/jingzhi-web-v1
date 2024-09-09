@@ -4,7 +4,7 @@ import ModelDetail from './content'
 const getData = async params => {
   try {
     const res = await getModelDetail(params)
-    console.log("res", res)
+    // console.log("res", res)
     if (res.code === 0) {
       return { data: res.data, flag: true }
     } else {
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
 
 const ModelContentServer = async ({ modelName: modelName, status }) => {
   const { data, flag } = await getData(modelName)
-  console.log('data', data, flag)
+  // console.log('data', data, flag)
   if (flag) {
     return <ModelDetail data={data} status={status}></ModelDetail>
   } else {
