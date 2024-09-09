@@ -16,7 +16,7 @@ import '../styles/animation.css'
 
 function RootLayout({ children }) {
   if (typeof window !== 'undefined') {
-    console.log('widno', window.__NEXT_DATA__)
+    console.log('widnow', window.__NEXT_DATA__)
   }
   return (
     <html lang="en">
