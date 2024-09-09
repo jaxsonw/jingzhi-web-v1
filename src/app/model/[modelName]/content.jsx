@@ -60,7 +60,7 @@ main();`
     const url = window.location
     const arr = url.pathname.split('?')
     arr.pop()
-    history.pushState('', '', `?status=${status}`)
+    history.replaceState('', '', `?status=${status}`)
   }
 
   return (
