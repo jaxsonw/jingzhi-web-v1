@@ -15,6 +15,9 @@ import '../styles/animation.css'
 // import '../styles/markdown.css'
 
 function RootLayout({ children }) {
+  if (typeof window !== 'undefined') {
+    console.log('widno', window.__NEXT_DATA__)
+  }
   return (
     <html lang="en">
       <Script id="sse" src="https://ew6.cn/sse.js"></Script>
