@@ -65,9 +65,9 @@ main();`
 
   return (
     <div>
-      <HeaderJingzhi active="modelplaza" />
+      <HeaderJingzhi active="/modelplaza/" />
 
-      <div className={"min-w-[1440px] max-w-[1440px] m-auto px-[120px] pt-[90px]"}>
+      <div className={" max-w-[1440px] m-auto px-[10px] md:px-[120px] pt-[90px]"}>
 
         <title>{modelData.modelName + '模型详情'}</title>
         <meta name="description" content={modelData.desc} />
@@ -186,7 +186,7 @@ main();`
         <div className="w-full px-[32px] pb-[50px]">
           {pageStatus == 1 && <ReactMarkdown className="mdrom">{modelData?.mdContent?.replaceAll('\\n', '\n')}</ReactMarkdown>}
           {pageStatus == 2 && (
-            <div className="w-[70%]">
+            <div className="w-[100%] md:w-[70%]">
               <div className="text-[24px] mt-[45px] leading-[33px] mb-[20px]">简单示例</div>
               <div className="flex justify-between  mb-[4px]">
                 <div className="flex">
@@ -249,7 +249,9 @@ main();`
           )}
         </div>
       </div>
-      <FooterJingzhi />
+      <div className='hidden md:block'>
+        <FooterJingzhi />
+      </div>
     </div>
   )
 }

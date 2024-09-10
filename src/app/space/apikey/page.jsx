@@ -32,7 +32,7 @@ export default function APIKeys() {
     if (res?.code === 0) {
       setTableData(res?.data?.recordList)
     } else {
-      toast.error('获取key数据失败')
+      toast.error(res?.message || '获取key数据失败')
     }
   }
 

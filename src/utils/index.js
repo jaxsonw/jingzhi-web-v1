@@ -13,21 +13,13 @@ export const getCookie = (key) => {
   return null;
 }
 
-export const setCookie = (obj, options = {}) => {
-  const { days = 0, path = '/', domain, secure = true, sameSite = 'Strict' } = options;
-  const date = new Date();
-  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  
-  for (let key in obj) {
-    let cookieString = `${key}=${encodeURIComponent(obj[key])}; expires=${date.toUTCString()}; path=${path}`;
-    
-    if (domain) cookieString += `; domain=${domain}`;
-    if (secure) cookieString += '; Secure';
-    cookieString += `; SameSite=${sameSite}`;
-    cookieString += '; HttpOnly';
-    
-    document.cookie = cookieString;
-  }
+export function setCookie(name, value, days = 7, path = '/') {
+  // 计算 cookie 的过期时间
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+
+  // 设置 cookie
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=${path}`;
 }
 
 export const checkServer = () => {
@@ -72,27 +64,27 @@ export const isWeixin = () => {
  * browser.versions.ios 判断是否是IOS设备
  */
 export const browser = () => {
-  if(!checkServer()){
+  if (!checkServer()) {
 
 
-  if (window?.navigator) {
-    const u = window?.navigator ? window?.navigator.userAgent : "";
-    return {
-      trident: u.indexOf("Trident") > -1, // IE内核
-      presto: u.indexOf("Presto") > -1, // opera内核
-      webKit: u.indexOf("AppleWebKit") > -1, // 苹果、谷歌内核
-      gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") === -1, // 火狐内核
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 是否为移动终端
-      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-      android: u.indexOf("Android") > -1 || u.indexOf("Adr") > -1, // android终端
-      iPhone: u.indexOf("iPhone") > -1, // 是否为iPhone或者QQHD浏览器
-      iPad: u.indexOf("iPad") > -1, // 是否iPad
-      webApp: u.indexOf("Safari") === -1, // 是否web应该程序，没有头部与底部
-      weixin: u.indexOf("MicroMessenger") > -1, // 是否微信
-      // qq: u.match(/\sQQ/i) === ' qq', // 是否QQ
-    };
-  }
+    if (window?.navigator) {
+      const u = window?.navigator ? window?.navigator.userAgent : "";
+      return {
+        trident: u.indexOf("Trident") > -1, // IE内核
+        presto: u.indexOf("Presto") > -1, // opera内核
+        webKit: u.indexOf("AppleWebKit") > -1, // 苹果、谷歌内核
+        gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") === -1, // 火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf("Android") > -1 || u.indexOf("Adr") > -1, // android终端
+        iPhone: u.indexOf("iPhone") > -1, // 是否为iPhone或者QQHD浏览器
+        iPad: u.indexOf("iPad") > -1, // 是否iPad
+        webApp: u.indexOf("Safari") === -1, // 是否web应该程序，没有头部与底部
+        weixin: u.indexOf("MicroMessenger") > -1, // 是否微信
+        // qq: u.match(/\sQQ/i) === ' qq', // 是否QQ
+      };
     }
+  }
   return {};
 };
 

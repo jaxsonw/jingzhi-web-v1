@@ -180,8 +180,8 @@ const Model = props => {
   }
   return (
     <div>
-      <HeaderJingzhi active="modelplaza" />
-      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh]">
+      <HeaderJingzhi active="/modelplaza/" />
+      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh] px-[10px]">
         <title>模型广场</title>
         {loading ? (
           <LoadingSkeleton />
@@ -215,7 +215,7 @@ const Model = props => {
                   }}
                 />
               </div>
-              <div className='h-full mr-[80px] ml-[50px]'>
+              <div className='h-full mx-[15px] md:mr-[80px] md:ml-[50px]'>
                 <button
                   type="button"
                   className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-[14px] font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
@@ -246,7 +246,9 @@ const Model = props => {
           </>
         )}
       </div>
-      <FooterJingzhi />
+      <div className='hidden md:block'>
+        <FooterJingzhi />
+      </div>
     </div>
   )
 }

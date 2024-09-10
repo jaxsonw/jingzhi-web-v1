@@ -1,11 +1,11 @@
 'use client'
 import { Fragment, useState, createContext, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from 'next/navigation'
 import baseHooks from '../../components/hooks/base'
 import navigation from './const'
-import { checkServer, getCookie } from '../../utils/index'
+import { checkServer, getCookie, setCookie } from '../../utils/index'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
 
@@ -35,7 +35,7 @@ export default function SpaceLayout({ children }) {
   return (
     <>
       <div>
-        <HeaderJingzhi active='space' />
+        <HeaderJingzhi active='/space/' />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -78,7 +78,7 @@ export default function SpaceLayout({ children }) {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 pt-[40px]">
                     {/* <a href="/" className="flex h-16 shrink-0 items-center">
                       <img className="h-[25px]" src={icon_logo_color} alt="" />
                     </a> */}
@@ -120,13 +120,17 @@ export default function SpaceLayout({ children }) {
                         </li>
 
                         <li className="mt-auto">
-                          <a
-                            href="/login"
+                          <span
+                            // href="/login"
+                            onClick={()=>{
+                              setCookie("idToken","",0)
+                              location.href="/modelplaza/"
+                            }}
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                           >
                             <Cog6ToothIcon className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-600" aria-hidden="true" />
                             退出登录
-                          </a>
+                          </span>
                         </li>
                       </ul>
                     </nav>
@@ -244,7 +248,13 @@ export default function SpaceLayout({ children }) {
             </div>
           </div> */}
 
-          <main className="bg-[#f3f8fe] h-[calc(100vh_-_56px)] overflow-scroll mt-[56px]">
+          <main className="bg-[#f3f8fe] h-[calc(100vh_-_56px)] overflow-scroll mt-[56px] relative">
+            <div className='absolute top-[15px] left-4'>
+              <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
+                <span className="sr-only">Open sidebar</span>
+                <Bars3Icon className="h-8 w-8" aria-hidden="true" />
+              </button>
+            </div>
             <SpaceContext.Provider value={userInfo}>
               <div>
                 <div className="px-4 sm:px-6 lg:px-8 py-10 min-h-[calc(100vh_-_56px)]">
@@ -254,7 +264,9 @@ export default function SpaceLayout({ children }) {
                   </div>
                   {children}
                 </div>
-                <FooterJingzhi />
+                <div className='hidden md:block'>
+                  <FooterJingzhi />
+                </div>
               </div>
             </SpaceContext.Provider>
           </main>

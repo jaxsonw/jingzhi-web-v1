@@ -1,34 +1,46 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { getLoginUrl, loginByCode } from '../../services/index'
 
 import 'swiper/bundle'
+import { setCookie } from '@/src/utils'
+import { toast } from 'react-toastify'
 
 export default function Login({ searchParams }) {
   const gotoLogin = async () => {
     try {
+      // console.log(window.location.href)
       const res = await getLoginUrl({
         url: window.location.href
       })
-      console.log("res",res)
       if (res.code == 0) {
+        // console.log("loginUrl", res?.data?.loginUrl)
         location.href = res.data.loginUrl
       }
     } catch (err) {
-      
+
     }
   }
 
   const getToken = async (code) => {
     const res = await loginByCode({ code: code })
+    // console.log("loginRes", res)
     if (res.code == 0) {
-      localStorage.setItem('token', res?.data?.accessToken)
+      setCookie('idToken', res?.data?.accessToken, 30)
+      location.href = "/modelplaza/"
+      // localStorage.setItem('token', res?.data?.accessToken)
       // location.href = "/space"
+    } else {
+      toast.error(res?.message || "登录失败")
+      setTimeout(() => {
+        location.href = "/modelplaza/"
+      }, 1500)
     }
   }
 
   useEffect(() => {
     if (searchParams.code) {
+      console.log("code", searchParams.code)
       getToken(searchParams.code)
     } else {
       gotoLogin()
