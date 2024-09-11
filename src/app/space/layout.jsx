@@ -16,7 +16,7 @@ function classNames(...classes) {
 export const SpaceContext = createContext()
 
 export default function SpaceLayout({ children }) {
-  const router = useRouter()
+  // const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const { userInfo } = baseHooks()
@@ -28,7 +28,7 @@ export default function SpaceLayout({ children }) {
   useEffect(() => {
     if (!checkServer() && !getCookie('idToken')) {
       localStorage.setItem("cb_url", window.location.href)
-      router.push('/signin/')
+      location.href('/signin/')
     }
   }, [userInfo])
 
