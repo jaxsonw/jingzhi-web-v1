@@ -1,5 +1,5 @@
 import { getNavList, getUserInfo } from "@/src/services";
-import { getCookie,setCookie } from "@/src/utils";
+import { getCookie, setCookie } from "@/src/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -171,7 +171,7 @@ const HeaderJingzhi = ({ active }) => {
                         tabIndex="-1"
                     >
                         <Link
-                            className="h-full px-[20px] w-full block"
+                            className="h-full px-[20px] w-full block text-nowrap"
                             href={navArray[0].index}
                             target={navArray[0].target ? navArray[0].target : "_self"}
                         >
@@ -182,7 +182,7 @@ const HeaderJingzhi = ({ active }) => {
                         className="w-full flex-1 flex justify-center items-center text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]"
                         onClick={() => {
                             setShowMobileMenu(!showMobileMenu)
-                            console.log(showMobileMenu)
+                            // console.log(showMobileMenu)
                         }}
                     >
                         <i className="w-[18px] h-[18px]">
@@ -320,6 +320,7 @@ const HeaderJingzhi = ({ active }) => {
                                 type="button"
                                 className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
                                 onClick={() => {
+                                    localStorage.setItem("cb_url", window.location.href)
                                     location.href = "/signin/"
                                 }}
                             >
