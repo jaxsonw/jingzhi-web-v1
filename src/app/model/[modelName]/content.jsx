@@ -16,8 +16,10 @@ const ModelDetail = ({ data, status }) => {
   const router = useRouter()
   const modelData = data
   const [pageStatus, setPageState] = useState(status)
-  const [codeType, setCodeType] = useState('python')
-  const pyCode = `from openai import OpenAI
+  const [codeType, setCodeType] = useState('curl')
+
+  const codes = {
+    python: `from openai import OpenAI
 
 client = OpenAI(
     api_key = "自己的API key",
@@ -33,8 +35,9 @@ chat_completion = client.chat.completions.create(
     ],
     model="${modelData.modelName}",
 )
-print(chat_completion.choices[0].message.content)`
-  const jsCode = `import OpenAI from "openai";
+print(chat_completion.choices[0].message.content)`,
+
+    javascript: `import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: '你自己的 key',
@@ -54,7 +57,21 @@ async function main() {
     console.log(completion.choices[0]);
 }
 
-main();`
+main();`,
+
+    curl: `curl "${BASE_URL}" \\
+    -H "Content-Type: application/json" \\
+    -H "Authorization: Bearer $OPENAI_API_KEY" \\
+    -d '{
+        "model": "${modelData.modelName}",
+        "messages": [
+            {
+                "role": "user",
+                "content": "你是谁，用中文回答"
+            }
+        ]
+    }'`
+  }
 
   const setUrl = status => {
     const url = window.location
@@ -190,7 +207,7 @@ main();`
               <div className="text-[24px] mt-[45px] leading-[33px] mb-[20px]">简单示例</div>
               <div className="flex justify-between  mb-[4px]">
                 <div className="flex">
-                  <div
+                  {/* <div
                     className={`text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'python' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
                       }`}
                     onClick={() => {
@@ -211,12 +228,23 @@ main();`
                     }}
                   >
                     JavaScript
+                  </div> */}
+                  <div
+                    className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'curl' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
+                      }`}
+                    onClick={() => {
+                      if (codeType !== 'curl') {
+                        setCodeType('curl')
+                      }
+                    }}
+                  >
+                    Curl
                   </div>
                 </div>
                 <div
                   className="text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] py-[4px] px-[8px] rounded cursor-pointer"
                   onClick={() => {
-                    copyValue(codeType === 'python' ? pyCode : jsCode)
+                    copyValue(codes[codeType] || "")
                     message.success('复制成功')
                   }}
                 >
@@ -242,7 +270,7 @@ main();`
               </div>
               <div className="bg-[#f8f8f8] p-2">
                 <Highlight language={codeType} style={github}>
-                  {codeType === 'python' ? pyCode : jsCode}
+                  {codes[codeType] || ""}
                 </Highlight>
               </div>
             </div>
