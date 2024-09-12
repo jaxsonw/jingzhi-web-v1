@@ -28,7 +28,7 @@ export default function SpaceLayout({ children }) {
   useEffect(() => {
     if (!checkServer() && !getCookie('idToken')) {
       localStorage.setItem("cb_url", window.location.href)
-      location.href('/signin/')
+      location.href = '/signin/'
     }
   }, [userInfo])
 

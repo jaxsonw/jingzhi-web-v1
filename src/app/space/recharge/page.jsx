@@ -11,8 +11,6 @@ import AliPay from '../../../icons/aliPay'
 import WeChatPay from '../../../icons/wechatPay'
 import PayModal from '../../../components/recharge/payModal'
 import {
-  recharge_center_bg1,
-  agicto_product_agent_wechat,
   recharge_50,
   recharge_100,
   recharge_500,
@@ -242,8 +240,8 @@ export default function Example() {
             <div className={`w-full h-[10px] bg-gradient-to-r from-[#FEE4B6] to-[#FDCD79]`}></div>
             <div className="p-[35px]">
               <div className="w-full  flex items-end justify-center mb-[35px]">
-                <img src={item?.label} alt="agicto-icon" className="h-[55px]" />
-                <img src={recharge_yuan} alt="agicto-icon" className="h-[30px]" />
+                <img src={item?.label} alt="jingzhi-icon" className="h-[55px]" />
+                <img src={recharge_yuan} alt="jingzhi-icon" className="h-[30px]" />
               </div>
               <div className="mt-4  border-t-2 border-b-2 py-4 flex w-full justify-center">
                 <span className="text-black">
@@ -274,7 +272,7 @@ export default function Example() {
           <div className={`w-full h-[10px] bg-gradient-to-r from-[#FEE4B6] to-[#FDCD79]`}></div>
           <div className="p-[35px]">
             <div className="w-full  flex items-end justify-center  mb-[35px]">
-              <img src={recharge_custom_price} alt="agicto-icon" className="h-[55px]" />
+              <img src={recharge_custom_price} alt="jingzhi-icon" className="h-[55px]" />
             </div>
             <div className="">
               <input
