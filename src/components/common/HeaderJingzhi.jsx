@@ -1,5 +1,6 @@
 import { getNavList, getUserInfo } from "@/src/services";
 import { getCookie, setCookie } from "@/src/utils";
+import { message } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -34,6 +35,11 @@ const HeaderJingzhi = ({ active }) => {
                 if (res.code === 0) {
                     setUserData(res.data)
                 } else {
+                    message.error("用户信息获取失败")
+                    localStorage.setItem("cb_url", window.location.href)
+                    setTimeout(() => {
+                        location.href = '/signin/'
+                    }, 1000)
                 }
             }
         } catch (err) {
