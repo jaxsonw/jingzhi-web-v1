@@ -7,6 +7,7 @@ import { copyValue } from '@/src/utils'
 import { LoadingSkeleton } from '@/src/components/common/LoadingSkeleton'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
+import { PLAY_GROUND_URL } from '../../consts/env'
 
 const TagListComponent = props => {
   const { list, title } = props
@@ -38,6 +39,7 @@ const TagListComponent = props => {
 }
 
 const ModelCard = props => {
+  // console.log(PLAY_GROUND_URL)
   return (
     <div className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] border-solid bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
       {props.isFree === 1 && (
@@ -119,7 +121,7 @@ const ModelCard = props => {
           查看详情
         </a>
         <a className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 hover:text-white py-[10px] rounded-[8px] flex items-center justify-center bg-[#FF5005]"
-          href={`/playground/?model=${props?.modelName}&modelType=message`}>
+          href={PLAY_GROUND_URL + `?model=${props?.modelName}&modelType=message`}>
           立即体验
         </a>
       </div>
