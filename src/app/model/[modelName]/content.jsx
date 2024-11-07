@@ -61,7 +61,7 @@ main();`,
 
     curl: `curl "${BASE_URL}" \\
     -H "Content-Type: application/json" \\
-    -H "Authorization: Bearer $OPENAI_API_KEY" \\
+    -H "Authorization: Bearer $JINGZHI_API_KEY" \\
     -d '{
         "model": "${modelData.modelName}",
         "messages": [
@@ -269,9 +269,25 @@ main();`,
                 </div>
               </div>
               <div className="bg-[#f8f8f8] p-2">
-                <Highlight language={codeType} style={github}>
+                {/* <Highlight language={codeType} style={github}>
                   {codes[codeType] || ""}
-                </Highlight>
+                </Highlight> */}
+                <pre style={{ display: "block", overflowX: "auto", padding: "0.5em", color: "#333", background: "#f8f8f8" }}>
+                  <code className="language-curl" style={{ whiteSpace: "pre" }}>
+                    <span>curl </span><span style={{ color: "#d14" }}>"{BASE_URL}"</span><span> \</span><br />
+                    <span>    -H </span><span style={{ color: "#d14" }}>"Content-Type: application/json"</span><span> \</span><br />
+                    <span>    -H </span><span style={{ color: "#d14" }}>"Authorization: Bearer <a href="/space/apikey/" className=" underline">JINGZHI_API_KEY</a>"</span><span> \</span><br />
+                    <span>    -d '</span><span>{`{`}</span><br />
+                    <span>        </span><span>"model"</span><span>: </span><span style={{ color: "#d14" }}>"{modelData.modelName}"</span><span>,</span><br />
+                    <span>        </span><span>"messages"</span><span>: [</span><br />
+                    <span>            {`{`}</span><br />
+                    <span>                </span><span>"role"</span><span>: </span><span style={{ color: "#d14" }}>"user"</span><span>,</span><br />
+                    <span>                </span><span>"content"</span><span>: </span><span style={{ color: "#d14" }}>"你是谁，用中文回答"</span><br />
+                    <span>            {`}`}</span><br />
+                    <span>        ]</span><br />
+                    <span>    {`}`}</span><span>'</span>
+                  </code>
+                </pre>
               </div>
             </div>
           )}
