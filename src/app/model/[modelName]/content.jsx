@@ -274,7 +274,7 @@ main();`,
                 </Highlight> */}
                 <pre style={{ display: "block", overflowX: "auto", padding: "0.5em", color: "#333", background: "#f8f8f8" }}>
                   <code className="language-curl" style={{ whiteSpace: "pre" }}>
-                    <span>curl </span><span style={{ color: "#d14" }}>"{BASE_URL}"</span><span> \</span><br />
+                    <span>curl </span><span style={{ color: "#d14" }}>"{BASE_URL}/v1/chat/completions"</span><span> \</span><br />
                     <span>    -H </span><span style={{ color: "#d14" }}>"Content-Type: application/json"</span><span> \</span><br />
                     <span>    -H </span><span style={{ color: "#d14" }}>"Authorization: Bearer <a href="/space/apikey/" className=" underline">JINGZHI_API_KEY</a>"</span><span> \</span><br />
                     <span>    -d '</span><span>{`{`}</span><br />
