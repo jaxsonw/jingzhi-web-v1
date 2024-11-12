@@ -35,7 +35,7 @@ const HeaderJingzhi = ({ active }) => {
                 if (res.code === 0) {
                     setUserData(res.data)
                 } else {
-                    message.error("用户信息获取失败")
+                    //message.error("用户信息获取失败")
                     localStorage.setItem("cb_url", window.location.href)
                     setTimeout(() => {
                         location.href = '/signin/'
