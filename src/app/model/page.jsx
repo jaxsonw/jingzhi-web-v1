@@ -41,7 +41,7 @@ const TagListComponent = props => {
 const ModelCard = props => {
   // console.log(PLAY_GROUND_URL)
   return (
-    <div className="relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 p-[20px] border-solid bg-[#fff] rounded-[12px] h-[220px] text-[#000]">
+    <div className="flex flex-col justify-between relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 px-[20px] pt-[20px] pb-[14px] border-solid bg-[#fff] rounded-[12px] h-full text-[#000]">
       {props.isFree === 1 && (
         <div
           className="absolute top-0 right-0 w-[80px] text-[#fff] text-[14px] pl-[14px] pr-[10px] py-[8px] rounded-tr-[12px] rounded-bl-[12px]"
@@ -84,10 +84,19 @@ const ModelCard = props => {
         </div>
       </div>
       <div className="flex items-center pb-[18px]">
-        <span className="block p-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">支持{props.typeName}</span>
-        <span className="block p-[5px] ml-[5px] bg-[#F3F3F3] text-[12px] rounded-[2px]">上下文长度: {props.contextLen} tokens</span>
+        <span className="block p-[5px] rounded-[4px] text-[12px] text-nowrap mb-2 mr-2 bg-[#F3F3F3]">{props.typeName}</span>
+        {
+          props?.attrList?.map((attr, attrId) => {
+            return <span
+              className={`block p-[5px] rounded-[4px] text-[12px] text-nowrap mb-2 mr-2 bg-[#F3F3F3]`}
+              key={attrId}
+            >
+              {attr}
+            </span>
+          })
+        }
       </div>
-      <div className="flex items-center pb-[18px]">
+      {props.typeId === 1 && <div className="flex items-center pb-[18px]">
         <div>
           <div className="flex items-end">
             <span className="text-[12px]">￥</span>
@@ -108,12 +117,12 @@ const ModelCard = props => {
           </div>
           <span className="text-[12px] text-[#140E35]">/ 百万tokens</span>
         </div>
-      </div>
-      <div className="flex group-hover:hidden items-center pt-[10px] border-t border-solid border-[#D3D7FA]	">
+      </div>}
+      <div className="flex group-hover:hidden items-center pt-[10px] border-t border-solid border-[#D3D7FA] h-[41px]">
         {props.icon && <img className="w-[20px] rounded-full mr-[10px]" src={props.icon} alt="" />}
         <span className="text-[12px] text-[#140E35]">{props.companyName}</span>
       </div>
-      <div className="btn  transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
+      <div className="btn transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
         <a
           href={`/modelplaza/${encodeURIComponent(props?.modelName) + "/"}`}
           className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 hover:text-[#ff5005] rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]"

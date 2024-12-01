@@ -175,7 +175,7 @@ main();`,
         </div>
         <div className="flex w-full mt-[28px] relative z-1 text-[16px]">
           <div
-            className={`px-[33px] py-[6px]  ${pageStatus == 1 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
+            className={`px-[33px] py-[6px]  ${pageStatus == 1 ? 'border-b-[3px] border-[#ff5005] border-solid text-[#ff5005] cursor-default' : 'cursor-pointer'
               } `}
             onClick={() => {
               if (pageStatus != 1) {
@@ -187,7 +187,7 @@ main();`,
             模型介绍
           </div>
           <div
-            className={`px-[33px] py-[6px]  ${pageStatus == 2 ? 'border-b-[3px] border-[#3162FFFF] border-solid text-[#3162FFFF] cursor-default' : 'cursor-pointer'
+            className={`px-[33px] py-[6px]  ${pageStatus == 2 ? 'border-b-[3px] border-[#ff5005] border-solid text-[#ff5005] cursor-default' : 'cursor-pointer'
               }`}
             onClick={() => {
               if (pageStatus != 2) {
@@ -201,7 +201,7 @@ main();`,
         </div>
         <div className="relative top-[-1px] w-full h-[2px] bg-[#140E3533] z-0"></div>
         <div className="w-full px-[32px] pb-[50px]">
-          {pageStatus == 1 && <ReactMarkdown className="mdrom">{modelData?.mdContent?.replaceAll('\\n', '\n')}</ReactMarkdown>}
+          {pageStatus == 1 && <ReactMarkdown className="mdrom min-h-[300px]">{modelData?.mdContent?.replaceAll('\\n', '\n') || "暂无介绍"}</ReactMarkdown>}
           {pageStatus == 2 && (
             <div className="w-[100%] md:w-[70%]">
               <div className="text-[24px] mt-[45px] leading-[33px] mb-[20px]">简单示例</div>
