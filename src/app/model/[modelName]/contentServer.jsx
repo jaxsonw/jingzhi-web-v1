@@ -40,16 +40,15 @@ const ModelContentServer = async ({ modelName: modelName, status }) => {
             }
         ]
     }'`
-
     const codeHtml = await (async function codeToHtml(code, lang) {
       const highlighter = await getHighlighter({
-        theme: 'solarized-light', // 你可以选择你喜欢的主题
+        theme: 'solarized-light', 
       });
       const html = highlighter.codeToHtml(code, { lang })
       return html.replace(/\{JINGZHI_API_KEY\}/g, '<a href="/space/apikey/" class="underline">JINGZHI_API_KEY</a>').replace(/\{BASE_URL\}/g, BASE_URL)
-    })(data?.example || code, 'json')
+    })(data?.code_content || code, 'json')
 
-    return <ModelDetail data={data} status={status} codeHtml={codeHtml} code={data?.example || code}></ModelDetail>
+    return <ModelDetail data={data} status={status} codeHtml={codeHtml} code={data?.code_content || code}></ModelDetail>
   } else {
     return <div className="h-screen text-center leading-[100vh] text-[30px]">
       {data}

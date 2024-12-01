@@ -131,7 +131,7 @@ const ModelCard = props => {
 
 const Model = () => {
   const [typeData, setTypeData] = useState({ cateList: [], companyList: [] })
-  const [queryParams, setQueryParams] = useState({ companyId: 0, type: 0, freeType: 0 })
+  const [queryParams, setQueryParams] = useState({ companyId: 0, typeId: 0, freeType: 0 })
   const [modelDataRes, setModelDataRes] = useState([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -144,7 +144,7 @@ const Model = () => {
     getServerModelList({
       ...queryParams,
       companyId: queryParams.companyId,
-      type: queryParams.type,
+      typeId: queryParams.typeId,
     }).then(res => {
       setModelDataRes(res?.data?.recordList)
       setTotal(res?.data?.total)
@@ -193,8 +193,8 @@ const Model = () => {
                 <TagListComponent {...modalPriceTag} />
                 <TagListComponent {...{
                   title: '使用场景',
-                  current: queryParams.type,
-                  setCurrent: (v) => setQueryParams({ ...queryParams, type: v }),
+                  current: queryParams.typeId,
+                  setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
                   list: [{
                     name: '全部',
                     value: 0
