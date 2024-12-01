@@ -12,7 +12,7 @@ import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
 import { BASE_URL } from '../../../consts/env'
 
-const ModelDetail = ({ data, status }) => {
+const ModelDetail = ({ data, status, codeHtml, code }) => {
   const router = useRouter()
   const modelData = data
   const [pageStatus, setPageState] = useState(status)
@@ -229,7 +229,7 @@ main();`,
                   >
                     JavaScript
                   </div> */}
-                  <div
+                  {/* <div
                     className={`ml-[10px] text-[12px] py-[4px] px-[8px] border border-solid border-[#D8D8D8FF] rounded ${codeType === 'curl' ? 'bg-[#EEEEEEFF]' : 'text-[#140E3580] cursor-pointer'
                       }`}
                     onClick={() => {
@@ -239,12 +239,12 @@ main();`,
                     }}
                   >
                     Curl
-                  </div>
+                  </div> */}
                 </div>
                 <div
                   className="text-[10px] text-[#140E3580] flex items-center border-solid border border-[#140E351A] py-[4px] px-[8px] rounded cursor-pointer"
                   onClick={() => {
-                    copyValue(codes[codeType] || "")
+                    copyValue(code || "")
                     message.success('复制成功')
                   }}
                 >
@@ -268,11 +268,12 @@ main();`,
                   <span className="text-[12px] ml-1">复制</span>
                 </div>
               </div>
-              <div className="bg-[#f8f8f8] p-2">
+              <div className="bg-[#FDF6E3] p-4 rounded-lg">
+                <div dangerouslySetInnerHTML={{ __html: codeHtml }} />
                 {/* <Highlight language={codeType} style={github}>
                   {codes[codeType] || ""}
                 </Highlight> */}
-                <pre style={{ display: "block", overflowX: "auto", padding: "0.5em", color: "#333", background: "#f8f8f8" }}>
+                {/* <pre style={{ display: "block", overflowX: "auto", padding: "0.5em", color: "#333", background: "#f8f8f8" }}>
                   <code className="language-curl" style={{ whiteSpace: "pre" }}>
                     <span>curl </span><span style={{ color: "#d14" }}>"{BASE_URL}/v1/chat/completions"</span><span> \</span><br />
                     <span>    -H </span><span style={{ color: "#d14" }}>"Content-Type: application/json"</span><span> \</span><br />
@@ -287,7 +288,7 @@ main();`,
                     <span>        ]</span><br />
                     <span>    {`}`}</span><span>'</span>
                   </code>
-                </pre>
+                </pre> */}
               </div>
             </div>
           )}

@@ -22,19 +22,19 @@ const FooterJingzhi = () => {
                             <div className="flex md:basis-1/3 flex-col gap-[16px]">
                                 <div className="text-[14px] font-[500] leading-[20px] opacity-60">关注我们</div>
                                 <div className="flex flex-col gap-[12px]">
-                                    <Link href="javascript:;" className="text-white inline-block text-[16px] font-[500] leading-[24px] ">公众号</Link>
+                                    <Link href="#0" className="text-white inline-block text-[16px] font-[500] leading-[24px] ">公众号</Link>
                                 </div>
                             </div>
                             <div className="flex md:basis-1/3 flex-col gap-[16px]">
                                 <div className="text-[14px] font-[500] leading-[20px] opacity-60">联系我们</div>
                                 <div className="flex flex-col gap-[12px]">
-                                    <Link href="javascript:;" className="text-white inline-block text-[16px] font-[500] leading-[24px] ">邮箱</Link>
+                                    <Link href="#0" className="text-white inline-block text-[16px] font-[500] leading-[24px] ">邮箱</Link>
                                 </div>
                             </div>
                             <div className="flex md:basis-1/3 flex-col gap-[16px]">
                                 <div className="text-[14px] font-[500] leading-[20px] opacity-60">政府机构</div>
                                 <div className="flex flex-col gap-[12px]">
-                                    <Link href="javascript:;" className="text-white inline-block text-[16px] font-[500] leading-[24px] text-nowrap">中华人民共和国工业和信息化部</Link>
+                                    <Link href="#0" className="text-white inline-block text-[16px] font-[500] leading-[24px] text-nowrap">中华人民共和国工业和信息化部</Link>
                                 </div>
                             </div>
                         </div>
