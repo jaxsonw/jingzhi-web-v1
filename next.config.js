@@ -3,11 +3,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'tsx', 'mdx'],
   reactStrictMode: false,
   experimental: {
-    newNextLinkBehavior: true,
-    scrollRestoration: true,
-    images: {
-      allowFutureImage: true
-    }
+    scrollRestoration: true
   },
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,

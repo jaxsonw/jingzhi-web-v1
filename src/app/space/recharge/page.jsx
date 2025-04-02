@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 'use client'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, Suspense } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -53,7 +53,8 @@ const rechargeType = [
   }
 ]
 
-export default function Example() {
+// 创建包裹有useSearchParams的组件
+function RechargeContent() {
   const spaceData = useContext(SpaceContext)
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -199,6 +200,7 @@ export default function Example() {
 
             return
           }
+
           weixinPay(createOrderRes?.data?.codeUrl)
         }
       }
@@ -207,7 +209,6 @@ export default function Example() {
 
   useEffect(() => {
     init()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -389,5 +390,13 @@ export default function Example() {
         </button>
       </div> */}
     </div>
+  )
+}
+
+export default function Example() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RechargeContent />
+    </Suspense>
   )
 }

@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import qrcode from 'qrcode'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -13,9 +13,9 @@ import { getOrderStatus, getWechatSign, getOrderPayInfo } from '../../../../serv
 import { checkServer, isWeixin, isPc } from '../../../../utils/index'
 
 let countdown = null
-const PayPage = () => {
 
-
+// 包装使用useSearchParams的组件
+function PayContent() {
     const searchParams = useSearchParams()
     const [createOrderLoading, setCreateOrderLoading] = useState(false)
     const [startCount, setStartCount] = useState(false)
@@ -37,8 +37,6 @@ const PayPage = () => {
     const orderSn = searchParams.get('orderSn')
     const [payFee, setPayFee] = useState(0)
     const [codeUrl, setCodeUrl] = useState("")
-
-
 
     // pc微信
     const pcWechat = () => {
@@ -67,7 +65,6 @@ const PayPage = () => {
 
     // h5 微信
     const weixinPay = async (sign) => {
-
         if (!checkServer()) {
             const wehchatRes = await getWechatSign({ url: window.location.href })
             window.wx.config({
@@ -111,11 +108,7 @@ const PayPage = () => {
         }
         setPayFee(res?.data?.payFee)
         setCodeUrl(res?.data?.codeUrl)
-
-
     }
-
-
 
     const init = async () => {
         setCreateOrderLoading(true)
@@ -134,7 +127,6 @@ const PayPage = () => {
             weixinPay()
         }
         setCreateOrderLoading(false)
-
     }
 
     useEffect(() => { getOrderInfo() }, [])
@@ -146,8 +138,6 @@ const PayPage = () => {
         init()
     }, [payFee, codeUrl])
 
-
-
     useEffect(() => {
         if (!aliPayForm) return
         const dom = document.getElementById('alipay_submit')
@@ -155,7 +145,6 @@ const PayPage = () => {
             dom?.submit()
         }
     }, [aliPayForm])
-
 
     const checkOrderStatus = async () => {
         const res = await getOrderStatus({ orderSn })
@@ -183,10 +172,6 @@ const PayPage = () => {
         }, 1000)
         return () => clearInterval(countdown) // 清理函数
     }, [count, startCount, orderSn])
-
-
-
-
 
     const getTwoDigitString = num => (num < 10 ? '0' + num : num)
 
@@ -288,6 +273,14 @@ const PayPage = () => {
             </div>
 
         </>
+    )
+}
+
+const PayPage = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <PayContent />
+        </Suspense>
     )
 }
 
