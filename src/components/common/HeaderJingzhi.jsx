@@ -83,7 +83,7 @@ const HeaderJingzhi = ({ active }) => {
 
     return <div className="absolute top-0 bg-white w-full z-[100] md:min-w-[1024px]">
         <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
-            <div>
+            {process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" && <div>
                 <div>
                     <a href="/">
                         <img
@@ -93,7 +93,7 @@ const HeaderJingzhi = ({ active }) => {
                         />
                     </a>
                 </div>
-            </div>
+            </div>}
             <div className="w-full flex-1 h-[60px] justify-between hidden md:block">
                 <ul
                     className="flex w-full text-[14px] h-full leading-[58px]"
@@ -103,7 +103,7 @@ const HeaderJingzhi = ({ active }) => {
                         item.subs ? <li
                             key={index}
                             role="menuitem"
-                            className={`pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative shrink-0 ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                             onMouseEnter={() => {
                                 if (showTimer) clearTimeout(showTimer)
