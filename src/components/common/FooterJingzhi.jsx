@@ -40,7 +40,7 @@ const FooterJingzhi = () => {
                             <div className="flex md:basis-1/3 flex-col gap-[16px]">
                                 <div className="text-[14px] font-[500] leading-[20px] opacity-60">政府机构</div>
                                 {process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" ? <div className="flex flex-col gap-[12px]">
-                                    <Link href="https://wap.miit.gov.cn/index.html" className="text-white inline-block text-[16px] font-[500] leading-[24px] text-[#223B99] text-nowrap">中华人民共和国工业和信息化部</Link>
+                                    <Link href="https://wap.miit.gov.cn/index.html" target="_blank" className="text-white inline-block text-[16px] font-[500] leading-[24px] text-[#223B99] text-nowrap">中华人民共和国工业和信息化部</Link>
                                 </div> : <div className="flex flex-col gap-[12px]">
                                     <Link href="https://jxj.wuhan.gov.cn/" target="_blank" className="text-white inline-block text-[16px] font-[500] leading-[24px] text-[#223B99] text-nowrap">武汉市经济和信息化局</Link>
                                 </div>}
