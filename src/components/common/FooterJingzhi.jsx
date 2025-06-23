@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const FooterJingzhi = () => {
     return (
-        <div className="w-full bg-[#181f31] max-w-[1440px] mx-auto">
+        <div className="w-full bg-[#181f31] mx-auto">
             <div className="pt-[64px] text-white w-full">
                 <div className="px-[64px] m-auto">
                     <div className="flex justify-between md:flex-wrap md:gap-[16px]">

@@ -1,6 +1,5 @@
 import { getNavList, getUserInfo } from "@/src/services";
 import { getCookie, setCookie } from "@/src/utils";
-import { message } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
