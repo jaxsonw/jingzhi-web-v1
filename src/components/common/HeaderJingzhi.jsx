@@ -82,17 +82,18 @@ const HeaderJingzhi = ({ active }) => {
 
     return <div className="absolute top-0 bg-white w-full z-[100] md:min-w-[1024px]">
         <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
-            {process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" && <div>
-                <div>
-                    <a href="/">
-                        <img
-                            src="https://caict-llm-portal-storage-test.oss-cn-beijing.aliyuncs.com/eed9cb99-84a1-45dc-bd58-a0c581a4bf8e"
-                            alt="Community Logo"
-                            className="h-[32px]"
-                        />
-                    </a>
-                </div>
-            </div>}
+            <div>
+                <a href="/">
+                    <img
+                        src={process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" ?
+                            "https://caict-llm-portal-storage-test.oss-cn-beijing.aliyuncs.com/eed9cb99-84a1-45dc-bd58-a0c581a4bf8e" :
+                            "http://caict-llm-portal-storage.oss-cn-beijing.aliyuncs.com/system-logo/7b5dc806-c024-43b6-806e-bf3dca49964a"
+                        }
+                        alt="Community Logo"
+                        className="h-[32px]"
+                    />
+                </a>
+            </div>
             <div className="w-full flex-1 h-[60px] justify-between hidden md:block">
                 <ul
                     className="flex w-full text-[14px] h-full leading-[58px]"

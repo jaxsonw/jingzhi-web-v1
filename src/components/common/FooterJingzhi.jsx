@@ -19,8 +19,11 @@ const FooterJingzhi = () => {
                                     项目来源：2023年产业技术基础公共服务平台-面向人工智能大模型工程化技术及应用的产业公共服务平台
                                 </div>
                             </> : <>
-                                <div class="text-[24px] font-bold opacity-60">
-                                    国家人工智能大模型公共服务平台（武汉）
+                                <div>
+                                    <img src="http://caict-llm-portal-storage.oss-cn-beijing.aliyuncs.com/system-logo/49bdeca2-b8e0-4706-a5dc-83b8ddfeb352" alt="Community Logo" className="" />
+                                </div>
+                                <div class="text-[16px] font-[300] leading-[24px] opacity-60">
+                                    江城模境·工信部人工智能大模型公共服务平台（武汉）
                                 </div>
                             </>}
                         </div>
