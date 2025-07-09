@@ -14,7 +14,8 @@ const nextConfig = {
   },
   serverRuntimeConfig: {
     maxHeaderSize: 100 * 1024 // 配置最大接收请求长度 100KB
-  }
+  },
+  trailingSlash: process.env.NEXT_TRAILINGSLASH || false,
 }
 
 module.exports = nextConfig

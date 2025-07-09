@@ -8,6 +8,6 @@ export default function Example() {
 
   useEffect(() => {
     router.push(navigation[0]?.href)
-  }, [])
+  }, [router])
   return <>loading...</>
 }
