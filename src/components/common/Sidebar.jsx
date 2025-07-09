@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation";
-import { memo, useCallback, useMemo,useEffect,useState } from "react";
+import { memo, useCallback, useMemo, useEffect, useState } from "react";
 import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line } from "@remixicon/react";
 
 // MenuItem component optimized with memo
@@ -14,11 +14,10 @@ const MenuItem = memo(
   }) => {
     return (
       <div
-        className={`w-full h-10 flex items-center cursor-pointer px-4 rounded-lg transition-all duration-200 ease-in-out ${
-          isActive
+        className={`w-full h-10 flex items-center cursor-pointer px-4 rounded-lg transition-all duration-200 ease-in-out ${isActive
             ? "text-[#FF5005] bg-[#FF500530]"
             : "text-gray-800 hover:bg-gray-100"
-        }`}
+          }`}
         onClick={onClick}
         onMouseEnter={onHover}
       >
@@ -69,31 +68,31 @@ export function Sidebar() {
       {
         name: "对话",
         pathname: "chat",
-        path: "/chat",
+        path: "/modelplaza/chat/",
         icon: <RiChat1Line className="w-5 h-5" />
       },
       {
         name: "智能体",
         pathname: "apps",
-        path: "/apps",
+        path: "/modelplaza/apps/",
         icon: <RiRobot2Line className="w-5 h-5" />
       },
       {
         name: "知识库",
         pathname: "datasets",
-        path: "/datasets",
+        path: "/modelplaza/datasets/",
         icon: <RiDatabase2Line className="w-5 h-5" />
       },
       {
         name: "模型广场",
         pathname: "modelsquare",
-        path: "/modelsquare",
+        path: "/modelplaza/modelsquare/",
         icon: <RiBrainLine className="w-5 h-5" />
       },
       {
         name: "充值管理",
         pathname: "space",
-        path: "/space",
+        path: "/modelplaza/space/",
         icon: <RiStore2Line className="w-5 h-5" />
       }
     ],
