@@ -88,7 +88,7 @@ export function Sidebar() {
       {
         name: "充值管理",
         pathname: "space",
-        path: "/modelplaza/space/",
+        path: "/space/apikey/",
         icon: <RiStore2Line className="w-5 h-5" />
       }
     ],
