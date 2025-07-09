@@ -39,7 +39,9 @@ function RootLayout({ children }) {
             zIndex: 999999
           }}
         />
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   )

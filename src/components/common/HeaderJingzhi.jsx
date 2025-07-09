@@ -80,7 +80,7 @@ const HeaderJingzhi = ({ active }) => {
 
     const activeRegex = new RegExp(active)
 
-    return <div className="absolute top-0 bg-white w-full z-[100] md:min-w-[1024px]">
+    return <div className="fixed top-0 bg-white w-full z-[100] md:min-w-[1024px]">
         <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
             <div>
                 <a href="/">

@@ -7,6 +7,7 @@ import { copyValue } from '@/src/utils'
 import { LoadingSkeleton } from '@/src/components/common/LoadingSkeleton'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
+import {Sidebar} from '@/src/components/common/Sidebar'
 import { PLAY_GROUND_URL } from '../../consts/env'
 
 const TagListComponent = props => {
@@ -191,80 +192,88 @@ const Model = () => {
   return (
     <div>
       <HeaderJingzhi active="/modelplaza/" />
-      <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh] px-[10px]">
-        <title>模型广场</title>
-        {loading ? (
-          <LoadingSkeleton />
-        ) : (
-          <>
-            <div className='flex items-center'>
-              <div className='flex-1'>
-                <TagListComponent {...modalPriceTag} />
-                <TagListComponent {...{
-                  title: '使用场景',
-                  current: queryParams.typeId,
-                  setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
-                  list: [{
-                    name: '全部',
-                    value: 0
-                  }, {
-                    name: '会话',
-                    value: 1
-                  }, {
-                    name: '工具',
-                    value: 2
-                  }]
-                }} />
-                <TagListComponent
-                  {...{
-                    title: '提供公司',
-                    current: queryParams.companyId,
-                    setCurrent: v => setQueryParams({ ...queryParams, companyId: v }),
-                    list: handleList(typeData.companyList, list =>
-                      [
-                        {
-                          name: '全部',
-                          value: 0
-                        }
-                      ].concat(list.map(item => ({ name: item.companyName, value: item.companyId })))
-                    )
-                  }}
-                />
-              </div>
-              <div className='h-full mx-[15px] md:mr-[80px] md:ml-[50px]'>
-                <button
-                  type="button"
-                  className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-[14px] font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
-                  onClick={() => {
-                    location.href = "/space/apikey/"
-                  }}
-                >
-                  充值管理
-                </button>
-              </div>
-            </div>
-            <div className="mt-[60px]">
-              <Row gutter={[16, 16]}>
-                {modelDataRes && modelDataRes.length > 0 ? (
-                  modelDataRes?.map((item, index) => {
-                    return (
-                      // eslint-disable-next-line react/jsx-key
-                      <Col lg={8} xs={24} md={12} key={'modelitem' + index}>
-                        <ModelCard {...item} />
-                      </Col>
-                    )
-                  })
-                ) : (
-                  <div className="text-center text-[#999] w-full">暂无数据~</div>
-                )}
-              </Row>
-            </div>
-          </>
-        )}
+      <div className="flex">
+        <div>
+          <Sidebar />
+        </div>
+        <div>
+          <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh] px-[10px]">
+            <title>模型广场</title>
+            {loading ? (
+              <LoadingSkeleton />
+            ) : (
+              <>
+                <div className='flex items-center'>
+                  <div className='flex-1'>
+                    <TagListComponent {...modalPriceTag} />
+                    <TagListComponent {...{
+                      title: '使用场景',
+                      current: queryParams.typeId,
+                      setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
+                      list: [{
+                        name: '全部',
+                        value: 0
+                      }, {
+                        name: '会话',
+                        value: 1
+                      }, {
+                        name: '工具',
+                        value: 2
+                      }]
+                    }} />
+                    <TagListComponent
+                      {...{
+                        title: '提供公司',
+                        current: queryParams.companyId,
+                        setCurrent: v => setQueryParams({ ...queryParams, companyId: v }),
+                        list: handleList(typeData.companyList, list =>
+                          [
+                            {
+                              name: '全部',
+                              value: 0
+                            }
+                          ].concat(list.map(item => ({ name: item.companyName, value: item.companyId })))
+                        )
+                      }}
+                    />
+                  </div>
+                  {/* <div className='h-full mx-[15px] md:mr-[80px] md:ml-[50px]'>
+                    <button
+                      type="button"
+                      className="inline-flex text-center items-center justify-center text-nowrap px-4 py-2 border border-transparent text-[14px] font-medium rounded shadow-sm text-white bg-[#ff8035] hover:bg-[#ff5005]"
+                      onClick={() => {
+                        location.href = "/space/apikey/"
+                      }}
+                    >
+                      充值管理
+                    </button>
+                  </div> */}
+                </div>
+                <div className="mt-[60px]">
+                  <Row gutter={[16, 16]}>
+                    {modelDataRes && modelDataRes.length > 0 ? (
+                      modelDataRes?.map((item, index) => {
+                        return (
+                          // eslint-disable-next-line react/jsx-key
+                          <Col lg={8} xs={24} md={12} key={'modelitem' + index}>
+                            <ModelCard {...item} />
+                          </Col>
+                        )
+                      })
+                    ) : (
+                      <div className="text-center text-[#999] w-full">暂无数据~</div>
+                    )}
+                  </Row>
+                </div>
+              </>
+            )}
+          </div>
+          <div className='hidden md:block'>
+            <FooterJingzhi />
+          </div>
+        </div>
       </div>
-      <div className='hidden md:block'>
-        <FooterJingzhi />
-      </div>
+      
     </div>
   )
 }
