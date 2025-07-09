@@ -5,30 +5,26 @@ import { memo, useCallback, useMemo, useEffect, useState } from "react";
 import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line } from "@remixicon/react";
 
 // MenuItem component optimized with memo
-const MenuItem = memo(
-  ({
-    item,
-    isActive,
-    onClick,
-    onHover,
-  }) => {
-    return (
-      <div
-        className={`w-full h-10 flex items-center cursor-pointer px-4 rounded-lg transition-all duration-200 ease-in-out ${isActive
-            ? "text-[#FF5005] bg-[#FF500530]"
-            : "text-gray-800 hover:bg-gray-100"
-          }`}
-        onClick={onClick}
-        onMouseEnter={onHover}
-      >
-        <div className={`flex items-center justify-center mr-2`}>
-          {item.icon}
-        </div>
-        <div className="text-base text-center">{item.name}</div>
-      </div>
-    );
-  }
-);
+const MenuItem = ({
+  item,
+  isActive,
+  href,
+  onHover,
+}) => {
+  return <a
+    className={`w-full h-10 flex items-center cursor-pointer px-4 rounded-lg transition-all duration-200 ease-in-out ${isActive
+      ? "text-[#FF5005] bg-[#FF500530]"
+      : "text-gray-800 hover:bg-gray-100"
+      }`}
+    href={href}
+    onMouseEnter={onHover}
+  >
+    <div className={`flex items-center justify-center mr-2`}>
+      {item.icon}
+    </div>
+    <div className="text-base text-center">{item.name}</div>
+  </a>
+}
 
 // Main sidebar component
 export function Sidebar() {
@@ -113,7 +109,7 @@ export function Sidebar() {
         <div className="w-full flex-1 flex flex-col gap-y-2 px-1.5 pt-4 items-center scrollbar-none [-ms-overflow-style:'none'] [&::-webkit-scrollbar]:hidden">
           {menuList.map((item, index) => {
             // Using includes allows partial path matching which is more flexible
-            const isActive = pathname.includes(item.pathname);
+            const isActive = item.pathname === 'modelsquare'
 
             // Use memoized MenuItem component
             return (
@@ -121,7 +117,7 @@ export function Sidebar() {
                 key={`${item.pathname}-${index}`}
                 item={item}
                 isActive={isActive}
-                onClick={() => handleItemClick(item.path)}
+                href={item.path}
                 onHover={() => handleItemHover(item.path)}
               />
             );
