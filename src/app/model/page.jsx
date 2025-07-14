@@ -7,7 +7,7 @@ import { copyValue } from '@/src/utils'
 import { LoadingSkeleton } from '@/src/components/common/LoadingSkeleton'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { FooterJingzhi } from '@/src/components/common/FooterJingzhi'
-import {Sidebar} from '@/src/components/common/Sidebar'
+import { Sidebar } from '@/src/components/common/Sidebar'
 import { PLAY_GROUND_URL } from '../../consts/env'
 
 const TagListComponent = props => {
@@ -130,10 +130,10 @@ const ModelCard = props => {
         >
           查看详情
         </a>
-        {/* {props.typeId === 1 && <a className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 hover:text-white py-[10px] rounded-[8px] flex items-center justify-center bg-[#FF5005]"
+        {props.typeId === 1 && <a className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 hover:text-white py-[10px] rounded-[8px] flex items-center justify-center bg-[#FF5005]"
           href={PLAY_GROUND_URL + `?model=${props?.modelName}&modelType=message`}>
           立即体验
-        </a>} */}
+        </a>}
       </div>
     </div>
   )
@@ -273,7 +273,7 @@ const Model = () => {
           </div>
         </div>
       </div>
-      
+
     </div>
   )
 }
