@@ -125,7 +125,7 @@ const ModelCard = props => {
       </div>
       <div className="btn transition duration-150 ease-out hidden group-hover:flex items-center justify-between">
         <a
-          href={`/modelplaza/${encodeURIComponent(props?.modelName) + "/"}`}
+          href={`/modelplaza/modelsquare/${encodeURIComponent(props?.modelName) + "/"}`}
           className="flex-1 py-[10px] transition duration-150 ease-out hover:opacity-65 hover:text-[#ff5005] rounded-[8px] flex items-center justify-center text-[#333] bg-[#EEEEEE]"
         >
           查看详情
