@@ -131,7 +131,7 @@ const ModelCard = props => {
           查看详情
         </a>
         {props.typeId === 1 && <a className="text-[#fff] ml-[12px] flex-1 transition duration-150 ease-out hover:opacity-65 hover:text-white py-[10px] rounded-[8px] flex items-center justify-center bg-[#FF5005]"
-          href={PLAY_GROUND_URL + `?model=${props?.modelName}&modelType=message`}>
+          href={`/modelplaza/chat/?model=${props?.modelName}`}>
           立即体验
         </a>}
       </div>
