@@ -4,7 +4,7 @@ import Link from 'next/link';
 const FooterJingzhi = () => {
     return (
         <div className="w-full bg-[#181f31] mx-auto">
-            <div className="pt-[64px] text-white w-full">
+            <div className="pt-[64px] text-white w-full pb-[20px]">
                 <div className="px-[64px] m-auto">
                     <div className="flex justify-between md:flex-wrap md:gap-[16px]">
                         <div className="flex flex-col gap-[16px] md:gap-[8px]">
@@ -50,21 +50,21 @@ const FooterJingzhi = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-[64px] border-t pb-[48px] opacity-60 border-solid">
+                    {process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" && <div className="mt-[64px] border-t pb-[48px] opacity-60 border-solid">
                         <div className="pt-[32px] flex justify-between">
                             <div className="flex items-center text-[12px] font-[400] text-[#223B99] leading=[20px]">
-                                {process.env.NEXT_PUBLIC_OTHER_USE !== "wuhan" && <>
+                                <>
                                     <PoliceBadge />
                                     <Link href="https://beian.mps.gov.cn/" target="_blank" className="text-white inline-block ml-[8px]">京公网安备11010802027721号</Link>
                                     <span className="inline-block">｜</span>
                                     <Link href="https://beian.miit.gov.cn/" target="_blank" className="text-white inline-block">京ICP备09013372号</Link>
-                                </>}
+                                </>
                             </div>
                             <div className="flex text-white text-[14px] font-[400] leading-[22px]">
                                 Copyright © 2018-{new Date().getFullYear()} 中国信息通信研究院 版权所有
                             </div>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>)
