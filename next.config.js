@@ -7,14 +7,14 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    PLAY_GROUND_BASE_URL: process.env.PLAY_GROUND_BASE_URL
+    PLAY_GROUND_BASE_URL: process.env.NEXT_PLAY_GROUND_BASE_URL
   },
   compiler: {
     styledComponents: true
   },
   serverRuntimeConfig: {
     maxHeaderSize: 100 * 1024 // 配置最大接收请求长度 100KB
-  },
+  }
 }
 
 module.exports = nextConfig

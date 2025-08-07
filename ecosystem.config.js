@@ -13,7 +13,7 @@ module.exports = {
         NODE_ENV: 'production',
         PORT: 5003,
         NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-        PLAY_GROUND_BASE_URL: process.env.PLAY_GROUND_BASE_URL
+        PLAY_GROUND_BASE_URL: process.env.NEXT_PLAY_GROUND_BASE_URL
       }
     }
   ]
