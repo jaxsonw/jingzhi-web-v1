@@ -210,16 +210,16 @@ const Model = () => {
                       title: '使用场景',
                       current: queryParams.typeId,
                       setCurrent: (v) => setQueryParams({ ...queryParams, typeId: v }),
-                      list: [{
-                        name: '全部',
-                        value: 0
-                      }, {
-                        name: '会话',
-                        value: 1
-                      }, {
-                        name: '工具',
-                        value: 2
-                      }]
+                      list: [
+                        {
+                          name: '全部',
+                          value: 0
+                        },
+                        ...typeData.cateList.map(item => ({
+                          name: item.cateName,
+                          value: item.cateId
+                        }))
+                      ]
                     }} />
                     <TagListComponent
                       {...{
