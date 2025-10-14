@@ -31,8 +31,8 @@ export function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const hideSidebar = ["/workflow", "/explore"];
-  const isHideSidebar = hideSidebar.some((item) => pathname.includes(item)) || process.env.NEXT_PUBLIC_OTHER_USE === "wuhan";
-
+  //const isHideSidebar = hideSidebar.some((item) => pathname.includes(item)) || process.env.NEXT_PUBLIC_OTHER_USE === "wuhan";
+  const isHideSidebar = hideSidebar.some((item) => pathname.includes(item));
   // Track last active path to optimize rendering
   const [lastActivePath, setLastActivePath] = useState(pathname);
 
