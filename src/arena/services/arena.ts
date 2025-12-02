@@ -31,6 +31,12 @@ export interface ChatCompletionRequest {
   stream?: boolean;
 }
 
+export interface VoteRequest {
+  round_id: string;
+  user_choice: 'A' | 'B' | 'tie' | 'both_bad';
+  comment?: string;
+}
+
 export interface ChatCompletionChoice {
   index: number;
   message: ChatCompletionMessage;
@@ -393,6 +399,30 @@ class ArenaService {
     const shuffled = [...models].sort(() => Math.random() - 0.5);
     return [shuffled[0], shuffled[1]];
   }
+
+  /**
+   * 投票（仅匿名对战模式使用）
+   */
+  async vote(request: VoteRequest): Promise<void> {
+    const apiKey = await this.getApiKey();
+    if (!apiKey) {
+      throw new ArenaApiError('No API key available', 401);
+    }
+
+    const response = await fetch(`${ARENA_API_BASE}/arena/battle/vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new ArenaApiError(error.error?.message || 'Failed to vote', response.status);
+    }
+  }
 }
 
 // 单例导出
@@ -414,6 +444,9 @@ export const arenaApi = {
   // 对话
   chatCompletion: (request: ChatCompletionRequest) => arenaService.chatCompletion(request),
   chatCompletionStream: (request: ChatCompletionRequest) => arenaService.chatCompletionStream(request),
+  
+  // 投票（仅匿名对战）
+  vote: (request: VoteRequest) => arenaService.vote(request),
 };
 
 export { ArenaApiError };

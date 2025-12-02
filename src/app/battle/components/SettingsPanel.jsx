@@ -1,11 +1,11 @@
 'use client'
 
-import { Button, Select, Slider, Tooltip } from 'antd'
+import { Button, Select, Tooltip } from 'antd'
 import { ReloadOutlined } from '@ant-design/icons'
 
 /**
  * 设置面板组件
- * 包含模式选择、模型选择、参数设置
+ * 包含模式选择、模型选择
  */
 export function SettingsPanel({
   mode,
@@ -17,10 +17,6 @@ export function SettingsPanel({
   setSelectedModel,
   selectedModels,
   setSelectedModels,
-  temperature,
-  setTemperature,
-  maxTokens,
-  setMaxTokens,
   isGenerating,
   generationTime,
   onRefreshModels,
@@ -61,14 +57,6 @@ export function SettingsPanel({
             </p>
           </div>
         )}
-
-        {/* 参数设置 */}
-        <ParameterSettings
-          temperature={temperature}
-          setTemperature={setTemperature}
-          maxTokens={maxTokens}
-          setMaxTokens={setMaxTokens}
-        />
 
         {/* 状态指示 */}
         <StatusIndicator 
@@ -207,56 +195,6 @@ function ModelSelector({
           />
         </div>
       )}
-    </div>
-  )
-}
-
-/**
- * 参数设置
- */
-// 橙色主题滑块样式
-const sliderStyles = {
-  trackBg: '#FF5005',
-  trackHoverBg: '#FF5005',
-  handleColor: '#FF5005',
-  handleActiveColor: '#FF5005',
-  dotActiveBorderColor: '#FF5005',
-}
-
-function ParameterSettings({ temperature, setTemperature, maxTokens, setMaxTokens }) {
-  return (
-    <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-3">参数设置</label>
-      <div className="space-y-4 px-1">
-        <div>
-          <div className="flex justify-between text-xs text-gray-600 mb-1">
-            <span>Temperature</span>
-            <span>{temperature}</span>
-          </div>
-          <Slider
-            min={0}
-            max={2}
-            step={0.1}
-            value={temperature}
-            onChange={setTemperature}
-            styles={{ track: { background: '#FF5005' }, handle: { borderColor: '#FF5005' } }}
-          />
-        </div>
-        <div>
-          <div className="flex justify-between text-xs text-gray-600 mb-1">
-            <span>Max Tokens</span>
-            <span>{maxTokens}</span>
-          </div>
-          <Slider
-            min={50}
-            max={4096}
-            step={50}
-            value={maxTokens}
-            onChange={setMaxTokens}
-            styles={{ track: { background: '#FF5005' }, handle: { borderColor: '#FF5005' } }}
-          />
-        </div>
-      </div>
     </div>
   )
 }

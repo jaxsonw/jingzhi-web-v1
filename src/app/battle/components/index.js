@@ -1,3 +1,2 @@
-export { SingleMessage, BattleRound } from './MessageComponents'
-export { SettingsPanel } from './SettingsPanel'
+export { BattleRound } from './MessageComponents'
 export { ChatInput } from './ChatInput'
