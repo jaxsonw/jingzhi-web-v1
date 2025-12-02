@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { Button, Dialog, DialogPanel, Title } from '@tremor/react'
 import { Divider } from '@tremor/react'

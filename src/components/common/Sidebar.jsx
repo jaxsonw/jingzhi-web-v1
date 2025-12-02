@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { memo, useCallback, useMemo, useEffect, useState } from "react";
-import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line } from "@remixicon/react";
+import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line, RiSwordLine } from "@remixicon/react";
 
 // MenuItem component optimized with memo
 const MenuItem = ({
@@ -63,9 +63,15 @@ export function Sidebar() {
       // Organization menu item removed to match current implementation
       {
         name: "对话",
-        pathname: "chat",
+        pathname: "chat/",
         path: "/modelplaza/chat/",
         icon: <RiChat1Line className="w-5 h-5" />
+      },
+      {
+        name: "模型对战",
+        pathname: "battle",
+        path: "/modelplaza/battle/",
+        icon: <RiSwordLine className="w-5 h-5" />
       },
       {
         name: "智能体",
@@ -109,7 +115,7 @@ export function Sidebar() {
         <div className="w-full flex-1 flex flex-col gap-y-2 px-1.5 pt-4 items-center scrollbar-none [-ms-overflow-style:'none'] [&::-webkit-scrollbar]:hidden">
           {menuList.map((item, index) => {
             // Using includes allows partial path matching which is more flexible
-            const isActive = item.pathname === 'modelsquare'
+            const isActive = pathname.includes(item.pathname)
 
             // Use memoized MenuItem component
             return (
