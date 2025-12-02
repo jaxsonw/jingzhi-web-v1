@@ -84,7 +84,7 @@ const ModelCard = props => {
           <span className="ml-1">复制</span>
         </div>
       </div>
-      <div className="flex items-center pb-[18px]">
+      <div className="flex items-center flex-wrap pb-[18px]">
         <span className="block p-[5px] rounded-[4px] text-[12px] text-nowrap mb-2 mr-2 bg-[#F3F3F3]">{props.typeName}</span>
         {
           props?.attrList?.map((attr, attrId) => {
@@ -97,7 +97,7 @@ const ModelCard = props => {
           })
         }
       </div>
-      {props.typeId === 1 && <div className="flex items-center pb-[18px]">
+      {props.typeId == 1 && <div className="flex items-center pb-[18px]">
         <div>
           <div className="flex items-end">
             <span className="text-[12px]">￥</span>
@@ -197,7 +197,7 @@ const Model = () => {
         <div>
           <Sidebar />
         </div>
-        <div>
+        <div className="w-0 grow">
           <div className="overflow-auto pb-[100px] pt-[104px] lg:px-16 bg-[#F4F5FE] min-h-[100vh] px-[10px]">
             <title>模型广场</title>
             {loading ? (

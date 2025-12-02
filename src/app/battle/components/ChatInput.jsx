@@ -44,15 +44,16 @@ export function ChatInput({
   return (
     <div className="border-t border-gray-200 bg-white px-4 md:px-6 py-3 shrink-0">
       <div className="max-w-4xl mx-auto">
-        <div className="flex gap-2 md:gap-3">
+        <div className="flex gap-2 md:gap-3 items-end">
           <TextArea
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={getPlaceholder()}
-            autoSize={{ minRows: 1, maxRows: 4 }}
+            rows={3}
             disabled={isGenerating}
-            className="flex-1 resize-none"
+            className="flex-1"
+            style={{ resize: 'none' }}
           />
           {isGenerating ? (
             <Button 
