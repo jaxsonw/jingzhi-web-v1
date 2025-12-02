@@ -100,7 +100,7 @@ export function Sidebar() {
 
   return (
     <div
-      className={`h-screen hidden lg:block sticky top-0 left-0 top-0 z-[1] pt-[60px] `}
+      className={`h-screen hidden lg:block sticky left-0 top-0 z-[1] pt-[58px] `}
       style={{ width: 220 }}
     >
       <div

@@ -1,16 +1,22 @@
 import { getNavList, getUserInfo } from "@/src/services";
 import { getCookie, setCookie } from "@/src/utils";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const HeaderJingzhi = ({ active }) => {
 
     const [showChildren, setShowChildren] = useState(false)
-    const [showMobileMenu, setShowMobileMenu] = useState(false)
+    const [showOverflowMenu, setShowOverflowMenu] = useState(false)
+    const [submenuPosition, setSubmenuPosition] = useState({}) // 存储子菜单位置
     const [userData, setUserData] = useState(null)
     let showTimer = ""
     const [navArray, setNavArrary] = useState([])
+    const [visibleCount, setVisibleCount] = useState(-1) // -1 表示未计算
+    const navContainerRef = useRef(null)
+    const navItemsRef = useRef([])
+    const itemWidthsRef = useRef([]) // 存储每个项目的宽度
+    const moreButtonRef = useRef(null)
+    const resizeTimerRef = useRef(null)
 
     const menuItem = [
         [
@@ -62,6 +68,83 @@ const HeaderJingzhi = ({ active }) => {
         getNavData()
     }, [])
 
+    // 测量并存储项目宽度（只在首次或数据变化时）
+    const measureItemWidths = useCallback(() => {
+        if (navArray.length === 0) return
+        const widths = []
+        for (let i = 0; i < navItemsRef.current.length; i++) {
+            const item = navItemsRef.current[i]
+            if (item) {
+                // 临时移除 hidden 类以便测量
+                const wasHidden = item.classList.contains('hidden')
+                if (wasHidden) item.classList.remove('hidden')
+                widths[i] = item.offsetWidth
+                if (wasHidden) item.classList.add('hidden')
+            }
+        }
+        itemWidthsRef.current = widths
+    }, [navArray])
+
+    // 计算可见导航项数量
+    const calculateVisibleItems = useCallback(() => {
+        if (!navContainerRef.current || navArray.length === 0) return
+
+        // 如果没有存储宽度，先测量
+        if (itemWidthsRef.current.length === 0) {
+            measureItemWidths()
+        }
+
+        const containerWidth = navContainerRef.current.offsetWidth
+        const moreButtonWidth = 60 // 图标按钮宽度
+        let totalWidth = 0
+        let count = 0
+
+        for (let i = 0; i < itemWidthsRef.current.length; i++) {
+            const itemWidth = itemWidthsRef.current[i] || 0
+            if (itemWidth === 0) continue
+
+            // 检查是否需要预留"更多"按钮空间
+            const needMoreButton = i < navArray.length - 1
+            const availableWidth = needMoreButton ? containerWidth - moreButtonWidth : containerWidth
+
+            if (totalWidth + itemWidth > availableWidth) {
+                break
+            }
+            totalWidth += itemWidth
+            count++
+        }
+
+        // 如果所有项目都能显示，就显示全部
+        setVisibleCount(count === navArray.length ? navArray.length : Math.max(count, 0))
+    }, [navArray, measureItemWidths])
+
+    // 监听窗口大小变化（带防抖）
+    useEffect(() => {
+        const handleResize = () => {
+            if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current)
+            resizeTimerRef.current = setTimeout(() => {
+                calculateVisibleItems()
+            }, 50)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+            if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current)
+        }
+    }, [calculateVisibleItems])
+
+    // 导航数据加载后测量宽度并计算
+    useEffect(() => {
+        if (navArray.length > 0) {
+            // 先显示所有项目，等待 DOM 渲染完成后测量
+            setVisibleCount(-1)
+            setTimeout(() => {
+                measureItemWidths()
+                calculateVisibleItems()
+            }, 50)
+        }
+    }, [navArray, measureItemWidths, calculateVisibleItems])
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             const targetElement = event.target;
@@ -80,8 +163,28 @@ const HeaderJingzhi = ({ active }) => {
 
     const activeRegex = new RegExp(active)
 
+    // 计算子菜单位置：右侧优先 -> 左侧 -> 下方
+    const calculateSubmenuPosition = (parentEl, submenuWidth = 200) => {
+        if (!parentEl) return { type: 'left', style: {} }
+        const rect = parentEl.getBoundingClientRect()
+        const viewportWidth = window.innerWidth
+        const spaceRight = viewportWidth - rect.right
+        const spaceLeft = rect.left
+
+        // 优先右侧（留4px间隙）
+        if (spaceRight >= submenuWidth + 4) {
+            return { type: 'right', style: { left: 'calc(100% + 4px)', top: 0 } }
+        }
+        // 其次左侧（留4px间隙）
+        if (spaceLeft >= submenuWidth + 4) {
+            return { type: 'left', style: { right: 'calc(100% + 4px)', top: 0 } }
+        }
+        // 最后下方
+        return { type: 'bottom', style: { left: 0, top: '36px' } }
+    }
+
     return <div className="fixed top-0 bg-white w-full z-[100] md:min-w-[1024px]">
-        <div className="px-[32px] h-[56px] max-w-[1440px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
+        <div className="px-[32px] h-[56px] mx-auto flex md:justify-between justify-start items-center gap-[16px] border-b border-solid border-[#dcdfe6aa]">
             <div>
                 <a href="/">
                     <img
@@ -94,16 +197,17 @@ const HeaderJingzhi = ({ active }) => {
                     />
                 </a>
             </div>
-            <div className="w-full flex-1 h-[60px] justify-between hidden md:block">
+            <div className="w-0 grow h-[60px] justify-center" ref={navContainerRef}>
                 <ul
-                    className="flex w-full text-[14px] h-full leading-[58px]"
+                    className="flex w-full text-[14px] h-full leading-[58px] justify-center"
                     role="menubar"
                 >
                     {navArray.length == 0 ? "" : navArray.map((item, index) => (
                         item.subs ? <li
                             key={index}
+                            ref={el => navItemsRef.current[index] = el}
                             role="menuitem"
-                            className={`pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative shrink-0 ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`pl-[20px] pr-[44px] h-full hover:text-[#ff5005] relative shrink-0 ${visibleCount > 0 && index >= visibleCount ? "hidden" : ""} ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                             onMouseEnter={() => {
                                 if (showTimer) clearTimeout(showTimer)
@@ -150,8 +254,9 @@ const HeaderJingzhi = ({ active }) => {
                             </div>
                         </li> : <li
                             key={index}
+                            ref={el => navItemsRef.current[index] = el}
                             role="menuitem"
-                            className={`h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${activeRegex.test(item.index) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            className={`h-full hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer shrink-0 ${visibleCount > 0 && index >= visibleCount ? "hidden" : ""} ${activeRegex.test(item.index) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
                             tabIndex="-1"
                         >
                             {activeRegex.test(item.index) ? <span className="h-full px-[20px] w-full block">{item.title}</span> : <Link
@@ -164,98 +269,89 @@ const HeaderJingzhi = ({ active }) => {
                         </li>
                     ))}
 
-                </ul>
-            </div>
-            <div className="w-full flex-1 h-[60px] block md:hidden">
-                <ul
-                    className="flex flex-1 justify-between text-[14px] h-full leading-[58px] mx-auto relative"
-                    role="menubar"
-                >
-                    {navArray.length != 0 && <li
-                        role="menuitem"
-                        className={`h-full flex-1 hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer text-center`}
-                        tabIndex="-1"
-                    >
-                        <Link
-                            className="h-full px-[20px] w-full block text-nowrap"
-                            href={navArray[0].index}
-                            target={navArray[0].target ? navArray[0].target : "_self"}
+                    {/* 溢出菜单按钮 */}
+                    {visibleCount > 0 && visibleCount < navArray.length && (
+                        <li
+                            ref={moreButtonRef}
+                            role="menuitem"
+                            className={`h-full hover:text-[#ff5005] cursor-pointer relative shrink-0 ${navArray.slice(visibleCount).some(item => item.subs ? item.subs.some(child => activeRegex.test(child.index)) : activeRegex.test(item.index)) ? "text-[#FF5005] border-solid border-b-2 border-[#FF5005]" : ""}`}
+                            tabIndex="-1"
+                            onMouseEnter={() => {
+                                if (showTimer) clearTimeout(showTimer)
+                                setShowOverflowMenu(true)
+                            }}
+                            onMouseLeave={() => {
+                                showTimer = setTimeout(() => {
+                                    setShowOverflowMenu(false)
+                                }, 200)
+                            }}
                         >
-                            {navArray[0].title}
-                        </Link>
-                    </li>}
-                    <div
-                        className="w-full flex-1 flex justify-center items-center text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]"
-                        onClick={() => {
-                            setShowMobileMenu(!showMobileMenu)
-                            // console.log(showMobileMenu)
-                        }}
-                    >
-                        <i className="w-[18px] h-[18px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M176 416a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224"></path></svg>
-                        </i>
-                    </div>
-                    <div className={`absolute w-[200px] top-[64px] right-0 ${showMobileMenu ? "" : "overflow-hidden"} text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showMobileMenu ? "py-1 border-solid" : "h-0"}`}>
-                        {navArray.length <= 1 ? "" : navArray.map((item, index) => (
-                            index === 0 ? "" : item.subs ? <li
-                                key={index}
-                                role="menuitem"
-                                className={`pl-[20px] pr-[44px] h-[36px] relative ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold" : ""}`}
-                                tabIndex="-1"
-                                onClick={() => {
-                                    if (showChildren === index) setShowChildren(false)
-                                    else setShowChildren(index)
+                            <div className={`flex items-center h-full px-[20px] ${navArray.slice(visibleCount).some(item => item.subs ? item.subs.some(child => activeRegex.test(child.index)) : activeRegex.test(item.index)) ? "text-[#FF5005] font-bold" : ""}`}>
+                                <i className="w-[18px] h-[18px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M176 416a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224"></path></svg>
+                                </i>
+                            </div>
+                            <div
+                                className={`absolute top-[64px] right-0 text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showOverflowMenu ? "py-1 border-solid" : "h-0 overflow-hidden"}`}
+                                onMouseEnter={() => {
+                                    if (showTimer) clearTimeout(showTimer)
+                                    setShowOverflowMenu(true)
+                                }}
+                                onMouseLeave={() => {
+                                    showTimer = setTimeout(() => {
+                                        setShowOverflowMenu(false)
+                                    }, 200)
                                 }}
                             >
-                                <div
-                                    className="flex items-center h-[36px]"
-                                >
-                                    {item.title}
-                                    <i
-                                        className={`w-[12px] h-[12px] absolute right-[20px] transition-transform duration-200 ${showChildren === index ? "transform rotate-180" : ""} `}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 1024 1024">
-                                            <path fill="currentColor" d="M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z">
-                                            </path>
-                                        </svg>
-                                    </i>
-                                </div>
-                                <div
-                                    className={`absolute z-10 top-[36px] left-0 overflow-hidden text-black shadow-lg bg-white transition-all duration-200 rounded border border-[#ccc] ${showChildren === index ? "py-1 border-solid" : "h-0"}`}
-                                >
-                                    {item.subs.map((child, index) => <div
-                                        key={index}
-                                        className="w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]"
-                                    >
-                                        {activeRegex.test(child.index) ? <span
-                                            className="w-full h-full px-[10px] block text-[#ff5005] font-bold cursor-pointer"
+                                {navArray.slice(visibleCount).map((item, idx) => {
+                                    const originalIndex = visibleCount + idx
+                                    return item.subs ? (
+                                        <div
+                                            key={originalIndex}
+                                            className="relative"
+                                            onMouseEnter={(e) => {
+                                                const pos = calculateSubmenuPosition(e.currentTarget)
+                                                setSubmenuPosition(prev => ({ ...prev, [`overflow-${originalIndex}`]: pos }))
+                                                setShowChildren(`overflow-${originalIndex}`)
+                                            }}
+                                            onMouseLeave={() => setShowChildren(false)}
                                         >
-                                            {child.title}
-                                        </span> : <Link
-                                            className="w-full h-full px-[10px] block font-normal"
-                                            href={child.index}
-                                            target={child.target ? child.target : "_self"}
-                                        >
-                                            {child.title}
-                                        </Link>}
-                                    </div>)}
-                                </div>
-                            </li> : <li
-                                key={index}
-                                role="menuitem"
-                                className={`h-[36px] hover:bg-[#ff500530] hover:text-[#ff5005] cursor-pointer ${activeRegex.test(item.index) ? "text-[#FF5005] font-bold border-solid border-b-2 border-[#FF5005]" : ""}`}
-                                tabIndex="-1"
-                            >
-                                {activeRegex.test(item.index) ? <span className="h-[36px] px-[20px] w-full block">{item.title}</span> : <Link
-                                    className="h-[36px] px-[20px] w-full block leading-[36px]"
-                                    href={item.index}
-                                    target={item.target ? item.target : "_self"}
-                                >
-                                    {item.title}
-                                </Link>}
-                            </li>
-                        ))}
-                    </div>
+                                            <div className={`w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005] px-[10px] flex items-center justify-between cursor-pointer ${item.subs.some(child => activeRegex.test(child.index)) ? "text-[#FF5005] font-bold" : ""}`}>
+                                                <span>{item.title}</span>
+                                                <i className={`w-[12px] h-[12px] transition-transform duration-200 ${showChildren === `overflow-${originalIndex}` ? "transform -rotate-90" : ""}`}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 1024 1024">
+                                                        <path fill="currentColor" d="M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z"></path>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div
+                                                className={`absolute z-10 overflow-hidden text-black font-normal shadow-lg bg-white transition-[height,padding] duration-200 rounded border border-[#ccc] ${showChildren === `overflow-${originalIndex}` ? "py-1 border-solid" : "h-0"}`}
+                                                style={submenuPosition[`overflow-${originalIndex}`]?.style || { right: 'calc(100% + 4px)', top: 0 }}
+                                            >
+                                                {item.subs.map((child, childIdx) => (
+                                                    <div key={childIdx} className="w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]">
+                                                        {activeRegex.test(child.index) ? (
+                                                            <span className="w-full h-full px-[10px] block text-[#ff5005] font-bold cursor-pointer">{child.title}</span>
+                                                        ) : (
+                                                            <Link className="w-full h-full px-[10px] block font-normal" href={child.index} target={child.target || "_self"}>{child.title}</Link>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div key={originalIndex} className={`w-[200px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005] ${activeRegex.test(item.index) ? "text-[#FF5005] font-bold" : ""}`}>
+                                            {activeRegex.test(item.index) ? (
+                                                <span className="w-full h-full px-[10px] block">{item.title}</span>
+                                            ) : (
+                                                <Link className="w-full h-full px-[10px] block" href={item.index} target={item.target || "_self"}>{item.title}</Link>
+                                            )}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </li>
+                    )}
                 </ul>
             </div>
             <div className="flex items-center">
@@ -272,7 +368,6 @@ const HeaderJingzhi = ({ active }) => {
                                         setShowChildren("menu")
                                     }
                                 }}
-
                             >
                                 <img src={userData ? userData.avatar : ""} alt="avatar" />
                             </div>
@@ -302,24 +397,10 @@ const HeaderJingzhi = ({ active }) => {
                                 >
                                     <span
                                         className="w-full h-full px-[10px] block"
-                                    // href="/logout"
                                     >
                                         退出登录
                                     </span>
                                 </div>
-                                {/* <div className="w-[120px] text-[14px] leading-[36px] hover:bg-[#ff500530] hover:text-[#ff5005]" >
-                                    <span
-                                        className="w-full h-full px-[10px] block"
-                                        onClick={
-                                            () => {
-                                                setCookie({ ['idToken']: "" }, { days: -1, secure: true, sameSite: 'Strict' })
-                                                location.reload()
-                                            }
-                                        }
-                                    >
-                                        退出登录
-                                    </span>
-                                </div> */}
                             </div>
                         </div> : <div>
                             <button
