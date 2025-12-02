@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
-import { Button, message, Tooltip, ConfigProvider } from 'antd'
-import { ClearOutlined, RobotOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, message, Tooltip, ConfigProvider, Popconfirm } from 'antd'
+import { ClearOutlined, RobotOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { arenaApi } from '@/src/arena/services/arena'
 import { isLogin } from '@/src/utils'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
@@ -151,6 +151,7 @@ export default function ChatBattlePage() {
       message.error('删除会话失败')
     }
   }, [currentSessionId])
+
 
   // 验证登录状态和 API Key
   const validateApiKey = useCallback(async () => {
@@ -572,12 +573,31 @@ export default function ChatBattlePage() {
                     <div
                       key={session.id}
                       onClick={() => loadSession(session.id)}
-                      className={`p-3 cursor-pointer hover:bg-gray-100 transition-colors ${
+                      className={`p-3 cursor-pointer hover:bg-gray-100 transition-colors group ${
                         currentSessionId === session.id ? 'bg-orange-50 border-l-2 border-[#FF5005]' : ''
                       }`}
                     >
-                      <div className="font-medium text-sm text-gray-900 truncate">
-                        {session.title}
+                      <div className="flex items-center justify-between">
+                        <div className="font-medium text-sm text-gray-900 truncate flex-1 mr-2">
+                          {session.title}
+                        </div>
+                        <Popconfirm
+                          title="删除会话"
+                          description="确定要删除这个会话吗？"
+                          onConfirm={(e) => { e?.stopPropagation(); deleteSession(session.id) }}
+                          onCancel={(e) => e?.stopPropagation()}
+                          okText="删除"
+                          cancelText="取消"
+                          okButtonProps={{ danger: true }}
+                        >
+                          <Button
+                            type="text"
+                            size="small"
+                            icon={<DeleteOutlined className="text-gray-400 hover:text-red-500" />}
+                            onClick={(e) => e.stopPropagation()}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          />
+                        </Popconfirm>
                       </div>
                       <div className="text-xs text-gray-500 mt-1">
                         {new Date(session.updatedAt).toLocaleString()}

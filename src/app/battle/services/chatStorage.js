@@ -93,12 +93,29 @@ export async function getSession(id) {
 
 /**
  * 更新会话
+ * @param {string|Object} sessionOrId - 会话对象或会话ID
+ * @param {Object} [updates] - 如果第一个参数是ID，则此参数为更新内容
  */
-export async function updateSession(session) {
+export async function updateSession(sessionOrId, updates = null) {
   await initDB()
   
+  // 支持两种调用方式：
+  // 1. updateSession(session) - 传入完整会话对象
+  // 2. updateSession(sessionId, { title: 'xxx' }) - 传入ID和部分更新
+  let sessionToUpdate
+  
+  if (typeof sessionOrId === 'string' && updates) {
+    // 方式2：先获取现有会话，再合并更新
+    const existing = await getSession(sessionOrId)
+    if (!existing) throw new Error('Session not found')
+    sessionToUpdate = { ...existing, ...updates }
+  } else {
+    // 方式1：传入完整对象
+    sessionToUpdate = sessionOrId
+  }
+  
   const updated = {
-    ...session,
+    ...sessionToUpdate,
     updatedAt: Date.now(),
   }
   
