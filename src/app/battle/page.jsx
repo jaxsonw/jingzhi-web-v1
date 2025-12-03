@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { Button, message, Tooltip, ConfigProvider, Popconfirm } from 'antd'
 import { ClearOutlined, RobotOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
-import { arenaApi } from '@/src/arena/services/arena'
+import { arenaApi } from '@/src/services/arenaService'
 import { isLogin } from '@/src/utils'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { Sidebar } from '@/src/components/common/Sidebar'
