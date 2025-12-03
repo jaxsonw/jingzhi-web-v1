@@ -32,9 +32,21 @@ export interface ChatCompletionRequest {
 }
 
 export interface VoteRequest {
-  round_id: string;
-  user_choice: 'A' | 'B' | 'tie' | 'both_bad';
-  comment?: string;
+  upModel: string[];
+  downModel: string[];
+}
+
+export interface VoteRankItem {
+  model: string;
+  companyName: string;
+  vote: number;
+  score: number;
+}
+
+export interface VoteRankResponse {
+  code: number;
+  data: VoteRankItem[];
+  message?: string;
 }
 
 export interface ChatCompletionChoice {
@@ -402,18 +414,20 @@ class ArenaService {
 
   /**
    * 投票（仅匿名对战模式使用）
+   * @param upModel - 点赞的模型名称数组
+   * @param downModel - 点踩的模型名称数组
    */
   async vote(request: VoteRequest): Promise<void> {
-    const apiKey = await this.getApiKey();
-    if (!apiKey) {
-      throw new ArenaApiError('No API key available', 401);
+    const idToken = this.getIdToken();
+    if (!idToken) {
+      throw new ArenaApiError('未登录', 401);
     }
 
-    const response = await fetch(`${ARENA_API_BASE}/arena/battle/vote`, {
+    const response = await fetch(`${V1_BASE_URL}/v1/inner/model/vote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${idToken}`,
       },
       body: JSON.stringify(request),
     });
@@ -422,6 +436,33 @@ class ArenaService {
       const error = await response.json().catch(() => ({}));
       throw new ArenaApiError(error.error?.message || 'Failed to vote', response.status);
     }
+  }
+
+  /**
+   * 获取投票排行榜
+   */
+  async getVoteRank(): Promise<VoteRankItem[]> {
+    const idToken = this.getIdToken();
+    
+    const response = await fetch(`${V1_BASE_URL}/v1/inner/model/voteRank`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(idToken ? { 'Authorization': `Bearer ${idToken}` } : {}),
+      },
+    });
+
+    if (!response.ok) {
+      throw new ArenaApiError('获取排行榜失败', response.status);
+    }
+
+    const res = await response.json();
+    
+    if (res?.code === 0 && Array.isArray(res?.data)) {
+      return res.data;
+    }
+    
+    return [];
   }
 }
 
@@ -447,6 +488,9 @@ export const arenaApi = {
   
   // 投票（仅匿名对战）
   vote: (request: VoteRequest) => arenaService.vote(request),
+  
+  // 排行榜
+  getVoteRank: () => arenaService.getVoteRank(),
 };
 
 export { ArenaApiError };

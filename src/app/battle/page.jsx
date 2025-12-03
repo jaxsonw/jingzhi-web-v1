@@ -425,7 +425,7 @@ export default function ChatBattlePage() {
     if (!currentSession) return
     
     try {
-      // 调用投票 API
+      // 获取当前轮次信息
       const rounds = []
       for (let i = 0; i < messages.length; i++) {
         const msg = messages[i]
@@ -444,21 +444,37 @@ export default function ChatBattlePage() {
       }
       
       const targetRound = rounds[roundIndex]
-      if (targetRound?.assistantA?.id) {
-        await arenaApi.vote({
-          round_id: targetRound.assistantA.id,
-          user_choice: choice,
-        })
+      const modelAId = targetRound.assistantA?.roundModelA || targetRound.assistantA?.modelId
+      const modelBId = targetRound.assistantA?.roundModelB || targetRound.assistantB?.modelId
+      const modelAName = getModelNameById(modelAId)
+      const modelBName = getModelNameById(modelBId)
+      
+      // 根据选择构建投票请求
+      // A更好: upModel=[A], B更好: upModel=[B], 平局: upModel=[A,B], 都不好: downModel=[A,B]
+      let upModel = []
+      let downModel = []
+      
+      if (choice === 'A') {
+        upModel = [modelAName]
+      } else if (choice === 'B') {
+        upModel = [modelBName]
+      } else if (choice === 'tie') {
+        upModel = [modelAName, modelBName]
+      } else if (choice === 'both_bad') {
+        downModel = [modelAName, modelBName]
       }
       
-      // 更新投票状态，从消息中获取本轮使用的模型信息
+      // 调用投票 API
+      await arenaApi.vote({ upModel, downModel })
+      
+      // 更新投票状态
       const newVotes = {
         ...votes,
         [roundIndex]: {
           choice,
-          modelA: targetRound.assistantA?.roundModelA || targetRound.assistantA?.modelId,
-          modelB: targetRound.assistantA?.roundModelB || targetRound.assistantB?.modelId,
-          revealed: true, // 标记已揭晓
+          modelA: modelAId,
+          modelB: modelBId,
+          revealed: true,
         }
       }
       setVotes(newVotes)

@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { memo, useCallback, useMemo, useEffect, useState } from "react";
-import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line, RiSwordLine } from "@remixicon/react";
+import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line, RiSwordLine, RiTrophyLine } from "@remixicon/react";
 
 // MenuItem component optimized with memo
 const MenuItem = ({
@@ -68,12 +68,6 @@ export function Sidebar() {
         icon: <RiChat1Line className="w-5 h-5" />
       },
       {
-        name: "模型对战",
-        pathname: "battle",
-        path: "/modelplaza/battle/",
-        icon: <RiSwordLine className="w-5 h-5" />
-      },
-      {
         name: "智能体",
         pathname: "apps",
         path: "/modelplaza/apps/",
@@ -92,11 +86,24 @@ export function Sidebar() {
         icon: <RiBrainLine className="w-5 h-5" />
       },
       {
+        name: "模型竞技场",
+        pathname: "battle",
+        path: "/modelplaza/battle/",
+        icon: <RiSwordLine className="w-5 h-5" />
+      },
+      {
+        name: "模型排行",
+        pathname: "rank",
+        path: "/modelplaza/rank/",
+        icon: <RiTrophyLine className="w-5 h-5" />
+      },
+      {
         name: "充值管理",
         pathname: "space",
         path: "/space/apikey/",
         icon: <RiStore2Line className="w-5 h-5" />
       }
+
     ],
     []
   );
