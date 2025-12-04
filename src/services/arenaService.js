@@ -13,6 +13,7 @@ const ENDPOINTS = {
   CHAT_COMPLETIONS: '/v1/chat/completions',
   VOTE: '/v1/inner/model/vote',
   VOTE_RANK: '/v1/inner/model/voteRank',
+  MODEL_STAT: '/v1/model/stat',
 }
 
 // 缓存
@@ -227,6 +228,114 @@ export const getVoteRank = async () => {
   return []
 }
 
+/**
+ * 获取模型调用统计
+ */
+export const getModelStats = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}${ENDPOINTS.MODEL_STAT}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    })
+    
+    if (!response.ok) throw new Error(`API responded with status: ${response.status}`)
+    
+    const rawData = await response.json()
+    
+    // 处理数据：按模型分组并计算总调用量
+    const modelMap = new Map()
+    
+    rawData.forEach((item) => {
+      if (!modelMap.has(item.model)) {
+        modelMap.set(item.model, {
+          model: item.model,
+          totalToken: item.token || 0,
+          companyName: item.companyName || 'Unknown',
+        })
+      } else {
+        const existing = modelMap.get(item.model)
+        existing.totalToken += (item.token || 0)
+      }
+    })
+
+    // 转换为数组并按 token 数量排序
+    const models = Array.from(modelMap.values()).sort((a, b) => b.totalToken - a.totalToken)
+
+    // 计算排名和真实占比百分比
+    const totalTokens = models.reduce((sum, model) => sum + model.totalToken, 0)
+    const processedModels = models.map((model, index) => ({
+      ...model,
+      rank: index + 1,
+      percentage: totalTokens > 0 ? (model.totalToken / totalTokens * 100) : 0
+    }))
+
+    // 生成月度数据用于图表（按公司分类）
+    const colors = ['#2563eb', '#ea580c', '#9333ea', '#16a34a', '#0891b2', '#dc2626', '#7c3aed', '#0d9488', '#ca8a04', '#6366f1']
+    const months = [...new Set(rawData.map((item) => item.month))].sort()
+    
+    // 获取所有公司并计算总调用量，用于确定颜色分配
+    const companyTotals = new Map()
+    rawData.forEach(item => {
+      const company = item.companyName || 'Unknown'
+      companyTotals.set(company, (companyTotals.get(company) || 0) + (item.token || 0))
+    })
+    const sortedCompanies = [...companyTotals.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([name], index) => ({ name, color: colors[index % colors.length] }))
+    const companyColorMap = new Map(sortedCompanies.map(c => [c.name, c.color]))
+    
+    const monthlyData = months.map(month => {
+      const monthItems = rawData.filter((item) => item.month === month)
+      const monthTotal = monthItems.reduce((sum, m) => sum + (m.token || 0), 0)
+      
+      // 按公司分组统计
+      const companyMap = new Map()
+      monthItems.forEach(item => {
+        const company = item.companyName || 'Unknown'
+        companyMap.set(company, (companyMap.get(company) || 0) + (item.token || 0))
+      })
+      
+      const companySegments = [...companyMap.entries()]
+        .filter(([_, value]) => value > 0)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(([name, value]) => ({
+          name,
+          value,
+          percentage: monthTotal > 0 ? (value / monthTotal * 100) : 0,
+          color: companyColorMap.get(name) || '#6b7280'
+        }))
+
+      return {
+        month,
+        segments: companySegments,
+        total: monthTotal
+      }
+    })
+
+    // 统计信息
+    const activeModels = processedModels.filter(model => model.totalToken > 0).length
+    
+    return {
+      models: processedModels,
+      monthlyData,
+      stats: {
+        totalModels: processedModels.length,
+        activeModels,
+        totalTokens,
+        averageTokens: processedModels.length > 0 ? Math.round(totalTokens / processedModels.length) : 0,
+        topModel: processedModels.length > 0 ? processedModels[0].model : 'N/A'
+      },
+      lastUpdated: new Date().toISOString(),
+    }
+  } catch (error) {
+    console.error('获取模型统计数据失败:', error)
+    return null
+  }
+}
+
 // 便捷 API 导出（兼容旧代码）
 export const arenaApi = {
   getKeyList,
@@ -240,6 +349,7 @@ export const arenaApi = {
   chatCompletionStream,
   vote,
   getVoteRank,
+  getModelStats,
 }
 
 export default arenaApi

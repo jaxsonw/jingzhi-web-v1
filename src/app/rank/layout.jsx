@@ -1,23 +1,33 @@
 'use client'
 
 import React from 'react'
-import { usePathname } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-import { TrophyOutlined, BarChartOutlined } from '@ant-design/icons'
+import { TrophyOutlined, BarChartOutlined, LineChartOutlined } from '@ant-design/icons'
 import { HeaderJingzhi } from '@/src/components/common/HeaderJingzhi'
 import { Sidebar } from '@/src/components/common/Sidebar'
 
 const tabs = [
-  { key: 'vote', label: '投票总榜', icon: <TrophyOutlined />, path: '/modelplaza/rank/' },
-  { key: 'params', label: '多领域评测榜', icon: <BarChartOutlined />, path: '/modelplaza/rank/params/' },
+  { key: 'vote', label: '投票总榜', icon: <TrophyOutlined /> },
+  { key: 'params', label: '多领域评测榜', icon: <BarChartOutlined /> },
+  { key: 'usage', label: '调用量榜', icon: <LineChartOutlined /> },
 ]
 
 export default function RankLayout({ children }) {
-  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const router = useRouter()
   
   // 获取当前激活的 tab
-  const activeTab = pathname.includes('/params') ? 'params' : 'vote'
+  const activeTab = searchParams.get('tab') || 'vote'
+
+  const handleTabChange = (tabKey) => {
+    if (tabKey === 'vote') {
+      router.push('/modelplaza/rank/')
+    } else {
+      router.push(`/modelplaza/rank/?tab=${tabKey}`)
+    }
+  }
 
   return (
     <ConfigProvider locale={zhCN} theme={{ token: { colorPrimary: '#FF5005', colorLink: '#FF5005' } }}>
@@ -44,7 +54,7 @@ export default function RankLayout({ children }) {
                   {tabs.map((tab) => (
                     <button
                       key={tab.key}
-                      onClick={() => { location.href = tab.path }}
+                      onClick={() => handleTabChange(tab.key)}
                       className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                         activeTab === tab.key
                           ? 'bg-white text-[#FF5005] shadow-sm'
