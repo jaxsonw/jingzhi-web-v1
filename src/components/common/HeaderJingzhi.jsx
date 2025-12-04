@@ -197,9 +197,9 @@ const HeaderJingzhi = ({ active }) => {
                     />
                 </a>
             </div>
-            <div className="w-0 grow h-[60px] justify-center" ref={navContainerRef}>
+            <div className="w-0 grow h-[60px]" ref={navContainerRef}>
                 <ul
-                    className="flex w-full text-[14px] h-full leading-[58px] justify-center"
+                    className="flex w-full text-[14px] h-full leading-[58px] justify-start"
                     role="menubar"
                 >
                     {navArray.length == 0 ? "" : navArray.map((item, index) => (
