@@ -359,8 +359,8 @@ function UsageRankContent() {
             <span className="text-sm text-gray-500">总调用量</span>
             <RiseOutlined className="text-gray-400" />
           </div>
-          <div className="text-2xl font-semibold text-gray-900">{formatTokens(stats.stats?.totalTokens || 0)}</div>
-          <p className="text-xs text-gray-400">{formatTokensWithUnit(stats.stats?.totalTokens || 0)}</p>
+          <div className="text-2xl font-semibold text-gray-900">{formatTokens(stats.stats?.totalTokens || 0)} tokens</div>
+          <p className="text-xs text-gray-400">{formatTokensWithUnit(stats.stats?.totalTokens || 0)} tokens</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
@@ -394,9 +394,9 @@ function UsageRankContent() {
           <div className="mb-4">
             <h3 className="font-semibold text-gray-800 flex items-center gap-2">
               <LineChartOutlined className="text-[#FF5005]" />
-              公司调用量分布
+              调用量分布
             </h3>
-            <p className="text-xs text-gray-500 mt-1">各月份公司调用量占比分析（基于真实数据）</p>
+            <p className="text-xs text-gray-500 mt-1">各月份模型调用量占比分析（基于真实数据）</p>
           </div>
 
           <div className="h-52 relative">
@@ -522,8 +522,8 @@ function UsageRankContent() {
                   <h3 className="font-medium text-gray-900 truncate pr-2 text-sm">{model.model}</h3>
                   <div className="flex items-center space-x-2 text-xs">
                     <div className="text-right">
-                      <span className="font-medium text-gray-700">{formatTokens(model.totalToken)}</span>
-                      <div className="text-xs text-gray-500">{formatTokensWithUnit(model.totalToken)}</div>
+                      <span className="font-medium text-gray-700">{formatTokens(model.totalToken)} tokens</span>
+                      <div className="text-xs text-gray-500">{formatTokensWithUnit(model.totalToken)} tokens</div>
                     </div>
                     <span className="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-bold whitespace-nowrap">
                       {model.percentage?.toFixed(2)}%
@@ -548,9 +548,9 @@ function UsageRankContent() {
 }
 
 const tabs = [
-  { key: 'vote', label: '投票总榜', icon: <TrophyOutlined /> },
-  { key: 'params', label: '多领域评测榜', icon: <BarChartOutlined /> },
   { key: 'usage', label: '调用量榜', icon: <LineChartOutlined /> },
+  { key: 'vote', label: '投票总榜', icon: <TrophyOutlined /> },
+  // { key: 'params', label: '多领域评测榜', icon: <BarChartOutlined /> },
 ]
 
 const RANK_TAB_STORAGE_KEY = 'rank_active_tab'
@@ -576,12 +576,12 @@ export default function RankPage() {
   // 根据 activeTab 渲染内容
   const renderContent = () => {
     switch (activeTab) {
-      case 'params':
-        return <ParamsRankContent />
-      case 'usage':
-        return <UsageRankContent />
-      default:
+      // case 'params':
+      //   return <ParamsRankContent />
+      case 'vote':
         return <VoteRankContent />
+      default:
+        return <UsageRankContent />
     }
   }
 
