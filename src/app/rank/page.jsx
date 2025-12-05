@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Table } from 'antd'
 import { ReloadOutlined, LineChartOutlined, UserOutlined, RiseOutlined } from '@ant-design/icons'
@@ -45,26 +45,24 @@ const DomainCard = ({ domain, data }) => {
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
         <h3 className="font-semibold text-gray-800">{domain.name}</h3>
       </div>
-      
+
       {/* 表头 */}
       <div className="grid grid-cols-[40px_1fr_70px] px-4 py-2 bg-gray-50 text-xs text-gray-500 font-medium">
         <span className="text-center">排名</span>
         <span>模型</span>
         <span className="text-right">得分</span>
       </div>
-      
+
       {/* 数据列表 */}
       <div className="divide-y divide-gray-50">
         {data.map((item, idx) => (
-          <div 
-            key={idx} 
-            className={`grid grid-cols-[40px_1fr_70px] px-4 py-2.5 items-center hover:bg-orange-50/50 transition-colors ${
-              idx === 0 ? 'bg-yellow-50/30' : idx === 1 ? 'bg-gray-50/30' : idx === 2 ? 'bg-amber-50/30' : ''
-            }`}
+          <div
+            key={idx}
+            className={`grid grid-cols-[40px_1fr_70px] px-4 py-2.5 items-center hover:bg-orange-50/50 transition-colors ${idx === 0 ? 'bg-yellow-50/30' : idx === 1 ? 'bg-gray-50/30' : idx === 2 ? 'bg-amber-50/30' : ''
+              }`}
           >
-            <span className={`text-center font-bold text-sm ${
-              idx === 0 ? 'text-yellow-600' : idx === 1 ? 'text-gray-500' : idx === 2 ? 'text-amber-700' : 'text-gray-400'
-            }`}>
+            <span className={`text-center font-bold text-sm ${idx === 0 ? 'text-yellow-600' : idx === 1 ? 'text-gray-500' : idx === 2 ? 'text-amber-700' : 'text-gray-400'
+              }`}>
               {idx + 1}
             </span>
             <span className="text-sm text-gray-800 truncate" title={item.model}>{item.model}</span>
@@ -85,7 +83,7 @@ const OverallCard = ({ title, data }) => {
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
         <h3 className="font-semibold text-gray-800">{title}</h3>
       </div>
-      
+
       {/* 表头 */}
       <div className="grid grid-cols-[40px_1fr_60px_60px_60px_60px_70px] px-4 py-2 bg-gray-50 text-xs text-gray-500 font-medium">
         <span className="text-center">排名</span>
@@ -96,18 +94,16 @@ const OverallCard = ({ title, data }) => {
         <span className="text-center">简洁</span>
         <span className="text-right">总分</span>
       </div>
-      
+
       <div className="divide-y divide-gray-50">
         {data.map((item, idx) => (
-          <div 
-            key={idx} 
-            className={`grid grid-cols-[40px_1fr_60px_60px_60px_60px_70px] px-4 py-2.5 items-center hover:bg-orange-50/50 transition-colors ${
-              idx === 0 ? 'bg-yellow-50/30' : idx === 1 ? 'bg-gray-50/30' : idx === 2 ? 'bg-amber-50/30' : ''
-            }`}
+          <div
+            key={idx}
+            className={`grid grid-cols-[40px_1fr_60px_60px_60px_60px_70px] px-4 py-2.5 items-center hover:bg-orange-50/50 transition-colors ${idx === 0 ? 'bg-yellow-50/30' : idx === 1 ? 'bg-gray-50/30' : idx === 2 ? 'bg-amber-50/30' : ''
+              }`}
           >
-            <span className={`text-center font-bold text-sm ${
-              idx === 0 ? 'text-yellow-600' : idx === 1 ? 'text-gray-500' : idx === 2 ? 'text-amber-700' : 'text-gray-400'
-            }`}>
+            <span className={`text-center font-bold text-sm ${idx === 0 ? 'text-yellow-600' : idx === 1 ? 'text-gray-500' : idx === 2 ? 'text-amber-700' : 'text-gray-400'
+              }`}>
               {idx + 1}
             </span>
             <div className="truncate">
@@ -224,14 +220,14 @@ function ParamsRankContent() {
       {/* 网格布局 */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {/* 综合排名卡片 */}
-        <OverallCard 
-          title="📊 综合排名" 
-          data={NON_TIMELY_SCORES} 
+        <OverallCard
+          title="📊 综合排名"
+          data={NON_TIMELY_SCORES}
         />
-        
+
         {/* 各领域卡片 */}
         {DOMAINS.map(domain => (
-          <DomainCard 
+          <DomainCard
             key={domain.key}
             domain={domain}
             data={domainDataMap[domain.key]}
@@ -358,7 +354,7 @@ function UsageRankContent() {
           <div className="text-2xl font-semibold text-gray-900">{stats.stats?.totalModels?.toLocaleString() || 0}</div>
           <p className="text-xs text-gray-400">活跃模型</p>
         </div>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-500">总调用量</span>
@@ -367,7 +363,7 @@ function UsageRankContent() {
           <div className="text-2xl font-semibold text-gray-900">{formatTokens(stats.stats?.totalTokens || 0)}</div>
           <p className="text-xs text-gray-400">{formatTokensWithUnit(stats.stats?.totalTokens || 0)}</p>
         </div>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-500">热门模型</span>
@@ -378,7 +374,7 @@ function UsageRankContent() {
             {formatTokens(stats.models[0]?.totalToken || 0)} ({stats.models[0]?.percentage?.toFixed(1) || '0'}%)
           </p>
         </div>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-500">最后更新</span>
@@ -403,7 +399,7 @@ function UsageRankContent() {
             </h3>
             <p className="text-xs text-gray-500 mt-1">各月份公司调用量占比分析（基于真实数据）</p>
           </div>
-          
+
           <div className="h-52 relative">
             <div className="ml-4 h-full border-l border-b border-gray-300 relative">
               {/* 网格线 */}
@@ -412,7 +408,7 @@ function UsageRankContent() {
                   <div key={line} className="border-t border-gray-100 border-dashed" />
                 ))}
               </div>
-              
+
               {/* 堆叠柱状图 */}
               <div className="absolute inset-0 flex items-end justify-around px-2 pb-2">
                 {(() => {
@@ -421,12 +417,12 @@ function UsageRankContent() {
                   // 根据月份数量动态计算宽度
                   const barWidth = monthCount <= 3 ? 60 : monthCount <= 6 ? 45 : monthCount <= 12 ? 35 : 25
                   const gap = monthCount <= 6 ? 8 : 4
-                  
+
                   return stackedBarData.map((monthData, monthIndex) => (
                     <div
                       key={monthIndex}
                       className="flex flex-col justify-end rounded-t overflow-hidden"
-                      style={{ 
+                      style={{
                         height: maxHeight > 0 ? `${(monthData.total / maxHeight) * 100}%` : '0%',
                         width: `${barWidth}px`,
                         marginLeft: monthIndex === 0 ? 0 : `${gap}px`
@@ -437,7 +433,7 @@ function UsageRankContent() {
                         <div
                           key={segIndex}
                           className="w-full transition-all duration-500 ease-out hover:opacity-80"
-                          style={{ 
+                          style={{
                             height: `${segment.percentage}%`,
                             backgroundColor: segment.color,
                             minHeight: '1px'
@@ -449,14 +445,14 @@ function UsageRankContent() {
                   ))
                 })()}
               </div>
-              
+
               {/* X轴标签 */}
               <div className="absolute -bottom-6 left-0 right-0 flex justify-around text-xs text-gray-500 px-2">
                 {stackedBarData.map((monthData, index) => (
-                  <span 
-                    key={index} 
+                  <span
+                    key={index}
                     className="text-center truncate"
-                    style={{ 
+                    style={{
                       fontSize: stackedBarData.length > 12 ? '8px' : '10px',
                       maxWidth: stackedBarData.length <= 3 ? '60px' : stackedBarData.length <= 6 ? '45px' : '35px'
                     }}
@@ -467,12 +463,12 @@ function UsageRankContent() {
               </div>
             </div>
           </div>
-          
+
           {/* 图例 - 使用真实数据的模型 */}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {stackedBarData[0]?.segments?.map((segment, idx) => (
               <div key={segment.name} className="flex items-center gap-2">
-                <div 
+                <div
                   className="w-3 h-3 rounded"
                   style={{ backgroundColor: segment.color }}
                 />
@@ -494,11 +490,10 @@ function UsageRankContent() {
             <button
               key={item.key}
               onClick={() => setTimeRange(item.key)}
-              className={`px-4 py-1.5 text-sm rounded-md transition-all ${
-                timeRange === item.key
+              className={`px-4 py-1.5 text-sm rounded-md transition-all ${timeRange === item.key
                   ? 'bg-white text-[#FF5005] shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
-              }`}
+                }`}
             >
               {item.label}
             </button>
@@ -522,7 +517,7 @@ function UsageRankContent() {
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 font-medium text-xs text-gray-600 min-w-[32px]">
                 {model.rank}
               </div>
-              
+
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-gray-900 truncate pr-2 text-sm">{model.model}</h3>
@@ -536,10 +531,10 @@ function UsageRankContent() {
                     </span>
                   </div>
                 </div>
-                
+
                 {/* 进度条 */}
                 <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="absolute top-0 left-0 h-full bg-green-500 transition-all duration-500 ease-out"
                     style={{ width: `${Math.max(model.percentage || 0, 3)}%` }}
                   />
@@ -553,12 +548,21 @@ function UsageRankContent() {
   )
 }
 
-// 主页面组件
-export default function RankPage() {
+// 内部内容组件
+function RankPageContent() {
   const searchParams = useSearchParams()
   const tab = searchParams.get('tab') || 'vote'
 
   if (tab === 'params') return <ParamsRankContent />
   if (tab === 'usage') return <UsageRankContent />
   return <VoteRankContent />
+}
+
+// 主页面组件
+export default function RankPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[400px]"><span className="text-gray-500">加载中...</span></div>}>
+      <RankPageContent />
+    </Suspense>
+  )
 }
