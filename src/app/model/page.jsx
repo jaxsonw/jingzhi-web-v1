@@ -41,11 +41,22 @@ const TagListComponent = props => {
 
 const ModelCard = props => {
   // console.log(PLAY_GROUND_URL)
+  const isAvailable = props.normal === 1
   return (
     <div className="flex flex-col justify-between relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 px-[20px] pt-[20px] pb-[14px] border-solid bg-[#fff] rounded-[12px] h-full text-[#000]">
+      {/* 可用状态 Badge */}
+      <div
+        className={`absolute top-[10px] right-[10px] px-[8px] py-[2px] text-[12px] rounded-full font-medium ${
+          isAvailable
+            ? 'bg-green-100 text-green-700 border border-green-300'
+            : 'bg-gray-100 text-gray-500 border border-gray-300'
+        }`}
+      >
+        {isAvailable ? '可用' : '不可用'}
+      </div>
       {props.isFree === 1 && (
         <div
-          className="absolute top-0 right-0 w-[80px] text-[#fff] text-[14px] pl-[14px] pr-[10px] py-[8px] rounded-tr-[12px] rounded-bl-[12px]"
+          className="absolute top-0 left-0 w-[80px] text-[#fff] text-[14px] pl-[10px] pr-[14px] py-[4px] rounded-tl-[12px] rounded-br-[12px]"
           style={{
             background: 'linear-gradient(135deg, #46AD76 0%, #46CA92 100%)'
           }}
@@ -251,12 +262,12 @@ const Model = () => {
                   </div> */}
                 </div>
                 <div className="mt-[60px]">
-                  <Row gutter={[16, 16]}>
+                  <Row gutter={[20, 20]}>
                     {modelDataRes && modelDataRes.length > 0 ? (
                       modelDataRes?.map((item, index) => {
                         return (
                           // eslint-disable-next-line react/jsx-key
-                          <Col lg={8} xs={24} md={12} key={'modelitem' + index}>
+                          <Col xxl={6} xl={8} lg={8} md={12} sm={12} xs={24} key={'modelitem' + index}>
                             <ModelCard {...item} />
                           </Col>
                         )

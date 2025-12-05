@@ -14,6 +14,7 @@ const ENDPOINTS = {
   VOTE: '/v1/inner/model/vote',
   VOTE_RANK: '/v1/inner/model/voteRank',
   MODEL_STAT: '/v1/model/stat',
+  MODEL_PROVIDER_APPLY: '/v1/modelProvider/apply',
 }
 
 // 缓存
@@ -92,7 +93,7 @@ export const fetchModels = async () => {
     return rawModels.map(m => ({
       id: m.id || m.modelId || m.model_name || m.modelName || m.name,
       name: m.name || m.modelName || m.model_name || m.id || m.modelId,
-      provider: m.provider || m.companyName || inferProvider(m.id || m.modelId || m.model_name),
+      provider: m.provider || m.companyName || '--',
     }))
   } catch (error) {
     console.warn('Failed to fetch models:', error)
@@ -118,30 +119,9 @@ export const refreshModels = async () => {
 }
 
 /**
- * 推断模型提供商
- */
-const inferProvider = (modelId) => {
-  if (!modelId) return 'Unknown'
-  const id = modelId.toLowerCase()
-  if (id.includes('gpt') || id.includes('openai')) return 'OpenAI'
-  if (id.includes('claude')) return 'Anthropic'
-  if (id.includes('tencent') || id.includes('hunyuan')) return 'Tencent'
-  if (id.includes('ernie') || id.includes('wenxin')) return 'Baidu'
-  if (id.includes('baichuan')) return 'Baichuan'
-  if (id.includes('moonshot') || id.includes('kimi')) return 'Moonshot'
-  if (id.includes('doubao') || id.includes('skylark')) return 'ByteDance'
-  if (id.includes('qwen') || id.includes('tongyi')) return 'Alibaba'
-  if (id.includes('glm') || id.includes('zhipu')) return 'Zhipu'
-  return 'Other'
-}
-
-/**
  * 默认模型列表
  */
 export const getDefaultModels = () => [
-  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI' },
-  { id: 'gpt-4o-mini', name: 'GPT-4o Mini', provider: 'OpenAI' },
-  { id: 'gpt-4-turbo', name: 'GPT-4 Turbo', provider: 'OpenAI' },
   { id: 'tencent-ChatStd', name: 'Tencent ChatStd', provider: 'Tencent' },
   { id: 'tencent-ChatPro', name: 'Tencent ChatPro', provider: 'Tencent' },
   { id: 'ERNIE-4.0-Turbo-8K', name: 'ERNIE 4.0 Turbo', provider: 'Baidu' },
@@ -213,7 +193,8 @@ export const chatCompletionStream = async (chatRequest) => {
  * 投票
  */
 export const vote = async (voteRequest) => {
-  const res = await request.post(`${BASE_URL}${ENDPOINTS.VOTE}`, voteRequest)
+  const ctobase = 'https://api.agicto.cn'
+  const res = await request.post(`${ctobase}${ENDPOINTS.VOTE}`, voteRequest)
   return res
 }
 
@@ -221,7 +202,8 @@ export const vote = async (voteRequest) => {
  * 获取投票排行榜
  */
 export const getVoteRank = async () => {
-  const res = await request.post(`${BASE_URL}${ENDPOINTS.VOTE_RANK}`)
+  const ctobase = 'https://api.agicto.cn'
+  const res = await request.post(`${ctobase}${ENDPOINTS.VOTE_RANK}`)
   if (res?.code === 0 && Array.isArray(res?.data)) {
     return res.data
   }
@@ -230,10 +212,16 @@ export const getVoteRank = async () => {
 
 /**
  * 获取模型调用统计
+ * 新数据结构：
+ * {
+ *   monthList: [{ month: "202512", childList: [{ token: "123", companyName: "xxx" }] }],
+ *   modelList: [{ token: "123", companyName: "xxx", model: "xxx-gpt" }]
+ * }
  */
 export const getModelStats = async () => {
+  const ctobase = 'https://api.agicto.cn'
   try {
-    const response = await fetch(`${BASE_URL}${ENDPOINTS.MODEL_STAT}`, {
+    const response = await fetch(`${ctobase}${ENDPOINTS.MODEL_STAT}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({}),
@@ -242,28 +230,21 @@ export const getModelStats = async () => {
     if (!response.ok) throw new Error(`API responded with status: ${response.status}`)
     
     const rawData = await response.json()
-    
-    // 处理数据：按模型分组并计算总调用量
-    const modelMap = new Map()
-    
-    rawData.forEach((item) => {
-      if (!modelMap.has(item.model)) {
-        modelMap.set(item.model, {
-          model: item.model,
-          totalToken: item.token || 0,
-          companyName: item.companyName || 'Unknown',
-        })
-      } else {
-        const existing = modelMap.get(item.model)
-        existing.totalToken += (item.token || 0)
-      }
-    })
+    const { monthList = [], modelList = [] } = rawData
 
-    // 转换为数组并按 token 数量排序
-    const models = Array.from(modelMap.values()).sort((a, b) => b.totalToken - a.totalToken)
+    // 处理模型列表数据（token 为字符串，需要转换）
+    const models = modelList
+      .map(item => ({
+        model: item.model || 'Unknown',
+        totalToken: parseInt(item.token, 10) || 0,
+        companyName: item.companyName || 'Unknown',
+      }))
+      .sort((a, b) => b.totalToken - a.totalToken)
+
+    // 计算总调用量
+    const totalTokens = models.reduce((sum, model) => sum + model.totalToken, 0)
 
     // 计算排名和真实占比百分比
-    const totalTokens = models.reduce((sum, model) => sum + model.totalToken, 0)
     const processedModels = models.map((model, index) => ({
       ...model,
       rank: index + 1,
@@ -272,13 +253,15 @@ export const getModelStats = async () => {
 
     // 生成月度数据用于图表（按公司分类）
     const colors = ['#2563eb', '#ea580c', '#9333ea', '#16a34a', '#0891b2', '#dc2626', '#7c3aed', '#0d9488', '#ca8a04', '#6366f1']
-    const months = [...new Set(rawData.map((item) => item.month))].sort()
     
-    // 获取所有公司并计算总调用量，用于确定颜色分配
+    // 计算所有公司的总调用量，用于确定颜色分配
     const companyTotals = new Map()
-    rawData.forEach(item => {
-      const company = item.companyName || 'Unknown'
-      companyTotals.set(company, (companyTotals.get(company) || 0) + (item.token || 0))
+    monthList.forEach(monthItem => {
+      (monthItem.childList || []).forEach(item => {
+        const company = item.companyName || 'Unknown'
+        const tokenValue = parseInt(item.token, 10) || 0
+        companyTotals.set(company, (companyTotals.get(company) || 0) + tokenValue)
+      })
     })
     const sortedCompanies = [...companyTotals.entries()]
       .sort((a, b) => b[1] - a[1])
@@ -286,34 +269,37 @@ export const getModelStats = async () => {
       .map(([name], index) => ({ name, color: colors[index % colors.length] }))
     const companyColorMap = new Map(sortedCompanies.map(c => [c.name, c.color]))
     
-    const monthlyData = months.map(month => {
-      const monthItems = rawData.filter((item) => item.month === month)
-      const monthTotal = monthItems.reduce((sum, m) => sum + (m.token || 0), 0)
-      
-      // 按公司分组统计
-      const companyMap = new Map()
-      monthItems.forEach(item => {
-        const company = item.companyName || 'Unknown'
-        companyMap.set(company, (companyMap.get(company) || 0) + (item.token || 0))
-      })
-      
-      const companySegments = [...companyMap.entries()]
-        .filter(([_, value]) => value > 0)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
-        .map(([name, value]) => ({
-          name,
-          value,
-          percentage: monthTotal > 0 ? (value / monthTotal * 100) : 0,
-          color: companyColorMap.get(name) || '#6b7280'
-        }))
+    // 处理月度数据
+    const monthlyData = monthList
+      .sort((a, b) => (a.month || '').localeCompare(b.month || ''))
+      .map(monthItem => {
+        const month = monthItem.month || ''
+        const childList = monthItem.childList || []
+        
+        // 计算月度总调用量
+        const monthTotal = childList.reduce((sum, item) => sum + (parseInt(item.token, 10) || 0), 0)
+        
+        // 按公司生成分段数据
+        const companySegments = childList
+          .map(item => {
+            const tokenValue = parseInt(item.token, 10) || 0
+            return {
+              name: item.companyName || 'Unknown',
+              value: tokenValue,
+              percentage: monthTotal > 0 ? (tokenValue / monthTotal * 100) : 0,
+              color: companyColorMap.get(item.companyName) || '#6b7280'
+            }
+          })
+          .filter(seg => seg.value > 0)
+          .sort((a, b) => b.value - a.value)
+          .slice(0, 10)
 
-      return {
-        month,
-        segments: companySegments,
-        total: monthTotal
-      }
-    })
+        return {
+          month,
+          segments: companySegments,
+          total: monthTotal
+        }
+      })
 
     // 统计信息
     const activeModels = processedModels.filter(model => model.totalToken > 0).length
@@ -336,6 +322,31 @@ export const getModelStats = async () => {
   }
 }
 
+/**
+ * 提交模型提供商申请
+ */
+export const submitProviderApply = async (formData) => {
+  const ctobase = 'https://api.agicto.cn'
+  try {
+    const response = await fetch(`${ctobase}${ENDPOINTS.MODEL_PROVIDER_APPLY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+    
+    const data = await response.json()
+    
+    if (!response.ok) {
+      throw new Error(data.error || '提交失败')
+    }
+    
+    return { success: true, data }
+  } catch (error) {
+    console.error('提交模型提供商申请失败:', error)
+    return { success: false, error: error.message || '网络错误，请重试' }
+  }
+}
+
 // 便捷 API 导出（兼容旧代码）
 export const arenaApi = {
   getKeyList,
@@ -350,6 +361,7 @@ export const arenaApi = {
   vote,
   getVoteRank,
   getModelStats,
+  submitProviderApply,
 }
 
 export default arenaApi

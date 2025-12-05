@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { memo, useCallback, useMemo, useEffect, useState } from "react";
-import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line, RiSwordLine, RiTrophyLine } from "@remixicon/react";
+import { RiBrainLine, RiChat1Line, RiDatabase2Line, RiRobot2Line, RiStore2Line, RiSwordLine, RiTrophyLine, RiFileAddLine } from "@remixicon/react";
 
 // MenuItem component optimized with memo
 const MenuItem = ({
@@ -63,7 +63,7 @@ export function Sidebar() {
       // Organization menu item removed to match current implementation
       {
         name: "对话",
-        pathname: "chat/",
+        pathname: "/chat/",
         path: "/modelplaza/chat/",
         icon: <RiChat1Line className="w-5 h-5" />
       },
@@ -102,8 +102,13 @@ export function Sidebar() {
         pathname: "space",
         path: "/space/apikey/",
         icon: <RiStore2Line className="w-5 h-5" />
-      }
-
+      },
+      {
+        name: "模型入驻",
+        pathname: "apply",
+        path: "/apply/",
+        icon: <RiFileAddLine className="w-5 h-5" />
+      },
     ],
     []
   );

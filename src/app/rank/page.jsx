@@ -532,7 +532,7 @@ function UsageRankContent() {
                       <div className="text-xs text-gray-500">{formatTokensWithUnit(model.totalToken)}</div>
                     </div>
                     <span className="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-bold whitespace-nowrap">
-                      {model.percentage?.toFixed(1)}%
+                      {model.percentage?.toFixed(2)}%
                     </span>
                   </div>
                 </div>
