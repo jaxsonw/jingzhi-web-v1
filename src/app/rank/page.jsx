@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useState, useEffect, useMemo, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Table } from 'antd'
-import { ReloadOutlined, LineChartOutlined, UserOutlined, RiseOutlined } from '@ant-design/icons'
+import { ReloadOutlined, LineChartOutlined, UserOutlined, RiseOutlined, TrophyOutlined, BarChartOutlined } from '@ant-design/icons'
 import { arenaApi } from '@/src/services/arenaService'
 import { NON_TIMELY_SCORES, DOMAINS, NON_TIMELY_BY_DOMAIN } from './data'
 
@@ -491,8 +490,8 @@ function UsageRankContent() {
               key={item.key}
               onClick={() => setTimeRange(item.key)}
               className={`px-4 py-1.5 text-sm rounded-md transition-all ${timeRange === item.key
-                  ? 'bg-white text-[#FF5005] shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-[#FF5005] shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
                 }`}
             >
               {item.label}
@@ -548,21 +547,67 @@ function UsageRankContent() {
   )
 }
 
-// 内部内容组件
-function RankPageContent() {
-  const searchParams = useSearchParams()
-  const tab = searchParams.get('tab') || 'vote'
+const tabs = [
+  { key: 'vote', label: '投票总榜', icon: <TrophyOutlined /> },
+  { key: 'params', label: '多领域评测榜', icon: <BarChartOutlined /> },
+  { key: 'usage', label: '调用量榜', icon: <LineChartOutlined /> },
+]
 
-  if (tab === 'params') return <ParamsRankContent />
-  if (tab === 'usage') return <UsageRankContent />
-  return <VoteRankContent />
-}
+const RANK_TAB_STORAGE_KEY = 'rank_active_tab'
 
 // 主页面组件
 export default function RankPage() {
+  const [activeTab, setActiveTab] = useState('vote')
+
+  // 从 localStorage 读取初始值
+  useEffect(() => {
+    const savedTab = localStorage.getItem(RANK_TAB_STORAGE_KEY)
+    if (savedTab && tabs.some(tab => tab.key === savedTab)) {
+      setActiveTab(savedTab)
+    }
+  }, [])
+
+  // 切换 tab
+  const handleTabChange = (tabKey) => {
+    setActiveTab(tabKey)
+    localStorage.setItem(RANK_TAB_STORAGE_KEY, tabKey)
+  }
+
+  // 根据 activeTab 渲染内容
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'params':
+        return <ParamsRankContent />
+      case 'usage':
+        return <UsageRankContent />
+      default:
+        return <VoteRankContent />
+    }
+  }
+
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-[400px]"><span className="text-gray-500">加载中...</span></div>}>
-      <RankPageContent />
-    </Suspense>
+    <>
+      {/* Tab 切换器 */}
+      <div className="mb-6">
+        <div className="flex gap-2 p-1 bg-gray-100 rounded-xl w-fit">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => handleTabChange(tab.key)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${activeTab === tab.key
+                ? 'bg-white text-[#FF5005] shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+                }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 内容区域 */}
+      {renderContent()}
+    </>
   )
 }
