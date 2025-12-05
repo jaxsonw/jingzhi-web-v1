@@ -1,7 +1,8 @@
 'use client'
 
 import React, { Suspense } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import { TrophyOutlined, BarChartOutlined, LineChartOutlined } from '@ant-design/icons'
@@ -17,17 +18,12 @@ const tabs = [
 // 内部布局内容组件
 function RankLayoutContent({ children }) {
   const searchParams = useSearchParams()
-  const router = useRouter()
 
   // 获取当前激活的 tab
   const activeTab = searchParams.get('tab') || 'vote'
 
-  const handleTabChange = (tabKey) => {
-    if (tabKey === 'vote') {
-      router.push('/modelplaza/rank/')
-    } else {
-      router.push(`/modelplaza/rank/?tab=${tabKey}`)
-    }
+  const getTabHref = (tabKey) => {
+    return tabKey === 'vote' ? '/modelplaza/rank/' : `/modelplaza/rank/?tab=${tabKey}`
   }
 
   return (
@@ -52,17 +48,17 @@ function RankLayoutContent({ children }) {
             <div className="mb-6">
               <div className="flex gap-2 p-1 bg-gray-100 rounded-xl w-fit">
                 {tabs.map((tab) => (
-                  <button
+                  <Link
                     key={tab.key}
-                    onClick={() => handleTabChange(tab.key)}
+                    href={getTabHref(tab.key)}
                     className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.key
-                        ? 'bg-white text-[#FF5005] shadow-sm'
-                        : 'text-gray-600 hover:text-gray-900'
+                      ? 'bg-white text-[#FF5005] shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
                       }`}
                   >
                     {tab.icon}
                     {tab.label}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -106,7 +106,7 @@ export function Sidebar() {
       {
         name: "模型入驻",
         pathname: "apply",
-        path: "/apply/",
+        path: "/modelplaza/apply/",
         icon: <RiFileAddLine className="w-5 h-5" />
       },
     ],

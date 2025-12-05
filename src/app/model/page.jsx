@@ -46,11 +46,10 @@ const ModelCard = props => {
     <div className="flex flex-col justify-between relative group shadow-xs cursor-pointer transition duration-150 ease-out hover:bg-gradient-to-b hover:from-[#ffd085] hover:to-[#FFFFFF] shadow-indigo-500/40 px-[20px] pt-[20px] pb-[14px] border-solid bg-[#fff] rounded-[12px] h-full text-[#000]">
       {/* 可用状态 Badge */}
       <div
-        className={`absolute top-[10px] right-[10px] px-[8px] py-[2px] text-[12px] rounded-full font-medium ${
-          isAvailable
-            ? 'bg-green-100 text-green-700 border border-green-300'
-            : 'bg-gray-100 text-gray-500 border border-gray-300'
-        }`}
+        className={`absolute top-[4px] right-[4px] px-[8px] py-[1px] text-[12px] rounded-full font-medium ${isAvailable
+          ? 'bg-green-100 text-green-700 border border-green-300'
+          : 'bg-gray-100 text-gray-500 border border-gray-300'
+          }`}
       >
         {isAvailable ? '可用' : '不可用'}
       </div>
@@ -65,9 +64,9 @@ const ModelCard = props => {
         </div>
       )}
       <div className="flex items-center pb-[8px]">
-        <h4 className="text-[#140E35] text-[20px]">{props.modelName}</h4>
+        <h4 className="text-[#140E35] text-[20px] w-0 grow">{props.modelName}</h4>
         <div
-          className="cursor-pointer ml-[10px] flex items-center rounded-md border border-solid border-green-500 text-green-500 px-[4px] py-[2px] text-[12px]"
+          className="cursor-pointer ml-[4px] flex items-center rounded-md border border-solid border-green-500 text-green-500 px-[4px] py-[1px] text-[12px]"
           onClick={e => {
             e.preventDefault()
             copyValue(props.modelName)
@@ -92,7 +91,7 @@ const ModelCard = props => {
               </g>
             </g>
           </svg>
-          <span className="ml-1">复制</span>
+          <span className="ml-1 text-nowrap">复制</span>
         </div>
       </div>
       <div className="flex items-center flex-wrap pb-[18px]">
