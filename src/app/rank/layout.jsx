@@ -1,8 +1,6 @@
 'use client'
 
-import React, { Suspense } from 'react'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import React, { Suspense, useState, useEffect } from 'react'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import { TrophyOutlined, BarChartOutlined, LineChartOutlined } from '@ant-design/icons'
@@ -15,15 +13,24 @@ const tabs = [
   { key: 'usage', label: '调用量榜', icon: <LineChartOutlined /> },
 ]
 
+const RANK_TAB_STORAGE_KEY = 'rank_active_tab'
+
 // 内部布局内容组件
 function RankLayoutContent({ children }) {
-  const searchParams = useSearchParams()
+  const [activeTab, setActiveTab] = useState('vote')
 
-  // 获取当前激活的 tab
-  const activeTab = searchParams.get('tab') || 'vote'
+  // 从 localStorage 读取初始值
+  useEffect(() => {
+    const savedTab = localStorage.getItem(RANK_TAB_STORAGE_KEY)
+    if (savedTab && tabs.some(tab => tab.key === savedTab)) {
+      setActiveTab(savedTab)
+    }
+  }, [])
 
-  const getTabHref = (tabKey) => {
-    return tabKey === 'vote' ? '/modelplaza/rank/' : `/modelplaza/rank/?tab=${tabKey}`
+  // 切换 tab
+  const handleTabChange = (tabKey) => {
+    setActiveTab(tabKey)
+    localStorage.setItem(RANK_TAB_STORAGE_KEY, tabKey)
   }
 
   return (
@@ -48,17 +55,17 @@ function RankLayoutContent({ children }) {
             <div className="mb-6">
               <div className="flex gap-2 p-1 bg-gray-100 rounded-xl w-fit">
                 {tabs.map((tab) => (
-                  <Link
+                  <button
                     key={tab.key}
-                    href={getTabHref(tab.key)}
-                    className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.key
+                    onClick={() => handleTabChange(tab.key)}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${activeTab === tab.key
                       ? 'bg-white text-[#FF5005] shadow-sm'
                       : 'text-gray-600 hover:text-gray-900'
                       }`}
                   >
                     {tab.icon}
                     {tab.label}
-                  </Link>
+                  </button>
                 ))}
               </div>
             </div>
